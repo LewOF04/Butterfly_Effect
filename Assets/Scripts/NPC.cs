@@ -18,7 +18,6 @@ public class Attributes
     private float constitution;
     private float wisdom;
     private float strength;
-    //hello
 
     //getter and setter functions for attributes
     public float Morality
@@ -117,7 +116,7 @@ public class NPC : MonoBehaviour
     private Attributes attributes; //the attributes of the character
     private Stats stats; //the stats of the character
     private List<int> traits; //list of ids of the traits that this NPC has
-    private int buidlingID; //the building which the NPC belongs to (-1 if no such building exists)
+    private int buildingID; //the building which the NPC belongs to (-1 if no such building exists)
     
 
     //getter and setters for NPC information
@@ -145,6 +144,11 @@ public class NPC : MonoBehaviour
     {
         get { return traits; }
         set { traits = value; }
+    }
+    public int BuildingID
+    {
+        get { return buildingID; }
+        set { buildingID = value; }
     }
 
     //extra utility functions for traits list
