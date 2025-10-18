@@ -1,17 +1,16 @@
 using UnityEngine;
-
-[CreateAssetMenu(menuName = "Scriptable Objects/Trait")]
-public class TraitDefinition : ScriptableObject
-{
-    public string id;              // unique key, e.g. "Strong"
-    public string displayName;
-    public string description;
-    public float damageMultiplier; 
-    // add fields as needed
-}
+using System.Collections.Generic;
 
 public class Trait : MonoBehaviour
 {
+    public int id; //unique ID number
+    private string _displayName; //traits name
+    private string _description; //short description of trait 
+
+    private Dictionary<string, float> _numericalEffectss = new Dictionary<string, float>(); //dictionary of effects that alter attributes/statistics
+    private List<string> _behaviouralEffects; //list of additional effects
+
+    /*
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -23,4 +22,5 @@ public class Trait : MonoBehaviour
     {
         
     }
+    */
 }
