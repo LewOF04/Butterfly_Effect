@@ -18,6 +18,7 @@ public class Attributes
     private float constitution;
     private float wisdom;
     private float strength;
+    //hello
 
     //getter and setter functions for attributes
     public float Morality
