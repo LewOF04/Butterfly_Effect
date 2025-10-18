@@ -1,0 +1,1313 @@
+fileFormatVersion: 2
+guid: 29b7ea630e781634f8ce7ccabfffb0af
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5287072596516572794
+    second: Outer_Wall_Lvl1_0
+  - first:
+      213: 3886110915991310170
+    second: Outer_Wall_Lvl1_1
+  - first:
+      213: -9117456753330768149
+    second: Outer_Wall_Lvl1_2
+  - first:
+      213: 8244735384151770335
+    second: Outer_Wall_Lvl1_3
+  - first:
+      213: 8618390723801302427
+    second: Outer_Wall_Lvl1_4
+  - first:
+      213: -298493263887130902
+    second: Outer_Wall_Lvl1_5
+  - first:
+      213: 4635173272350879126
+    second: Outer_Wall_Lvl1_6
+  - first:
+      213: -3273399753977343861
+    second: Outer_Wall_Lvl1_7
+  - first:
+      213: -5651287524941744041
+    second: Outer_Wall_Lvl1_8
+  - first:
+      213: -1875903680386313557
+    second: Outer_Wall_Lvl1_9
+  - first:
+      213: 7193040269843708130
+    second: Outer_Wall_Lvl1_10
+  - first:
+      213: -7142308694189198279
+    second: Outer_Wall_Lvl1_11
+  - first:
+      213: 2747217684795836862
+    second: Outer_Wall_Lvl1_12
+  - first:
+      213: 813146066138896427
+    second: Outer_Wall_Lvl1_13
+  - first:
+      213: -1762243310299170972
+    second: Outer_Wall_Lvl1_14
+  - first:
+      213: -8467518367332773150
+    second: Outer_Wall_Lvl1_15
+  - first:
+      213: 5210153805298785168
+    second: Outer_Wall_Lvl1_16
+  - first:
+      213: -1682318272879737404
+    second: Outer_Wall_Lvl1_17
+  - first:
+      213: -1928212975507206384
+    second: Outer_Wall_Lvl1_18
+  - first:
+      213: -7918653761839630484
+    second: Outer_Wall_Lvl1_19
+  - first:
+      213: -4357179482929850918
+    second: Outer_Wall_Lvl1_20
+  - first:
+      213: -1284374840973213603
+    second: Outer_Wall_Lvl1_21
+  - first:
+      213: 6161671671917690034
+    second: Outer_Wall_Lvl1_22
+  - first:
+      213: 3687816133729248138
+    second: Outer_Wall_Lvl1_23
+  - first:
+      213: 6992398020564782252
+    second: Outer_Wall_Lvl1_24
+  - first:
+      213: -7236405020974371676
+    second: Outer_Wall_Lvl1_25
+  - first:
+      213: -322366957477105897
+    second: Outer_Wall_Lvl1_26
+  - first:
+      213: -7811218584707779534
+    second: Outer_Wall_Lvl1_27
+  - first:
+      213: 72433065320248384
+    second: Outer_Wall_Lvl1_28
+  - first:
+      213: 8585090427132039372
+    second: Outer_Wall_Lvl1_29
+  - first:
+      213: 8982627379087758262
+    second: Outer_Wall_Lvl1_30
+  - first:
+      213: 1908337007678739701
+    second: Outer_Wall_Lvl1_31
+  - first:
+      213: -9214640088820882025
+    second: Outer_Wall_Lvl1_32
+  - first:
+      213: -4433634804822939504
+    second: Outer_Wall_Lvl1_33
+  - first:
+      213: 2708720785906096741
+    second: Outer_Wall_Lvl1_34
+  - first:
+      213: -3248280477529183990
+    second: Outer_Wall_Lvl1_35
+  - first:
+      213: -6981201199947098314
+    second: Outer_Wall_Lvl1_36
+  - first:
+      213: 6048755258385864264
+    second: Outer_Wall_Lvl1_37
+  - first:
+      213: -7338951580586976317
+    second: Outer_Wall_Lvl1_38
+  - first:
+      213: -4052318661033784050
+    second: Outer_Wall_Lvl1_39
+  - first:
+      213: -8854241158649767276
+    second: Outer_Wall_Lvl1_40
+  - first:
+      213: -9099098859584325105
+    second: Outer_Wall_Lvl1_41
+  - first:
+      213: -9076782074728772975
+    second: Outer_Wall_Lvl1_42
+  - first:
+      213: 5821990041983702579
+    second: Outer_Wall_Lvl1_43
+  - first:
+      213: -8211610066564109862
+    second: Outer_Wall_Lvl1_44
+  - first:
+      213: 7846240706191977399
+    second: Outer_Wall_Lvl1_45
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Outer_Wall_Lvl1_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1296
+        width: 248
+        height: 752
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a7e8211b3847f5940800000000000000
+      internalID: 5287072596516572794
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Outer_Wall_Lvl1_1
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 1160
+        width: 95
+        height: 95
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a5f0e61e94d3ee530800000000000000
+      internalID: 3886110915991310170
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Outer_Wall_Lvl1_2
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 1241
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be6bbb2a369487180800000000000000
+      internalID: -9117456753330768149
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Outer_Wall_Lvl1_3
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 1235
+        width: 15
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fd4c57f362f2b6270800000000000000
+      internalID: 8244735384151770335
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Outer_Wall_Lvl1_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1167
+        width: 21
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b95c2bb73bcaa9770800000000000000
+      internalID: 8618390723801302427
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Outer_Wall_Lvl1_5
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 1205
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aee192e35f98bdbf0800000000000000
+      internalID: -298493263887130902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Outer_Wall_Lvl1_6
+      rect:
+        serializedVersion: 2
+        x: 91
+        y: 1206
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 69debd27881735040800000000000000
+      internalID: 4635173272350879126
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Outer_Wall_Lvl1_7
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 1193
+        width: 34
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b805458544c8292d0800000000000000
+      internalID: -3273399753977343861
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Outer_Wall_Lvl1_8
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 1184
+        width: 15
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 758304810f79291b0800000000000000
+      internalID: -5651287524941744041
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Outer_Wall_Lvl1_9
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 1184
+        width: 11
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba2d9b9aa8377f5e0800000000000000
+      internalID: -1875903680386313557
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Outer_Wall_Lvl1_10
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 1190
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2e83d1bd300d2d360800000000000000
+      internalID: 7193040269843708130
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Outer_Wall_Lvl1_11
+      rect:
+        serializedVersion: 2
+        x: 19
+        y: 1153
+        width: 11
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9343bae851c61ec90800000000000000
+      internalID: -7142308694189198279
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Outer_Wall_Lvl1_12
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 1179
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eb94deecde3102620800000000000000
+      internalID: 2747217684795836862
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Outer_Wall_Lvl1_13
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 1177
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b2817b6f900e84b00800000000000000
+      internalID: 813146066138896427
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Outer_Wall_Lvl1_14
+      rect:
+        serializedVersion: 2
+        x: 174
+        y: 1173
+        width: 15
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4673fc9cb014b87e0800000000000000
+      internalID: -1762243310299170972
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Outer_Wall_Lvl1_15
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1116
+        width: 21
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2e2d80268e45d7a80800000000000000
+      internalID: -8467518367332773150
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Outer_Wall_Lvl1_16
+      rect:
+        serializedVersion: 2
+        x: 78
+        y: 1110
+        width: 33
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 09bdbf5084f2e4840800000000000000
+      internalID: 5210153805298785168
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Outer_Wall_Lvl1_17
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 1168
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4c5cad1b17437a8e0800000000000000
+      internalID: -1682318272879737404
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Outer_Wall_Lvl1_18
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 1146
+        width: 10
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 01f089fc38c9d35e0800000000000000
+      internalID: -1928212975507206384
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Outer_Wall_Lvl1_19
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 1123
+        width: 29
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c67fc32cb5a4b1290800000000000000
+      internalID: -7918653761839630484
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Outer_Wall_Lvl1_20
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 1134
+        width: 29
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad5985978503883c0800000000000000
+      internalID: -4357179482929850918
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Outer_Wall_Lvl1_21
+      rect:
+        serializedVersion: 2
+        x: 134
+        y: 1145
+        width: 13
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d50c75513ebfc2ee0800000000000000
+      internalID: -1284374840973213603
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Outer_Wall_Lvl1_22
+      rect:
+        serializedVersion: 2
+        x: 146
+        y: 1124
+        width: 30
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2bcbd3b5db7a28550800000000000000
+      internalID: 6161671671917690034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Outer_Wall_Lvl1_23
+      rect:
+        serializedVersion: 2
+        x: 177
+        y: 1133
+        width: 18
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a83e2e71c31cd2330800000000000000
+      internalID: 3687816133729248138
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Outer_Wall_Lvl1_24
+      rect:
+        serializedVersion: 2
+        x: 207
+        y: 1144
+        width: 14
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cac88efc3fcf90160800000000000000
+      internalID: 6992398020564782252
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Outer_Wall_Lvl1_25
+      rect:
+        serializedVersion: 2
+        x: 230
+        y: 1136
+        width: 18
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4ac28f939ff139b90800000000000000
+      internalID: -7236405020974371676
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Outer_Wall_Lvl1_26
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1097
+        width: 33
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 71fe04cc5f8b68bf0800000000000000
+      internalID: -322366957477105897
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Outer_Wall_Lvl1_27
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1053
+        width: 5
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2343093351af89390800000000000000
+      internalID: -7811218584707779534
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Outer_Wall_Lvl1_28
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 1062
+        width: 11
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 044f7683d75510100800000000000000
+      internalID: 72433065320248384
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Outer_Wall_Lvl1_29
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 1070
+        width: 26
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cc0dfc9f14e542770800000000000000
+      internalID: 8585090427132039372
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Outer_Wall_Lvl1_30
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 1066
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6b359306204b8ac70800000000000000
+      internalID: 8982627379087758262
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Outer_Wall_Lvl1_31
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 1017
+        width: 15
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5f45c6ec566cb7a10800000000000000
+      internalID: 1908337007678739701
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Outer_Wall_Lvl1_32
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 1067
+        width: 33
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 795e1c419a50f1080800000000000000
+      internalID: -9214640088820882025
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Outer_Wall_Lvl1_33
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 1114
+        width: 15
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 09868baa2a09872c0800000000000000
+      internalID: -4433634804822939504
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Outer_Wall_Lvl1_34
+      rect:
+        serializedVersion: 2
+        x: 95
+        y: 1055
+        width: 28
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 56a56af043f479520800000000000000
+      internalID: 2708720785906096741
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Outer_Wall_Lvl1_35
+      rect:
+        serializedVersion: 2
+        x: 95
+        y: 996
+        width: 69
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a096906ad1acbe2d0800000000000000
+      internalID: -3248280477529183990
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Outer_Wall_Lvl1_36
+      rect:
+        serializedVersion: 2
+        x: 139
+        y: 1042
+        width: 45
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6375f932f7acd1f90800000000000000
+      internalID: -6981201199947098314
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Outer_Wall_Lvl1_37
+      rect:
+        serializedVersion: 2
+        x: 164
+        y: 1097
+        width: 14
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8469d5d1cde71f350800000000000000
+      internalID: 6048755258385864264
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Outer_Wall_Lvl1_38
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 1016
+        width: 19
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3cb525fbb6ec62a90800000000000000
+      internalID: -7338951580586976317
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Outer_Wall_Lvl1_39
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 1020
+        width: 43
+        height: 113
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e0d056cd5a543c7c0800000000000000
+      internalID: -4052318661033784050
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Outer_Wall_Lvl1_40
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 1026
+        width: 12
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 49a9907f39a6f1580800000000000000
+      internalID: -8854241158649767276
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Outer_Wall_Lvl1_41
+      rect:
+        serializedVersion: 2
+        x: 220
+        y: 1087
+        width: 10
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f0a705adbc189b180800000000000000
+      internalID: -9099098859584325105
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Outer_Wall_Lvl1_42
+      rect:
+        serializedVersion: 2
+        x: 221
+        y: 1076
+        width: 6
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 19a882c3bcac80280800000000000000
+      internalID: -9076782074728772975
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Outer_Wall_Lvl1_43
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 248
+        height: 1016
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 336dc42d81ddbc050800000000000000
+      internalID: 5821990041983702579
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Outer_Wall_Lvl1_44
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 993
+        width: 10
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad9ac64c6208a0e80800000000000000
+      internalID: -8211610066564109862
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Outer_Wall_Lvl1_45
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 973
+        width: 40
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7bb68c2e95273ec60800000000000000
+      internalID: 7846240706191977399
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Outer_Wall_Lvl1_0: 5287072596516572794
+      Outer_Wall_Lvl1_1: 3886110915991310170
+      Outer_Wall_Lvl1_10: 7193040269843708130
+      Outer_Wall_Lvl1_11: -7142308694189198279
+      Outer_Wall_Lvl1_12: 2747217684795836862
+      Outer_Wall_Lvl1_13: 813146066138896427
+      Outer_Wall_Lvl1_14: -1762243310299170972
+      Outer_Wall_Lvl1_15: -8467518367332773150
+      Outer_Wall_Lvl1_16: 5210153805298785168
+      Outer_Wall_Lvl1_17: -1682318272879737404
+      Outer_Wall_Lvl1_18: -1928212975507206384
+      Outer_Wall_Lvl1_19: -7918653761839630484
+      Outer_Wall_Lvl1_2: -9117456753330768149
+      Outer_Wall_Lvl1_20: -4357179482929850918
+      Outer_Wall_Lvl1_21: -1284374840973213603
+      Outer_Wall_Lvl1_22: 6161671671917690034
+      Outer_Wall_Lvl1_23: 3687816133729248138
+      Outer_Wall_Lvl1_24: 6992398020564782252
+      Outer_Wall_Lvl1_25: -7236405020974371676
+      Outer_Wall_Lvl1_26: -322366957477105897
+      Outer_Wall_Lvl1_27: -7811218584707779534
+      Outer_Wall_Lvl1_28: 72433065320248384
+      Outer_Wall_Lvl1_29: 8585090427132039372
+      Outer_Wall_Lvl1_3: 8244735384151770335
+      Outer_Wall_Lvl1_30: 8982627379087758262
+      Outer_Wall_Lvl1_31: 1908337007678739701
+      Outer_Wall_Lvl1_32: -9214640088820882025
+      Outer_Wall_Lvl1_33: -4433634804822939504
+      Outer_Wall_Lvl1_34: 2708720785906096741
+      Outer_Wall_Lvl1_35: -3248280477529183990
+      Outer_Wall_Lvl1_36: -6981201199947098314
+      Outer_Wall_Lvl1_37: 6048755258385864264
+      Outer_Wall_Lvl1_38: -7338951580586976317
+      Outer_Wall_Lvl1_39: -4052318661033784050
+      Outer_Wall_Lvl1_4: 8618390723801302427
+      Outer_Wall_Lvl1_40: -8854241158649767276
+      Outer_Wall_Lvl1_41: -9099098859584325105
+      Outer_Wall_Lvl1_42: -9076782074728772975
+      Outer_Wall_Lvl1_43: 5821990041983702579
+      Outer_Wall_Lvl1_44: -8211610066564109862
+      Outer_Wall_Lvl1_45: 7846240706191977399
+      Outer_Wall_Lvl1_5: -298493263887130902
+      Outer_Wall_Lvl1_6: 4635173272350879126
+      Outer_Wall_Lvl1_7: -3273399753977343861
+      Outer_Wall_Lvl1_8: -5651287524941744041
+      Outer_Wall_Lvl1_9: -1875903680386313557
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

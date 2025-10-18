@@ -1,0 +1,27 @@
+# Unity — keep your repo lean & portable
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Mm]emoryCaptures/
+UserSettings/
+Assets/AssetStoreTools*
+
+# OS/editor cruft
+.DS_Store
+Thumbs.db
+
+# Unity Cache Server
+/[Uu]ser[Ss]ettings/
+
+# Rider/VSCode/etc.
+.idea/
+.vscode/
+*.sln
+*.csproj
+*.pidb
+*.user
+*.unityproj
+*.booproj
