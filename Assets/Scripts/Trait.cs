@@ -1,26 +1,17 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class Trait : MonoBehaviour
+/*
+This is the trait object which holds the information about each unique trait that can exist as well as the effects it has
+*/
+[System.Serializable]
+public class Trait
 {
     public int id; //unique ID number
-    private string _displayName; //traits name
-    private string _description; //short description of trait 
+    public string displayName; //traits name
+    public string description; //short description of trait 
 
-    private Dictionary<string, float> _numericalEffectss = new Dictionary<string, float>(); //dictionary of effects that alter attributes/statistics
-    private List<string> _behaviouralEffects; //list of additional effects
-
-    /*
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-    */
+    public Dictionary<string, float> attributeNumericalEffects = new Dictionary<string, float>(); //dictionary of effects that alter attributes (where string is the attribute and float is the change to said attribute)
+    public Dictionary<string, float> statNumericalEffects = new Dictionary<string, float>(); //dictionary of effects that alter stats (where string is the stat name and float is the change to said stat)
+    public List<string> behaviouralEffects; //list of additional effects
 }

@@ -1,41 +1,46 @@
 using UnityEngine;
 using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
+using System.Collections.Generic;
 
 public static class SaveSys
 {
-    string NPCDataPath = Application.persistentDataPath + "/NPCSaveData.json"; //defines the save location of the NPC Data
-    public static void SaveNPC(NPC npc)
+    static string NPCDataPath = Application.persistentDataPath + "/NPCSaveData.json"; //defines the save location of the NPC Data
+
+    /*
+    Function to convert dictionary of NPCs currently stored in the game into a JSON for saving
+
+    @param map - the dictionary containing all of the NPCs with their related IDs
+    */
+    public static void SaveAllNPCs(Dictionary<int, NPC> map)
     {
+        NPCDatabase db = new NPCDatabase(); //create database to store all of the NPCs for serialization
+        foreach (var kvp in map) //iterates over all values within the dictionary
+        {
+            var npc = kvp.Value; //retrieves the NPC from the dictionary
+            db.items.Add(new NPCData(npc)); //add the npc to the npcs list
+        }
 
-        NPCData data = new NPCData(npc); //turns the NPC's data into a standard object so that it can be serialized
-
-        //convert data to JSON
-        string json = JsonUtility.ToJson(data, true);
-
-        //write JSON to file
-        File.WriteAllText(NPCDataPath, json);
-
-        Debug.Log("Saved NPC data to: " + NPCDataPath);
+        var json = JsonUtility.ToJson(db, true); //turns the npcs list into json format
+        File.WriteAllText(NPCDataPath, json); //writes to the NPC data json file
+        Debug.Log($"Saved {db.items.Count} NPCs to: " + NPCDataPath);
     }
     
-    public static NPCData LoadNPC()
+    /*
+    Function to reloard all NPC data from the NPC save file
+
+    @return - list of NPCData from the JSON file
+    */
+    public static List<NPCData> LoadAllNPCs()
     {
-        if (File.Exists(NPCDataPath))
+        if (!File.Exists(NPCDataPath)) //checks whether load file exists
         {
-            //read JSON from file
-            string json = File.ReadAllText(NPCDataPath);
-
-            //convert JSON back to NPCData object
-            NPCData data = JsonUtility.FromJson<NPCData>(json);
-
-            Debug.Log("Loaded NPC data from: " + NPCDataPath);
-            return data;
-        }
-        else
-        {
-            Debug.LogError("Save file not found in: " + NPCDataPath);
+            Debug.LogError("Save file not found: " + NPCDataPath);
             return null;
         }
+
+        var json = File.ReadAllText(NPCDataPath); //reads the NPCDatabase from the json
+        var data = JsonUtility.FromJson<NPCDatabase>(json); //returns to a NPCDatabase from the json format
+        Debug.Log($"Loaded {data?.items?.Count ?? 0} NPCs from: {NPCDataPath}");
+        return data.items; //returns the list within the database
     }
 }
