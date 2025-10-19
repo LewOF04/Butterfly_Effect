@@ -4,33 +4,37 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 public static class SaveSys
 {
-    string NPCDataPath = Application.persistentDataPath + "/NPCSaveData.json";
+    string NPCDataPath = Application.persistentDataPath + "/NPCSaveData.json"; //defines the save location of the NPC Data
     public static void SaveNPC(NPC npc)
     {
-        BinaryFormatter formatter = new BinaryFormatter();
-        fileStream stream = new fileStream(NPCDataPath, FileMode.Create);
 
-        NPCData data = new NPCData(npc);
+        NPCData data = new NPCData(npc); //turns the NPC's data into a standard object so that it can be serialized
 
-        formatter.Serialize(stream, data);
-        stream.close();
+        //convert data to JSON
+        string json = JsonUtility.ToJson(data, true);
+
+        //write JSON to file
+        File.WriteAllText(NPCDataPath, json);
+
+        Debug.Log("Saved NPC data to: " + NPCDataPath);
     }
     
     public static NPCData LoadNPC()
     {
         if (File.Exists(NPCDataPath))
         {
-            BinaryFormatter formatter = new BinaryFormatter();
-            FileStream stream = new FileStream(NPCDataPath, FileMde.Open);
+            //read JSON from file
+            string json = File.ReadAllText(NPCDataPath);
 
-            NPCData data = formatter.Deserialize(stream) as NPCData;
-            stream.close();
+            //convert JSON back to NPCData object
+            NPCData data = JsonUtility.FromJson<NPCData>(json);
 
+            Debug.Log("Loaded NPC data from: " + NPCDataPath);
             return data;
         }
         else
         {
-            Debug.LogError("Save file not found in : " + NPCDataPath);
+            Debug.LogError("Save file not found in: " + NPCDataPath);
             return null;
         }
     }

@@ -24,21 +24,25 @@ public class NPC : MonoBehaviour
         traits.Add(id);
     }
 
+
+    //TODO: These functions probably need to be done in a data structure that can hold all of the various NPCs (probably a hashmap)
+    //saving and loading
     public void SaveNPC()
     {
-        SaveSys.SaveNPC(this);
+        SaveSys.SaveNPC(this); //passes the NPCs data into the save system
     }
 
-    public void LoadPlayer()
+    public void LoadNPC()
     {
-        NPCData data = SaveSys.LoadNPC();
+        NPCData data = SaveSys.LoadNPC(); //TODO: Currently this loads a singular NPC, need to be able to iterate through NPC loads
 
-        id = data.get(id);
-        npcName = data.get(npcName);
-        attributes = data.get(attributes);
-        stats = data.get(stats);
-        traits = data.get(traits).ToList();
-        buildingID = data.get(buildingID);
+        id = data.id;
+        npcName = data.npcName;
+        attributes = data.attributes;
+        stats = data.stats;
+        traits = data.traits.ToList(); //converts the NPCData (which is stored as an array) into a list to be stored in the NPC
+        buildingID = data.buildingID;
+
     }
 
     /*
