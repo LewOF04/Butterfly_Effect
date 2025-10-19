@@ -4,6 +4,7 @@ using System.Collections.Generic;
 public class NPCManager : MonoBehaviour
 {
     public Dictionary<string, NPC> NPCStorage = new Dictionary<string, NPC>(); //dictionary storing each NPC currently within the game 
+    public NPC npcPrefab;
 
     //saving and loading
 
@@ -19,10 +20,12 @@ public class NPCManager : MonoBehaviour
 
         foreach (var npcData in npcs)
         {
-            NPC npc = new NPC(); //creates a new npc
+            var inst = Instantiate(npcPrefab); //instantiates the NPC
+            var npc = inst.GetComponent<NPC>(); //gets the monoBehaviour script linked to the instantiation
+
             npc.Load(npcData); //loads the npc with data
 
-            NPCStorage.Add(npc.id, npc); //adds the npc to the storage dictionary
+            NPCStorage.Add(npc.id, npc); //adds the instantiated NPC to the storage
         }
     }
 }

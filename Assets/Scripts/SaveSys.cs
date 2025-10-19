@@ -11,7 +11,7 @@ public static class SaveSys
 
     @param map - the dictionary containing all of the NPCs with their related IDs
     */
-    public static void SaveAllNPCs(Dictionary<int, NPC> map)
+    public static void SaveAllNPCs(Dictionary<string, NPC> map)
     {
         NPCDatabase db = new NPCDatabase(); //create database to store all of the NPCs for serialization
         foreach (var kvp in map) //iterates over all values within the dictionary
