@@ -11,7 +11,6 @@ using System.Collections.Generic;
     public Attributes attributes = new Attributes(); //the attributes of the character
     public Stats stats = new Stats(); //the stats of the character
     public List<int> traits = new List<int>(); //list of ids of the traits that this NPC has
-    public int buildingID; //the building which the NPC belongs to (-1 if no such building exists)
 
     //extra utility functions for traits list
     public bool ContainsTrait(int id)
@@ -30,6 +29,5 @@ using System.Collections.Generic;
         attributes = data.attributes;
         stats = data.stats;
         traits = new List<int>(data.traits ?? System.Array.Empty<int>()); //converts into list from array
-        buildingID = data.buildingID;
     }
 }

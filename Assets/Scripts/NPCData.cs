@@ -9,7 +9,6 @@ public class NPCData
     public Attributes attributes; //the attributes of the character
     public Stats stats; //the stats of the character
     public int[] traits; //list of ids of the traits that this NPC has
-    public int buildingID; //the building which the NPC belongs to (-1 if no such building exists)
 
     public NPCData() { }
 
@@ -19,7 +18,6 @@ public class NPCData
         npcName = npc.npcName;
         attributes = npc.attributes;
         stats = npc.stats;
-        buildingID = npc.buildingID;
         traits = npc.traits.ToArray(); //converts into array 
     }
 }
