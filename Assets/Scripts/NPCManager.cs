@@ -3,20 +3,20 @@ using System.Collections.Generic;
 
 public class NPCManager : MonoBehaviour
 {
-    public Dictionary<string, NPC> NPCStorage = new Dictionary<string, NPC>(); //dictionary storing each NPC currently within the game 
     public NPC npcPrefab;
 
     //saving and loading
 
-     public void SaveNPCs()
+     public void SaveNPCs(Dictionary<string, NPC> NPCStorage)
     {
         SaveSys.SaveAllNPCs(NPCStorage);
     }
 
-    public void LoadNPCs()
+    public Dictionary<string, NPC> LoadNPCs()
     {
         var npcs = SaveSys.LoadAllNPCs(); //gets the list of stored NPCs
-        if (npcs == null) return;
+
+        Dictionary<string, NPC> NPCStorage = new Dictionary<string, NPC>(); //dictionary storing each NPC currently within the game 
 
         foreach (var npcData in npcs)
         {
@@ -27,5 +27,7 @@ public class NPCManager : MonoBehaviour
 
             NPCStorage.Add(npc.id, npc); //adds the instantiated NPC to the storage
         }
+
+        return NPCStorage;
     }
 }
