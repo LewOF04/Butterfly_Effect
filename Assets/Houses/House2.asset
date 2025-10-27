@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1646102c79d85f45b061d00eae3b9ad, type: 3}
+  m_Name: House2
+  m_EditorClassIdentifier: Assembly-CSharp::BuildingType
+  id: House2
+  displayName: Hovel
+  purchaseCost: 0
+  maintenanceCost: 0
+  buildCost: 0
+  possibleSprites:
+  - {fileID: -5274078672832802197, guid: 15ad39aaae2bce94ab14e4675e6851c0, type: 3}
+  - {fileID: 8501199437743977124, guid: ae1f2cb37b2210d4db567fa9d72c216a, type: 3}
+  - {fileID: 1782749348632645623, guid: 5cd2f134794194a4bb5f029aec1be43b, type: 3}
+  - {fileID: 1540425342689520371, guid: 625006b58205d80448fc8bf824d97423, type: 3}
+  - {fileID: 6008755849024553855, guid: 1136c5c8177498f4fb8515d67d350289, type: 3}
+  - {fileID: 6008755849024553855, guid: 1136c5c8177498f4fb8515d67d350289, type: 3}
+  - {fileID: 6008755849024553855, guid: 1136c5c8177498f4fb8515d67d350289, type: 3}
+  - {fileID: 6008755849024553855, guid: 1136c5c8177498f4fb8515d67d350289, type: 3}
+  scale: {x: 0.23, y: 0.23, z: 0.23}
+  defaultPosition: {x: 1.21, y: -0.96, z: 0}

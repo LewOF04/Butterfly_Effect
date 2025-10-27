@@ -166,6 +166,11 @@ MonoBehaviour:
   npcManager: {fileID: 251445326}
   buildingManager: {fileID: 1953881593}
   traitManager: {fileID: 612492712}
+  house1Data: {fileID: 11400000, guid: 07f7956cdd846524db2b0fafa49742cc, type: 2}
+  house2Data: {fileID: 11400000, guid: 1941b2649ede8a54e943be01971153da, type: 2}
+  house3Data: {fileID: 11400000, guid: 73471f272c9099a408f02c6141d37e55, type: 2}
+  house4Data: {fileID: 11400000, guid: 716309134eac00f4988029ee6aee8ab4, type: 2}
+  house5Data: {fileID: 11400000, guid: 15b97f59ef7b2c24da23b2740b47a6eb, type: 2}
 --- !u!1 &251445325
 GameObject:
   m_ObjectHideFlags: 0
@@ -1046,7 +1051,7 @@ GameObject:
   - component: {fileID: 1495880204}
   - component: {fileID: 1495880203}
   m_Layer: 0
-  m_Name: Housing
+  m_Name: Builder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1061,18 +1066,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1495880202}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59d4cfd2e57933644b7295c2c3a014e6, type: 3}
+  m_Script: {fileID: 11500000, guid: 0370516ac5fccfd49a8143a07fb0a5d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::House_Generation
-  housePrefabs:
-  - {fileID: 1367227178578407573, guid: 2a787fbd1ab55544d9164f4642726cb9, type: 3}
-  - {fileID: 5967352277657051600, guid: 05c635ee97fcbc446b71b20ab0fd668e, type: 3}
-  - {fileID: 4792543657880822769, guid: 6ec4a9aae57d1f54d8e9057cb04662e4, type: 3}
-  - {fileID: 8679505324001095375, guid: c4a5a5585deba2d4d9704d9027c22fdd, type: 3}
-  - {fileID: 5344100359546750314, guid: 2e5d65e58f6a0874b913400105d84024, type: 3}
   floorPrefab: {fileID: 4679774453417906803, guid: 2acffb0942e750e488e380b4df9f47ea, type: 3}
-  outerWallLeftPrefab: {fileID: 3673520786779133846, guid: 63a0f2e4ca9957a4cb71d7ccfe7a61c1, type: 3}
-  outerWallRightPrefab: {fileID: 3559058710677481754, guid: 174ad2ae8303b764491e378836bce71e, type: 3}
+  house1Data: {fileID: 11400000, guid: 07f7956cdd846524db2b0fafa49742cc, type: 2}
+  house2Data: {fileID: 11400000, guid: 1941b2649ede8a54e943be01971153da, type: 2}
+  house3Data: {fileID: 11400000, guid: 73471f272c9099a408f02c6141d37e55, type: 2}
+  house4Data: {fileID: 11400000, guid: 716309134eac00f4988029ee6aee8ab4, type: 2}
+  house5Data: {fileID: 11400000, guid: 15b97f59ef7b2c24da23b2740b47a6eb, type: 2}
+  wallData: {fileID: 11400000, guid: 6ca51a7fdf984d04aa7a76f454f43ec7, type: 2}
 --- !u!4 &1495880204
 Transform:
   m_ObjectHideFlags: 0
@@ -1300,7 +1303,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bdbb511601c7674c9cc7e7be7d90059, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BuildingManager
-  buildingPrefab: {fileID: 0}
+  buildingPrefab: {fileID: 7305655118164059182, guid: b599baa5d2828284c8a96c1ab4426e24, type: 3}
 --- !u!1001 &2009695956
 PrefabInstance:
   m_ObjectHideFlags: 0

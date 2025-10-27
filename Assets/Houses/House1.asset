@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1646102c79d85f45b061d00eae3b9ad, type: 3}
+  m_Name: House1
+  m_EditorClassIdentifier: Assembly-CSharp::BuildingType
+  id: House1
+  displayName: Shed
+  purchaseCost: 0
+  maintenanceCost: 0
+  buildCost: 0
+  possibleSprites:
+  - {fileID: -3482062948776847638, guid: 384b72263709a5c42b861211cf45a907, type: 3}
+  - {fileID: 4498729502696186937, guid: 9f2a14d7729be0a4981714a74cad5514, type: 3}
+  - {fileID: -3260252709369252922, guid: 72a29edc6d00c764183f9736d9625ab5, type: 3}
+  - {fileID: 8072120054536126404, guid: aa669c6aad5e44d4f8eeff45239d5729, type: 3}
+  - {fileID: 6117446205806104104, guid: 0ebc4a0c60d7cdc42b1cacd0480a51c9, type: 3}
+  - {fileID: 3341638471596972746, guid: 353bbe5c3d58198448be196044207d4c, type: 3}
+  - {fileID: -9188057374736398189, guid: d855c8c9d08c5444092d104b1fd4a3b3, type: 3}
+  - {fileID: -592804867170626837, guid: 2ae996bb63f43944e921ba155f2162a4, type: 3}
+  scale: {x: 0.23, y: 0.23, z: 0.23}
+  defaultPosition: {x: 1.25, y: -0.926, z: 0}

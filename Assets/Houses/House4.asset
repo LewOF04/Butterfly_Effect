@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1646102c79d85f45b061d00eae3b9ad, type: 3}
+  m_Name: House4
+  m_EditorClassIdentifier: Assembly-CSharp::BuildingType
+  id: House4
+  displayName: Ranch
+  purchaseCost: 0
+  maintenanceCost: 0
+  buildCost: 0
+  possibleSprites:
+  - {fileID: 2491897223048795810, guid: 1af93e4fd23288e4eb56b7804824a960, type: 3}
+  - {fileID: 6008755849024553855, guid: 1136c5c8177498f4fb8515d67d350289, type: 3}
+  - {fileID: 6008755849024553855, guid: 1136c5c8177498f4fb8515d67d350289, type: 3}
+  - {fileID: 6008755849024553855, guid: 1136c5c8177498f4fb8515d67d350289, type: 3}
+  - {fileID: 6008755849024553855, guid: 1136c5c8177498f4fb8515d67d350289, type: 3}
+  - {fileID: 6008755849024553855, guid: 1136c5c8177498f4fb8515d67d350289, type: 3}
+  - {fileID: 6008755849024553855, guid: 1136c5c8177498f4fb8515d67d350289, type: 3}
+  - {fileID: 6008755849024553855, guid: 1136c5c8177498f4fb8515d67d350289, type: 3}
+  scale: {x: 0.23, y: 0.23, z: 0.23}
+  defaultPosition: {x: 1.25, y: -0.1, z: 0}

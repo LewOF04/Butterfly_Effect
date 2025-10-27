@@ -3,12 +3,19 @@ using System.Collections.Generic;
 
 public class DataController : MonoBehaviour
 {
-    [Header("Scene References (drag the GOs here)")]
-    [SerializeField] private NPCManager npcManager;
-    [SerializeField] private BuildingManager buildingManager;
-    [SerializeField] private TraitManager traitManager;
+    [Header("Managers")]
+    public NPCManager npcManager;
+    public BuildingManager buildingManager;
+    public TraitManager traitManager;
 
-    //exposes storages 
+    [Header("House ScrObjs")]
+    public BuildingType house1Data;
+    public BuildingType house2Data;
+    public BuildingType house3Data;
+    public BuildingType house4Data;
+    public BuildingType house5Data;
+
+    
     public Dictionary<string, NPC> NPCStorage;
     public Dictionary<string, Building> BuildingStorage;
     public Dictionary<int, TraitData> TraitStorage;

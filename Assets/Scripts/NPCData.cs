@@ -9,6 +9,7 @@ public class NPCData
     public Attributes attributes; //the attributes of the character
     public Stats stats; //the stats of the character
     public int[] traits; //list of ids of the traits that this NPC has
+    public string spriteType; //the code of the sprite
 
     public NPCData() { }
 
