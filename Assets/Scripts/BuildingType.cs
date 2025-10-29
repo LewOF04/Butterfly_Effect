@@ -14,11 +14,10 @@ public class BuildingType : ScriptableObject
     [Min(0)] public int purchaseCost;    // in your chosen currency units
     [Min(0)] public int maintenanceCost;
     [Min(0)] public int buildCost;
+    [Min(1)] public int capacity;
 
     [Header("Visuals")]
     public Sprite[] possibleSprites = new Sprite[8];  // drop all variants here (night/day, rotated, skin variants, etc.)
     public Vector3 scale;
-
-    [Tooltip("Optional: default scale to apply to this building.")]
     public Vector3 defaultPosition = Vector3.one;
 }
