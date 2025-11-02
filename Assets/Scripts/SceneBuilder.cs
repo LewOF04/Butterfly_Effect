@@ -10,25 +10,26 @@ public class SceneBuilder : MonoBehaviour
     [Header("Build Settings")]
     private Vector3 floorPosition = new Vector3(1.21f, -2.13f, 0.5f);
 
-    [Header("Asset Data")]
+    [Header("Data References")]
     public BuildingType house1Data;
     public BuildingType house2Data;
     public BuildingType house3Data;
     public BuildingType house4Data;
     public BuildingType house5Data;
     public WallType wallData;
-    public GameObject DataController; //data controller with all information about the scene
+
+    [Header("Other References")]
+    public DataController dataController; //data controller with all information about the scene
 
     private Vector3 offset = new Vector3(9.36f, 0.0f, 0.0f); //distance between each section
 
+    
     void BuildScene()
     {
-        var DataControllerScript = DataController.GetComponents<DataController>();
-
-        var npcs = DataControllerScript.NPCStorage;
-        var buildings = DataControllerScript.BuildingStorage;
-        var traits = DataControllerScript.TraitStorage;
-        var NPCBuildingLinks = DataControllerScript.NPCBuildingLinks;
+        var npcs = dataController.NPCStorage;
+        var buildings = dataController.BuildingStorage;
+        var traits = dataController.TraitStorage;
+        var NPCBuildingLinks = dataController.NPCBuildingLinks;
         
         
         Vector3 wallPosition = new Vector3(-3.04f, -0.18f, 0.0f);
@@ -68,7 +69,7 @@ public class SceneBuilder : MonoBehaviour
             }
 
             housePosition = currHouseData.defaultPosition;
-            housePosition += iteration * offset; //moves position over the offest amount
+            housePosition += iteration * offset; //moves position over the offset amount
 
             //move the house to the designated position
             building.gameObject.transform.position = housePosition;
@@ -101,10 +102,12 @@ public class SceneBuilder : MonoBehaviour
         }
         wallPosition += (iteration * offset) + new Vector3(-0.85f, -0.18f, 0.0f);
         GameObject rightWall = Instantiate(wallData.rightPrefab, wallPosition, Quaternion.identity);
+        //TODO: instantiate sprite onto rightWall
 
         //tell the camera where the side walls are positioned
         CamerMovement camera = Camera.main.GetComponent<CamerMovement>();
         camera.leftWallPos = leftWall.transform;
         camera.rightWallPos = rightWall.transform;
     }
+    
 }
