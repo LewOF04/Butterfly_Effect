@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 using System.Collections.Generic;
 
 public class SceneBuilder : MonoBehaviour
@@ -30,17 +31,20 @@ public class SceneBuilder : MonoBehaviour
         var buildings = dataController.BuildingStorage;
         var traits = dataController.TraitStorage;
         var NPCBuildingLinks = dataController.NPCBuildingLinks;
+
+
+        int totalQuality = 0; //the overall quality of the settlement based upon the total quality of all of the buildings
         
         
         Vector3 wallPosition = new Vector3(-3.04f, -0.18f, 0.0f);
         GameObject leftWall = Instantiate(wallData.leftPrefab, wallPosition, Quaternion.identity);
-        //TODO: instantiate sprite onto left wall
 
         int iteration = 0;
         BuildingType currHouseData;
         Vector3 housePosition;
         foreach (KeyValuePair<string, Building> entry in buildings) //iterate over all buildings
         {
+            //retrieve the current building
             Building building = entry.Value;
             string id = entry.Key;
 
@@ -87,6 +91,7 @@ public class SceneBuilder : MonoBehaviour
                 (c <= 87.5f) ? 6 : 7;
 
             buildingsSprite = currHouseData.possibleSprites[idx];
+            totalQuality += idx;
 
             var sr = building.GetComponent<SpriteRenderer>();
             sr.sprite = buildingsSprite;
@@ -102,12 +107,24 @@ public class SceneBuilder : MonoBehaviour
         }
         wallPosition += (iteration * offset) + new Vector3(-0.85f, -0.18f, 0.0f);
         GameObject rightWall = Instantiate(wallData.rightPrefab, wallPosition, Quaternion.identity);
-        //TODO: instantiate sprite onto rightWall
+
+        //calculate the required quality of the outer walls
+        int averageQuality = (int)Math.Round((double)totalQuality / buildings.Count);
+        var wallSprite = wallData.possibleSprites[averageQuality];
+
+        //apply the sprites to the right and left walls
+        var rightWallSR = rightWall.GetComponent<SpriteRenderer>();
+        var leftWallSR = leftWall.GetComponent<SpriteRenderer>();
+        rightWallSR.sprite = wallSprite;
+        leftWallSR.sprite = wallSprite;
+        leftWallSR.flipX = true;
+        leftWall.gameObject.transform.localScale = wallData.scale;
+        rightWall.gameObject.transform.localScale = wallData.scale;
 
         //tell the camera where the side walls are positioned
         CamerMovement camera = Camera.main.GetComponent<CamerMovement>();
         camera.leftWallPos = leftWall.transform;
         camera.rightWallPos = rightWall.transform;
-    }
+    } //TODO: build NPC spawning
     
 }

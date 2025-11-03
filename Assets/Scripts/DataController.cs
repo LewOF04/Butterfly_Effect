@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System;
 
 public class DataController : MonoBehaviour
 {
@@ -15,7 +16,7 @@ public class DataController : MonoBehaviour
     public BuildingType house4Data;
     public BuildingType house5Data;
 
-    
+
     public Dictionary<string, NPC> NPCStorage;
     public Dictionary<string, Building> BuildingStorage;
     public Dictionary<int, TraitData> TraitStorage;
@@ -31,10 +32,20 @@ public class DataController : MonoBehaviour
 
         BuildingStorage = buildingManager ? (buildingManager.LoadBuildings() ?? new Dictionary<string, Building>())
                                         : new Dictionary<string, Building>();
-                                        
-        foreach(var (id, building) in BuildingStorage)
+
+        foreach (var (id, building) in BuildingStorage)
         {
             NPCBuildingLinks.Add(id, building.inhabitants);
         }
+    }
+
+    private void seedGenerate(int seed)
+    {
+        System.Random rng = new System.Random(seed);
+        TraitStorage = traitManager ? traitManager.LoadTraits() : new Dictionary<int, TraitData>(); //loads traits from memory
+
+        BuildingStorage = buildingManager.generateBuildings(rng);
+        NPCStorage = npcManager.generateNPCs(rng, TraitStorage.Count);
+        //linkNPCsBuidlings(); //TODO: implement this
     }
 }

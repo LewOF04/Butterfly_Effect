@@ -17,5 +17,7 @@ public class Attributes
     [Range(0,100)] public float dexterity;
     [Range(0,100)] public float constitution;
     [Range(0,100)] public float wisdom;
-    [Range(0,100)] public float strength;
-}
+    [Range(0, 100)] public float strength;
+
+    public Attributes() { }
+} 

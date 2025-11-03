@@ -10,6 +10,7 @@ public class BuildingData
     [Range(0, 100)] public float condition; //the condition of the building from 0-100
     public List<string> inhabitants = new List<string>(); //string of inhabitant NPCs
 
+
     public BuildingData() { }
 
     public BuildingData(Building building)
@@ -30,3 +31,4 @@ public class BuildingDatabase
 {
     public List<BuildingData> items = new List<BuildingData>();
 }
+ 

@@ -9,7 +9,8 @@ public class NPCData
     public Attributes attributes; //the attributes of the character
     public Stats stats; //the stats of the character
     public int[] traits; //list of ids of the traits that this NPC has
-    public string spriteType; //the code of the sprite
+    public int spriteType; //the code of the sprite
+    public string parentBuilding;
 
     public NPCData() { }
 
@@ -20,6 +21,8 @@ public class NPCData
         attributes = npc.attributes;
         stats = npc.stats;
         traits = npc.traits.ToArray(); //converts into array 
+        spriteType = npc.spriteType;
+        parentBuilding = npc.parentBuilding;
     }
 }
 

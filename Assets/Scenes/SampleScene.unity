@@ -1076,7 +1076,7 @@ MonoBehaviour:
   house4Data: {fileID: 11400000, guid: 716309134eac00f4988029ee6aee8ab4, type: 2}
   house5Data: {fileID: 11400000, guid: 15b97f59ef7b2c24da23b2740b47a6eb, type: 2}
   wallData: {fileID: 11400000, guid: 6ca51a7fdf984d04aa7a76f454f43ec7, type: 2}
-  DataController: {fileID: 36750639}
+  dataController: {fileID: 36750642}
 --- !u!4 &1495880204
 Transform:
   m_ObjectHideFlags: 0
