@@ -17,21 +17,27 @@ public class DataController : MonoBehaviour
     public BuildingType house5Data;
 
 
-    public Dictionary<string, NPC> NPCStorage;
-    public Dictionary<string, Building> BuildingStorage;
+    public Dictionary<int, NPC> NPCStorage;
+    public Dictionary<int, Building> BuildingStorage;
     public Dictionary<int, TraitData> TraitStorage;
-    public Dictionary<string, List<string>> NPCBuildingLinks;
+    public Dictionary<int, List<int>> NPCBuildingLinks;
 
-    private void LoadFromMemory()
+    public void saveToMemory()
+    {
+        buildingManager.SaveBuildings(BuildingStorage);
+        npcManager.SaveNPCs(NPCStorage);
+    }
+
+    public void LoadFromMemory()
     {
         //loads traits first as NPCs are reliant on their existence
         TraitStorage = traitManager ? traitManager.LoadTraits() : new Dictionary<int, TraitData>();
 
-        NPCStorage = npcManager ? (npcManager.LoadNPCs() ?? new Dictionary<string, NPC>())
-                                        : new Dictionary<string, NPC>();
+        NPCStorage = npcManager ? (npcManager.LoadNPCs() ?? new Dictionary<int, NPC>())
+                                        : new Dictionary<int, NPC>();
 
-        BuildingStorage = buildingManager ? (buildingManager.LoadBuildings() ?? new Dictionary<string, Building>())
-                                        : new Dictionary<string, Building>();
+        BuildingStorage = buildingManager ? (buildingManager.LoadBuildings() ?? new Dictionary<int, Building>())
+                                        : new Dictionary<int, Building>();
 
         foreach (var (id, building) in BuildingStorage)
         {
@@ -39,7 +45,7 @@ public class DataController : MonoBehaviour
         }
     }
 
-    private void seedGenerate(int seed)
+    public void seedGenerate(int seed)
     {
         System.Random rng = new System.Random(seed);
         TraitStorage = traitManager ? traitManager.LoadTraits() : new Dictionary<int, TraitData>(); //loads traits from memory

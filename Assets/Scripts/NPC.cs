@@ -6,7 +6,7 @@ using System.Collections.Generic;
  */
  public class NPC : MonoBehaviour
 {
-    public string id; //unique ID identifier for the NPC
+    public int id; //unique ID identifier for the NPC
     public string npcName; //name of the NPC
     public Attributes attributes; //the attributes of the character
     public Stats stats; //the stats of the character
@@ -36,7 +36,7 @@ using System.Collections.Generic;
         parentBuilding = data.parentBuilding;
     }
 
-    public void Load(string inputID, string inputNpcName, Attributes inputAttributes, Stats inputStats, List<int> inputTraits, int inputSpriteType, string inputParentBuilding)
+    public void Load(int inputID, string inputNpcName, Attributes inputAttributes, Stats inputStats, List<int> inputTraits, int inputSpriteType, string inputParentBuilding)
     {
         id = inputID;
         npcName = inputNpcName;

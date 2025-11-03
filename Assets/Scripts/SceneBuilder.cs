@@ -42,11 +42,11 @@ public class SceneBuilder : MonoBehaviour
         int iteration = 0;
         BuildingType currHouseData;
         Vector3 housePosition;
-        foreach (KeyValuePair<string, Building> entry in buildings) //iterate over all buildings
+        foreach (KeyValuePair<int, Building> entry in buildings) //iterate over all buildings
         {
             //retrieve the current building
             Building building = entry.Value;
-            string id = entry.Key;
+            int id = entry.Key;
 
             //get the data for the house type of this current building
             switch (building.buildingType)

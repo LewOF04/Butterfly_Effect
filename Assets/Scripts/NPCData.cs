@@ -4,7 +4,7 @@ using System.Collections.Generic;
 [System.Serializable]
 public class NPCData
 {
-    public string id;//unique ID identifier for the NPC
+    public int id;//unique ID identifier for the NPC
     public string npcName;//name of the NPC
     public Attributes attributes; //the attributes of the character
     public Stats stats; //the stats of the character

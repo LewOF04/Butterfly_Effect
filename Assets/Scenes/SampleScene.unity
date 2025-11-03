@@ -201,6 +201,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPCManager
   npcPrefab: {fileID: -242075621941404267, guid: d050232c96babe643b0fbf05b3d31920, type: 3}
+  dataController: {fileID: 36750642}
 --- !u!4 &251445327
 Transform:
   m_ObjectHideFlags: 0
@@ -1305,6 +1306,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BuildingManager
   buildingPrefab: {fileID: 7305655118164059182, guid: b599baa5d2828284c8a96c1ab4426e24, type: 3}
+  dataController: {fileID: 36750642}
 --- !u!1001 &2009695956
 PrefabInstance:
   m_ObjectHideFlags: 0

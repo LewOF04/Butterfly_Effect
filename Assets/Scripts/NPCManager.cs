@@ -5,6 +5,7 @@ using System;
 public class NPCManager : MonoBehaviour
 {
     public NPC npcPrefab;
+    public DataController dataController;
 
     const int MIN_NPCS = 0;
     const int MAX_NPCS = 10;
@@ -12,16 +13,16 @@ public class NPCManager : MonoBehaviour
 
     //saving and loading
 
-    public void SaveNPCs(Dictionary<string, NPC> NPCStorage)
+    public void SaveNPCs(Dictionary<int, NPC> NPCStorage)
     {
         SaveSys.SaveAllNPCs(NPCStorage);
     }
 
-    public Dictionary<string, NPC> LoadNPCs()
+    public Dictionary<int, NPC> LoadNPCs()
     {
         var npcs = SaveSys.LoadAllNPCs(); //gets the list of stored NPCs
 
-        Dictionary<string, NPC> NPCStorage = new Dictionary<string, NPC>(); //dictionary storing each NPC currently within the game 
+        Dictionary<int, NPC> NPCStorage = new Dictionary<int, NPC>(); //dictionary storing each NPC currently within the game 
 
         foreach (var npcData in npcs)
         {
@@ -36,24 +37,24 @@ public class NPCManager : MonoBehaviour
         return NPCStorage;
     }
 
-    public Dictionary<string, NPC> generateNPCs(System.Random rng, int maxTrait)
+    public Dictionary<int, NPC> generateNPCs(System.Random rng, int maxTrait)
     {
         int npcNumber = rng.Next(MIN_NPCS, MAX_NPCS);
 
-        Dictionary<string, NPC> NPCStorage = new Dictionary<string, NPC>(); //dictionary storing each NPC currently within the game 
+        Dictionary<int, NPC> NPCStorage = new Dictionary<int, NPC>(); //dictionary storing each NPC currently within the game 
 
         for (int i = 0; i < npcNumber; i++)
         {
-            NPC npc = generateNPC(i.ToString(), maxTrait, rng);
+            NPC npc = generateNPC(i, maxTrait, rng);
             NPCStorage.Add(npc.id, npc);
         }
 
         return NPCStorage;
     }
 
-    public NPC generateNPC(string inputID, int maxTrait, System.Random rng)
+    public NPC generateNPC(int inputID, int maxTrait, System.Random rng)
     {
-        string id = inputID;
+        int id = inputID;
         string npcName = ""; //TODO: create a way to give NPCs unique names
         Attributes attributes = new Attributes(); //the attributes of the character
         Stats stats = new Stats(); //the stats of the character
@@ -99,5 +100,33 @@ public class NPCManager : MonoBehaviour
         npc.Load(id, npcName, attributes, stats, traits, spriteType, parentBuilding); //loads the npc with data
 
         return npc;
+    }
+
+    public void generateSingleNPC()
+    {
+        System.Random rng = new System.Random();
+
+        //gets the lowest missing key
+        int id = -1;
+        int lastKey = -1;
+        foreach (int key in dataController.NPCStorage.Keys)
+        {
+            //checks if there are any gaps in the key id list
+            if (key - 1 != lastKey)
+            {
+                id = key - 1;
+                break;
+            }
+            lastKey = key;
+        }
+
+        //if no id has been set
+        if (id == -1)
+        {
+            id = dataController.NPCStorage.Count; //the new id is the next key     
+        }
+
+        var npc = generateNPC(id, dataController.TraitStorage.Count, rng);
+        dataController.NPCStorage.Add(npc.id, npc);
     }
 } 
