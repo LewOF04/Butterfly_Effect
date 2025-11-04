@@ -45,10 +45,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b52d749af39cbc1489d92b4284475fe9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Building
-  id: 
+  id: 0
   buildingName: 
-  buildingType: 0
+  buildingType: 1
   condition: 0
+  inhabitants: 
 --- !u!212 &1145738255409744166
 SpriteRenderer:
   m_ObjectHideFlags: 0

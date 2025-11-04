@@ -1071,6 +1071,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::House_Generation
   floorPrefab: {fileID: 4679774453417906803, guid: 2acffb0942e750e488e380b4df9f47ea, type: 3}
+  houseData:
+  - {fileID: 11400000, guid: 07f7956cdd846524db2b0fafa49742cc, type: 2}
+  - {fileID: 11400000, guid: 1941b2649ede8a54e943be01971153da, type: 2}
+  - {fileID: 11400000, guid: 73471f272c9099a408f02c6141d37e55, type: 2}
+  - {fileID: 11400000, guid: 716309134eac00f4988029ee6aee8ab4, type: 2}
+  - {fileID: 11400000, guid: 15b97f59ef7b2c24da23b2740b47a6eb, type: 2}
   house1Data: {fileID: 11400000, guid: 07f7956cdd846524db2b0fafa49742cc, type: 2}
   house2Data: {fileID: 11400000, guid: 1941b2649ede8a54e943be01971153da, type: 2}
   house3Data: {fileID: 11400000, guid: 73471f272c9099a408f02c6141d37e55, type: 2}

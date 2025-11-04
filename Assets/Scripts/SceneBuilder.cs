@@ -12,12 +12,9 @@ public class SceneBuilder : MonoBehaviour
     private Vector3 floorPosition = new Vector3(1.21f, -2.13f, 0.5f);
 
     [Header("Data References")]
-    public BuildingType house1Data;
-    public BuildingType house2Data;
-    public BuildingType house3Data;
-    public BuildingType house4Data;
-    public BuildingType house5Data;
+    public List<BuildingType> houseData = new List<BuildingType>();
     public WallType wallData;
+
 
     [Header("Other References")]
     public DataController dataController; //data controller with all information about the scene
@@ -49,28 +46,7 @@ public class SceneBuilder : MonoBehaviour
             int id = entry.Key;
 
             //get the data for the house type of this current building
-            switch (building.buildingType)
-            {
-                case 1:
-                    currHouseData = house1Data;
-                    break;
-
-                case 2:
-                    currHouseData = house2Data;
-                    break;
-
-                case 3:
-                    currHouseData = house3Data;
-                    break;
-
-                case 4:
-                    currHouseData = house4Data;
-                    break;
-
-                default:
-                    currHouseData = house5Data;
-                    break;
-            }
+            currHouseData = houseData[building.buildingType - 1];
 
             housePosition = currHouseData.defaultPosition;
             housePosition += iteration * offset; //moves position over the offset amount

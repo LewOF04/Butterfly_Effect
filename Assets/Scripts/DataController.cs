@@ -52,6 +52,10 @@ public class DataController : MonoBehaviour
 
         BuildingStorage = buildingManager.generateBuildings(rng);
         NPCStorage = npcManager.generateNPCs(rng, TraitStorage.Count);
-        //linkNPCsBuidlings(); //TODO: implement this
+        
+        foreach (var (id, building) in BuildingStorage)
+        {
+            NPCBuildingLinks.Add(id, building.inhabitants);
+        }
     }
 }
