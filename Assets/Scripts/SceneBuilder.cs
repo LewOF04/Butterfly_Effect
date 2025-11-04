@@ -78,6 +78,35 @@ public class SceneBuilder : MonoBehaviour
             //spawn the flooring underneath the house
             GameObject floor = Instantiate(floorPrefab, floorPosition, Quaternion.Euler(68.064f, 0.0f, 0.0f));
 
+            //iterate over all npcs of the building and spawn them
+            var npcPosition = housePosition - iteration * offset;
+            NPCType currNPCData;
+            foreach (int npcID in building.inhabitants)
+            {
+                NPC npc = npcs[npcID];
+                currNPCData = npcData[npc.spriteType - 1];
+
+                npc.gameObject.transform.position = npcPosition;
+                npcPosition += new Vector3(0.1f, 0.0f, 0.0f);
+
+                Sprite npcSprite;
+                float c = npc.stats.condition;
+                int idx =
+                    (c <= 12.5f) ? 0 :
+                    (c <= 25f) ? 1 :
+                    (c <= 37.5f) ? 2 :
+                    (c <= 50f) ? 3 :
+                    (c <= 62.5f) ? 4 :
+                    (c <= 75f) ? 5 :
+                    (c <= 87.5f) ? 6 : 7;
+                npcSprite = currNPCData.possibleSprites[idx];
+
+                var sr = npc.GetComponent<SpriteRenderer>();
+                sr.sprite = npcSprite;
+
+                npc.gameObject.transform.localScale = currNPCData.scale;
+            }
+
             //move the position for the next set
             floorPosition += offset;
             iteration++;
