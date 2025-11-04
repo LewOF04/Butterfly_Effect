@@ -10,6 +10,7 @@ public class GameSystemsInstaller : MonoBehaviour
         {
             var go = Instantiate(gameSystemsPrefab);
             go.name = "GameSystems";
+            //TODO: This needs to operate before the generate runs
         }
     }
 }

@@ -346,6 +346,7 @@ GameObject:
   - component: {fileID: 127957064}
   - component: {fileID: 127957063}
   - component: {fileID: 127957062}
+  - component: {fileID: 127957065}
   m_Layer: 5
   m_Name: Go Button
   m_TagString: Untagged
@@ -416,7 +417,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 127957063}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 127957065}
+        m_TargetAssemblyTypeName: GenerateGo, Assembly-CSharp
+        m_MethodName: OnButtonPress
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &127957063
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -455,6 +468,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 127957060}
   m_CullTransparentMesh: 1
+--- !u!114 &127957065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 127957060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10617f648f18eca40b0fe76d1a434d1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GenerateGo
+  inputField: {fileID: 2066246334}
+  mainMenu: {fileID: 1086781370}
 --- !u!1 &201598521
 GameObject:
   m_ObjectHideFlags: 0
@@ -537,7 +564,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 201598524}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1086781368}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 802925433}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &201598524
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1141,7 +1192,31 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 761217358}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 802925433}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1086781368}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &761217358
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1195,7 +1270,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &802925434
 Transform:
   m_ObjectHideFlags: 0
@@ -1439,7 +1514,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c5f1c982137a884987d007e73a37211, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  gameSystemsPrefab: {fileID: 947856916039176080, guid: 2f34a8fa536835540b438f7709c14860, type: 3}
+  gameSystemsPrefab: {fileID: 7742010175312080408, guid: 937433024f2206b44b039dcdd7beb37b, type: 3}
 --- !u!1 &1273428984
 GameObject:
   m_ObjectHideFlags: 0

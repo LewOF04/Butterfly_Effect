@@ -8,7 +8,14 @@ public class BuildingManager : MonoBehaviour
     const int MIN_HOUSES = 0;
     //TODO: this number is entirely arbitrary
     public Building buildingPrefab;
-    public DataController dataController;
+    private DataController dataController = DataController.Instance;
+
+    [Header("House ScrObjs")]
+    public BuildingType house1Data;
+    public BuildingType house2Data;
+    public BuildingType house3Data;
+    public BuildingType house4Data;
+    public BuildingType house5Data;
 
     //saving and loading
     public void SaveBuildings(Dictionary<int, Building> BuildingStorage)

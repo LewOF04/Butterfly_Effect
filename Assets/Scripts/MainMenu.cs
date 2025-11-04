@@ -20,7 +20,6 @@ public class MainMenu : MonoBehaviour
 
     public void GenerateGame(int seed)
     {
-        //TODO: retrieve seed from generate game
         dataManager.seedGenerate(seed);
         enterGame();
     }

@@ -5,7 +5,7 @@ using System;
 public class NPCManager : MonoBehaviour
 {
     public NPC npcPrefab;
-    public DataController dataController;
+    private DataController dataController = DataController.Instance;
 
     const int MIN_NPCS = 0;
     const int MAX_NPCS = 10;

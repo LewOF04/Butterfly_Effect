@@ -21,6 +21,11 @@ public class SceneBuilder : MonoBehaviour
 
     private Vector3 offset = new Vector3(9.36f, 0.0f, 0.0f); //distance between each section
 
+    public void Awake()
+    {
+        BuildScene();
+    }
+
     
     void BuildScene()
     {
