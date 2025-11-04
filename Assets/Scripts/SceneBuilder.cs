@@ -17,8 +17,7 @@ public class SceneBuilder : MonoBehaviour
     public WallType wallData;
 
 
-    [Header("Other References")]
-    public DataController dataController; //data controller with all information about the scene
+    private DataController dataController = DataController.Instance;
 
     private Vector3 offset = new Vector3(9.36f, 0.0f, 0.0f); //distance between each section
 

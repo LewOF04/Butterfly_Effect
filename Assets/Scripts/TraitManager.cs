@@ -7,7 +7,6 @@ public class TraitManager : MonoBehaviour
     public TextAsset traitFile; 
 
     //loading traits
-
     public Dictionary<int, TraitData> LoadTraits()
     {
         string json = traitFile.text; //reads the traitDatabase from the json

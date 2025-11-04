@@ -4,6 +4,8 @@ using System;
 
 public class DataController : MonoBehaviour
 {
+    public static DataController Instance;
+
     [Header("Managers")]
     public NPCManager npcManager;
     public BuildingManager buildingManager;
@@ -21,6 +23,12 @@ public class DataController : MonoBehaviour
     public Dictionary<int, Building> BuildingStorage;
     public Dictionary<int, TraitData> TraitStorage;
     public Dictionary<int, List<int>> NPCBuildingLinks;
+
+    void Awake()
+    {
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
 
     public void saveToMemory()
     {
