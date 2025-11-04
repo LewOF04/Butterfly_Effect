@@ -940,7 +940,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: a23b25cdede60cc498c15089e4b9beaf, type: 3}
+  m_Sprite: {fileID: -9095717837082945937, guid: bc7408b00dc1c81498ae1f020512c85b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1077,11 +1077,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 73471f272c9099a408f02c6141d37e55, type: 2}
   - {fileID: 11400000, guid: 716309134eac00f4988029ee6aee8ab4, type: 2}
   - {fileID: 11400000, guid: 15b97f59ef7b2c24da23b2740b47a6eb, type: 2}
-  house1Data: {fileID: 11400000, guid: 07f7956cdd846524db2b0fafa49742cc, type: 2}
-  house2Data: {fileID: 11400000, guid: 1941b2649ede8a54e943be01971153da, type: 2}
-  house3Data: {fileID: 11400000, guid: 73471f272c9099a408f02c6141d37e55, type: 2}
-  house4Data: {fileID: 11400000, guid: 716309134eac00f4988029ee6aee8ab4, type: 2}
-  house5Data: {fileID: 11400000, guid: 15b97f59ef7b2c24da23b2740b47a6eb, type: 2}
+  npcData:
+  - {fileID: 11400000, guid: 8a5fc402d37e0924ea7f6150e1276273, type: 2}
+  - {fileID: 11400000, guid: 0d3b218c1993706409b59f7ccae45090, type: 2}
+  - {fileID: 11400000, guid: 7b70c61e41383d847bdc7e2d6f2eeb51, type: 2}
+  - {fileID: 11400000, guid: bbd1864e64633c84791125db281b2de3, type: 2}
+  - {fileID: 11400000, guid: 32d7c62793a597e4ba15f7c432509f53, type: 2}
   wallData: {fileID: 11400000, guid: 6ca51a7fdf984d04aa7a76f454f43ec7, type: 2}
   dataController: {fileID: 36750642}
 --- !u!4 &1495880204

@@ -13,6 +13,7 @@ public class SceneBuilder : MonoBehaviour
 
     [Header("Data References")]
     public List<BuildingType> houseData = new List<BuildingType>();
+    public List<NPCType> npcData = new List<NPCType>();
     public WallType wallData;
 
 

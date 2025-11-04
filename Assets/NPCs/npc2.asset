@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f933f69f8ef0fb478b0a4f030d16631, type: 3}
   m_Name: npc2
   m_EditorClassIdentifier: Assembly-CSharp::NPCType
-  id: 
-  race: 
-  hairColour: 
+  id: 2
+  race: Square
+  hairColour: None
   possibleSprites:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 7482667652216324306, guid: e537f03567e389448a231370d2161328, type: 3}
+  - {fileID: 7482667652216324306, guid: e537f03567e389448a231370d2161328, type: 3}
+  - {fileID: 7482667652216324306, guid: e537f03567e389448a231370d2161328, type: 3}
+  - {fileID: 7482667652216324306, guid: e537f03567e389448a231370d2161328, type: 3}
+  - {fileID: 7482667652216324306, guid: e537f03567e389448a231370d2161328, type: 3}
+  - {fileID: 7482667652216324306, guid: e537f03567e389448a231370d2161328, type: 3}
+  - {fileID: 7482667652216324306, guid: e537f03567e389448a231370d2161328, type: 3}
+  - {fileID: 7482667652216324306, guid: e537f03567e389448a231370d2161328, type: 3}
   scale: {x: 0, y: 0, z: 0}
