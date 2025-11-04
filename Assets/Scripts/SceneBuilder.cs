@@ -90,19 +90,19 @@ public class SceneBuilder : MonoBehaviour
                 npcPosition += new Vector3(0.1f, 0.0f, 0.0f);
 
                 Sprite npcSprite;
-                float c = npc.stats.condition;
-                int idx =
-                    (c <= 12.5f) ? 0 :
-                    (c <= 25f) ? 1 :
-                    (c <= 37.5f) ? 2 :
-                    (c <= 50f) ? 3 :
-                    (c <= 62.5f) ? 4 :
-                    (c <= 75f) ? 5 :
-                    (c <= 87.5f) ? 6 : 7;
-                npcSprite = currNPCData.possibleSprites[idx];
+                float c1 = npc.stats.condition;
+                int idx1 =
+                    (c1 <= 12.5f) ? 0 :
+                    (c1 <= 25f) ? 1 :
+                    (c1 <= 37.5f) ? 2 :
+                    (c1 <= 50f) ? 3 :
+                    (c1 <= 62.5f) ? 4 :
+                    (c1 <= 75f) ? 5 :
+                    (c1 <= 87.5f) ? 6 : 7;
+                npcSprite = currNPCData.possibleSprites[idx1];
 
-                var sr = npc.GetComponent<SpriteRenderer>();
-                sr.sprite = npcSprite;
+                var sr1 = npc.GetComponent<SpriteRenderer>();
+                sr1.sprite = npcSprite;
 
                 npc.gameObject.transform.localScale = currNPCData.scale;
             }
@@ -131,6 +131,6 @@ public class SceneBuilder : MonoBehaviour
         CamerMovement camera = Camera.main.GetComponent<CamerMovement>();
         camera.leftWallPos = leftWall.transform;
         camera.rightWallPos = rightWall.transform;
-    } //TODO: build NPC spawning
+    } 
     
 }
