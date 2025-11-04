@@ -1,0 +1,37 @@
+{
+  "items": [
+    {
+      "id": 1,
+      "displayName": "Brave",
+      "description": "Unafraid to take risks.",
+      "attributeNumericalEffects": [
+        { "name": "Courage", "effect": 10.0 },
+        { "name": "Fear", "effect": -5.0 }
+      ],
+      "statNumericalEffects": [
+        { "name": "Health", "effect": 15.0 },
+        { "name": "Stamina", "effect": 5.0 }
+      ],
+      "behaviouralEffects": [
+        "Charges into danger",
+        "Protects allies"
+      ]
+    },
+    
+    {
+      "id": 2,
+      "displayName": "Lazy",
+      "description": "Avoids work whenever possible.",
+      "attributeNumericalEffects": [
+        { "name": "Energy", "effect": -10.0 }
+      ],
+      "statNumericalEffects": [
+        { "name": "Speed", "effect": -2.5 }
+      ],
+      "behaviouralEffects": [
+        "Sleeps often",
+        "Complains about effort"
+      ]
+    }
+  ]
+}
