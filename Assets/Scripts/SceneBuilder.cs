@@ -83,7 +83,7 @@ public class SceneBuilder : MonoBehaviour
             GameObject floor = Instantiate(floorPrefab, floorPosition, Quaternion.Euler(68.064f, 0.0f, 0.0f));
 
             //iterate over all npcs of the building and spawn them
-            var npcPosition = housePosition - iteration * offset;
+            var npcPosition = housePosition - (iteration * offset);
             NPCType currNPCData;
             foreach (int npcID in building.inhabitants)
             {
@@ -120,6 +120,7 @@ public class SceneBuilder : MonoBehaviour
 
         //calculate the required quality of the outer walls
         int averageQuality = (int)Math.Round((double)totalQuality / buildings.Count);
+        Debug.Log("Average Quality = " + averageQuality.ToString());
         var wallSprite = wallData.possibleSprites[averageQuality];
 
         //apply the sprites to the right and left walls

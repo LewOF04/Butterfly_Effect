@@ -5,14 +5,18 @@ using System;
 public class NPCManager : MonoBehaviour
 {
     public NPC npcPrefab;
-    private DataController dataController = DataController.Instance;
+    private DataController dataController;
 
-    const int MIN_NPCS = 0;
+    const int MIN_NPCS = 1;
     const int MAX_NPCS = 10;
     //TODO: these numbers are entirely arbitrary
 
-    //saving and loading
+    private void Awake()
+    {
+        dataController = DataController.Instance;
+    }
 
+    //saving and loading
     public void SaveNPCs(Dictionary<int, NPC> NPCStorage)
     {
         SaveSys.SaveAllNPCs(NPCStorage);
@@ -27,6 +31,7 @@ public class NPCManager : MonoBehaviour
         foreach (var npcData in npcs)
         {
             var inst = Instantiate(npcPrefab); //instantiates the NPC
+            inst.transform.SetParent(dataController.npcContainer, false);
             var npc = inst.GetComponent<NPC>(); //gets the monoBehaviour script linked to the instantiation
 
             npc.Load(npcData); //loads the npc with data
@@ -60,7 +65,7 @@ public class NPCManager : MonoBehaviour
         Stats stats = new Stats(); //the stats of the character
         List<int> traits = new List<int>(); //TODO: idk how many traits there will be
         int spriteType = rng.Next(1, 5); //TODO: idk how many different sprite types there will be
-        string parentBuilding = "-1"; //not yet defined
+        int parentBuilding = -1; //not yet defined
 
         attributes.morality = rng.Next(0, 100);
         attributes.intelligence = rng.Next(0, 100);
@@ -95,6 +100,7 @@ public class NPCManager : MonoBehaviour
         }
 
         var inst = Instantiate(npcPrefab); //instantiates the NPC
+        inst.transform.SetParent(dataController.npcContainer, false);
         var npc = inst.GetComponent<NPC>(); //gets the monoBehaviour script linked to the instantiation
 
         npc.Load(id, npcName, attributes, stats, traits, spriteType, parentBuilding); //loads the npc with data

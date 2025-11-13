@@ -4,23 +4,30 @@ using System;
 
 public class MainMenu : MonoBehaviour
 {
-    private DataController dataManager = DataController.Instance;
+    public GameObject gameSysPrefab;
     public void LoadGame()
     {
+        Instantiate(gameSysPrefab);
         try
         {
-            dataManager.LoadFromMemory();
+            DataController.Instance.LoadFromMemory();
         }
         catch (Exception e)
         {
-            return; //TODO: get some error message that allows the user to generate
+            Debug.Log(e);
+            return;
         }
         enterGame();
     }
 
     public void GenerateGame(int seed)
     {
-        dataManager.seedGenerate(seed);
+        if (DataController.Instance != null)
+        {
+            Destroy(DataController.Instance);
+        }
+        Instantiate(gameSysPrefab);
+        DataController.Instance.seedGenerate(seed);
         enterGame();
     }
 

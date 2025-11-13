@@ -2,13 +2,14 @@ using UnityEngine;
 using TMPro;
 using System;
 
-public class GenerateGo : MonoBehaviour
+public class GenerateButton : MonoBehaviour
 {
     public TMP_InputField inputField; 
     public MainMenu mainMenu;
 
     public void OnButtonPress()
     {
+        Debug.Log("Button Pressed");
         string text = inputField.text ?? string.Empty;
         int seed = SeedFromString(text);
         Debug.Log($"Seed: {seed}");

@@ -12,7 +12,7 @@ using System.Collections.Generic;
     public Stats stats; //the stats of the character
     public List<int> traits; //list of ids of the traits that this NPC has
     public int spriteType; //the code of the sprite
-    public string parentBuilding; //the building that the NPC lives in (-1 if non)
+    public int parentBuilding; //the building that the NPC lives in (-1 if non)
 
     //extra utility functions for traits list
     public bool ContainsTrait(int id)
@@ -36,7 +36,7 @@ using System.Collections.Generic;
         parentBuilding = data.parentBuilding;
     }
 
-    public void Load(int inputID, string inputNpcName, Attributes inputAttributes, Stats inputStats, List<int> inputTraits, int inputSpriteType, string inputParentBuilding)
+    public void Load(int inputID, string inputNpcName, Attributes inputAttributes, Stats inputStats, List<int> inputTraits, int inputSpriteType, int inputParentBuilding)
     {
         id = inputID;
         npcName = inputNpcName;

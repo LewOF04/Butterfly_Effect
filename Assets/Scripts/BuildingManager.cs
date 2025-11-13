@@ -5,10 +5,10 @@ using System;
 public class BuildingManager : MonoBehaviour
 {
     const int MAX_HOUSES = 5;
-    const int MIN_HOUSES = 0;
+    const int MIN_HOUSES = 1;
     //TODO: this number is entirely arbitrary
     public Building buildingPrefab;
-    private DataController dataController = DataController.Instance;
+    private DataController dataController;
 
     [Header("House ScrObjs")]
     public BuildingType house1Data;
@@ -16,6 +16,11 @@ public class BuildingManager : MonoBehaviour
     public BuildingType house3Data;
     public BuildingType house4Data;
     public BuildingType house5Data;
+
+    private void Awake()
+    {
+        dataController = DataController.Instance;
+    }
 
     //saving and loading
     public void SaveBuildings(Dictionary<int, Building> BuildingStorage)
@@ -32,6 +37,7 @@ public class BuildingManager : MonoBehaviour
         foreach (var buildingData in buildings)
         {
             var inst = Instantiate(buildingPrefab); //instantiates the Building
+            inst.transform.SetParent(dataController.buildingContainer, false);
             var building = inst.GetComponent<Building>(); //gets the monoBehaviour script linked to the instantiation
 
             building.Load(buildingData); //loads the npc with data
@@ -65,9 +71,10 @@ public class BuildingManager : MonoBehaviour
         float condition = rng.Next(0, 100);
 
         var inst = Instantiate(buildingPrefab); //instantiates the Building
+        inst.transform.SetParent(dataController.buildingContainer, false);
         var building = inst.GetComponent<Building>(); //gets the monoBehaviour script linked to the instantiation
 
-        building.Load(id, buildingName, buildingType, condition); //loads the npc with data
+        building.Load(id, buildingName, buildingType, condition); //loads the building with data
 
         return building;
     }
