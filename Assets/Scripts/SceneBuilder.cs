@@ -83,15 +83,17 @@ public class SceneBuilder : MonoBehaviour
             GameObject floor = Instantiate(floorPrefab, floorPosition, Quaternion.Euler(68.064f, 0.0f, 0.0f));
 
             //iterate over all npcs of the building and spawn them
-            var npcPosition = housePosition - (iteration * offset);
+            var buildingPosition = building.gameObject.transform.position;
             NPCType currNPCData;
+            Vector3 buildingOffset = new Vector3(buildingPosition.x, 0, 0);
             foreach (int npcID in building.inhabitants)
             {
                 NPC npc = npcs[npcID];
-                currNPCData = npcData[npc.spriteType - 1];
+                currNPCData = npcData[npc.spriteType - 1]; 
+                Vector3 npcPosition = currNPCData.startingPosition + buildingOffset;
 
                 npc.gameObject.transform.position = npcPosition;
-                npcPosition += new Vector3(0.1f, 0.0f, 0.0f);
+                buildingOffset += new Vector3(0.1f, 0.0f, 0.0f);
 
                 Sprite npcSprite;
                 float c1 = npc.stats.condition;

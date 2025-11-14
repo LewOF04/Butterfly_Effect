@@ -24,4 +24,4 @@ MonoBehaviour:
   - {fileID: 7482667652216324306, guid: 64f77251b7d1c484691f14dd219e4af0, type: 3}
   - {fileID: 7482667652216324306, guid: 64f77251b7d1c484691f14dd219e4af0, type: 3}
   - {fileID: 7482667652216324306, guid: 64f77251b7d1c484691f14dd219e4af0, type: 3}
-  scale: {x: 0, y: 0, z: 0}
+  scale: {x: 1, y: 1, z: 1}

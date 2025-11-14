@@ -12,6 +12,7 @@ public class NPCType : ScriptableObject
     public string hairColour;
 
     [Header("Visuals")]
-    public Sprite[] possibleSprites = new Sprite[8]; 
+    public Sprite[] possibleSprites = new Sprite[8];
+    public Vector3 startingPosition;
     public Vector3 scale;
 }
