@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2050665663574928940}
   - component: {fileID: 7305655118164059182}
   - component: {fileID: 1145738255409744166}
+  - component: {fileID: -247867780279712266}
   m_Layer: 0
   m_Name: HousePrefab
   m_TagString: Untagged
@@ -108,3 +109,15 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-247867780279712266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5952298140390452027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2df51a1cdf7a0424c94f30ed4227a815, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EventClick

@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: 7147ec918f50e28489f2702c87b2171e
+guid: 15ad39aaae2bce94ab14e4675e6851c0
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7741213312081945828
-    second: House3_Lvl7_0
-  - first:
-      213: -2086705659911730484
-    second: House3_Lvl7_1
+      213: -5274078672832802197
+    second: House2_Lvl7_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -49,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -103,35 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: House3_Lvl7_0
+      name: House2_Lvl7_0
       rect:
         serializedVersion: 2
-        x: 10
-        y: 603
-        width: 6
-        height: 11
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: c1b94d2e18fa19490800000000000000
-      internalID: -7741213312081945828
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: House3_Lvl7_1
-      rect:
-        serializedVersion: 2
-        x: 23
+        x: 387
         y: 0
-        width: 2016
-        height: 1138
+        width: 1292
+        height: 897
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -140,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: cca0a2612488a03e0800000000000000
-      internalID: -2086705659911730484
+      spriteID: b62565ce365bec6b0800000000000000
+      internalID: -5274078672832802197
       vertices: []
       indices: 
       edges: []
@@ -150,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -160,8 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      House3_Lvl7_0: -7741213312081945828
-      House3_Lvl7_1: -2086705659911730484
+      House2_Lvl7_0: -5274078672832802197
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

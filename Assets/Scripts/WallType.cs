@@ -11,4 +11,5 @@ public class WallType : ScriptableObject
     public Vector3 scale;
     public GameObject leftPrefab;
     public GameObject rightPrefab;
+    public Vector3 defaultTransform;
 }

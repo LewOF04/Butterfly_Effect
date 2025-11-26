@@ -17,8 +17,8 @@ MonoBehaviour:
   purchaseCost: 0
   maintenanceCost: 0
   buildCost: 0
+  capacity: 0
   possibleSprites:
-  - {fileID: -8722024563354455737, guid: 8b65a8bcee2a9be47905cd605b004766, type: 3}
   - {fileID: 6008755849024553855, guid: 1136c5c8177498f4fb8515d67d350289, type: 3}
   - {fileID: 6008755849024553855, guid: 1136c5c8177498f4fb8515d67d350289, type: 3}
   - {fileID: 6008755849024553855, guid: 1136c5c8177498f4fb8515d67d350289, type: 3}
@@ -26,5 +26,6 @@ MonoBehaviour:
   - {fileID: 6008755849024553855, guid: 1136c5c8177498f4fb8515d67d350289, type: 3}
   - {fileID: 6008755849024553855, guid: 1136c5c8177498f4fb8515d67d350289, type: 3}
   - {fileID: 6008755849024553855, guid: 1136c5c8177498f4fb8515d67d350289, type: 3}
+  - {fileID: 21300000, guid: 8b65a8bcee2a9be47905cd605b004766, type: 3}
   scale: {x: 0.23, y: 0.23, z: 0.23}
   defaultPosition: {x: 1.21, y: 0.03, z: 0}

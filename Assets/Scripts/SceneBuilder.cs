@@ -36,9 +36,9 @@ public class SceneBuilder : MonoBehaviour
 
 
         int totalQuality = 0; //the overall quality of the settlement based upon the total quality of all of the buildings
-        
-        
-        Vector3 wallPosition = new Vector3(-3.04f, -0.18f, 0.0f);
+
+
+        Vector3 wallPosition = wallData.defaultTransform;
         GameObject leftWall = Instantiate(wallData.leftPrefab, wallPosition, Quaternion.identity);
 
         int iteration = 0;
@@ -61,18 +61,18 @@ public class SceneBuilder : MonoBehaviour
 
             //set the sprite of the building
             Sprite buildingsSprite;
-            float c = building.condition;
-            int idx =
-                (c <= 12.5f) ? 0 :
-                (c <= 25f)   ? 1 :
-                (c <= 37.5f) ? 2 :
-                (c <= 50f)   ? 3 :
-                (c <= 62.5f) ? 4 :
-                (c <= 75f)   ? 5 :
-                (c <= 87.5f) ? 6 : 7;
+            float cond = building.condition;
+            int spriteNum =
+                (cond <= 12.5f) ? 0 :
+                (cond <= 25f)   ? 1 :
+                (cond <= 37.5f) ? 2 :
+                (cond <= 50f)   ? 3 :
+                (cond <= 62.5f) ? 4 :
+                (cond <= 75f)   ? 5 :
+                (cond <= 87.5f) ? 6 : 7;
 
-            buildingsSprite = currHouseData.possibleSprites[idx];
-            totalQuality += idx;
+            buildingsSprite = currHouseData.possibleSprites[spriteNum];
+            totalQuality += spriteNum;
 
             var sr = building.GetComponent<SpriteRenderer>();
             sr.sprite = buildingsSprite;
@@ -83,9 +83,8 @@ public class SceneBuilder : MonoBehaviour
             GameObject floor = Instantiate(floorPrefab, floorPosition, Quaternion.Euler(68.064f, 0.0f, 0.0f));
 
             //iterate over all npcs of the building and spawn them
-            var buildingPosition = building.gameObject.transform.position;
             NPCType currNPCData;
-            Vector3 buildingOffset = new Vector3(buildingPosition.x, 0, 0);
+            Vector3 buildingOffset = new Vector3(housePosition.x, 0, 0);
             foreach (int npcID in building.inhabitants)
             {
                 NPC npc = npcs[npcID];
@@ -93,19 +92,19 @@ public class SceneBuilder : MonoBehaviour
                 Vector3 npcPosition = currNPCData.startingPosition + buildingOffset;
 
                 npc.gameObject.transform.position = npcPosition;
-                buildingOffset += new Vector3(0.1f, 0.0f, 0.0f);
+                buildingOffset += new Vector3(1.0f, 0.0f, 0.0f);
 
                 Sprite npcSprite;
-                float c1 = npc.stats.condition;
-                int idx1 =
-                    (c1 <= 12.5f) ? 0 :
-                    (c1 <= 25f) ? 1 :
-                    (c1 <= 37.5f) ? 2 :
-                    (c1 <= 50f) ? 3 :
-                    (c1 <= 62.5f) ? 4 :
-                    (c1 <= 75f) ? 5 :
-                    (c1 <= 87.5f) ? 6 : 7;
-                npcSprite = currNPCData.possibleSprites[idx1];
+                float cond1 = npc.stats.condition;
+                int npcSpriteNum =
+                    (cond1 <= 12.5f) ? 0 :
+                    (cond1 <= 25f) ? 1 :
+                    (cond1 <= 37.5f) ? 2 :
+                    (cond1 <= 50f) ? 3 :
+                    (cond1 <= 62.5f) ? 4 :
+                    (cond1 <= 75f) ? 5 :
+                    (cond1 <= 87.5f) ? 6 : 7;
+                npcSprite = currNPCData.possibleSprites[npcSpriteNum];
 
                 var sr1 = npc.GetComponent<SpriteRenderer>();
                 sr1.sprite = npcSprite;
@@ -117,7 +116,7 @@ public class SceneBuilder : MonoBehaviour
             floorPosition += offset;
             iteration++;
         }
-        wallPosition += (iteration * offset) + new Vector3(-0.85f, -0.18f, 0.0f);
+        wallPosition += (iteration * offset) + new Vector3(-0.96f, 0, 0.0f);
         GameObject rightWall = Instantiate(wallData.rightPrefab, wallPosition, Quaternion.identity);
 
         //calculate the required quality of the outer walls

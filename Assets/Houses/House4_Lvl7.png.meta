@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: 8b65a8bcee2a9be47905cd605b004766
+guid: 1af93e4fd23288e4eb56b7804824a960
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8722024563354455737
-    second: House5_0
-  - first:
-      213: -4680712978827466827
-    second: House5_1
+      213: 2491897223048795810
+    second: House4_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -49,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -103,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: House5_0
+      name: House4_0
       rect:
         serializedVersion: 2
-        x: 32
+        x: 3
         y: 0
-        width: 2352
-        height: 1738
+        width: 2237
+        height: 1625
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -118,30 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 741b603fed425f680800000000000000
-      internalID: -8722024563354455737
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: House5_1
-      rect:
-        serializedVersion: 2
-        x: 2351
-        y: 1157
-        width: 48
-        height: 52
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 5b7ad616854ca0fb0800000000000000
-      internalID: -4680712978827466827
+      spriteID: 2a61b9c525ff49220800000000000000
+      internalID: 2491897223048795810
       vertices: []
       indices: 
       edges: []
@@ -150,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -160,8 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      House5_0: -8722024563354455737
-      House5_1: -4680712978827466827
+      House4_0: 2491897223048795810
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -24,4 +24,5 @@ MonoBehaviour:
   - {fileID: 3625043607559282579, guid: 8041c4ccb1174ce4b9502eca0d5e650e, type: 3}
   - {fileID: 3625043607559282579, guid: 8041c4ccb1174ce4b9502eca0d5e650e, type: 3}
   - {fileID: 3625043607559282579, guid: 8041c4ccb1174ce4b9502eca0d5e650e, type: 3}
+  startingPosition: {x: 0, y: -1.5, z: -0.5}
   scale: {x: 1, y: 1, z: 1}

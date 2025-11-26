@@ -13,14 +13,15 @@ MonoBehaviour:
   m_Name: WallData
   m_EditorClassIdentifier: Assembly-CSharp::WallType
   possibleSprites:
-  - {fileID: 8643525469414146272, guid: 45c638567374c29478f736c92c573f66, type: 3}
-  - {fileID: -5717047683234351432, guid: e72c2889c8a8eb1469e3a1a94fe1fd22, type: 3}
-  - {fileID: -1735565029983656956, guid: 29b6f95de29e222478a38dcecf46c830, type: 3}
-  - {fileID: 4174900634425042, guid: d88a4e97250c06f4da49a7710ee65802, type: 3}
-  - {fileID: -9015023570671585665, guid: 2103de184ba6fff47b2aafd310e384d9, type: 3}
-  - {fileID: -7738224288948097722, guid: 6921d33528d173e448df23eb9b86f31c, type: 3}
-  - {fileID: 5287072596516572794, guid: 29b7ea630e781634f8ce7ccabfffb0af, type: 3}
-  - {fileID: 4653298773734390638, guid: 9c07bc77c4380634bb853e4ca48d4fb0, type: 3}
+  - {fileID: 21300000, guid: 9c07bc77c4380634bb853e4ca48d4fb0, type: 3}
+  - {fileID: 21300000, guid: 29b7ea630e781634f8ce7ccabfffb0af, type: 3}
+  - {fileID: 21300000, guid: 6921d33528d173e448df23eb9b86f31c, type: 3}
+  - {fileID: 21300000, guid: 2103de184ba6fff47b2aafd310e384d9, type: 3}
+  - {fileID: 21300000, guid: d88a4e97250c06f4da49a7710ee65802, type: 3}
+  - {fileID: 21300000, guid: 29b6f95de29e222478a38dcecf46c830, type: 3}
+  - {fileID: 21300000, guid: e72c2889c8a8eb1469e3a1a94fe1fd22, type: 3}
+  - {fileID: 21300000, guid: 45c638567374c29478f736c92c573f66, type: 3}
   scale: {x: 0.35, y: 0.35, z: 0.35}
   leftPrefab: {fileID: 29285234760755276, guid: 4f7a667d8bbc17c4a8eda6bdcc4da22f, type: 3}
   rightPrefab: {fileID: 7630428467754726264, guid: 18be131aa67f9e947a3afad3a20ab97b, type: 3}
+  defaultTransform: {x: -3.04, y: 1.15, z: 0}
