@@ -74,13 +74,20 @@ public class SceneBuilder : MonoBehaviour
             buildingsSprite = currHouseData.possibleSprites[spriteNum];
             totalQuality += spriteNum;
 
+            //set the sprite of the building
             var sr = building.GetComponent<SpriteRenderer>();
             sr.sprite = buildingsSprite;
 
+            //set the scale of the building
             building.gameObject.transform.localScale = currHouseData.scale;
 
             //spawn the flooring underneath the house
             GameObject floor = Instantiate(floorPrefab, floorPosition, Quaternion.Euler(68.064f, 0.0f, 0.0f));
+
+            //set the collider of the building
+            var collider = building.gameObject.GetComponent<PolygonCollider2D>();
+            collider.pathCount = 1;
+            collider.SetPath(0, currHouseData.colliderShape);
 
             //iterate over all npcs of the building and spawn them
             NPCType currNPCData;
@@ -91,9 +98,11 @@ public class SceneBuilder : MonoBehaviour
                 currNPCData = npcData[npc.spriteType - 1]; 
                 Vector3 npcPosition = currNPCData.startingPosition + buildingOffset;
 
+                //set the location to spawn the npc
                 npc.gameObject.transform.position = npcPosition;
                 buildingOffset += new Vector3(1.0f, 0.0f, 0.0f);
 
+                //get the condition and sprite of the npc
                 Sprite npcSprite;
                 float cond1 = npc.stats.condition;
                 int npcSpriteNum =
@@ -106,9 +115,11 @@ public class SceneBuilder : MonoBehaviour
                     (cond1 <= 87.5f) ? 6 : 7;
                 npcSprite = currNPCData.possibleSprites[npcSpriteNum];
 
+                //set the sprite of the npc
                 var sr1 = npc.GetComponent<SpriteRenderer>();
                 sr1.sprite = npcSprite;
 
+                //set the scale of npc
                 npc.gameObject.transform.localScale = currNPCData.scale;
             }
 

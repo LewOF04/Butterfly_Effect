@@ -4,7 +4,7 @@ using System;
 
 public class BuildingManager : MonoBehaviour
 {
-    const int MAX_HOUSES = 5;
+    const int MAX_HOUSES = 10;
     const int MIN_HOUSES = 1;
     //TODO: this number is entirely arbitrary
     public Building buildingPrefab;
