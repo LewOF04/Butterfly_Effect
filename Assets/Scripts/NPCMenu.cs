@@ -9,8 +9,8 @@ public class NPCMenu : MonoBehaviour
     public TextMeshProUGUI menuTitle;
     public List<Slider> attributeSliders = new List<Slider>();
     public List<Slider> statSliders = new List<Slider>();
-    public MonoBehaviour playerMover;
-    public MonoBehaviour cameraMover;
+    public Button buildingButton;
+    public Image spriteImageLoc;
     
 
     public void saveNPC()
@@ -40,16 +40,23 @@ public class NPCMenu : MonoBehaviour
 
     public void displayData()
     {
-        //disable movement
-        playerMover.enabled = false;
-        cameraMover.enabled = false;
-
-        BoxCollider2D collider = GetComponent<BoxCollider2D>();
-        collider.enabled = true; //enable the collider, to block inputs 
-
+        InputLocker.Lock(); //locks the input 
 
         Attributes attrs = npc.attributes;
         Stats stats = npc.stats;
+
+        if(npc.parentBuilding == -1)
+        {
+            buildingButton.enabled = false;
+        }
+        else
+        {
+            buildingButton.enabled = true;
+        }
+
+        Sprite npcSprite = npc.GetComponent<SpriteRenderer>().sprite;
+        spriteImageLoc.sprite = npcSprite;
+        spriteImageLoc.preserveAspect = true;
 
         menuTitle.text = "(NPC) Name: "+npc.npcName+" ID: "+npc.id;
 
@@ -78,12 +85,8 @@ public class NPCMenu : MonoBehaviour
         Canvas canvas = GetComponent<Canvas>();
         canvas.enabled = false; //disable the canvas
 
-        BoxCollider2D collider = GetComponent<BoxCollider2D>();
-        collider.enabled = false; //disable the collider
+        InputLocker.Unlock(); //unlock the inputs
 
-        //re-enable movement
-        playerMover.enabled = true;
-        cameraMover.enabled = true;
     }
 }
 
