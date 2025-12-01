@@ -13,8 +13,8 @@ public class Stats
     [Range(0, 100)] public float energy;
 
     //quantity of food and money owned by the NPC
-    [Min(0)] public float food;
-    [Min(0)] public float wealth;
+    [Range(0, 100)] public float food;
+    [Range(0, 100)] public float wealth;
 
     public Stats(){}
 } 

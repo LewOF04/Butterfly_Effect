@@ -83,8 +83,8 @@ public class NPCManager : MonoBehaviour
         stats.nutrition = rng.Next(0, 100);
         stats.happiness = rng.Next(0, 100);
         stats.energy = rng.Next(0, 100);
-        stats.food = rng.Next();
-        stats.wealth = rng.Next();
+        stats.food = rng.Next(0, 100);
+        stats.wealth = rng.Next(0, 100);
 
         int numberOfTraits = rng.Next(0, maxTrait);
         int traitNum;
