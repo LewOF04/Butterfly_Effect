@@ -92,17 +92,17 @@ public class NPCMenu : MonoBehaviour
 
     public void openActions()
     {
-        
+        Debug.Log("Clicked Actions!");
     }
 
     public void openMemories()
     {
-        
+        Debug.Log("Clicked Memories!");
     }
 
     public void openRelationships()
     {
-        
+        Debug.Log("Clicked Relationships!");
     }
 
     public void openBuilding()

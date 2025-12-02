@@ -9,6 +9,9 @@ public class BuildingMenu : MonoBehaviour
     public TextMeshProUGUI menuTitle;
     public Slider conditionSlider;
     public Image spriteImageLoc;
+    public GameObject npcViewer;
+    public NPCViewButton npcWindowPrefab;
+    private DataController dataController = DataController.Instance;
     
 
     public void saveBuilding()
@@ -28,12 +31,34 @@ public class BuildingMenu : MonoBehaviour
 
         conditionSlider.value = building.condition;
 
+        //instantiate the buttons for the npcs of the Building
+        List<int> npcs = building.inhabitants;
+        foreach (int id in npcs)
+        {
+            NPC npc = dataController.NPCStorage[id];
+            NPCViewButton newPrefab = Instantiate(npcWindowPrefab, npcViewer.transform);
+            newPrefab.npc = npc;
+            newPrefab.displayData();
+        }
+    }
+
+
+    /*
+    Delete the buttons in the npc viewier
+    */
+    public void removeButtons()
+    {
+        foreach (Transform child in npcViewer.transform)
+        {
+            Destroy(child.gameObject);
+        }
     }
 
     public void exitMenu()
     {
         Canvas canvas = GetComponent<Canvas>();
         canvas.enabled = false; //disable the canvas
+        removeButtons();
 
         InputLocker.Unlock(); //unlock the inputs
 
