@@ -7,8 +7,8 @@ public class SliderScript : MonoBehaviour
     [SerializeField] private Slider slider;
     [SerializeField] private TMP_Text textField;
 
-    public void hanldeSliderChange(float value)
+    public void hanldeSliderChange()
     {
-        textField.SetText(value.ToString("F2"));
+        textField.SetText(slider.value.ToString("F2"));
     }
 }

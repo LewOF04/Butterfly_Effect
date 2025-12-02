@@ -14,10 +14,15 @@ public class ObjectSelector : MonoBehaviour
         if (TryGetComponent<Building>(out var building))
         {
             Debug.Log("Clicked a Building!");
-            int buildinID = building.id;
-            string buildingName = building.buildingName;
-            float buildingCond = building.condition;
-            List<int> inhabitants = building.inhabitants;
+            BuildingMenu buildingMenu = FindFirstObjectByType<BuildingMenu>();
+            Canvas canvas = buildingMenu.GetComponent<Canvas>();
+            Camera camera = FindFirstObjectByType<Camera>();
+            buildingMenu.transform.position = camera.transform.position;
+            buildingMenu.transform.position += new Vector3(0.0f, 0.0f, 0.5f);
+            
+            buildingMenu.building = building;
+            buildingMenu.displayData();
+            canvas.enabled = true;
         }
         
         else if (TryGetComponent<NPC>(out var npc))
@@ -27,7 +32,7 @@ public class ObjectSelector : MonoBehaviour
             Canvas canvas = npcMenu.GetComponent<Canvas>(); //get the canvas within the npc menu
             Camera camera = FindFirstObjectByType<Camera>();
             npcMenu.transform.position = camera.transform.position;
-            npcMenu.transform.position += new Vector3(0.0f,0.0f, 0.5f);
+            npcMenu.transform.position += new Vector3(0.0f, 0.0f, 0.5f);
 
             npcMenu.npc = npc; //define the npc for the menu
             npcMenu.displayData(); //display the npcs data into the menu

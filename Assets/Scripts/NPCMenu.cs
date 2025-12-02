@@ -11,6 +11,7 @@ public class NPCMenu : MonoBehaviour
     public List<Slider> statSliders = new List<Slider>();
     public Button buildingButton;
     public Image spriteImageLoc;
+    private DataController dataController = DataController.Instance;
     
 
     public void saveNPC()
@@ -45,7 +46,7 @@ public class NPCMenu : MonoBehaviour
         Attributes attrs = npc.attributes;
         Stats stats = npc.stats;
 
-        if(npc.parentBuilding == -1)
+        if(npc.parentBuilding < 0)
         {
             buildingButton.enabled = false;
         }
@@ -87,6 +88,41 @@ public class NPCMenu : MonoBehaviour
 
         InputLocker.Unlock(); //unlock the inputs
 
+    }
+
+    public void openActions()
+    {
+        
+    }
+
+    public void openMemories()
+    {
+        
+    }
+
+    public void openRelationships()
+    {
+        
+    }
+
+    public void openBuilding()
+    {
+        if (npc.parentBuilding >= 0)
+        {
+            Canvas canvas = GetComponent<Canvas>();
+            canvas.enabled = false; //disable the canvas
+            var buildings = dataController.BuildingStorage;
+            Building building = buildings[npc.parentBuilding];
+            BuildingMenu buildingMenu = FindFirstObjectByType<BuildingMenu>();
+            Canvas buidlingCanvas = buildingMenu.GetComponent<Canvas>();
+            Camera camera = FindFirstObjectByType<Camera>();
+            buildingMenu.transform.position = camera.transform.position;
+            buildingMenu.transform.position += new Vector3(0.0f, 0.0f, 0.5f);
+            
+            buildingMenu.building = building;
+            buildingMenu.displayData();
+            buidlingCanvas.enabled = true;
+        }
     }
 }
 
