@@ -41,7 +41,7 @@ public class ObjectSelector : MonoBehaviour
         
         else if (TryGetComponent<TimeSkipper>(out var skipper))
         {
-            
+            skipper.reloadWorld();
         }
         
         else
