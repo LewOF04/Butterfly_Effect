@@ -10,13 +10,6 @@ public class BuildingManager : MonoBehaviour
     public Building buildingPrefab;
     private DataController dataController;
 
-    [Header("House ScrObjs")]
-    public BuildingType house1Data;
-    public BuildingType house2Data;
-    public BuildingType house3Data;
-    public BuildingType house4Data;
-    public BuildingType house5Data;
-
     private void Awake()
     {
         dataController = DataController.Instance;

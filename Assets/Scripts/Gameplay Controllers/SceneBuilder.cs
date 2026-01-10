@@ -21,9 +21,11 @@ public class SceneBuilder : MonoBehaviour
     private DataController dataController = DataController.Instance;
 
     private Vector3 offset; //distance between each section
+    private GameObject timeSkipper; //skipper game object 
 
     public void Awake()
     {
+        timeSkipper = Instantiate(skipperPrefab, timeSkipperData.defaultTransform, Quaternion.identity);
         BuildScene();
     }
 
@@ -46,9 +48,7 @@ public class SceneBuilder : MonoBehaviour
         GameObject leftWall = Instantiate(wallData.leftPrefab, wallPosition, Quaternion.identity);
         leftWall.transform.SetParent(sceneDecoration.transform);
 
-        Vector3 skipperPosition = timeSkipperData.defaultTransform;
-        GameObject timeSkipper = Instantiate(skipperPrefab, skipperPosition, Quaternion.identity);
-        timeSkipper.transform.SetParent(sceneDecoration.transform);
+        timeSkipper.transform.position = timeSkipperData.defaultTransform;
 
         int iteration = 0;
         BuildingType currHouseData;
