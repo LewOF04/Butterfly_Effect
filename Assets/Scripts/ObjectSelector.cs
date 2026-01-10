@@ -41,7 +41,9 @@ public class ObjectSelector : MonoBehaviour
         
         else if (TryGetComponent<TimeSkipper>(out var skipper))
         {
-            skipper.reloadWorld();
+            Debug.Log("Clicked the skipper");
+            int time = 0; //pass in specific time
+            skipper.skipTime(time);
         }
         
         else

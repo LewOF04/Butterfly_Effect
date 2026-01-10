@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7099409275943711000}
   - component: {fileID: -56762281442542216}
   m_Layer: 0
-  m_Name: Reload World
+  m_Name: Time Skipper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -59,8 +59,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f019560243671447af3b32c77cfe804, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  builder: {fileID: 0}
-  camMovement: {fileID: 0}
   player: {fileID: 0}
 --- !u!212 &7099409275943711000
 SpriteRenderer:
@@ -150,7 +148,7 @@ PolygonCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0

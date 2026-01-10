@@ -1,55 +1,40 @@
 fileFormatVersion: 2
-guid: 0ebc4a0c60d7cdc42b1cacd0480a51c9
+guid: 919cce34fdfe1574384f70abaa21bb2a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6117446205806104104
-    second: House1_Lvl3_0
+      213: 9011806575288980250
+    second: House1_Lvl8_0
   - first:
-      213: 6914690742804020506
-    second: House1_Lvl3_1
+      213: -3086986144632290805
+    second: House1_Lvl8_1
   - first:
-      213: -996051843298159862
-    second: House1_Lvl3_2
+      213: 3183668622412642926
+    second: House1_Lvl8_2
   - first:
-      213: 7357419111124111487
-    second: House1_Lvl3_3
+      213: -77915599413697145
+    second: House1_Lvl8_3
   - first:
-      213: -5798923380377195973
-    second: House1_Lvl3_4
+      213: 2840569676457308690
+    second: House1_Lvl8_4
   - first:
-      213: -6355700374032516890
-    second: House1_Lvl3_5
+      213: -8221044893702599066
+    second: House1_Lvl8_5
   - first:
-      213: -6399253133990524560
-    second: House1_Lvl3_6
+      213: 4974274625686514807
+    second: House1_Lvl8_6
   - first:
-      213: -447420769369162387
-    second: House1_Lvl3_7
+      213: -4232235911275449848
+    second: House1_Lvl8_7
   - first:
-      213: -2113873790549337959
-    second: House1_Lvl3_8
+      213: 7003243047237807662
+    second: House1_Lvl8_8
   - first:
-      213: 2541270372248713793
-    second: House1_Lvl3_9
+      213: -1405123435306191977
+    second: House1_Lvl8_9
   - first:
-      213: -5534629010122524954
-    second: House1_Lvl3_10
-  - first:
-      213: -2082364100692164992
-    second: House1_Lvl3_11
-  - first:
-      213: -2247370312952174480
-    second: House1_Lvl3_12
-  - first:
-      213: 9194901307657410138
-    second: House1_Lvl3_13
-  - first:
-      213: -5233259575042333829
-    second: House1_Lvl3_14
-  - first:
-      213: 5044774893316190965
-    second: House1_Lvl3_15
+      213: -6691440029113111607
+    second: House1_Lvl8_10
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -145,13 +130,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: House1_Lvl3_0
+      name: House1_Lvl8_0
       rect:
         serializedVersion: 2
         x: 508
         y: 0
         width: 1077
-        height: 862
+        height: 853
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -160,124 +145,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 82e42ad99e885e450800000000000000
-      internalID: 6117446205806104104
+      spriteID: a1311a8655e501d70800000000000000
+      internalID: 9011806575288980250
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: House1_Lvl3_1
-      rect:
-        serializedVersion: 2
-        x: 653
-        y: 523
-        width: 68
-        height: 100
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: a1df380589ae5ff50800000000000000
-      internalID: 6914690742804020506
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: House1_Lvl3_2
-      rect:
-        serializedVersion: 2
-        x: 1381
-        y: 508
-        width: 57
-        height: 115
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: a03175630205d22f0800000000000000
-      internalID: -996051843298159862
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: House1_Lvl3_3
-      rect:
-        serializedVersion: 2
-        x: 643
-        y: 505
-        width: 8
-        height: 13
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: f70193643bdca1660800000000000000
-      internalID: 7357419111124111487
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: House1_Lvl3_4
-      rect:
-        serializedVersion: 2
-        x: 665
-        y: 499
-        width: 6
-        height: 19
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: b3ae8e8d8e5168fa0800000000000000
-      internalID: -5798923380377195973
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: House1_Lvl3_5
-      rect:
-        serializedVersion: 2
-        x: 1410
-        y: 498
-        width: 6
-        height: 6
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 6e879fa0f240cc7a0800000000000000
-      internalID: -6355700374032516890
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: House1_Lvl3_6
+      name: House1_Lvl8_1
       rect:
         serializedVersion: 2
         x: 1453
@@ -292,14 +167,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 07980b8ed294137a0800000000000000
-      internalID: -6399253133990524560
+      spriteID: b02c3aef472d825d0800000000000000
+      internalID: -3086986144632290805
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: House1_Lvl3_7
+      name: House1_Lvl8_2
       rect:
         serializedVersion: 2
         x: 1457
@@ -314,14 +189,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d6d7e984e217ac9f0800000000000000
-      internalID: -447420769369162387
+      spriteID: e6a76798eb9ae2c20800000000000000
+      internalID: 3183668622412642926
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: House1_Lvl3_8
+      name: House1_Lvl8_3
       rect:
         serializedVersion: 2
         x: 1451
@@ -336,14 +211,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 9985c4ebcf20aa2e0800000000000000
-      internalID: -2113873790549337959
+      spriteID: 7852c76dc203beef0800000000000000
+      internalID: -77915599413697145
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: House1_Lvl3_9
+      name: House1_Lvl8_4
       rect:
         serializedVersion: 2
         x: 1431
@@ -358,14 +233,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 14afb1870f7644320800000000000000
-      internalID: 2541270372248713793
+      spriteID: 212fbfc121bbb6720800000000000000
+      internalID: 2840569676457308690
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: House1_Lvl3_10
+      name: House1_Lvl8_5
       rect:
         serializedVersion: 2
         x: 1434
@@ -380,14 +255,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6e633103d3c0133b0800000000000000
-      internalID: -5534629010122524954
+      spriteID: 66e4154e93bf8ed80800000000000000
+      internalID: -8221044893702599066
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: House1_Lvl3_11
+      name: House1_Lvl8_6
       rect:
         serializedVersion: 2
         x: 1424
@@ -402,14 +277,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 08eb73d12e4f913e0800000000000000
-      internalID: -2082364100692164992
+      spriteID: 77ca84fca6c280540800000000000000
+      internalID: 4974274625686514807
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: House1_Lvl3_12
+      name: House1_Lvl8_7
       rect:
         serializedVersion: 2
         x: 1439
@@ -424,14 +299,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 0782ab18b9cbfc0e0800000000000000
-      internalID: -2247370312952174480
+      spriteID: 80276ceacd31445c0800000000000000
+      internalID: -4232235911275449848
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: House1_Lvl3_13
+      name: House1_Lvl8_8
       rect:
         serializedVersion: 2
         x: 1463
@@ -446,14 +321,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: a56d1bbc50ada9f70800000000000000
-      internalID: 9194901307657410138
+      spriteID: e2e655a5274803160800000000000000
+      internalID: 7003243047237807662
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: House1_Lvl3_14
+      name: House1_Lvl8_9
       rect:
         serializedVersion: 2
         x: 1475
@@ -468,14 +343,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b73a03cb42abf57b0800000000000000
-      internalID: -5233259575042333829
+      spriteID: 7937ff42eafff7ce0800000000000000
+      internalID: -1405123435306191977
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: House1_Lvl3_15
+      name: House1_Lvl8_10
       rect:
         serializedVersion: 2
         x: 1475
@@ -490,8 +365,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 5f2bbef7904a20640800000000000000
-      internalID: 5044774893316190965
+      spriteID: 9cb22ec0fba3323a0800000000000000
+      internalID: -6691440029113111607
       vertices: []
       indices: 
       edges: []
@@ -500,7 +375,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
@@ -510,22 +385,17 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      House1_Lvl3_0: 6117446205806104104
-      House1_Lvl3_1: 6914690742804020506
-      House1_Lvl3_10: -5534629010122524954
-      House1_Lvl3_11: -2082364100692164992
-      House1_Lvl3_12: -2247370312952174480
-      House1_Lvl3_13: 9194901307657410138
-      House1_Lvl3_14: -5233259575042333829
-      House1_Lvl3_15: 5044774893316190965
-      House1_Lvl3_2: -996051843298159862
-      House1_Lvl3_3: 7357419111124111487
-      House1_Lvl3_4: -5798923380377195973
-      House1_Lvl3_5: -6355700374032516890
-      House1_Lvl3_6: -6399253133990524560
-      House1_Lvl3_7: -447420769369162387
-      House1_Lvl3_8: -2113873790549337959
-      House1_Lvl3_9: 2541270372248713793
+      House1_Lvl8_0: 9011806575288980250
+      House1_Lvl8_1: -3086986144632290805
+      House1_Lvl8_10: -6691440029113111607
+      House1_Lvl8_2: 3183668622412642926
+      House1_Lvl8_3: -77915599413697145
+      House1_Lvl8_4: 2840569676457308690
+      House1_Lvl8_5: -8221044893702599066
+      House1_Lvl8_6: 4974274625686514807
+      House1_Lvl8_7: -4232235911275449848
+      House1_Lvl8_8: 7003243047237807662
+      House1_Lvl8_9: -1405123435306191977
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

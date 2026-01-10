@@ -14738,6 +14738,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::House_Generation
   floorPrefab: {fileID: 4679774453417906803, guid: 2acffb0942e750e488e380b4df9f47ea, type: 3}
+  skipperPrefab: {fileID: 7303357870220871190, guid: 6856efc4a94ab0b46a5b059602f48929, type: 3}
   houseData:
   - {fileID: 11400000, guid: 07f7956cdd846524db2b0fafa49742cc, type: 2}
   - {fileID: 11400000, guid: 1941b2649ede8a54e943be01971153da, type: 2}
@@ -14751,6 +14752,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: bbd1864e64633c84791125db281b2de3, type: 2}
   - {fileID: 11400000, guid: 32d7c62793a597e4ba15f7c432509f53, type: 2}
   wallData: {fileID: 11400000, guid: 6ca51a7fdf984d04aa7a76f454f43ec7, type: 2}
+  timeSkipperData: {fileID: 11400000, guid: aa5f535c7fce3574fac2236aed2a255b, type: 2}
 --- !u!4 &1495880204
 Transform:
   m_ObjectHideFlags: 0

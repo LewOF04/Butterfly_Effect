@@ -7,19 +7,20 @@ public class SceneBuilder : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     [Header("Prefabs")]
     public GameObject floorPrefab; //prefab for flooring
+    public GameObject skipperPrefab; //prefab for time skipper
 
     [Header("Build Settings")]
-    private Vector3 floorPosition = new Vector3(1.21f, -2.13f, 0.5f);
+    private Vector3 floorPosition;
 
     [Header("Data References")]
     public List<BuildingType> houseData = new List<BuildingType>();
     public List<NPCType> npcData = new List<NPCType>();
     public WallType wallData;
-
+    public SkipperData timeSkipperData;
 
     private DataController dataController = DataController.Instance;
 
-    private Vector3 offset = new Vector3(9.36f, 0.0f, 0.0f); //distance between each section
+    private Vector3 offset; //distance between each section
 
     public void Awake()
     {
@@ -27,19 +28,27 @@ public class SceneBuilder : MonoBehaviour
     }
 
     
-    void BuildScene()
+    public void BuildScene()
     {
         var npcs = dataController.NPCStorage;
         var buildings = dataController.BuildingStorage;
         var traits = dataController.TraitStorage;
         var NPCBuildingLinks = dataController.NPCBuildingLinks;
+        var sceneDecoration = new GameObject("SceneDecoration"); //game object to store scene decoration instantiated at run time
 
 
         int totalQuality = 0; //the overall quality of the settlement based upon the total quality of all of the buildings
 
+        offset = new Vector3(9.36f, 0.0f, 0.0f);
+        floorPosition = new Vector3(1.21f, -2.13f, 0.5f);
 
         Vector3 wallPosition = wallData.defaultTransform;
         GameObject leftWall = Instantiate(wallData.leftPrefab, wallPosition, Quaternion.identity);
+        leftWall.transform.SetParent(sceneDecoration.transform);
+
+        Vector3 skipperPosition = timeSkipperData.defaultTransform;
+        GameObject timeSkipper = Instantiate(skipperPrefab, skipperPosition, Quaternion.identity);
+        timeSkipper.transform.SetParent(sceneDecoration.transform);
 
         int iteration = 0;
         BuildingType currHouseData;
@@ -83,6 +92,7 @@ public class SceneBuilder : MonoBehaviour
 
             //spawn the flooring underneath the house
             GameObject floor = Instantiate(floorPrefab, floorPosition, Quaternion.Euler(68.064f, 0.0f, 0.0f));
+            floor.transform.SetParent(sceneDecoration.transform);
 
             //set the collider of the building
             var collider = building.gameObject.GetComponent<PolygonCollider2D>();
@@ -129,11 +139,22 @@ public class SceneBuilder : MonoBehaviour
         }
         wallPosition += (iteration * offset) + new Vector3(-0.96f, 0, 0.0f);
         GameObject rightWall = Instantiate(wallData.rightPrefab, wallPosition, Quaternion.identity);
+        rightWall.transform.SetParent(sceneDecoration.transform);
 
         //calculate the required quality of the outer walls
         int averageQuality = (int)Math.Round((double)totalQuality / buildings.Count);
-        Debug.Log("Average Quality = " + averageQuality.ToString());
         var wallSprite = wallData.possibleSprites[averageQuality];
+        var skipperSprite = timeSkipperData.possibleSprites[averageQuality];
+
+        //apply sprite to the time skipper post
+        var skipperSR = timeSkipper.GetComponent<SpriteRenderer>();
+        skipperSR.sprite = skipperSprite;
+        timeSkipper.gameObject.transform.localScale = timeSkipperData.scale;
+
+        //set collider for time skipper post
+        var skipCollider = timeSkipper.gameObject.GetComponent<PolygonCollider2D>();
+        skipCollider.pathCount = 1;
+        skipCollider.SetPath(0, timeSkipperData.colliderShape);
 
         //apply the sprites to the right and left walls
         var rightWallSR = rightWall.GetComponent<SpriteRenderer>();
