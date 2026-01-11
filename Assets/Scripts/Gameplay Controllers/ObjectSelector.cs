@@ -13,7 +13,6 @@ public class ObjectSelector : MonoBehaviour
 
         if (TryGetComponent<Building>(out var building))
         {
-            Debug.Log("Clicked a Building!");
             BuildingMenu buildingMenu = FindFirstObjectByType<BuildingMenu>();
             Canvas canvas = buildingMenu.GetComponent<Canvas>();
             Camera camera = FindFirstObjectByType<Camera>();
@@ -27,7 +26,6 @@ public class ObjectSelector : MonoBehaviour
         
         else if (TryGetComponent<NPC>(out var npc))
         {
-            Debug.Log("Clicked an NPC!");
             NPCMenu npcMenu = FindFirstObjectByType<NPCMenu>(); //get the npc menu object
             Canvas canvas = npcMenu.GetComponent<Canvas>(); //get the canvas within the npc menu
             Camera camera = FindFirstObjectByType<Camera>();
@@ -41,7 +39,6 @@ public class ObjectSelector : MonoBehaviour
         
         else if (TryGetComponent<TimeSkipper>(out var skipper))
         {
-            Debug.Log("Clicked the skipper");
             int time = 0; //pass in specific time
             skipper.skipTime(time);
         }

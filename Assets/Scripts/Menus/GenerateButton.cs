@@ -9,10 +9,8 @@ public class GenerateButton : MonoBehaviour
 
     public void OnButtonPress()
     {
-        Debug.Log("Button Pressed");
         string text = inputField.text ?? string.Empty;
         int seed = SeedFromString(text);
-        Debug.Log($"Seed: {seed}");
         mainMenu.GenerateGame(seed);
     }
     

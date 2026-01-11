@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using TMPro;
-
+ 
 public class BuildingMenu : MonoBehaviour
 {
     public Building building;

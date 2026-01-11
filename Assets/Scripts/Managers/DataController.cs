@@ -49,13 +49,11 @@ public class DataController : MonoBehaviour
     public void LoadFromMemory()
     {
         //loads traits first as NPCs are reliant on their existence
-        TraitStorage = traitManager ? traitManager.LoadTraits() : new Dictionary<int, TraitData>();
+        TraitStorage = traitManager.LoadTraits();
 
-        NPCStorage = npcManager ? (npcManager.LoadNPCs() ?? new Dictionary<int, NPC>())
-                                        : new Dictionary<int, NPC>();
+        NPCStorage = npcManager.LoadNPCs();
 
-        BuildingStorage = buildingManager ? (buildingManager.LoadBuildings() ?? new Dictionary<int, Building>())
-                                        : new Dictionary<int, Building>();
+        BuildingStorage = buildingManager.LoadBuildings();
 
         foreach (var (id, building) in BuildingStorage)
         {
@@ -76,23 +74,18 @@ public class DataController : MonoBehaviour
 
     public void seedGenerate(int seed)
     {
-        Debug.Log("Entered seed generate");
         System.Random rng = new System.Random(seed);
-        Debug.Log("Random created");
-        TraitStorage = traitManager ? traitManager.LoadTraits() : new Dictionary<int, TraitData>(); //loads traits from memory
-        Debug.Log("Traits Created");
+        
+        TraitStorage = traitManager.LoadTraits(); //loads traits from memory
 
         BuildingStorage = buildingManager.generateBuildings(rng);
-        Debug.Log("Buildings Created");
 
         NPCStorage = npcManager.generateNPCs(rng, TraitStorage.Count);
-        Debug.Log("NPCs Created");
 
         linkNPCsAndBuildings(rng);
         
         foreach (var (id, building) in BuildingStorage)
         {
-            Debug.Log("Iteration");
             NPCBuildingLinks.Add(id, building.inhabitants);
         }
     }

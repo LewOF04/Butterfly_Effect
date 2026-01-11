@@ -11,6 +11,8 @@ public class NPCMenu : MonoBehaviour
     public List<Slider> statSliders = new List<Slider>();
     public Button buildingButton;
     public Image spriteImageLoc;
+    public GameObject traitViewer;
+    public TraitViewItem traitItemPrefab;
     private DataController dataController = DataController.Instance;
     
 
@@ -79,12 +81,23 @@ public class NPCMenu : MonoBehaviour
         statSliders[3].value = stats.energy;
         statSliders[4].value = stats.food;
         statSliders[5].value = stats.wealth;
+
+        List<int> npcTraits = npc.traits;
+        Dictionary<int, TraitData> traitDatabase = dataController.TraitStorage;
+        foreach (int id in npcTraits)
+        {
+            TraitData trait = traitDatabase[id];
+            TraitViewItem newPrefab = Instantiate(traitItemPrefab, traitViewer.transform);
+            newPrefab.trait = trait;
+            newPrefab.displayData();
+        }
     }
 
     public void exitMenu()
     {
         Canvas canvas = GetComponent<Canvas>();
         canvas.enabled = false; //disable the canvas
+        removeButtons();
 
         InputLocker.Unlock(); //unlock the inputs
 
@@ -121,7 +134,20 @@ public class NPCMenu : MonoBehaviour
             
             buildingMenu.building = building;
             buildingMenu.displayData();
+
+            removeButtons();
             buidlingCanvas.enabled = true;
+        }
+    }
+
+    /*
+    Delete the buttons in the npc viewier
+    */
+    public void removeButtons()
+    {
+        foreach (Transform child in traitViewer.transform)
+        {
+            Destroy(child.gameObject);
         }
     }
 }
