@@ -11,7 +11,7 @@ public class BuildingType : ScriptableObject
     public string displayName;
 
     [Header("Economy")]
-    [Min(0)] public int purchaseCost; 
+    [Min(0)] public int purchaseCost;  
     [Min(0)] public int maintenanceCost;
     [Min(0)] public int buildCost;
     [Min(1)] public int capacity;

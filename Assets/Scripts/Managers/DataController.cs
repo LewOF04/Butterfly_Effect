@@ -10,6 +10,8 @@ public class DataController : MonoBehaviour
     public NPCManager npcManager;
     public BuildingManager buildingManager;
     public TraitManager traitManager;
+    public ActionManager actionManager;
+    public RelationShipManager relationshipManager;
 
     [Header("Containers")]
     public Transform npcContainer;
@@ -17,6 +19,9 @@ public class DataController : MonoBehaviour
     public Dictionary<int, NPC> NPCStorage;
     public Dictionary<int, Building> BuildingStorage;
     public Dictionary<int, TraitData> TraitStorage;
+    public Dictionary<string, Action> ActionStorage;
+    public Dictionary<RelationshipKey, Relationship> RelationshipStorage;
+    public Dictionary<id, List<Relationship>> RelationshipByNPCStorage;
     public Dictionary<int, List<int>> NPCBuildingLinks = new Dictionary<int, List<int>>();
 
     void Awake()
@@ -24,19 +29,19 @@ public class DataController : MonoBehaviour
         if (Instance != null && Instance != this) { Destroy(Instance);}
         Instance = this;
         this.transform.SetParent(null); //removes its parent, making it a root prefab
-        DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(gameObject); //this won't be destroyed on reload
 
         if (npcContainer == null)
         {
-            var go = new GameObject("NPCContainer");
-            go.transform.SetParent(transform, false);
-            npcContainer = go.transform;
+            var newContainer = new GameObject("NPCContainer");
+            newContainer.transform.SetParent(transform, false);
+            npcContainer = newContainer.transform;
         }
         if (buildingContainer == null)
         {
-            var go = new GameObject("BuildingContainer");
-            go.transform.SetParent(transform, false);
-            buildingContainer = go.transform;
+            var newContainer = new GameObject("BuildingContainer");
+            newContainer.transform.SetParent(transform, false);
+            buildingContainer = newContainer.transform;
         }
     }
 
@@ -44,6 +49,7 @@ public class DataController : MonoBehaviour
     {
         buildingManager.SaveBuildings(BuildingStorage);
         npcManager.SaveNPCs(NPCStorage);
+        RelationshipManager.SaveRelationships(RelationshipStorage);
     }
 
     public void LoadFromMemory()
@@ -54,6 +60,10 @@ public class DataController : MonoBehaviour
         NPCStorage = npcManager.LoadNPCs();
 
         BuildingStorage = buildingManager.LoadBuildings();
+
+        ActionStorage = actionManager.LoadActions();
+
+        RelationshipStorage, RelationshipByNPCStorage = relationshipManager.LoadRelationships();
 
         foreach (var (id, building) in BuildingStorage)
         {
@@ -78,9 +88,13 @@ public class DataController : MonoBehaviour
         
         TraitStorage = traitManager.LoadTraits(); //loads traits from memory
 
-        BuildingStorage = buildingManager.generateBuildings(rng);
+        ActionStorage = actionManager.LoadActions(); //load actions from memory
 
-        NPCStorage = npcManager.generateNPCs(rng, TraitStorage.Count);
+        BuildingStorage = buildingManager.generateBuildings(rng); //use rng to produce buildings
+
+        NPCStorage = npcManager.generateNPCs(rng, TraitStorage.Count); //use rng to produce npcs
+
+        RelationshipStorage, RelationshipByNPCStorage = relationshipManager.generateRelationships(rng, NPCStorage); //use rng to create npc relationships
 
         linkNPCsAndBuildings(rng);
         

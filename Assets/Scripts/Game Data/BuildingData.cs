@@ -9,7 +9,7 @@ public class BuildingData
     [Range(1,5)] public int buildingType; //the type of building [0,1,2,3,4]
     [Range(0, 100)] public float condition; //the condition of the building from 0-100
     public List<int> inhabitants = new List<int>(); //string of inhabitant NPCs
-
+ 
 
     public BuildingData() { }
 

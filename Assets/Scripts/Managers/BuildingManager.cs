@@ -8,7 +8,7 @@ public class BuildingManager : MonoBehaviour
     const int MIN_HOUSES = 1;
     //TODO: this number is entirely arbitrary
     public Building buildingPrefab;
-    private DataController dataController;
+    private DataController dataController; 
 
     private void Awake()
     {
@@ -27,7 +27,7 @@ public class BuildingManager : MonoBehaviour
 
         Dictionary<int, Building> BuildingStorage = new Dictionary<int, Building>(); //dictionary storing each building currently within the game 
 
-        foreach (var buildingData in buildings)
+        foreach (BuildingData buildingData in buildings)
         {
             var inst = Instantiate(buildingPrefab); //instantiates the Building
             inst.transform.SetParent(dataController.buildingContainer, false);
