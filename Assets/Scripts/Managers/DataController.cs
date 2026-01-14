@@ -11,7 +11,7 @@ public class DataController : MonoBehaviour
     public BuildingManager buildingManager;
     public TraitManager traitManager;
     public ActionManager actionManager;
-    public RelationShipManager relationshipManager;
+    public RelationshipManager relationshipManager;
 
     [Header("Containers")]
     public Transform npcContainer;
@@ -21,7 +21,7 @@ public class DataController : MonoBehaviour
     public Dictionary<int, TraitData> TraitStorage;
     public Dictionary<string, Action> ActionStorage;
     public Dictionary<RelationshipKey, Relationship> RelationshipStorage;
-    public Dictionary<id, List<Relationship>> RelationshipByNPCStorage;
+    public Dictionary<int, List<Relationship>> RelationshipPerNPCStorage;
     public Dictionary<int, List<int>> NPCBuildingLinks = new Dictionary<int, List<int>>();
 
     void Awake()
@@ -49,9 +49,12 @@ public class DataController : MonoBehaviour
     {
         buildingManager.SaveBuildings(BuildingStorage);
         npcManager.SaveNPCs(NPCStorage);
-        RelationshipManager.SaveRelationships(RelationshipStorage);
+        relationshipManager.SaveRelationships(RelationshipStorage);
     }
 
+    /*
+    Load the save file for each relevant data set
+    */
     public void LoadFromMemory()
     {
         //loads traits first as NPCs are reliant on their existence
@@ -63,7 +66,10 @@ public class DataController : MonoBehaviour
 
         ActionStorage = actionManager.LoadActions();
 
-        RelationshipStorage, RelationshipByNPCStorage = relationshipManager.LoadRelationships();
+        RelationshipWrapper wrappedRelationship = relationshipManager.LoadRelationships();
+        RelationshipStorage = wrappedRelationship.RelationshipStorage;
+        RelationshipPerNPCStorage = wrappedRelationship.RelationshipPerNPC;
+
 
         foreach (var (id, building) in BuildingStorage)
         {
@@ -71,6 +77,9 @@ public class DataController : MonoBehaviour
         }
     }
 
+    /*
+    Function to randomly link NPCs with houses once they have all been instantiated following generation
+    */
     public void linkNPCsAndBuildings(System.Random rng)
     {
 
@@ -82,8 +91,12 @@ public class DataController : MonoBehaviour
         }
     }
 
+    /*
+    Generate world data including Buildings, NPCs and relationships based upon the provided seed.
+    */
     public void seedGenerate(int seed)
     {
+        Debug.Log("SEED: "+seed.ToString());
         System.Random rng = new System.Random(seed);
         
         TraitStorage = traitManager.LoadTraits(); //loads traits from memory
@@ -94,7 +107,9 @@ public class DataController : MonoBehaviour
 
         NPCStorage = npcManager.generateNPCs(rng, TraitStorage.Count); //use rng to produce npcs
 
-        RelationshipStorage, RelationshipByNPCStorage = relationshipManager.generateRelationships(rng, NPCStorage); //use rng to create npc relationships
+        RelationshipWrapper wrappedRelationship = relationshipManager.generateRelationships(rng, NPCStorage); //use rng to create npc relationships
+        RelationshipStorage = wrappedRelationship.RelationshipStorage;
+        RelationshipPerNPCStorage = wrappedRelationship.RelationshipPerNPC;
 
         linkNPCsAndBuildings(rng);
         

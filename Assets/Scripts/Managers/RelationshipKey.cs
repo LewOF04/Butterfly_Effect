@@ -1,7 +1,10 @@
-public readonly struct RelationshipKey : IEquatable<RelationshipKey>
+using System;
+
+[System.Serializable]
+public struct RelationshipKey : IEquatable<RelationshipKey>
 {
-    public readonly int npcA; //ID of the first npc
-    public readonly int npcB; //ID of the second npc
+    public int npcA; //ID of the first npc
+    public int npcB; //ID of the second npc
 
     public RelationshipKey(int id1, int id2)
     {

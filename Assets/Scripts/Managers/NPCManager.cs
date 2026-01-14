@@ -44,7 +44,7 @@ public class NPCManager : MonoBehaviour
 
     public Dictionary<int, NPC> generateNPCs(System.Random rng, int maxTrait)
     {
-        int npcNumber = rng.Next(MIN_NPCS, MAX_NPCS);
+        int npcNumber = rng.Next(MIN_NPCS, MAX_NPCS+1);
 
         Dictionary<int, NPC> NPCStorage = new Dictionary<int, NPC>(); //dictionary storing each NPC currently within the game 
 
@@ -63,28 +63,28 @@ public class NPCManager : MonoBehaviour
         string npcName = ""; //TODO: create a way to give NPCs unique names
         Attributes attributes = new Attributes(); //the attributes of the character
         Stats stats = new Stats(); //the stats of the character
-        List<int> traits = new List<int>(); //TODO: idk how many traits there will be
+        List<int> traits = new List<int>(); 
         int spriteType = rng.Next(1, 5); //TODO: idk how many different sprite types there will be
         int parentBuilding = -1; //not yet defined
 
-        attributes.morality = rng.Next(0, 100);
-        attributes.intelligence = rng.Next(0, 100);
-        attributes.rationality = rng.Next(0, 100);
-        attributes.fortitude = rng.Next(0, 100);
-        attributes.charisma = rng.Next(0, 100);
-        attributes.aesthetic_sensitivity = rng.Next(0, 100);
-        attributes.perception = rng.Next(0, 100);
-        attributes.dexterity = rng.Next(0, 100);
-        attributes.constitution = rng.Next(0, 100);
-        attributes.wisdom = rng.Next(0, 100);
-        attributes.strength = rng.Next(0, 100);
+        attributes.morality = rng.Next(0, 101);
+        attributes.intelligence = rng.Next(0, 101);
+        attributes.rationality = rng.Next(0, 101);
+        attributes.fortitude = rng.Next(0, 101);
+        attributes.charisma = rng.Next(0, 101);
+        attributes.aesthetic_sensitivity = rng.Next(0, 101);
+        attributes.perception = rng.Next(0, 101);
+        attributes.dexterity = rng.Next(0, 101);
+        attributes.constitution = rng.Next(0, 101);
+        attributes.wisdom = rng.Next(0, 101);
+        attributes.strength = rng.Next(0, 101);
 
-        stats.condition = rng.Next(0, 100);
-        stats.nutrition = rng.Next(0, 100);
-        stats.happiness = rng.Next(0, 100);
-        stats.energy = rng.Next(0, 100);
-        stats.food = rng.Next(0, 100);
-        stats.wealth = rng.Next(0, 100);
+        stats.condition = rng.Next(0, 101);
+        stats.nutrition = rng.Next(0, 101);
+        stats.happiness = rng.Next(0, 101);
+        stats.energy = rng.Next(0, 101);
+        stats.food = rng.Next(0, 101);
+        stats.wealth = rng.Next(0, 101);
 
         int numberOfTraits = rng.Next(0, maxTrait);
         int traitNum;

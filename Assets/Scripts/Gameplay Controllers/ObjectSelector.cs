@@ -11,7 +11,7 @@ public class ObjectSelector : MonoBehaviour
             return;
         }
 
-        if (TryGetComponent<Building>(out var building))
+        if (TryGetComponent<Building>(out Building building))
         {
             BuildingMenu buildingMenu = FindFirstObjectByType<BuildingMenu>();
             Canvas canvas = buildingMenu.GetComponent<Canvas>();
@@ -24,7 +24,7 @@ public class ObjectSelector : MonoBehaviour
             canvas.enabled = true;
         }
         
-        else if (TryGetComponent<NPC>(out var npc))
+        else if (TryGetComponent<NPC>(out NPC npc))
         {
             NPCMenu npcMenu = FindFirstObjectByType<NPCMenu>(); //get the npc menu object
             Canvas canvas = npcMenu.GetComponent<Canvas>(); //get the canvas within the npc menu
@@ -41,11 +41,6 @@ public class ObjectSelector : MonoBehaviour
         {
             int time = 0; //pass in specific time
             skipper.skipTime(time);
-        }
-        
-        else
-        {
-            Debug.Log("Clicked something else");
         }
     }
 }

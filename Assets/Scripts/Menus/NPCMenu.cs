@@ -5,14 +5,25 @@ using TMPro;
 
 public class NPCMenu : MonoBehaviour
 {
+    [Header("General Info")]
     public NPC npc;
     public TextMeshProUGUI menuTitle;
+    public Button backToMainButton;
+    
+    [Header("Main Page")]
     public List<Slider> attributeSliders = new List<Slider>();
     public List<Slider> statSliders = new List<Slider>();
     public Button buildingButton;
     public Image spriteImageLoc;
     public GameObject traitViewer;
     public TraitViewItem traitItemPrefab;
+    public Canvas mainCanvas;
+
+    [Header("Relationship Page")]
+    public Canvas relationshipCanvas;
+    public GameObject relationshipInfoContainer;
+    public RelationshipPanel relationshipPrefab;
+
     private DataController dataController = DataController.Instance;
     
 
@@ -39,12 +50,19 @@ public class NPCMenu : MonoBehaviour
         stats.energy = statSliders[3].value;
         stats.food = statSliders[4].value;
         stats.wealth = statSliders[5].value;
+
+        foreach(Transform child in relationshipInfoContainer.transform)
+        {
+            RelationshipPanel info = child.gameObject.GetComponent<RelationshipPanel>();
+            info.save(); 
+        }
     }
 
     public void displayData()
     {
         InputLocker.Lock(); //locks the input 
 
+        //main page
         Attributes attrs = npc.attributes;
         Stats stats = npc.stats;
 
@@ -91,6 +109,20 @@ public class NPCMenu : MonoBehaviour
             newPrefab.trait = trait;
             newPrefab.displayData();
         }
+
+        //relationship page
+        foreach(Relationship relationship in dataController.RelationshipPerNPCStorage[npc.id])
+        {
+            RelationshipPanel relInsts = Instantiate(relationshipPrefab, relationshipInfoContainer.transform);
+            relInsts.relationship = relationship;
+            if(relationship.key.npcA == npc.id) relInsts.secondaryNPC = dataController.NPCStorage[relationship.key.npcB];
+            else relInsts.secondaryNPC = dataController.NPCStorage[relationship.key.npcA];
+
+            relInsts.displayData();
+        }
+
+        mainCanvas.enabled = true;
+        backToMainButton.gameObject.SetActive(false);
     }
 
     public void exitMenu()
@@ -99,8 +131,18 @@ public class NPCMenu : MonoBehaviour
         canvas.enabled = false; //disable the canvas
         removeButtons();
 
+        backToMainButton.gameObject.SetActive(false);
+        relationshipCanvas.enabled = false;
         InputLocker.Unlock(); //unlock the inputs
 
+    }
+
+    public void backToMain()
+    {
+        backToMainButton.gameObject.SetActive(false);
+        if(relationshipCanvas.enabled == true) relationshipCanvas.enabled = false;
+
+        mainCanvas.enabled = true;
     }
 
     public void openActions()
@@ -115,7 +157,9 @@ public class NPCMenu : MonoBehaviour
 
     public void openRelationships()
     {
-        Debug.Log("Clicked Relationships!");
+        mainCanvas.enabled = false;
+        backToMainButton.gameObject.SetActive(true);
+        relationshipCanvas.enabled = true;
     }
 
     public void openBuilding()
@@ -146,6 +190,10 @@ public class NPCMenu : MonoBehaviour
     public void removeButtons()
     {
         foreach (Transform child in traitViewer.transform)
+        {
+            Destroy(child.gameObject);
+        }
+        foreach (Transform child in relationshipInfoContainer.transform)
         {
             Destroy(child.gameObject);
         }

@@ -60,8 +60,8 @@ public class BuildingManager : MonoBehaviour
     public Building generateBuilding(int id, System.Random rng)
     {
         string buildingName = ""; //TODO: a way to generate house names
-        int buildingType = rng.Next(1, 5);
-        float condition = rng.Next(0, 100);
+        int buildingType = rng.Next(1, 6);
+        float condition = rng.Next(0, 101);
 
         var inst = Instantiate(buildingPrefab); //instantiates the Building
         inst.transform.SetParent(dataController.buildingContainer, false);

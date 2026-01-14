@@ -1,6 +1,7 @@
 using UnityEngine;
+using System.Collections.Generic;
 
-[System.Serliazable]
+[System.Serializable]
 public class Relationship
 {
     public RelationshipKey key;
