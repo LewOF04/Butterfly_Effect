@@ -7,6 +7,8 @@ public static class SaveSys
     static string NPCDataPath = Application.persistentDataPath + "/NPCSaveData.json"; //defines the save location of the NPC Data
     static string BuildingDataPath = Application.persistentDataPath + "/BuildingSaveData.json"; //defines the save location of the Building Data
     static string RelationshipDataPath = Application.persistentDataPath + "/RelationshipSaveData.json"; //defines the save location of the Relationship Data
+    static string NPCEventDataPath = Application.persistentDataPath + "/NPCEventSaveData.json"; //defines the save location of the NPC Event Data
+    static string NPCHistoryTrackerDataPath = Application.persistentDataPath + "/NPCHistoryTrackerData.json"; //defines the save location for the NPC History Tracker Data
 
     /*
     Function to convert dictionary of NPCs currently stored in the game into a JSON for saving
@@ -120,5 +122,69 @@ public static class SaveSys
         var data = JsonUtility.FromJson<RelationshipDatabase>(json); //returns to a BuildingDatabase from the json format
         Debug.Log($"Loaded {data?.items?.Count ?? 0} NPCs from: {RelationshipDataPath}");
         return data.items; //returns the list within the database
+    }
+
+    /*
+    Function to reload all NPCEvents from stored JSON
+
+    @return - List of all NPCEvent objects
+    */
+    public static List<NPCEvent> LoadNPCHistory()
+    {
+        if (!File.Exists(NPCEventDataPath))
+        {
+            Debug.LogError("Save file not found: " + NPCEventDataPath);
+            return null;
+        }
+
+        var json = File.ReadAllText(NPCEventDataPath);
+        var data = JsonUtility.FromJson<NPCEventDatabase>(json);
+        Debug.Log($"Loaded {data?.items?.Count ?? 0} NPCs from: {NPCEventDataPath}");
+        return data.items;
+    }
+
+    /*
+    Function to save all NPCEvents to a JSON
+    */
+    public static void SaveNPCHistory(Dictionary<RelationshipKey, Dictionary<NPCEventKey, NPCEvent>> map)
+    {
+        NPCEventDatabase db = new NPCEventDatabase();
+        foreach (var kvp in map)
+        {
+            foreach(var kvp1 in kvp)
+            {
+                NPCEvent theEvent = kvp1.Value;
+                db.items.Add(theEvent);
+            }
+        }
+
+        var json = JsonUtility.ToJson(db, true);
+        File.WriteAllText(NPCEventDataPath, json);
+        Debug.Log($"Saved {db.items.Count} NPC events to: " + NPCEventDataPath);
+    }
+
+    /*
+    Function to save History Tracker information to a JSON
+    */
+    public static void SaveNPCHistoryTracker(NPCHistoryTracker tracker)
+    {
+        NPCHistoryTrackerDatabase db = new NPCHistoryTrackerDatabase(tracker.largestInt, tracker.missingInts);
+        
+        var json = JsonUtility.ToJson(db, true);
+        File.WriteAllText(NPCHistoryTrackerDataPath, json);
+        Debug.Log("Saved NPC History Tracker to: " + NPCHistoryTrackerDataPath);
+    }
+
+    /*
+    Function to reload NPC Tracker Data from JSON
+
+    @return - an NPCHistoryTrackerDatabase object
+    */
+    public static NPCHistoryTrackerDatabase LoadNPCHistoryTracker()
+    {
+        var json = File.ReadAllText(NPCHistoryTrackerDataPath);
+        var data = JsonUtility.FromJson<NPCHistoryTrackerDatabase>(json);
+        
+        return data;
     }
 }

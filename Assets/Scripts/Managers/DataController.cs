@@ -7,21 +7,35 @@ public class DataController : MonoBehaviour
     public static DataController Instance;
 
     [Header("Managers")]
+    //managers for each data type that contain related functions
     public NPCManager npcManager;
     public BuildingManager buildingManager;
     public TraitManager traitManager;
     public ActionManager actionManager;
     public RelationshipManager relationshipManager;
+    public HistoryManager historyManager;
 
-    [Header("Containers")]
+    [Header("Runtime Containers")]
+    //containers to hold instantiated buildings and npcs
     public Transform npcContainer;
     public Transform buildingContainer;
+
+    [Header("Runtime Storage")]
+    //storage containers for easy access to npcs, buildings, traits and actions
     public Dictionary<int, NPC> NPCStorage;
     public Dictionary<int, Building> BuildingStorage;
     public Dictionary<int, TraitData> TraitStorage;
     public Dictionary<string, Action> ActionStorage;
-    public Dictionary<RelationshipKey, Relationship> RelationshipStorage;
-    public Dictionary<int, List<Relationship>> RelationshipPerNPCStorage;
+
+    [Header("<i>Relationship</i>")]
+    public Dictionary<RelationshipKey, Relationship> RelationshipStorage; //dictionary that stores every relationship
+    public Dictionary<int, List<Relationship>> RelationshipPerNPCStorage; //dicionary that stores the relationships indexable by each npc
+
+    [Header("<i>Memory</i>")]
+    public Dictionary<int, List<NPCEvent>> eventsPerNPCStorage; //which events each NPC remember
+    public Dictionary<RelationshipKey, Dictionary<NPCEventKey, NPCEvent>> NPCEventStorage; //
+    public NPCHistoryTracker npcHistoryTracker; //npcHistoryTracker to record npc related interactions
+
     public Dictionary<int, List<int>> NPCBuildingLinks = new Dictionary<int, List<int>>();
 
     void Awake()
@@ -45,11 +59,12 @@ public class DataController : MonoBehaviour
         }
     }
 
-    public void saveToMemory()
+    public void SaveToMemory()
     {
-        buildingManager.SaveBuildings(BuildingStorage);
-        npcManager.SaveNPCs(NPCStorage);
-        relationshipManager.SaveRelationships(RelationshipStorage);
+        buildingManager.SaveBuildings();
+        npcManager.SaveNPCs();
+        relationshipManager.SaveRelationships();
+        historyManager.SaveHistory();
     }
 
     /*
@@ -58,19 +73,20 @@ public class DataController : MonoBehaviour
     public void LoadFromMemory()
     {
         //loads traits first as NPCs are reliant on their existence
-        TraitStorage = traitManager.LoadTraits();
+        traitManager.LoadTraits();
 
-        NPCStorage = npcManager.LoadNPCs();
+        npcManager.LoadNPCs();
 
-        BuildingStorage = buildingManager.LoadBuildings();
+        buildingManager.LoadBuildings();
 
-        ActionStorage = actionManager.LoadActions();
+        actionManager.LoadActions();
 
-        RelationshipWrapper wrappedRelationship = relationshipManager.LoadRelationships();
-        RelationshipStorage = wrappedRelationship.RelationshipStorage;
-        RelationshipPerNPCStorage = wrappedRelationship.RelationshipPerNPC;
+        relationshipManager.LoadRelationships();
 
+        historyManager.LoadHistory();
 
+        historyManager.LoadNPCHistoryTracker();
+        
         foreach (var (id, building) in BuildingStorage)
         {
             NPCBuildingLinks.Add(id, building.inhabitants);
@@ -80,7 +96,7 @@ public class DataController : MonoBehaviour
     /*
     Function to randomly link NPCs with houses once they have all been instantiated following generation
     */
-    public void linkNPCsAndBuildings(System.Random rng)
+    private void linkNPCsAndBuildings(System.Random rng)
     {
 
         foreach (var(id, npc) in NPCStorage)
@@ -99,17 +115,17 @@ public class DataController : MonoBehaviour
         Debug.Log("SEED: "+seed.ToString());
         System.Random rng = new System.Random(seed);
         
-        TraitStorage = traitManager.LoadTraits(); //loads traits from memory
+        traitManager.LoadTraits(); //loads traits from memory
 
-        ActionStorage = actionManager.LoadActions(); //load actions from memory
+        actionManager.LoadActions(); //load actions from memory
 
-        BuildingStorage = buildingManager.generateBuildings(rng); //use rng to produce buildings
+        buildingManager.GenerateBuildings(rng); //use rng to produce buildings
 
-        NPCStorage = npcManager.generateNPCs(rng, TraitStorage.Count); //use rng to produce npcs
+        npcManager.GenerateNPCs(rng, TraitStorage.Count); //use rng to produce npcs
 
-        RelationshipWrapper wrappedRelationship = relationshipManager.generateRelationships(rng, NPCStorage); //use rng to create npc relationships
-        RelationshipStorage = wrappedRelationship.RelationshipStorage;
-        RelationshipPerNPCStorage = wrappedRelationship.RelationshipPerNPC;
+        relationshipManager.GenerateRelationships(rng); //use rng to create npc relationships
+
+        historyManager.GenerateHistory(rng); //generate history and NPC history tracker
 
         linkNPCsAndBuildings(rng);
         

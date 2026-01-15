@@ -4,8 +4,16 @@ using System;
 
 public class RelationshipManager : MonoBehaviour
 {
-    public RelationshipWrapper generateRelationships(System.Random rng, Dictionary<int, NPC> npcs)
+    private DataController dataController;
+
+    private void Awake()
     {
+        dataController = DataController.Instance;
+    }
+    public void GenerateRelationships(System.Random rng)
+    {
+        Dictionary<int, NPC> npcs = dataController.NPCStorage;
+
         Dictionary<RelationshipKey, Relationship> RelationshipStorage = new Dictionary<RelationshipKey, Relationship>();
         Dictionary<int, List<Relationship>> RelationshipPerNPC = new Dictionary<int, List<Relationship>>();
         foreach(var kvp_1 in npcs)
@@ -42,15 +50,17 @@ public class RelationshipManager : MonoBehaviour
                 RelationshipPerNPC[kvp.Value.id] = new List<Relationship>();
             }
         }
-        return new RelationshipWrapper(RelationshipStorage, RelationshipPerNPC);
+
+        dataController.RelationshipStorage = RelationshipStorage;
+        dataController.RelationshipPerNPCStorage = RelationshipPerNPC;
     }
 
-    public void SaveRelationships(Dictionary<RelationshipKey, Relationship> relationshipStorage)
+    public void SaveRelationships()
     {
-        SaveSys.SaveRelationships(relationshipStorage);
+        SaveSys.SaveRelationships(dataController.RelationshipStorage);
     }
 
-    public RelationshipWrapper LoadRelationships()
+    public void LoadRelationships()
     {
         List<Relationship> relationships = SaveSys.LoadRelationships(); //gets the list of stored relationships
 
@@ -70,18 +80,8 @@ public class RelationshipManager : MonoBehaviour
             RelationshipPerNPC[relationship.key.npcB].Add(relationship);
         }
 
-        return new RelationshipWrapper(RelationshipStorage, RelationshipPerNPC); 
-    }
-}
-
-public class RelationshipWrapper
-{
-    public Dictionary<RelationshipKey, Relationship> RelationshipStorage;
-    public Dictionary<int, List<Relationship>> RelationshipPerNPC;
-    public RelationshipWrapper(Dictionary<RelationshipKey, Relationship> relStorage, Dictionary<int, List<Relationship>> relPerNPC)
-    {
-        RelationshipStorage = relStorage;
-        RelationshipPerNPC = relPerNPC;
+        dataController.RelationshipStorage = RelationshipStorage;
+        dataController.RelationshipPerNPCStorage = RelationshipPerNPC;
     }
 }
  

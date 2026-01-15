@@ -16,12 +16,12 @@ public class BuildingManager : MonoBehaviour
     }
 
     //saving and loading
-    public void SaveBuildings(Dictionary<int, Building> BuildingStorage)
+    public void SaveBuildings()
     {
-        SaveSys.SaveAllBuildings(BuildingStorage);
+        SaveSys.SaveAllBuildings(dataController.BuildingStorage);
     }
 
-    public Dictionary<int, Building> LoadBuildings()
+    public void LoadBuildings()
     {
         var buildings = SaveSys.LoadAllBuildings(); //gets the list of stored Buildings
 
@@ -38,10 +38,10 @@ public class BuildingManager : MonoBehaviour
             BuildingStorage.Add(building.id, building); //adds the instantiated NPC to the storage
         }
 
-        return BuildingStorage;
+        dataController.BuildingStorage = BuildingStorage;
     }
 
-    public Dictionary<int, Building> generateBuildings(System.Random rng)
+    public void GenerateBuildings(System.Random rng)
     {
         //number of houses in the game
         int houseNumber = rng.Next(MIN_HOUSES, MAX_HOUSES);
@@ -54,10 +54,10 @@ public class BuildingManager : MonoBehaviour
             BuildingStorage.Add(building.id, building); //adds the instantiated NPC to the storage
         }
 
-        return BuildingStorage;
+        dataController.BuildingStorage = BuildingStorage;
     }
 
-    public Building generateBuilding(int id, System.Random rng)
+    private Building generateBuilding(int id, System.Random rng)
     {
         string buildingName = ""; //TODO: a way to generate house names
         int buildingType = rng.Next(1, 6);

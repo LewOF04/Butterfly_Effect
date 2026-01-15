@@ -17,12 +17,12 @@ public class NPCManager : MonoBehaviour
     }
 
     //saving and loading
-    public void SaveNPCs(Dictionary<int, NPC> NPCStorage)
+    public void SaveNPCs()
     {
-        SaveSys.SaveAllNPCs(NPCStorage);
+        SaveSys.SaveAllNPCs(dataController.NPCStorage);
     }
 
-    public Dictionary<int, NPC> LoadNPCs()
+    public void LoadNPCs()
     {
         var npcs = SaveSys.LoadAllNPCs(); //gets the list of stored NPCs
 
@@ -39,10 +39,10 @@ public class NPCManager : MonoBehaviour
             NPCStorage.Add(npc.id, npc); //adds the instantiated NPC to the storage
         }
 
-        return NPCStorage;
+        dataController.NPCStorage = NPCStorage;
     }
 
-    public Dictionary<int, NPC> generateNPCs(System.Random rng, int maxTrait)
+    public void GenerateNPCs(System.Random rng, int maxTrait)
     {
         int npcNumber = rng.Next(MIN_NPCS, MAX_NPCS+1);
 
@@ -54,10 +54,10 @@ public class NPCManager : MonoBehaviour
             NPCStorage.Add(npc.id, npc);
         }
 
-        return NPCStorage;
+        dataController.NPCStorage = NPCStorage;
     }
 
-    public NPC generateNPC(int inputID, int maxTrait, System.Random rng)
+    private NPC generateNPC(int inputID, int maxTrait, System.Random rng)
     {
         int id = inputID;
         string npcName = ""; //TODO: create a way to give NPCs unique names

@@ -9,7 +9,19 @@ public struct RelationshipKey : IEquatable<RelationshipKey>
     public RelationshipKey(int id1, int id2)
     {
         //ensure that no matter which way it is entered, it is the same
-        if (id1 < id2)
+        if(id1 == -1 && id2 == -1)
+        {
+            Debug.LogError("Both ids cannot be -1.");
+            return null;
+        }else if(id1 == -1){
+            npcA = id2;
+            npcB = -1;
+
+        } else if(id2 == -1){
+            npcA = id1;
+            npcB = -1;
+
+        } else if (id1 < id2)
         {
             npcA = id1;
             npcB = id2;
