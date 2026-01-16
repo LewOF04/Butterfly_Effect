@@ -44,6 +44,7 @@ public class NPCManager : MonoBehaviour
 
     public void GenerateNPCs(System.Random rng, int maxTrait)
     {
+        Debug.Log("Entered NPC Generation.");
         int npcNumber = rng.Next(MIN_NPCS, MAX_NPCS+1);
 
         Dictionary<int, NPC> NPCStorage = new Dictionary<int, NPC>(); //dictionary storing each NPC currently within the game 

@@ -16,7 +16,7 @@ public class HistoryManager : MonoBehaviour
         Dictionary<int, NPC> npcStorage = dataController.NPCStorage;
         Dictionary<int, Building> buildingStorage = dataController.BuildingStorage;
 
-        NPCHistoryTracker npcHistoryTracker = new NPCHistoryTracker();
+        NPCHistoryTracker npcHistoryTracker = dataController.npcHistoryTracker;
         Dictionary<RelationshipKey, Dictionary<NPCEventKey, NPCEvent>> NPCEventStorage = new Dictionary<RelationshipKey, Dictionary<NPCEventKey, NPCEvent>>();
         foreach(var kvp in dataController.RelationshipStorage)
         {
@@ -44,7 +44,6 @@ public class HistoryManager : MonoBehaviour
 
         //implement selection
 
-        dataController.npcHistoryTracker = npcHistoryTracker;
         dataController.NPCEventStorage = NPCEventStorage;
         dataController.eventsPerNPCStorage = eventsPerNPCStorage;
 
@@ -59,13 +58,13 @@ public class HistoryManager : MonoBehaviour
     public void LoadHistory()
     {
         //=====================LOADING NPC EVENTS===========================
-        Dictionary<RelationshipKey, Dictionary<NPCEventKey, NPCEvent>> npcEvents;
-        Dictionary<int, List<NPCEvent>> perNPCEvents;
+        Dictionary<RelationshipKey, Dictionary<NPCEventKey, NPCEvent>> npcEvents = new Dictionary<RelationshipKey, Dictionary<NPCEventKey, NPCEvent>>();
+        Dictionary<int, List<NPCEvent>> perNPCEvents = new Dictionary<int, List<NPCEvent>>();
 
-        List<NPCEvent> npcEvents = SaveSys.LoadNPCHistory();
+        List<NPCEvent> npcEventsList = SaveSys.LoadNPCHistory();
 
         //take each stored NPCEvent and move it into the necessary storage structures
-        foreach(NPCEvent anEvent in npcEvents)
+        foreach(NPCEvent anEvent in npcEventsList)
         {
             NPCEventKey thisKey = anEvent.eventKey; //get the unique event key
             RelationshipKey relKey = new RelationshipKey(thisKey.npcA, thisKey.npcB); //get the relationship for these two npcs
@@ -93,13 +92,14 @@ public class HistoryManager : MonoBehaviour
         }
 
         //update in the data controller
-        dataController.NPCEventStorage = NPCEventStorage;
-        dataController.eventsPerNPCStorage = eventPerNPC;
+        dataController.NPCEventStorage = npcEvents;
+        dataController.eventsPerNPCStorage = perNPCEvents;
 
 
         //=====================LOADING NPC HISTORY TRACKER===========================
         NPCHistoryTrackerDatabase db = SaveSys.LoadNPCHistoryTracker();
-        NPCHistoryTracker npcHistoryTracker = new NPCHistoryTracker(db.largestInt, db.largestIntKeys, db.missingInts, db.missingIntsKeys);
+        dataController.npcHistoryTracker.SetValues(db.largestInts, db.largestIntKeys, db.missingInts, db.missingIntsKeys);
+        NPCHistoryTracker npcHistoryTracker = dataController.npcHistoryTracker;
 
         //trim down missing lists to as small as possible
         var keys = new List<RelationshipKey>(npcHistoryTracker.largestInt.Keys);
@@ -108,7 +108,7 @@ public class HistoryManager : MonoBehaviour
             int largInt = npcHistoryTracker.largestInt[rel];
             List<int> list = npcHistoryTracker.missingInts[rel];
 
-            while (missing.Remove(largInt - 1)) 
+            while (list.Remove(largInt - 1)) 
             {
                 //if one less than the largest int is in it, remove that and set it to be the largest int
                 largInt--;
@@ -137,7 +137,7 @@ public class HistoryManager : MonoBehaviour
                 thisNPCEvents.RemoveAt(index); //remove memory from this npc's memory
 
                 //remove memory entirely if there is no other npc remembering it
-                if(theEvent.npcB == -1)
+                if(theEvent.eventKey.npcB == -1)
                 {
                     RelationshipKey relKey = new RelationshipKey(npcID, -1);
 
@@ -148,7 +148,8 @@ public class HistoryManager : MonoBehaviour
                 else
                 {
                     int secondNPC;
-                    theEvent.npcA == npcID ? secondNPC = theEvent.npcB : secondNPC = theEvent.npcA;
+                    if(theEvent.eventKey.npcA == npcID) secondNPC = theEvent.eventKey.npcB;
+                    else secondNPC = theEvent.eventKey.npcA;
 
                     bool shouldRemove = !perNPCEvents[secondNPC].Contains(theEvent); //check whether it is present in the other npc
                     
@@ -194,7 +195,7 @@ public class HistoryManager : MonoBehaviour
         NPCEvent thisEvent = new NPCEvent(key, actionName, description, severity, timeOfAction, performer, receiver, wasPositive, wasSuccessful, importance);
 
         //add to per NPC storage
-        Dictionary<int, List<NPCEvents>> perNPCEvents = dataController.eventsPerNPCStorage;
+        Dictionary<int, List<NPCEvent>> perNPCEvents = dataController.eventsPerNPCStorage;
         perNPCEvents[performer].Add(thisEvent);
         perNPCEvents[receiver].Add(thisEvent);
 
@@ -228,7 +229,7 @@ public class HistoryManager : MonoBehaviour
             List<NPCEventKey> eventKeys = new List<NPCEventKey>(innerDic.Keys);
             foreach(NPCEventKey eventKey in eventKeys)
             {
-                NPCEvent currEvent = innderDic[eventKey];
+                NPCEvent currEvent = innerDic[eventKey];
 
                 currEvent.importance = calculateImportance(currEvent.severity, currEvent.timeOfAction);
                 if(currEvent.importance < 2)

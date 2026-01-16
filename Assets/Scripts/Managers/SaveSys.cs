@@ -149,12 +149,14 @@ public static class SaveSys
     public static void SaveNPCHistory(Dictionary<RelationshipKey, Dictionary<NPCEventKey, NPCEvent>> map)
     {
         NPCEventDatabase db = new NPCEventDatabase();
-        foreach (var kvp in map)
+        var keys = new List<RelationshipKey>(map.Keys);
+        foreach (RelationshipKey relKey in keys)
         {
-            foreach(var kvp1 in kvp)
+            Dictionary<NPCEventKey, NPCEvent> innerDict = map[relKey];
+            List<NPCEventKey> innerKeys = new List<NPCEventKey>(innerDict.Keys);
+            foreach(NPCEventKey key in innerKeys)
             {
-                NPCEvent theEvent = kvp1.Value;
-                db.items.Add(theEvent);
+                db.items.Add(innerDict[key]);
             }
         }
 

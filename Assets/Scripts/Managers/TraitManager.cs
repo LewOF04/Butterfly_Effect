@@ -5,9 +5,15 @@ using System.Collections.Generic;
 public class TraitManager : MonoBehaviour
 {
     public TextAsset traitFile; 
+    public DataController dataController;
+    
+    public void Awake()
+    {
+        dataController = DataController.Instance;
+    }
 
     //loading traits
-    public Dictionary<int, TraitData> LoadTraits()
+    public void LoadTraits()
     {
         string json = traitFile.text; //reads the traitDatabase from the json
         var data = JsonUtility.FromJson<TraitDatabase>(json); //returns to a TraitDatabase from the json format
@@ -20,6 +26,6 @@ public class TraitManager : MonoBehaviour
             traitStorage.Add(trait.id, trait); //adds the trait to the storage
         }
 
-        return traitStorage;
+        dataController.TraitStorage = traitStorage;
     }
 }
