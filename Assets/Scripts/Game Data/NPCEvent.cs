@@ -8,11 +8,26 @@ public class NPCEvent
     public string actionName; //the name of the action that took place
     public string description; //description of the historical event
     public float severity; //how importance was this event to the npc
-    public float timeSinceAction; //how long ago this event occurred
+    public float timeOfAction; //when this action occurred
     public int performer; //the npc that performed the action
     public int receiver; //the npc that received the action
     public bool wasPositive; //was the action positive for the performer
     public bool wasSuccessful; //was the action positive for the performer
+    public float importance;
+
+    public NPCEvent(NPCEventKey key, string name, string desc, float sev, float time, int perf, int rec, bool wasP, bool wasS, float imp)
+    {
+        eventKey = key;
+        actionName = name;
+        description = desc;
+        severity = sev;
+        timeOfAction = time;
+        performer = perf;
+        receiver = rec;
+        wasPositive = wasP;
+        wasSuccessful = wasS;
+        importance = imp;
+    }
 }
 
 /*

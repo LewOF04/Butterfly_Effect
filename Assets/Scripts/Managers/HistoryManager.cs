@@ -101,11 +101,20 @@ public class HistoryManager : MonoBehaviour
         NPCHistoryTrackerDatabase db = SaveSys.LoadNPCHistoryTracker();
         NPCHistoryTracker npcHistoryTracker = new NPCHistoryTracker(db.largestInt, db.largestIntKeys, db.missingInts, db.missingIntsKeys);
 
-        /*
-        foreach(var kvp in npcHistoryTracker.missingInts)
+        //trim down missing lists to as small as possible
+        var keys = new List<RelationshipKey>(npcHistoryTracker.largestInt.Keys);
+        foreach(var rel in keys) //iterate overl keys
         {
-            kvp.Value.TrimExcess();
-        }*/
+            int largInt = npcHistoryTracker.largestInt[rel];
+            List<int> list = npcHistoryTracker.missingInts[rel];
+
+            while (missing.Remove(largInt - 1)) 
+            {
+                //if one less than the largest int is in it, remove that and set it to be the largest int
+                largInt--;
+            }
+            npcHistoryTracker.largestInt[rel] = largInt;
+        }
 
         dataController.npcHistoryTracker = npcHistoryTracker;
     }
@@ -114,12 +123,12 @@ public class HistoryManager : MonoBehaviour
     Removes the memory item from the NPCs memory when it is no longer important enough to remember.
     Removes memory from storage overall if there is no memory at all
     */
-    private void RemoveMemoryFromNPC(NPCEvent theEvent, NPC npc)
+    private void RemoveMemoryFromNPC(NPCEvent theEvent, int npcID)
     {
         Dictionary<RelationshipKey, Dictionary<NPCEventKey, NPCEvent>> npcEvents = dataController.NPCEventStorage;
         Dictionary<int, List<NPCEvent>> perNPCEvents = dataController.eventsPerNPCStorage;
 
-        List<NPCEvent> thisNPCEvents = perNPCEvents[npc.id];
+        List<NPCEvent> thisNPCEvents = perNPCEvents[npcID];
         int index = 0;
         foreach(NPCEvent anEvent in thisNPCEvents)
         {
@@ -130,7 +139,7 @@ public class HistoryManager : MonoBehaviour
                 //remove memory entirely if there is no other npc remembering it
                 if(theEvent.npcB == -1)
                 {
-                    RelationshipKey relKey = new RelationshipKey(npc.id, -1);
+                    RelationshipKey relKey = new RelationshipKey(npcID, -1);
 
                     Dictionary<NPCEventKey, NPCEvent> subDict = npcEvents[relKey];
                     dataController.npcHistoryTracker.AddRemovedInt(relKey, theEvent.eventKey.eventNum); //remove unused integer
@@ -139,12 +148,12 @@ public class HistoryManager : MonoBehaviour
                 else
                 {
                     int secondNPC;
-                    theEvent.npcA == npc.id ? secondNPC = theEvent.npcB : secondNPC = theEvent.npcA;
+                    theEvent.npcA == npcID ? secondNPC = theEvent.npcB : secondNPC = theEvent.npcA;
 
                     bool shouldRemove = !perNPCEvents[secondNPC].Contains(theEvent); //check whether it is present in the other npc
                     
                     if(shouldRemove){
-                        RelationshipKey relKey = new RelationshipKey(secondNPC, npc.id);
+                        RelationshipKey relKey = new RelationshipKey(secondNPC, npcID);
                         
                         Dictionary<NPCEventKey, NPCEvent> subDict = npcEvents[relKey];
                         dataController.npcHistoryTracker.AddRemovedInt(relKey, theEvent.eventKey.eventNum); //remove unused integer
@@ -169,14 +178,66 @@ public class HistoryManager : MonoBehaviour
     @param wasPositive - was the action positive or negative for the performer?
     @param wasSuccessful - was the action successful for the performer?
     */
-    public void AddNPCMemory(string actionName, string description, float severity, float timeSinceAction, int performer, int receiver, bool wasPositive, bool wasSuccessful)
+    public void AddNPCMemory(string actionName, string description, float severity, float timeOfAction, int performer, int receiver, bool wasPositive, bool wasSuccessful)
+    {
+
+        RelationshipKey relKey = new RelationshipKey(performer, receiver);
+
+        NPCHistoryTracker tracker = dataController.npcHistoryTracker;
+
+        //determine the key of this event
+        int nextInt = tracker.getNextInt(relKey);
+        NPCEventKey key = new NPCEventKey(performer, receiver, nextInt);
+
+        float importance = calculateImportance(severity, timeOfAction); //determine the importance of this event
+
+        NPCEvent thisEvent = new NPCEvent(key, actionName, description, severity, timeOfAction, performer, receiver, wasPositive, wasSuccessful, importance);
+
+        //add to per NPC storage
+        Dictionary<int, List<NPCEvents>> perNPCEvents = dataController.eventsPerNPCStorage;
+        perNPCEvents[performer].Add(thisEvent);
+        perNPCEvents[receiver].Add(thisEvent);
+
+        //add to overall storage
+        Dictionary<RelationshipKey, Dictionary<NPCEventKey, NPCEvent>> npcEvents = dataController.NPCEventStorage;
+        npcEvents[relKey][key] = thisEvent;
+    }
+
+    /*
+    Calculate the importance of an action based on how severe it was and how long ago it happened.
+
+    A lesser importance will result in it being forgotten quicker.
+    */
+    public float calculateImportance(float sev, float time)
+    {
+        //TODO: need to implement (need to reference current time vs then time)
+        return sev;
+    }
+
+    /*
+    Delete unimportant events from memory of NPCs
+    */
+    public void deleteUnimportantEvents()
     {
         Dictionary<RelationshipKey, Dictionary<NPCEventKey, NPCEvent>> npcEvents = dataController.NPCEventStorage;
-        Dictionary<int, List<NPCEvent>> perNPCEvents = dataController.eventsPerNPCStorage;
+        List<RelationshipKey> relKeys = new List<RelationshipKey>(npcEvents.Keys);
 
-        RelationshipKey relKey = new RelationshipKey(theEvent.performer.id, theEvent.receiver.id);
-        
-        
+        foreach(int rel in relKeys)
+        {
+            Dictionary<NPCEventKey, NPCEvent> innerDic = npcEvents[rel];
+            List<NPCEventKey> eventKeys = new List<NPCEventKey>(innerDic.Keys);
+            foreach(NPCEventKey eventKey in eventKeys)
+            {
+                NPCEvent currEvent = innderDic[eventKey];
 
+                currEvent.importance = calculateImportance(currEvent.severity, currEvent.timeOfAction);
+                if(currEvent.importance < 2)
+                {
+                    //TODO: add a way fix removal to be relative to NPC
+                    RemoveMemoryFromNPC(currEvent, currEvent.performer);
+                    RemoveMemoryFromNPC(currEvent, currEvent.receiver);
+                }
+            }
+        }
     }
 }

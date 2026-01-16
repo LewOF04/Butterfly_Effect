@@ -33,7 +33,7 @@ public class NPCHistoryTracker
     */
     public int getNextInt(RelationshipKey rel)
     {
-        //check if there are any missing ints we can set as the new integer instead
+        //check if there aren't any missing ints we can set as the new integer instead
         if(missingInts[rel].Count == 0)
         {
             //no new int so take next largest int
