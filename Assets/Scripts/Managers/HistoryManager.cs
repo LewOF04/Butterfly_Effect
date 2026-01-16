@@ -222,7 +222,7 @@ public class HistoryManager : MonoBehaviour
         Dictionary<RelationshipKey, Dictionary<NPCEventKey, NPCEvent>> npcEvents = dataController.NPCEventStorage;
         List<RelationshipKey> relKeys = new List<RelationshipKey>(npcEvents.Keys);
 
-        foreach(int rel in relKeys)
+        foreach(RelationshipKey rel in relKeys)
         {
             Dictionary<NPCEventKey, NPCEvent> innerDic = npcEvents[rel];
             List<NPCEventKey> eventKeys = new List<NPCEventKey>(innerDic.Keys);

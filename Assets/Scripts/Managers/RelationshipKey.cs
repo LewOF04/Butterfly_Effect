@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 [System.Serializable]
 public struct RelationshipKey : IEquatable<RelationshipKey>
@@ -12,7 +13,8 @@ public struct RelationshipKey : IEquatable<RelationshipKey>
         if(id1 == -1 && id2 == -1)
         {
             Debug.LogError("Both ids cannot be -1.");
-            return null;
+            npcA = -1;
+            npcB = -1;
         }else if(id1 == -1){
             npcA = id2;
             npcB = -1;

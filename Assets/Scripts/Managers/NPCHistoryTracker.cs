@@ -69,7 +69,7 @@ public class NPCHistoryTracker
 [System.Serializable]
 public class NPCHistoryTrackerDatabase
 {
-    public List<int> largestInt;
+    public List<int> largestInts;
     public List<RelationshipKey> largestIntKeys;
     public List<List<int>> missingInts;
     public List<RelationshipKey> missingIntsKeys;
@@ -78,7 +78,7 @@ public class NPCHistoryTrackerDatabase
         largestInts = new List<int>();
         largestIntKeys = new List<RelationshipKey>();
         missingInts = new List<List<int>>();
-        missingIntKeys = new List<RelationshipKey>();
+        missingIntsKeys = new List<RelationshipKey>();
 
         foreach(var kvp in inputLargestInts)
         {

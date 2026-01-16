@@ -84,8 +84,6 @@ public class DataController : MonoBehaviour
         relationshipManager.LoadRelationships();
 
         historyManager.LoadHistory();
-
-        historyManager.LoadNPCHistoryTracker();
         
         foreach (var (id, building) in BuildingStorage)
         {
