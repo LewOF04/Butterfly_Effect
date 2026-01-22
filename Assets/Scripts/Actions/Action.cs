@@ -14,5 +14,7 @@ public abstract class Action
     public abstract void actionResult(NPC performer, NPC receiver); //compute the result of the action being performed
     public abstract bool successCalc(NPC performer, NPC receiver); //computer whether or not the action will be successful or fail
     public abstract bool isKnown(NPC performer, NPC receiver); //check that this action would be known to the NPC
+    public abstract float getTimeToComplete(NPC performer, NPC receiver); //calculate how much time it would take for the NPC to complete this action
+    public abstract float getEnergyToComplete(NPC performer, NPC receiver); //calculate how much energy it would take the NPC to compelete this action
     public Action(){}
 }
