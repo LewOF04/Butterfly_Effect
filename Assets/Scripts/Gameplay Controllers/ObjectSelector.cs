@@ -17,7 +17,7 @@ public class ObjectSelector : MonoBehaviour
             Canvas canvas = buildingMenu.GetComponent<Canvas>();
             Camera camera = FindFirstObjectByType<Camera>();
             buildingMenu.transform.position = camera.transform.position;
-            buildingMenu.transform.position += new Vector3(0.0f, 0.0f, 0.5f);
+            buildingMenu.transform.position += new Vector3(0.0f, 0.0f, 5.0f);
             
             buildingMenu.building = building;
             buildingMenu.displayData();
@@ -30,7 +30,7 @@ public class ObjectSelector : MonoBehaviour
             Canvas canvas = npcMenu.GetComponent<Canvas>(); //get the canvas within the npc menu
             Camera camera = FindFirstObjectByType<Camera>();
             npcMenu.transform.position = camera.transform.position;
-            npcMenu.transform.position += new Vector3(0.0f, 0.0f, 0.5f);
+            npcMenu.transform.position += new Vector3(0.0f, 0.0f, 5.0f);
 
             npcMenu.npc = npc; //define the npc for the menu
             npcMenu.displayData(); //display the npcs data into the menu
