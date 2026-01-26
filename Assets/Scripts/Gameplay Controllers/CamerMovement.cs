@@ -18,7 +18,7 @@ public class CamerMovement : MonoBehaviour
         transform.position = startingPosition;
         leftLimit = startingPosition;
         rightLimit = rightWallPos.position - new Vector3(3.125f, 0, 0);
-        backDrop.transform.position = new Vector3(wallStartingPosition.x, wallStartingPosition.y, wallStartingPosition.z);
+        backDrop.transform.position = new Vector3(playerTransform.position.x + wallStartingPosition.x, wallStartingPosition.y, wallStartingPosition.z);
     }
 
     // Update is called once per frame
