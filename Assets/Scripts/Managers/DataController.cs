@@ -36,6 +36,7 @@ public class DataController : MonoBehaviour
     [Header("<i>Memory</i>")]
     public Dictionary<int, List<NPCEvent>> eventsPerNPCStorage; //which events each NPC remember
     public Dictionary<RelationshipKey, Dictionary<NPCEventKey, NPCEvent>> NPCEventStorage; 
+    public Dictionary<BuildingRelationshipKey, Dictionary<BuildingEventKey, BuildingEvent>> buildingEventStorage;
     public Dictionary<int, List<BuildingEvent>> buildingEventsPerBuildingStorage; 
     public Dictionary<int, List<BuildingEvent>> buildingEventsPerNPCStorage;
 

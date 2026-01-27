@@ -45,27 +45,49 @@ public class HistoryManager : MonoBehaviour
         dataController.NPCEventStorage = NPCEventStorage;
         dataController.eventsPerNPCStorage = eventsPerNPCStorage;
 
+
         //Building History
         BuildingHistoryTracker buildingHistoryTracker = dataController.buildingHistoryTracker;
-        Dictionary<RelationshipKey, Dictionary<BuildingEventKey, BuildingEvent>> buildingEventStorage = new Dictionary<RelationshipKey, Dictionary<BuildingEventKey, BuildingEvent>>();
+        Dictionary<BuildingRelationshipKey, Dictionary<BuildingEventKey, BuildingEvent>> buildingEventStorage = new Dictionary<BuildingRelationshipKey, Dictionary<BuildingEventKey, BuildingEvent>>();
         Dictionary<int, List<BuildingEvent>> buildingEventsPerNPCStorage = new Dictionary<int, List<BuildingEvent>>();
-        Dictionary<int, List<BuildingEvent>> buildingEventsPerBuildingStorage = new Dictionary<int, List<BuildingEvent>>();
         foreach(var npcPair in dataController.NPCStorage)
         {
+            buildingEventsPerNPCStorage[npcPair.key] = new List<BuildingEvent>(); //populate per NPC
             foreach(var buildingPair in dataController.BuildingStorage)
             {
+                //populate npc and building stores
                 BuildingRelationshipKey rel = new BuildingRelationshipKey(buildingPair.Key, npcPair.Key);
-                buildingHistoryTracker
+                buildingHistoryTracker.largestInt[rel] = 0;
+                buildingHistoryTracker.missingInts[rel] = new List<int>();
+
+                buildingEventStorage[rel] = new Dictionary<BuildingEventKey, BuildingEvent>();
             }
         }
 
+        Dictionary<int, List<BuildingEvent>> buildingEventsPerBuildingStorage = new Dictionary<int, List<BuildingEvent>>();
+        foreach(var buildingPair in dataController.BuildingStorage)
+        {
+            //populate overall relationship storage
+            BuildingRelationshipKey selfRel = new BuildingRelationshipKey(buildingPair.Key, -1);
+            buildingHistoryTracker.largestInt[selfRel] = 0;
+            buildingHistoryTracker.missingInts[selfRel] = new List<int>();
+            buildingEventStorage[selfRel] = new Dictionary<BuildingEventKey, BuildingEvent>();
 
+            //populate per building storage
+            buildingEventsPerBuildingStorage[buildingPair.Key] = new List<BuildingEvent>();
+        }
+
+        dataController.buidlingEventStorage = buildingEventStorage;
+        dataController.buildingEventsPerNPCStorage = buildingEventsPerNPCStorage;
+        dataController.buildingEventsPerBuildingStorage = buildingEventsPerBuildingStorage;
     }
 
     public void SaveHistory() 
     {
         SaveSys.SaveNPCHistory(dataController.NPCEventStorage);
         SaveSys.SaveNPCHistoryTracker(dataController.npcHistoryTracker);
+        SaveSys.SaveBuildingHistory(dataController.buildingEventStorage);
+        SaveSys.SaveBuildingHistoryTracker(dataController.buildingHistoryTracker);
     }
 
     public void LoadHistory()

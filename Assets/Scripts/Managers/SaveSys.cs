@@ -9,6 +9,8 @@ public static class SaveSys
     static string RelationshipDataPath = Application.persistentDataPath + "/RelationshipSaveData.json"; //defines the save location of the Relationship Data
     static string NPCEventDataPath = Application.persistentDataPath + "/NPCEventSaveData.json"; //defines the save location of the NPC Event Data
     static string NPCHistoryTrackerDataPath = Application.persistentDataPath + "/NPCHistoryTrackerData.json"; //defines the save location for the NPC History Tracker Data
+    static string BuildingEventDataPath = Application.persistentDataPath + "/BuildingEventSaveData.json"; //defines the save location for the Building Event Data
+    static string BuildingHistoryTrackerDataPath = Application.persistentDataPath + "/BuildingHistoryTrackerData.json"; //defines the save location for the Building History Tracker Data
 
     /*
     Function to convert dictionary of NPCs currently stored in the game into a JSON for saving
@@ -166,7 +168,7 @@ public static class SaveSys
     }
 
     /*
-    Function to save History Tracker information to a JSON
+    Function to save NPC History Tracker information to a JSON
     */
     public static void SaveNPCHistoryTracker(NPCHistoryTracker tracker)
     {
@@ -188,5 +190,39 @@ public static class SaveSys
         var data = JsonUtility.FromJson<NPCHistoryTrackerDatabase>(json);
         
         return data;
+    }
+
+    /*
+    Function to save building history data
+    */
+    public static SaveBuildingHistory(Dictionary<BuildingRelationshipKey, Dictionary<BuildingEventKey, BuildingEvent>> map)
+    {
+        BuildingEventDatabase db = new BuildingEventDatabase();
+        var keys = new List<BuildingEventKey>(map.Keys);
+        foreach(BuildingRelationshipKey key in keys)
+        {
+            Dictionary<BuildingEventKey, BuildingEvent> innerDict = map[key];
+            var innerKeys = new List<BuildingEventKey>(innerDict.Keys);
+            foreach(BuildingEventKey innerKey in innerKeys)
+            {
+                db.items.Add(innerDict[innerKey]);
+            }
+        }
+
+        var json = JsonUtility.ToJson(db, true);
+        File.WriteAllText(BuildingEventDataPath, json);
+        Debug.Log($"Saved {db.items.Count} Building events to: " + BuildingEventDataPath);
+    }
+
+    /*
+    Function to save Building History Tracker information to JSON
+    */
+    public static SaveBuildingHistoryTracker(BuildingHistoryTracker tracker)
+    {
+        BuildingHistoryTrackerDatabase db = new BuildingHistoryTrackerDatabase(tracker.largestInt, tracker.missingInts);
+        
+        var json = JsonUtility.ToJson(db, true);
+        File.WriteAllText(BuildingHistoryTrackerDataPath, json);
+        Debug.Log("Saved Building History Tracker to: " + BuildingHistoryTrackerDataPath);
     }
 }
