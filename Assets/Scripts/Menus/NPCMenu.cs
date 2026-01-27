@@ -213,7 +213,7 @@ public class NPCMenu : MonoBehaviour
     }
 
     /*
-    Delete the buttons in the npc viewier
+    Delete the any instantiated prefabs within the menu
     */
     public void removeButtons()
     {
@@ -222,6 +222,10 @@ public class NPCMenu : MonoBehaviour
             Destroy(child.gameObject);
         }
         foreach (Transform child in relationshipInfoContainer.transform)
+        {
+            Destroy(child.gameObject);
+        }
+        foreach (Transform child in memoryInfoContainer.transform)
         {
             Destroy(child.gameObject);
         }
