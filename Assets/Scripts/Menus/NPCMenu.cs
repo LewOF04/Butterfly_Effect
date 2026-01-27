@@ -9,6 +9,7 @@ public class NPCMenu : MonoBehaviour
     public NPC npc;
     public TextMeshProUGUI menuTitle;
     public Button backToMainButton;
+    public Button saveButton;
     
     [Header("Main Page")]
     public List<Slider> attributeSliders = new List<Slider>();
@@ -23,6 +24,12 @@ public class NPCMenu : MonoBehaviour
     public Canvas relationshipCanvas;
     public GameObject relationshipInfoContainer;
     public RelationshipPanel relationshipPrefab;
+
+    [Header("Memory Page")]
+    public Canvas memoryCanvas;
+    public GameObject memoryInfoContainer;
+    public NPCMemoryPanel memoryPrefab;
+
 
     private DataController dataController = DataController.Instance;
     
@@ -121,8 +128,21 @@ public class NPCMenu : MonoBehaviour
             relInsts.displayData();
         }
 
+        //memory page
+        List<NPCEvent> thisNPCEvents = dataController.eventsPerNPCStorage[npc.id];
+        foreach(NPCEvent thisEvent in thisNPCEvents)
+        {
+            NPCMemoryPanel memPanel = Instantiate(memoryPrefab, memoryInfoContainer.transform);
+            
+            memPanel.performer = npc;
+            memPanel.thisEvent = thisEvent;
+
+            memPanel.displayData();
+        }
+
         mainCanvas.enabled = true;
         backToMainButton.gameObject.SetActive(false);
+        saveButton.gameObject.SetActive(true);
     }
 
     public void exitMenu()
@@ -141,6 +161,11 @@ public class NPCMenu : MonoBehaviour
     {
         backToMainButton.gameObject.SetActive(false);
         if(relationshipCanvas.enabled == true) relationshipCanvas.enabled = false;
+        if(memoryCanvas.enabled == true)
+        {
+            memoryCanvas.enabled = false;
+            saveButton.gameObject.SetActive(true);
+        }
 
         mainCanvas.enabled = true;
     }
@@ -152,7 +177,10 @@ public class NPCMenu : MonoBehaviour
 
     public void openMemories()
     {
-        Debug.Log("Clicked Memories!");
+        mainCanvas.enabled = false;
+        backToMainButton.gameObject.SetActive(true);
+        memoryCanvas.enabled = true;
+        saveButton.gameObject.SetActive(false);
     }
 
     public void openRelationships()

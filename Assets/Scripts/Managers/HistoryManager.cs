@@ -40,10 +40,6 @@ public class HistoryManager : MonoBehaviour
             eventsPerNPCStorage[kvp.Key] = new List<NPCEvent>();
         }
 
-        
-
-        //implement selection
-
         dataController.NPCEventStorage = NPCEventStorage;
         dataController.eventsPerNPCStorage = eventsPerNPCStorage;
 
@@ -190,9 +186,10 @@ public class HistoryManager : MonoBehaviour
         int nextInt = tracker.getNextInt(relKey);
         NPCEventKey key = new NPCEventKey(performer, receiver, nextInt);
 
-        float importance = calculateImportance(severity, timeOfAction); //determine the importance of this event
+        float performerImportance = calculateImportance(severity, timeOfAction, performer); //determine the importance of this event to the performer
+        float receiverImportance = calculateImportance(severity, timeOfAction, receiver); //determine the importance of this event to the receiver
 
-        NPCEvent thisEvent = new NPCEvent(key, actionName, description, severity, timeOfAction, performer, receiver, wasPositive, wasSuccessful, importance);
+        NPCEvent thisEvent = new NPCEvent(key, actionName, description, severity, timeOfAction, performer, receiver, wasPositive, wasSuccessful, performerImportance, receiverImportance);
 
         //add to per NPC storage
         Dictionary<int, List<NPCEvent>> perNPCEvents = dataController.eventsPerNPCStorage;
@@ -209,9 +206,14 @@ public class HistoryManager : MonoBehaviour
 
     A lesser importance will result in it being forgotten quicker.
     */
-    public float calculateImportance(float sev, float time)
+    public float calculateImportance(float sev, float time, int npcID)
     {
-        //TODO: need to implement (need to reference current time vs then time)
+        //if there is no NPC then return -1 for a void 
+        if(npcID == -1)
+        {
+            return -1;
+        }
+        //TODO: need to implement (need to reference current time vs then time and NPC memory size)
         return sev;
     }
 
@@ -231,11 +233,15 @@ public class HistoryManager : MonoBehaviour
             {
                 NPCEvent currEvent = innerDic[eventKey];
 
-                currEvent.importance = calculateImportance(currEvent.severity, currEvent.timeOfAction);
-                if(currEvent.importance < 2)
+                currEvent.performerImportance = calculateImportance(currEvent.severity, currEvent.timeOfAction, currEvent.performer);
+                currEvent.receiverImportance = calculateImportance(currEvent.severity, currEvent.timeOfAction, currEvent.receiver);
+
+                if(currEvent.performerImportance < 2)
                 {
-                    //TODO: add a way fix removal to be relative to NPC
                     RemoveMemoryFromNPC(currEvent, currEvent.performer);
+                } 
+                if(currEvent.receiverImportance < 2)
+                {
                     RemoveMemoryFromNPC(currEvent, currEvent.receiver);
                 }
             }

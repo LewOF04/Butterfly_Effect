@@ -110,7 +110,7 @@ public class DataController : MonoBehaviour
     */
     public void seedGenerate(int seed)
     {
-        Debug.Log("SEED: "+seed.ToString());
+        Debug.Log("Generated Seed: "+seed.ToString());
         System.Random rng = new System.Random(seed);
         
         traitManager.LoadTraits(); //loads traits from memory
@@ -118,7 +118,6 @@ public class DataController : MonoBehaviour
         actionManager.LoadActions(); //load actions from memory
 
         buildingManager.GenerateBuildings(rng); //use rng to produce buildings
-        Debug.Log("After building Generation.");
 
         npcManager.GenerateNPCs(rng, TraitStorage.Count); //use rng to produce npcs
 

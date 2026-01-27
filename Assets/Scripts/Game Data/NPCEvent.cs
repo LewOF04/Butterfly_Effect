@@ -13,9 +13,10 @@ public class NPCEvent
     public int receiver; //the npc that received the action
     public bool wasPositive; //was the action positive for the performer
     public bool wasSuccessful; //was the action positive for the performer
-    public float importance;
+    public float performerImportance; //how important the event is in the performing NPCs mind
+    public float receiverImportance; //how important the event is in the receiving NPCs mind
 
-    public NPCEvent(NPCEventKey key, string name, string desc, float sev, float time, int perf, int rec, bool wasP, bool wasS, float imp)
+    public NPCEvent(NPCEventKey key, string name, string desc, float sev, float time, int perf, int rec, bool wasP, bool wasS, float perImp, float recImp)
     {
         eventKey = key;
         actionName = name;
@@ -26,7 +27,9 @@ public class NPCEvent
         receiver = rec;
         wasPositive = wasP;
         wasSuccessful = wasS;
-        importance = imp;
+        performerImportance = perImp;
+        receiverImportance = recImp;
+
     }
 }
 
