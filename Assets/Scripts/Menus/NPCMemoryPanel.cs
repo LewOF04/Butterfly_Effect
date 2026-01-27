@@ -21,16 +21,18 @@ public class NPCMemoryPanel : MonoBehaviour
 
     public void displayData()
     {
-        actionNameField.text = thisEvent.actionName;
+        actionNameField.text = "Event: "+thisEvent.actionName;
         descriptionField.text = thisEvent.description;
         performerIDField.text = "ID: "+performer.id.ToString();
         performerNameField.text = "Name: "+performer.npcName;
+        perfImpField.text = "Importance: "+thisEvent.performerImportance;
 
         if(thisEvent.receiver == -1)
         {
             receiverNameField.text = "No Target";
             receiverIDField.text = "";
             receiverSpriteImageLoc.sprite = null; 
+            recImpField.text = ""; 
         }
         else
         {
@@ -38,6 +40,7 @@ public class NPCMemoryPanel : MonoBehaviour
             receiverNameField.text = "Name: "+receiver.npcName;
             receiverIDField.text = "ID: "+receiver.id.ToString();
             receiverSpriteImageLoc.sprite = performer.GetComponent<SpriteRenderer>().sprite;
+            recImpField.text = "Importance: "+thisEvent.receiverImportance;
         }
     }
 }
