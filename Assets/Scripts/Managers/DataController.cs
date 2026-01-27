@@ -15,6 +15,7 @@ public class DataController : MonoBehaviour
     public RelationshipManager relationshipManager;
     public HistoryManager historyManager;
     public NPCHistoryTracker npcHistoryTracker; //npcHistoryTracker to record npc related interactions
+    public BuildingHistoryTracker buildingHistoryTracker; //buildingHistoryTracker to record building related interactions
 
     [Header("Runtime Containers")]
     //containers to hold instantiated buildings and npcs
@@ -35,6 +36,8 @@ public class DataController : MonoBehaviour
     [Header("<i>Memory</i>")]
     public Dictionary<int, List<NPCEvent>> eventsPerNPCStorage; //which events each NPC remember
     public Dictionary<RelationshipKey, Dictionary<NPCEventKey, NPCEvent>> NPCEventStorage; 
+    public Dictionary<int, List<BuildingEvent>> buildingEventsPerBuildingStorage; 
+    public Dictionary<int, List<BuildingEvent>> buildingEventsPerNPCStorage;
 
     public Dictionary<int, List<int>> NPCBuildingLinks = new Dictionary<int, List<int>>();
 

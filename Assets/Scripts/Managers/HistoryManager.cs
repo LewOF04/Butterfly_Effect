@@ -13,9 +13,11 @@ public class HistoryManager : MonoBehaviour
 
     public void GenerateHistory(System.Random rng)
     {
+        
         Dictionary<int, NPC> npcStorage = dataController.NPCStorage;
         Dictionary<int, Building> buildingStorage = dataController.BuildingStorage;
 
+        //NPC History
         NPCHistoryTracker npcHistoryTracker = dataController.npcHistoryTracker;
         Dictionary<RelationshipKey, Dictionary<NPCEventKey, NPCEvent>> NPCEventStorage = new Dictionary<RelationshipKey, Dictionary<NPCEventKey, NPCEvent>>();
         foreach(var kvp in dataController.RelationshipStorage)
@@ -42,6 +44,21 @@ public class HistoryManager : MonoBehaviour
 
         dataController.NPCEventStorage = NPCEventStorage;
         dataController.eventsPerNPCStorage = eventsPerNPCStorage;
+
+        //Building History
+        BuildingHistoryTracker buildingHistoryTracker = dataController.buildingHistoryTracker;
+        Dictionary<RelationshipKey, Dictionary<BuildingEventKey, BuildingEvent>> buildingEventStorage = new Dictionary<RelationshipKey, Dictionary<BuildingEventKey, BuildingEvent>>();
+        Dictionary<int, List<BuildingEvent>> buildingEventsPerNPCStorage = new Dictionary<int, List<BuildingEvent>>();
+        Dictionary<int, List<BuildingEvent>> buildingEventsPerBuildingStorage = new Dictionary<int, List<BuildingEvent>>();
+        foreach(var npcPair in dataController.NPCStorage)
+        {
+            foreach(var buildingPair in dataController.BuildingStorage)
+            {
+                BuildingRelationshipKey rel = new BuildingRelationshipKey(buildingPair.Key, npcPair.Key);
+                buildingHistoryTracker
+            }
+        }
+
 
     }
 
