@@ -225,4 +225,15 @@ public static class SaveSys
         File.WriteAllText(BuildingHistoryTrackerDataPath, json);
         Debug.Log("Saved Building History Tracker to: " + BuildingHistoryTrackerDataPath);
     }
+
+    /*
+    Function to reload building event data from JSON
+    */
+    public static BuildingEventDatabase LoadBuildingEvents()
+    {
+        var json = File.ReadAllText(BuildingEventDataPath);
+        var data = JsonUtility.FromJson<BuildingEventDatabase>(json);
+        
+        return data.items;
+    }
 }

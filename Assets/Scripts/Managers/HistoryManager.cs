@@ -13,6 +13,11 @@ public class HistoryManager : MonoBehaviour
 
     public void GenerateHistory(System.Random rng)
     {
+        GenerateHistoryFramework();
+    }
+
+    public void GenerateHistoryFramework()
+    {
         
         Dictionary<int, NPC> npcStorage = dataController.NPCStorage;
         Dictionary<int, Building> buildingStorage = dataController.BuildingStorage;
@@ -92,9 +97,11 @@ public class HistoryManager : MonoBehaviour
 
     public void LoadHistory()
     {
+        GenerateHistoryFramework(); //ensure all data structures are initialised
+
         //=====================LOADING NPC EVENTS===========================
-        Dictionary<RelationshipKey, Dictionary<NPCEventKey, NPCEvent>> npcEvents = new Dictionary<RelationshipKey, Dictionary<NPCEventKey, NPCEvent>>();
-        Dictionary<int, List<NPCEvent>> perNPCEvents = new Dictionary<int, List<NPCEvent>>();
+        Dictionary<RelationshipKey, Dictionary<NPCEventKey, NPCEvent>> npcEvents = dataController.npcEventStorage;
+        Dictionary<int, List<NPCEvent>> perNPCEvents = dataController.eventsPerNPCStorage;
 
         List<NPCEvent> npcEventsList = SaveSys.LoadNPCHistory();
 
@@ -104,32 +111,12 @@ public class HistoryManager : MonoBehaviour
             NPCEventKey thisKey = anEvent.eventKey; //get the unique event key
             RelationshipKey relKey = new RelationshipKey(thisKey.npcA, thisKey.npcB); //get the relationship for these two npcs
 
-            //create the secondary dictionary if it is not already present
-            if (!npcEvents.ContainsKey(relKey))
-            {
-                npcEvents[relKey] = new Dictionary<NPCEventKey, NPCEvent>();
-            }
             npcEvents[relKey][thisKey] = anEvent; //store the event
-
-            //create the lists in perNPCEvents if not present
-            if (!perNPCEvents.ContainsKey(thisKey.npcA))
-            {
-                perNPCEvents[thisKey.npcA] = new List<NPCEvent>();
-            }
-            if (!perNPCEvents.ContainsKey(thisKey.npcB))
-            {
-                perNPCEvents[thisKey.npcB] = new List<NPCEvent>();
-            }
 
             //add event to both per NPC events
             perNPCEvents[thisKey.npcA].Add(anEvent);
             perNPCEvents[thisKey.npcB].Add(anEvent);
         }
-
-        //update in the data controller
-        dataController.NPCEventStorage = npcEvents;
-        dataController.eventsPerNPCStorage = perNPCEvents;
-
 
         //=====================LOADING NPC HISTORY TRACKER===========================
         NPCHistoryTrackerDatabase db = SaveSys.LoadNPCHistoryTracker();
@@ -152,6 +139,32 @@ public class HistoryManager : MonoBehaviour
         }
 
         dataController.npcHistoryTracker = npcHistoryTracker;
+
+
+        //=============LOADING BUILDING HISTORY===============================
+        Dictionary<BuildingRelationshipKey, Dictionary<BuildingEventKey, BuildingEvent>> buildingEventStorage = dataController.buildingEventStorage;
+        Dictionary<int, List<BuildingEvent>> buildingEventsPerBuildingStorage = dataController.buildingEventsPerBuildingStorage; 
+        Dictionary<int, List<BuildingEvent>> buildingEventsPerNPCStorage = dataController.buildingEventsPerNPCStorage;
+
+        List<BuildingEvent> buildingEventList = SaveSys.LoadBuildingEvents();
+
+        foreach(var buildingEvent in buildingEventList)
+        {
+            BuildingEventKey key = buildingEvent.eventKey;
+            BuildingRelationshipKey relKey = new BuildingRelationshipKey(key.building, key.npc);
+
+            buildingEventStorage[relKey][key] = buildingEvent;
+            buildingEventsPerBuildingStorage[key.building] = buildingEvent;
+
+            if(key.npc != -1)
+            {
+                buildingEventsPerNPCStorage[key.npc] = buildingEvent;
+            }
+        }
+
+
+        //============LOADING BUILDING HISTORY TRACKER=======================
+        
     }
 
     /*
