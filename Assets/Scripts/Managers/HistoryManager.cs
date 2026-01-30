@@ -355,6 +355,52 @@ public class HistoryManager : MonoBehaviour
         npcEvents[relKey][key] = thisEvent;
     }
 
+    
+    /*
+    Adds a Building memory to the stores
+
+    @param name - the name of the action
+    @param desc - the description of the action
+    @param severity - the severity of the action
+    @param time - the time when the action occurred
+    @param building - the id of the building
+    @param npc - the id of the npc
+    @param wasSucc - whether or not the action was successful as intended
+    @param wasPos - whether or not this action was positive for the building
+    */
+    public void AddBuildingMemory(string name, string desc, float severity, float time, int building, int npc, bool wasSucc, bool wasPos)
+    {
+        BuildingRelationshipKey relKey = new BuildingRelationshipKey(building, npc);
+
+        BuildingHistoryTracker tracker = dataController.buildingHistoryTracker;
+
+        //determine the key of this event
+        int nextInt = tracker.getNextInt(relKey);
+        BuildingEventKey key = new BuildingEventKey(npc, building, nextInt);
+
+        float buildingImportance = calculateImportance(severity, time, building);
+        float npcImportance = calculateImportance(severity, time, npc);
+
+        bool storeForBuilding = keepBuildingMemory(buildingImportance, building, true);
+        bool storeForNPC = keepBuildingMemory(npcImportance, npc, false);
+
+        if(!(storeForBuilding, storeForNPC)) return;
+
+        BuildingEvent thisEvent = new BuildingEvent(key, name, desc, time, severity, wasSucc, wasPos, buildingImportance, npcImportance);
+
+        //add to per Building Storage
+        Dictionary<int, List<BuildingEvent>> perBuilding = dataController.buildingEventsPerBuildingStorage;
+        if(storeForBuilding) perBuilding[building].Add(thisEvent);
+
+        //add to per npc storage
+        Dictionary<int, List<BuildingEvent>> perNPC = dataController.buildingEventsPerNPCStorage;
+        if(storeForNPC) perNPC[npc].Add(thisEvent);
+
+        //add to building events storage
+        Dictionary<BuildingRelationshipKey, Dictionary<BuildingEventKey, BuildingEvent>> buildingEvents = dataController.buildingEventStorage;
+        buildingEvents[relKey][key] = thisEvent;
+    }
+
     /*
     Calculate the importance of an action based on how severe it was and how long ago it happened
     */

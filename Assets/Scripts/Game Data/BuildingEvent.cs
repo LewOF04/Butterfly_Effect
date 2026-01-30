@@ -9,15 +9,22 @@ public class BuildingEvent
     public string description; //description of the historical event
     public float timeOfAction; //when this action occurred
     public float severity; //how severe this action
+    public bool wasSuccessful; //if the action was successful
+    public bool wasPositive; //if the action was positive (for the building)
     public float buildingImportance; //how important this action is for the building
     public float npcImportance; //how important this action is for the npc
 
-    public BuildingEvent(BuildingEventKey key, string name, string desc, float time)
+    public BuildingEvent(BuildingEventKey key, string name, string desc, float time, float sev, bool succ, bool pos, float buildImp, float npcImp)
     {
         eventKey = key;
         actionName = name;
         description = desc;
         timeOfAction = time;
+        severity = sev;
+        wasSuccessful = succ;
+        wasPositive = pos;
+        buildingImportance = buildImp;
+        npcImportance = npcImp;
     }
 }
 
