@@ -13,8 +13,8 @@ public struct BuildingRelationshipKey : IEquatable<BuildingRelationshipKey>
         if(npcID == -1 && buildingID == -1)
         {
             Debug.LogError("Both ids cannot be -1.");
-            npcA = -1;
-            npcB = -1;
+            npc = -1;
+            building = -1;
         }
         else
         {

@@ -1,6 +1,6 @@
 using UnityEngine;
-using Systems.Collections.Generic;
-using System.Random;
+using System.Collections.Generic;
+using System;
 
 [System.Serializable]
 public class WorldManager : MonoBehaviour
@@ -13,22 +13,22 @@ public class WorldManager : MonoBehaviour
         gameTime = time;
     }
 
-    public Awake()
+    public void Awake()
     {
         dataController = DataController.Instance;
     }
-    public LoadWorldData()
+    public void LoadWorldData()
     {
         WorldManager saved = SaveSys.LoadWorldData();
         gameTime = saved.gameTime;
     }
 
-    public SaveWorldData()
+    public void SaveWorldData()
     {
-        SaveSys.SaveWorldData();
+        SaveSys.SaveWorldData(this);
     }
 
-    public GenerateWorldData(System.Random rng)
+    public void GenerateWorldData(System.Random rng)
     {
         gameTime = 0.0f;
     }

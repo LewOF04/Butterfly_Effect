@@ -57,7 +57,7 @@ public class HistoryManager : MonoBehaviour
         Dictionary<int, List<BuildingEvent>> buildingEventsPerNPCStorage = new Dictionary<int, List<BuildingEvent>>();
         foreach(var npcPair in dataController.NPCStorage)
         {
-            buildingEventsPerNPCStorage[npcPair.key] = new List<BuildingEvent>(); //populate per NPC
+            buildingEventsPerNPCStorage[npcPair.Key] = new List<BuildingEvent>(); //populate per NPC
             foreach(var buildingPair in dataController.BuildingStorage)
             {
                 //populate npc and building stores
@@ -82,7 +82,7 @@ public class HistoryManager : MonoBehaviour
             buildingEventsPerBuildingStorage[buildingPair.Key] = new List<BuildingEvent>();
         }
 
-        dataController.buidlingEventStorage = buildingEventStorage;
+        dataController.buildingEventStorage = buildingEventStorage;
         dataController.buildingEventsPerNPCStorage = buildingEventsPerNPCStorage;
         dataController.buildingEventsPerBuildingStorage = buildingEventsPerBuildingStorage;
     }
@@ -100,7 +100,7 @@ public class HistoryManager : MonoBehaviour
         GenerateHistoryFramework(); //ensure all data structures are initialised
 
         //=====================LOADING NPC EVENTS===========================
-        Dictionary<RelationshipKey, Dictionary<NPCEventKey, NPCEvent>> npcEvents = dataController.npcEventStorage;
+        Dictionary<RelationshipKey, Dictionary<NPCEventKey, NPCEvent>> npcEvents = dataController.NPCEventStorage;
         Dictionary<int, List<NPCEvent>> perNPCEvents = dataController.eventsPerNPCStorage;
 
         List<NPCEvent> npcEventsList = SaveSys.LoadNPCHistory();
@@ -154,23 +154,23 @@ public class HistoryManager : MonoBehaviour
             BuildingRelationshipKey relKey = new BuildingRelationshipKey(key.building, key.npc);
 
             buildingEventStorage[relKey][key] = buildingEvent;
-            buildingEventsPerBuildingStorage[key.building] = buildingEvent;
+            buildingEventsPerBuildingStorage[key.building].Add(buildingEvent);
 
             if(key.npc != -1)
             {
-                buildingEventsPerNPCStorage[key.npc] = buildingEvent;
+                buildingEventsPerNPCStorage[key.npc].Add(buildingEvent);
             }
         }
 
 
         //============LOADING BUILDING HISTORY TRACKER=======================
-        BuildingHistoryTracker db = SaveSys.LoadBuildingHistoryTracker();
-        dataController.buildingHistoryTracker.SetValues(db.largestInts, db.largestIntKeys, db.missingInts, db.missingIntsKeys);
+        BuildingHistoryTrackerDatabase buildDB = SaveSys.LoadBuildingHistoryTracker();
+        dataController.buildingHistoryTracker.SetValues(buildDB.largestInts, buildDB.largestIntKeys, buildDB.missingInts, buildDB.missingIntsKeys);
         BuildingHistoryTracker buildingHistoryTracker = dataController.buildingHistoryTracker;
 
         //trim down missing lists to as small as possible
-        var keys = new List<BuildingRelationshipKey>(buildingHistoryTracker.largestInt.Keys);
-        foreach(var rel in keys) //iterate overl keys
+        var buildingKeys = new List<BuildingRelationshipKey>(buildingHistoryTracker.largestInt.Keys);
+        foreach(var rel in buildingKeys) //iterate overl keys
         {
             int largInt = buildingHistoryTracker.largestInt[rel];
             List<int> list = buildingHistoryTracker.missingInts[rel];
@@ -295,6 +295,7 @@ public class HistoryManager : MonoBehaviour
                 }
                 else
                 {
+                    int npcID = theEvent.eventKey.npc;
                     int buildingID = theEvent.eventKey.building;
 
                     bool shouldRemove = !perOther[npcID].Contains(theEvent); //check whether it is present in the other npc
@@ -341,7 +342,7 @@ public class HistoryManager : MonoBehaviour
         bool storeForPerformer = keepNPCMemory(performerImportance, performer);
         bool storeForReceiver = keepNPCMemory(receiverImportance, receiver);
 
-        if(!(storeForPerformer, storeForReceiver)) return; //if this won't be stored for either
+        if(!(storeForPerformer || storeForReceiver)) return; //if this won't be stored for either
 
         NPCEvent thisEvent = new NPCEvent(key, actionName, description, severity, timeOfAction, performer, receiver, wasPositive, wasSuccessful, performerImportance, receiverImportance);
 
@@ -384,7 +385,7 @@ public class HistoryManager : MonoBehaviour
         bool storeForBuilding = keepBuildingMemory(buildingImportance, building, true);
         bool storeForNPC = keepBuildingMemory(npcImportance, npc, false);
 
-        if(!(storeForBuilding, storeForNPC)) return;
+        if(!(storeForBuilding || storeForNPC)) return;
 
         BuildingEvent thisEvent = new BuildingEvent(key, name, desc, time, severity, wasSucc, wasPos, buildingImportance, npcImportance);
 
@@ -444,12 +445,12 @@ public class HistoryManager : MonoBehaviour
         }
 
         //=======Delete unimportant Building Events=========
-        Dictionary<BuildingRelationshipKey, Dictionary<BuildingEventKey, BuildingEvent>> buildingEventStorage = dataController.buildingEventStorage;
-        List<BuildingRelationshipKey> relKeys = new List<BuildingRelationshipKey>(npcEvents.Keys);
+        Dictionary<BuildingRelationshipKey, Dictionary<BuildingEventKey, BuildingEvent>> buildingEvents = dataController.buildingEventStorage;
+        List<BuildingRelationshipKey> buildRelKeys = new List<BuildingRelationshipKey>(buildingEvents.Keys);
 
-        foreach(BuildingRelationshipKey rel in relKeys)
+        foreach(BuildingRelationshipKey rel in buildRelKeys)
         {
-            Dictionary<BuildingEventKey, BuildingEvent> innerDict = buildingEventStorage[rel];
+            Dictionary<BuildingEventKey, BuildingEvent> innerDict = buildingEvents[rel];
             List<BuildingEventKey> eventKeys = new List<BuildingEventKey>(innerDict.Keys);
             foreach(BuildingEventKey eventKey in eventKeys)
             {
@@ -479,8 +480,9 @@ public class HistoryManager : MonoBehaviour
 
         float total = 0;
         int num = 0;
-        if(isBuilding) List<BuildingEvent> memory = dataController.buildingEventsPerBuildingStorage[ID];
-        else List<BuildingEvent> memory = dataController.buildingEventsPerNPCStorage[ID];
+        List<BuildingEvent> memory;
+        if(isBuilding) memory = dataController.buildingEventsPerBuildingStorage[ID];
+        else memory = dataController.buildingEventsPerNPCStorage[ID];
 
         foreach(BuildingEvent anEvent in memory)
         {
@@ -512,10 +514,10 @@ public class HistoryManager : MonoBehaviour
         float total = 0;
         int num = 0;
         List<NPCEvent> npcMemory = dataController.eventsPerNPCStorage[npcID];
-        bool isPerformer = npcMemory.eventKey.performer == npcID;
 
         foreach(NPCEvent anEvent in npcMemory)
         {
+            bool isPerformer = anEvent.performer == npcID;
             if(isPerformer) total += anEvent.performerImportance;
             else total += anEvent.receiverImportance;
             num++;

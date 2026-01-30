@@ -11,7 +11,7 @@ public static class SaveSys
     static string NPCHistoryTrackerDataPath = Application.persistentDataPath + "/NPCHistoryTrackerData.json"; //defines the save location for the NPC History Tracker Data
     static string BuildingEventDataPath = Application.persistentDataPath + "/BuildingEventSaveData.json"; //defines the save location for the Building Event Data
     static string BuildingHistoryTrackerDataPath = Application.persistentDataPath + "/BuildingHistoryTrackerData.json"; //defines the save location for the Building History Tracker Data
-    static string WorldDataPath = Application.persistentDataPath = "/WorldData.json";
+    static string WorldDataPath = Application.persistentDataPath + "/WorldData.json";
 
     /*
     Function to convert dictionary of NPCs currently stored in the game into a JSON for saving
@@ -196,10 +196,10 @@ public static class SaveSys
     /*
     Function to save building history data
     */
-    public static SaveBuildingHistory(Dictionary<BuildingRelationshipKey, Dictionary<BuildingEventKey, BuildingEvent>> map)
+    public static void SaveBuildingHistory(Dictionary<BuildingRelationshipKey, Dictionary<BuildingEventKey, BuildingEvent>> map)
     {
         BuildingEventDatabase db = new BuildingEventDatabase();
-        var keys = new List<BuildingEventKey>(map.Keys);
+        var keys = new List<BuildingRelationshipKey>(map.Keys);
         foreach(BuildingRelationshipKey key in keys)
         {
             Dictionary<BuildingEventKey, BuildingEvent> innerDict = map[key];
@@ -218,7 +218,7 @@ public static class SaveSys
     /*
     Function to save Building History Tracker information to JSON
     */
-    public static SaveBuildingHistoryTracker(BuildingHistoryTracker tracker)
+    public static void SaveBuildingHistoryTracker(BuildingHistoryTracker tracker)
     {
         BuildingHistoryTrackerDatabase db = new BuildingHistoryTrackerDatabase(tracker.largestInt, tracker.missingInts);
         
