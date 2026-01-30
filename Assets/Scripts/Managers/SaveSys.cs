@@ -229,11 +229,19 @@ public static class SaveSys
     /*
     Function to reload building event data from JSON
     */
-    public static BuildingEventDatabase LoadBuildingEvents()
+    public static List<BuildingEvent> LoadBuildingEvents()
     {
         var json = File.ReadAllText(BuildingEventDataPath);
         var data = JsonUtility.FromJson<BuildingEventDatabase>(json);
         
         return data.items;
+    }
+
+    public static BuildingHistoryTrackerDatabase LoadBuildingHistoryTracker()
+    {
+        var json = File.ReadAllText(BuildingHistoryTrackerDataPath);
+        var data = JsonUtility.FromJson<BuildingHistoryTrackerDatabase>(json);
+        
+        return data;
     }
 }

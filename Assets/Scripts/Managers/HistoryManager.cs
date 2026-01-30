@@ -164,7 +164,26 @@ public class HistoryManager : MonoBehaviour
 
 
         //============LOADING BUILDING HISTORY TRACKER=======================
-        
+        BuildingHistoryTracker db = SaveSys.LoadBuildingHistoryTracker();
+        dataController.buildingHistoryTracker.SetValues(db.largestInts, db.largestIntKeys, db.missingInts, db.missingIntsKeys);
+        BuildingHistoryTracker buildingHistoryTracker = dataController.buildingHistoryTracker;
+
+        //trim down missing lists to as small as possible
+        var keys = new List<BuildingRelationshipKey>(buildingHistoryTracker.largestInt.Keys);
+        foreach(var rel in keys) //iterate overl keys
+        {
+            int largInt = buildingHistoryTracker.largestInt[rel];
+            List<int> list = buildingHistoryTracker.missingInts[rel];
+
+            while (list.Remove(largInt - 1)) 
+            {
+                //if one less than the largest int is in it, remove that and set it to be the largest int
+                largInt--;
+            }
+            buildingHistoryTracker.largestInt[rel] = largInt;
+        }
+
+        dataController.buildingHistoryTracker = buildingHistoryTracker;
     }
 
     /*
