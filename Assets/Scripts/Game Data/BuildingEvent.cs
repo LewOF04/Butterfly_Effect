@@ -8,6 +8,9 @@ public class BuildingEvent
     public string actionName; //the name of the action that took place
     public string description; //description of the historical event
     public float timeOfAction; //when this action occurred
+    public float severity; //how severe this action
+    public float buildingImportance; //how important this action is for the building
+    public float npcImportance; //how important this action is for the npc
 
     public BuildingEvent(BuildingEventKey key, string name, string desc, float time)
     {

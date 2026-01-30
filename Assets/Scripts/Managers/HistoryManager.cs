@@ -235,6 +235,84 @@ public class HistoryManager : MonoBehaviour
     }
 
     /*
+    Removes the memory item from the building/npc memory when it is no longer important enough to remember.
+    Removes memory from storage overall if there is no memory at all
+    */
+    private void RemoveMemoryFromBuilding(BuildingEvent theEvent, bool isBuilding)
+    {
+        int id;
+        if(isBuilding) id = theEvent.eventKey.building;
+        else id = theEvent.eventKey.npc;
+        if(id == -1) return;
+
+        Dictionary<BuildingRelationshipKey, Dictionary<BuildingEventKey, BuildingEvent>> buildingEvents = dataController.buildingEventStorage;
+        Dictionary<int, List<BuildingEvent>> perEvents;
+        Dictionary<int, List<BuildingEvent>> perOther;
+
+        if(isBuilding) {
+            perEvents = dataController.buildingEventsPerBuildingStorage;
+            perOther = dataController.buildingEventsPerNPCStorage;
+        }
+        else
+        {
+            perEvents = dataController.buildingEventsPerNPCStorage;
+            perOther = dataController.buildingEventsPerBuildingStorage;
+        } 
+
+        List<BuildingEvent> thisEvents = perEvents[id];
+        int index = 0;
+        foreach(BuildingEvent anEvent in thisEvents)
+        {
+            if(anEvent == theEvent)
+            {
+                thisEvents.RemoveAt(index); //remove memory from the memory
+
+                if (isBuilding)
+                {   
+                    //remove memory entirely if there is no npc remembering it
+                    if(theEvent.eventKey.npc == -1)
+                    {
+                        BuildingRelationshipKey relKey = new BuildingRelationshipKey(id, -1);
+
+                        Dictionary<BuildingEventKey, BuildingEvent> subDict = buildingEvents[relKey];
+                        dataController.buildingHistoryTracker.AddRemovedInt(relKey, theEvent.eventKey.eventNum); //remove unused integer
+                        subDict.Remove(theEvent.eventKey);
+                    }
+                    else
+                    {
+                        int npcID = theEvent.eventKey.npc;
+
+                        bool shouldRemove = !perOther[npcID].Contains(theEvent); //check whether it is present in the other npc
+                        
+                        if(shouldRemove){
+                            BuildingRelationshipKey relKey = new BuildingRelationshipKey(id, npcID);
+                            
+                            Dictionary<BuildingEventKey, BuildingEvent> subDict = buildingEvents[relKey];
+                            dataController.buildingHistoryTracker.AddRemovedInt(relKey, theEvent.eventKey.eventNum); //remove unused integer
+                            subDict.Remove(theEvent.eventKey);
+                        }
+                    }
+                }
+                else
+                {
+                    int buildingID = theEvent.eventKey.building;
+
+                    bool shouldRemove = !perOther[npcID].Contains(theEvent); //check whether it is present in the other npc
+                        
+                    if(shouldRemove){
+                        BuildingRelationshipKey relKey = new BuildingRelationshipKey(buildingID, id);
+                        
+                        Dictionary<BuildingEventKey, BuildingEvent> subDict = buildingEvents[relKey];
+                        dataController.buildingHistoryTracker.AddRemovedInt(relKey, theEvent.eventKey.eventNum); //remove unused integer
+                        subDict.Remove(theEvent.eventKey);
+                    }
+                }
+            }
+            index++;
+        }
+    }
+
+    /*
     Adds an NPC memory to the stores
 
     @param actionName - the name of the action that occurred
@@ -257,8 +335,8 @@ public class HistoryManager : MonoBehaviour
         int nextInt = tracker.getNextInt(relKey);
         NPCEventKey key = new NPCEventKey(performer, receiver, nextInt);
 
-        float performerImportance = calculateNPCImportance(severity, timeOfAction, performer); //determine the importance of this event to the performer
-        float receiverImportance = calculateNPCImportance(severity, timeOfAction, receiver); //determine the importance of this event to the receiver
+        float performerImportance = calculateImportance(severity, timeOfAction, performer); //determine the importance of this event to the performer
+        float receiverImportance = calculateImportance(severity, timeOfAction, receiver); //determine the importance of this event to the receiver
 
         bool storeForPerformer = keepNPCMemory(performerImportance, performer);
         bool storeForReceiver = keepNPCMemory(receiverImportance, receiver);
@@ -278,24 +356,19 @@ public class HistoryManager : MonoBehaviour
     }
 
     /*
-    Calculate the importance of an action based on how severe it was and how long ago it happened.
-
-    A lesser importance will result in it being forgotten quicker.
+    Calculate the importance of an action based on how severe it was and how long ago it happened
     */
-    public float calculateNPCImportance(float sev, float time, int npcID)
+    public float calculateImportance(float sev, float time, int ID)
     {
-        //if there is no NPC then return -1 for a void 
-        if(npcID == -1)
+        if(ID == -1)
         {
             return -1;
         }
-        
-        List<NPCEvent> npcMemory = dataController.eventsPerNPCStorage[npcID];
-        float worldTime = dataController.worldManager.gameTime;
 
+        float worldTime = dataController.worldManager.gameTime;
         float timeDiff = worldTime - time;
 
-        return (10 / timeDiff) * sev;
+        return(10/timeDiff) * sev;
     }
 
     /*
@@ -309,25 +382,73 @@ public class HistoryManager : MonoBehaviour
 
         foreach(RelationshipKey rel in relKeys)
         {
-            Dictionary<NPCEventKey, NPCEvent> innerDic = npcEvents[rel];
-            List<NPCEventKey> eventKeys = new List<NPCEventKey>(innerDic.Keys);
+            Dictionary<NPCEventKey, NPCEvent> innerDict = npcEvents[rel];
+            List<NPCEventKey> eventKeys = new List<NPCEventKey>(innerDict.Keys);
             foreach(NPCEventKey eventKey in eventKeys)
             {
-                NPCEvent currEvent = innerDic[eventKey];
+                NPCEvent currEvent = innerDict[eventKey];
 
-                currEvent.performerImportance = calculateNPCImportance(currEvent.severity, currEvent.timeOfAction, currEvent.performer);
-                currEvent.receiverImportance = calculateNPCImportance(currEvent.severity, currEvent.timeOfAction, currEvent.receiver);
+                currEvent.performerImportance = calculateImportance(currEvent.severity, currEvent.timeOfAction, currEvent.performer);
+                currEvent.receiverImportance = calculateImportance(currEvent.severity, currEvent.timeOfAction, currEvent.receiver);
 
-                if(!keepNPCMemory(currEvent.performerImportance, currEvent.performer))
-                {
-                    RemoveMemoryFromNPC(currEvent, currEvent.performer);
-                } 
-                if(!keepNPCMemory(currEvent.receiverImportance, currEvent.receiver))
-                {
-                    RemoveMemoryFromNPC(currEvent, currEvent.receiver);
-                }
+                if(!keepNPCMemory(currEvent.performerImportance, currEvent.performer)) RemoveMemoryFromNPC(currEvent, currEvent.performer);
+                
+                if(!keepNPCMemory(currEvent.receiverImportance, currEvent.receiver)) RemoveMemoryFromNPC(currEvent, currEvent.receiver);
             }
         }
+
+        //=======Delete unimportant Building Events=========
+        Dictionary<BuildingRelationshipKey, Dictionary<BuildingEventKey, BuildingEvent>> buildingEventStorage = dataController.buildingEventStorage;
+        List<BuildingRelationshipKey> relKeys = new List<BuildingRelationshipKey>(npcEvents.Keys);
+
+        foreach(BuildingRelationshipKey rel in relKeys)
+        {
+            Dictionary<BuildingEventKey, BuildingEvent> innerDict = buildingEventStorage[rel];
+            List<BuildingEventKey> eventKeys = new List<BuildingEventKey>(innerDict.Keys);
+            foreach(BuildingEventKey eventKey in eventKeys)
+            {
+                BuildingEvent currEvent = innerDict[eventKey];
+
+                currEvent.buildingImportance = calculateImportance(currEvent.severity, currEvent.timeOfAction, currEvent.eventKey.building);
+                currEvent.npcImportance = calculateImportance(currEvent.severity, currEvent.timeOfAction, currEvent.eventKey.npc);
+
+                if(!keepBuildingMemory(currEvent.buildingImportance, currEvent.eventKey.building, true)) RemoveMemoryFromBuilding(currEvent, true);
+                if(!keepBuildingMemory(currEvent.npcImportance, currEvent.eventKey.npc, true)) RemoveMemoryFromBuilding(currEvent, false);
+            }
+        }
+    }
+
+    /*
+    Given a building or npc and the relative importance of that action to them. Determine whether or not this will be stored
+
+    @param relativeImportance - the relative importance of the event given time and severity
+    @param ID - the id of the building or NPC
+    @param isBuilding - whether this is a building or npc
+
+    @return - whether this should be memorised or not
+    */
+    public bool keepBuildingMemory(float relativeImportance, int ID, bool isBuilding)
+    {
+        if (ID == -1) return false;
+
+        float total = 0;
+        int num = 0;
+        if(isBuilding) List<BuildingEvent> memory = dataController.buildingEventsPerBuildingStorage[ID];
+        else List<BuildingEvent> memory = dataController.buildingEventsPerNPCStorage[ID];
+
+        foreach(BuildingEvent anEvent in memory)
+        {
+            if(isBuilding) total += anEvent.buildingImportance;
+            else total += anEvent.npcImportance;
+            num++;
+        }
+        
+        if(relativeImportance > (total/num)) return true;
+
+        if(num < 10 && !isBuilding) return true; //NPC will store a minimum of 10 memories about buildings
+        if(num < 20 && isBuilding) return true; //building will store a minimum of 20 memories 
+
+        return false;
     }
 
     /*
