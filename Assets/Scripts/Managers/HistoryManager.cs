@@ -257,15 +257,20 @@ public class HistoryManager : MonoBehaviour
         int nextInt = tracker.getNextInt(relKey);
         NPCEventKey key = new NPCEventKey(performer, receiver, nextInt);
 
-        float performerImportance = calculateImportance(severity, timeOfAction, performer); //determine the importance of this event to the performer
-        float receiverImportance = calculateImportance(severity, timeOfAction, receiver); //determine the importance of this event to the receiver
+        float performerImportance = calculateNPCImportance(severity, timeOfAction, performer); //determine the importance of this event to the performer
+        float receiverImportance = calculateNPCImportance(severity, timeOfAction, receiver); //determine the importance of this event to the receiver
+
+        bool storeForPerformer = keepNPCMemory(performerImportance, performer);
+        bool storeForReceiver = keepNPCMemory(receiverImportance, receiver);
+
+        if(!(storeForPerformer, storeForReceiver)) return; //if this won't be stored for either
 
         NPCEvent thisEvent = new NPCEvent(key, actionName, description, severity, timeOfAction, performer, receiver, wasPositive, wasSuccessful, performerImportance, receiverImportance);
 
         //add to per NPC storage
         Dictionary<int, List<NPCEvent>> perNPCEvents = dataController.eventsPerNPCStorage;
-        perNPCEvents[performer].Add(thisEvent);
-        perNPCEvents[receiver].Add(thisEvent);
+        if(storeForPerformer) perNPCEvents[performer].Add(thisEvent);
+        if(storeForReceiver) perNPCEvents[receiver].Add(thisEvent);
 
         //add to overall storage
         Dictionary<RelationshipKey, Dictionary<NPCEventKey, NPCEvent>> npcEvents = dataController.NPCEventStorage;
@@ -277,22 +282,28 @@ public class HistoryManager : MonoBehaviour
 
     A lesser importance will result in it being forgotten quicker.
     */
-    public float calculateImportance(float sev, float time, int npcID)
+    public float calculateNPCImportance(float sev, float time, int npcID)
     {
         //if there is no NPC then return -1 for a void 
         if(npcID == -1)
         {
             return -1;
         }
-        //TODO: need to implement (need to reference current time vs then time and NPC memory size)
-        return sev;
+        
+        List<NPCEvent> npcMemory = dataController.eventsPerNPCStorage[npcID];
+        float worldTime = dataController.worldManager.gameTime;
+
+        float timeDiff = worldTime - time;
+
+        return (10 / timeDiff) * sev;
     }
 
     /*
-    Delete unimportant events from memory of NPCs
+    Delete unimportant events from memory of NPCs and Buildings
     */
     public void deleteUnimportantEvents()
     {
+        //=========Delete unimportant NPC events===========
         Dictionary<RelationshipKey, Dictionary<NPCEventKey, NPCEvent>> npcEvents = dataController.NPCEventStorage;
         List<RelationshipKey> relKeys = new List<RelationshipKey>(npcEvents.Keys);
 
@@ -304,18 +315,48 @@ public class HistoryManager : MonoBehaviour
             {
                 NPCEvent currEvent = innerDic[eventKey];
 
-                currEvent.performerImportance = calculateImportance(currEvent.severity, currEvent.timeOfAction, currEvent.performer);
-                currEvent.receiverImportance = calculateImportance(currEvent.severity, currEvent.timeOfAction, currEvent.receiver);
+                currEvent.performerImportance = calculateNPCImportance(currEvent.severity, currEvent.timeOfAction, currEvent.performer);
+                currEvent.receiverImportance = calculateNPCImportance(currEvent.severity, currEvent.timeOfAction, currEvent.receiver);
 
-                if(currEvent.performerImportance < 2)
+                if(!keepNPCMemory(currEvent.performerImportance, currEvent.performer))
                 {
                     RemoveMemoryFromNPC(currEvent, currEvent.performer);
                 } 
-                if(currEvent.receiverImportance < 2)
+                if(!keepNPCMemory(currEvent.receiverImportance, currEvent.receiver))
                 {
                     RemoveMemoryFromNPC(currEvent, currEvent.receiver);
                 }
             }
         }
+    }
+
+    /*
+    Given an npc and the relative importance of that action to them. Determine whether or not the NPC will remember this or not
+
+    @param relativeImportance - the relative importance of the event given time and severity
+    @param npcID - the npc that we're concerned about
+
+    @return - whether or not this memory should be kept
+    */
+    public bool keepNPCMemory(float relativeImportance, int npcID)
+    {
+        if(npcID == -1) return false;
+
+        float total = 0;
+        int num = 0;
+        List<NPCEvent> npcMemory = dataController.eventsPerNPCStorage[npcID];
+        bool isPerformer = npcMemory.eventKey.performer == npcID;
+
+        foreach(NPCEvent anEvent in npcMemory)
+        {
+            if(isPerformer) total += anEvent.performerImportance;
+            else total += anEvent.receiverImportance;
+            num++;
+        }
+        
+        if(relativeImportance > (total/num)) return true;
+        if(num < 20) return true;
+
+        return false;
     }
 }

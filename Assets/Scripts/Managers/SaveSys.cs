@@ -11,6 +11,7 @@ public static class SaveSys
     static string NPCHistoryTrackerDataPath = Application.persistentDataPath + "/NPCHistoryTrackerData.json"; //defines the save location for the NPC History Tracker Data
     static string BuildingEventDataPath = Application.persistentDataPath + "/BuildingEventSaveData.json"; //defines the save location for the Building Event Data
     static string BuildingHistoryTrackerDataPath = Application.persistentDataPath + "/BuildingHistoryTrackerData.json"; //defines the save location for the Building History Tracker Data
+    static string WorldDataPath = Application.persistentDataPath = "/WorldData.json";
 
     /*
     Function to convert dictionary of NPCs currently stored in the game into a JSON for saving
@@ -242,6 +243,19 @@ public static class SaveSys
         var json = File.ReadAllText(BuildingHistoryTrackerDataPath);
         var data = JsonUtility.FromJson<BuildingHistoryTrackerDatabase>(json);
         
+        return data;
+    }
+
+    public static void SaveWorldData(WorldManager manager)
+    {
+        var json = JsonUtility.ToJson(manager, true);
+        File.WriteAllText(WorldDataPath, json);
+    }
+
+    public static WorldManager LoadWorldData()
+    {
+        var json = File.ReadAllText(WorldDataPath);
+        var data = JsonUtility.FromJson<WorldManager>(json);
         return data;
     }
 }

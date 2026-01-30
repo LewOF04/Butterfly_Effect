@@ -40,7 +40,11 @@ public class DataController : MonoBehaviour
     public Dictionary<int, List<BuildingEvent>> buildingEventsPerBuildingStorage; 
     public Dictionary<int, List<BuildingEvent>> buildingEventsPerNPCStorage;
 
+    [Header("Other stores")]
     public Dictionary<int, List<int>> NPCBuildingLinks = new Dictionary<int, List<int>>();
+
+    [Header("Game Variables")]
+    public WorldManager worldManager;
 
     void Awake()
     {
@@ -69,6 +73,7 @@ public class DataController : MonoBehaviour
         npcManager.SaveNPCs();
         relationshipManager.SaveRelationships();
         historyManager.SaveHistory();
+        worldManager.SaveWorldData();
     }
 
     /*
@@ -88,6 +93,8 @@ public class DataController : MonoBehaviour
         relationshipManager.LoadRelationships();
 
         historyManager.LoadHistory();
+
+        worldManager.LoadWorldData();
         
         foreach (var (id, building) in BuildingStorage)
         {
@@ -128,6 +135,8 @@ public class DataController : MonoBehaviour
         relationshipManager.GenerateRelationships(rng); //use rng to create npc relationships
 
         historyManager.GenerateHistory(rng); //generate history and NPC history tracker
+
+        worldManager.GenerateWorldData(rng); //generate world data
 
         linkNPCsAndBuildings(rng);
         
