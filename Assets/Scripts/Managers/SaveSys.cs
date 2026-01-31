@@ -238,6 +238,9 @@ public static class SaveSys
         return data.items;
     }
 
+    /*
+    Function to reload building history tracker from JSON
+    */
     public static BuildingHistoryTrackerDatabase LoadBuildingHistoryTracker()
     {
         var json = File.ReadAllText(BuildingHistoryTrackerDataPath);
@@ -246,12 +249,18 @@ public static class SaveSys
         return data;
     }
 
+    /*
+    Function to save the world data
+    */
     public static void SaveWorldData(WorldManager manager)
     {
         var json = JsonUtility.ToJson(manager, true);
         File.WriteAllText(WorldDataPath, json);
     }
 
+    /*
+    Function to reload the world data from JSON
+    */
     public static WorldManager LoadWorldData()
     {
         var json = File.ReadAllText(WorldDataPath);

@@ -7,11 +7,24 @@ public class BuildingMenu : MonoBehaviour
 {
     public Building building;
     public TextMeshProUGUI menuTitle;
+
+    [Header("Main Page")]
+    public Canvas mainCanvas;
     public Slider conditionSlider;
     public Image spriteImageLoc;
     public GameObject npcViewer;
     public NPCViewButton npcWindowPrefab;
+
+    [Header("History Page")]
+    public Canvas historyCanvas;
+    public GameObject memoryInfoContainer;
+    public BuildingMemoryPanel buildingMemoryPrefab;
+
+
+    [Header("Others")]
     private DataController dataController = DataController.Instance;
+    public Button backToMainButton;
+    public Button saveButton;
     
 
     public void saveBuilding()
@@ -40,8 +53,25 @@ public class BuildingMenu : MonoBehaviour
             newPrefab.npc = npc;
             newPrefab.displayData();
         }
-    }
 
+        List<BuildingEvent> theEvents = dataController.buildingEventsPerBuildingStorage[building.id];
+        foreach(BuildingEvent anEvent in theEvents)
+        {
+            
+        }
+
+        historyCanvas.enabled = false;
+        mainCanvas.enabled = true;
+        backToMainButton.gameObject.SetActive(false);
+        saveButton.gameObject.SetActive(true);
+    }
+    public void backToMain()
+    {
+        historyCanvas.enabled = false;
+        mainCanvas.enabled = true;
+        backToMainButton.gameObject.SetActive(false);
+        saveButton.gameObject.SetActive(true);
+    }
 
     /*
     Delete the buttons in the npc viewier
@@ -61,11 +91,13 @@ public class BuildingMenu : MonoBehaviour
         removeButtons();
 
         InputLocker.Unlock(); //unlock the inputs
-
     }
 
     public void viewHistory()
     {
-        Debug.Log("History Clicked!");
+        historyCanvas.enabled = true;
+        mainCanvas.enabled = false;
+        backToMainButton.gameObject.SetActive(true);
+        saveButton.gameObject.SetActive(false);
     }
 }

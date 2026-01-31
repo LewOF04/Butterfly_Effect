@@ -18,7 +18,7 @@ public class NPCMenu : MonoBehaviour
     public Image spriteImageLoc;
     public GameObject traitViewer;
     public TraitViewItem traitItemPrefab;
-    public Canvas mainCanvas;
+    public Canvas mainCanvas; 
 
     [Header("Relationship Page")]
     public Canvas relationshipCanvas;
@@ -28,7 +28,7 @@ public class NPCMenu : MonoBehaviour
     [Header("Memory Page")]
     public Canvas memoryCanvas;
     public GameObject memoryInfoContainer;
-    public NPCMemoryPanel memoryPrefab;
+    public NPCMemoryPanel npcMemoryPrefab;
 
 
     private DataController dataController = DataController.Instance;
@@ -132,7 +132,7 @@ public class NPCMenu : MonoBehaviour
         List<NPCEvent> thisNPCEvents = dataController.eventsPerNPCStorage[npc.id];
         foreach(NPCEvent thisEvent in thisNPCEvents)
         {
-            NPCMemoryPanel memPanel = Instantiate(memoryPrefab, memoryInfoContainer.transform);
+            NPCMemoryPanel memPanel = Instantiate(npcMemoryPrefab, memoryInfoContainer.transform);
             
             memPanel.performer = npc;
             memPanel.thisEvent = thisEvent;

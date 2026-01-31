@@ -26,6 +26,7 @@ public class NPCMemoryPanel : MonoBehaviour
         performerIDField.text = "ID: "+performer.id.ToString();
         performerNameField.text = "Name: "+performer.npcName;
         perfImpField.text = "Importance: "+thisEvent.performerImportance;
+        performerSpriteImageLoc.sprite = performer.GetComponent<SpriteRenderer>().sprite;
 
         if(thisEvent.receiver == -1)
         {
@@ -39,7 +40,7 @@ public class NPCMemoryPanel : MonoBehaviour
             receiver = dataController.NPCStorage[thisEvent.receiver];
             receiverNameField.text = "Name: "+receiver.npcName;
             receiverIDField.text = "ID: "+receiver.id.ToString();
-            receiverSpriteImageLoc.sprite = performer.GetComponent<SpriteRenderer>().sprite;
+            receiverSpriteImageLoc.sprite = receiver.GetComponent<SpriteRenderer>().sprite;
             recImpField.text = "Importance: "+thisEvent.receiverImportance;
         }
     }
