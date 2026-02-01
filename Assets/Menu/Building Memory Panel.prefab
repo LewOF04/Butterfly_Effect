@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4866134272393305384}
   - component: {fileID: 1370293024334038459}
   m_Layer: 5
-  m_Name: Perf Name
+  m_Name: Building Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -284,7 +284,7 @@ GameObject:
   - component: {fileID: 5354599290535778166}
   - component: {fileID: 6332479171889867686}
   m_Layer: 5
-  m_Name: Receiver Sprite
+  m_Name: NPC Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -359,7 +359,7 @@ GameObject:
   - component: {fileID: 8413989587139221519}
   - component: {fileID: 2890454787489478811}
   m_Layer: 5
-  m_Name: Rec Importance
+  m_Name: NPC Importance
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -495,7 +495,7 @@ GameObject:
   - component: {fileID: 382483364515925986}
   - component: {fileID: 1225546419150695370}
   m_Layer: 5
-  m_Name: Rec Name
+  m_Name: NPC Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -631,7 +631,7 @@ GameObject:
   - component: {fileID: 2832997968962372023}
   - component: {fileID: 104134252701338555}
   m_Layer: 5
-  m_Name: Rec Title
+  m_Name: NPC Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -684,7 +684,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Receiver
+  m_text: NPC
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -767,7 +767,7 @@ GameObject:
   - component: {fileID: 1434667432533217014}
   - component: {fileID: 3802029116889553927}
   m_Layer: 5
-  m_Name: Perf Title
+  m_Name: Building Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -820,7 +820,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Performer
+  m_text: Building
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -903,7 +903,7 @@ GameObject:
   - component: {fileID: 1169496466594471658}
   - component: {fileID: 352070194271378068}
   m_Layer: 5
-  m_Name: Perf ID
+  m_Name: Build ID
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1039,7 +1039,7 @@ GameObject:
   - component: {fileID: 3016520179584546329}
   - component: {fileID: 5173830613124017954}
   m_Layer: 5
-  m_Name: Rec ID
+  m_Name: NPC ID
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1175,7 +1175,7 @@ GameObject:
   - component: {fileID: 514249416344400138}
   - component: {fileID: 2319177536655792448}
   m_Layer: 5
-  m_Name: Performer Sprite
+  m_Name: Building Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1386,7 +1386,7 @@ GameObject:
   - component: {fileID: 1981739636004632782}
   - component: {fileID: 8965760628746672803}
   m_Layer: 5
-  m_Name: Perf Importance
+  m_Name: Building Importance
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1521,9 +1521,9 @@ GameObject:
   - component: {fileID: 4007779213793452085}
   - component: {fileID: 361767606039846267}
   - component: {fileID: 6163786853716242992}
-  - component: {fileID: 5898929181666095059}
+  - component: {fileID: 531855890751018780}
   m_Layer: 5
-  m_Name: Memory Panel
+  m_Name: Building Memory Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1599,7 +1599,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &5898929181666095059
+--- !u!114 &531855890751018780
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1608,36 +1608,34 @@ MonoBehaviour:
   m_GameObject: {fileID: 8053082759913994769}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d1936422fc6f8044a1db02f11b314ab, type: 3}
+  m_Script: {fileID: 11500000, guid: b6828546428b4f9499761c98e5f0bfa0, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::NPCMemoryPanel
-  performer: {fileID: 0}
-  receiver: {fileID: 0}
+  m_EditorClassIdentifier: Assembly-CSharp::BuildingMemoryPanel
+  building: {fileID: 0}
+  npc: {fileID: 0}
   thisEvent:
     eventKey:
-      npcA: 0
-      npcB: 0
+      npc: 0
+      building: 0
       eventNum: 0
     actionName: 
     description: 
-    severity: 0
     timeOfAction: 0
-    performer: 0
-    receiver: 0
-    wasPositive: 0
+    severity: 0
     wasSuccessful: 0
-    performerImportance: 0
-    receiverImportance: 0
+    wasPositive: 0
+    buildingImportance: 0
+    npcImportance: 0
   actionNameField: {fileID: 1491140430444408774}
   descriptionField: {fileID: 2942285118011613825}
-  performerIDField: {fileID: 352070194271378068}
-  receiverIDField: {fileID: 5173830613124017954}
-  performerNameField: {fileID: 1370293024334038459}
-  receiverNameField: {fileID: 1225546419150695370}
-  performerSpriteImageLoc: {fileID: 2319177536655792448}
-  receiverSpriteImageLoc: {fileID: 6332479171889867686}
-  perfImpField: {fileID: 8965760628746672803}
-  recImpField: {fileID: 2890454787489478811}
+  buildingIDField: {fileID: 352070194271378068}
+  npcIDField: {fileID: 5173830613124017954}
+  buildingNameField: {fileID: 1370293024334038459}
+  npcNameField: {fileID: 1225546419150695370}
+  buildingSpriteImageLoc: {fileID: 2319177536655792448}
+  npcSpriteImageLoc: {fileID: 6332479171889867686}
+  buildImpField: {fileID: 8965760628746672803}
+  npcImpField: {fileID: 2890454787489478811}
   dataController: {fileID: 0}
 --- !u!1 &8911904040858699006
 GameObject:

@@ -29,6 +29,7 @@ public class NPCMenu : MonoBehaviour
     public Canvas memoryCanvas;
     public GameObject memoryInfoContainer;
     public NPCMemoryPanel npcMemoryPrefab;
+    public BuildingMemoryPanel buildingMemoryPrefab;
 
 
     private DataController dataController = DataController.Instance;
@@ -135,6 +136,17 @@ public class NPCMenu : MonoBehaviour
             NPCMemoryPanel memPanel = Instantiate(npcMemoryPrefab, memoryInfoContainer.transform);
             
             memPanel.performer = npc;
+            memPanel.thisEvent = thisEvent;
+
+            memPanel.displayData();
+        }
+
+        List<BuildingEvent> thisBuildingEvents = dataController.buildingEventsPerNPCStorage[npc.id];
+        foreach(BuildingEvent thisEvent in thisBuildingEvents)
+        {
+            BuildingMemoryPanel memPanel = Instantiate(buildingMemoryPrefab, memoryInfoContainer.transform);
+
+            memPanel.building = dataController.BuildingStorage[thisEvent.eventKey.building];
             memPanel.thisEvent = thisEvent;
 
             memPanel.displayData();

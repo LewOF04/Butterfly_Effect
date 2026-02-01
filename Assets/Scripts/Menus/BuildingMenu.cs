@@ -54,10 +54,15 @@ public class BuildingMenu : MonoBehaviour
             newPrefab.displayData();
         }
 
-        List<BuildingEvent> theEvents = dataController.buildingEventsPerBuildingStorage[building.id];
-        foreach(BuildingEvent anEvent in theEvents)
+        List<BuildingEvent> thisBuildingEvents = dataController.buildingEventsPerBuildingStorage[building.id];
+        foreach(BuildingEvent thisEvent in thisBuildingEvents)
         {
-            
+            BuildingMemoryPanel memPanel = Instantiate(buildingMemoryPrefab, memoryInfoContainer.transform);
+
+            memPanel.building = building;
+            memPanel.thisEvent = thisEvent;
+
+            memPanel.displayData();
         }
 
         historyCanvas.enabled = false;
@@ -79,6 +84,10 @@ public class BuildingMenu : MonoBehaviour
     public void removeButtons()
     {
         foreach (Transform child in npcViewer.transform)
+        {
+            Destroy(child.gameObject);
+        }
+        foreach (Transform child in memoryInfoContainer.transform)
         {
             Destroy(child.gameObject);
         }
