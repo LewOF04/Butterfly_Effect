@@ -6,19 +6,19 @@ public class ActionManager : MonoBehaviour
 {
     public DataController dataController = DataController.Instance;
 
-    public LoadActions()
+    public void LoadActions()
     {
         List<BuildingAction> buildingActions = new Lists<BuildingAction>();
         List<NPCAction> npcActions = new List<NPCAction>();
         List<SelfAction> selfActions = new List<SelfAction>();
         List<EnvironmentAction> environmentActions = new List<EnvironmentAction>();
-        Dictionary<string, IActionBase> ActionStorage = new Dictionart<string, IActionBase>();
+        Dictionary<string, IActionBase> actionStorage = new Dictionary<string, IActionBase>();
 
         //get each class derived from the IActionBase interface
         var types = AppDomain.CurrentDomain.GetAssemblies() //in the current game get all the dynamically linked libraries (including the types we've created)
             .SelectMany(a => //for each assembly
             {
-                try { return a.GetTypes(); } //try to get all of the types in the assembly
+                try {return a.GetTypes();} //try to get all of the types in the assembly
                 catch (System.Reflection.ReflectionTypeLoadException e) //if we're unable to get a type then we can forget it
                 {
                     return e.Types.Where(t => t != null); //return all the valid types in the assembly
@@ -50,6 +50,6 @@ public class ActionManager : MonoBehaviour
         dataController.npcActions = npcActions;
         dataController.selfActions = selfActions;
         dataController.environmentActions = environmentActions;
-        dataController.ActionStorage = ActionStorage;
+        dataController.ActionStorage = actionStorage;
     }
 }

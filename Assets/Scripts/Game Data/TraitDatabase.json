@@ -19,6 +19,11 @@
       "id": 3,
       "displayName": "Workaholic",
       "description": "Some would say you're driven, others say obsessed." 
+    },
+    {
+      "id": 4,
+      "displayName": "Lazy Bones",
+      "description": "Work or don't work; that is the question. Answer: don't." 
     }
   ]
 }

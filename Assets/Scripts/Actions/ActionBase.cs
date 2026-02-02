@@ -9,8 +9,9 @@ public abstract class ActionBase<T> : IActionBase
     public char ActionType { get; }
     protected ActionBase(char actionType) => ActionType = actionType;
     public virtual string name => GetType().FullName;
-    private readonly float baseTime; //the time it would take for a completely "normal" npc to complete (in hours)
-    private readonly float baseEnergy; //the energy it would take for a completely "normal" npc to complete (in energy ramge 1-100)
+    [Range(0,24)] private readonly float baseTime; //the time it would take for a completely "normal" npc to complete
+    [Range(0,100)] private readonly float baseEnergy; //the energy it would take for a completely "normal" npc to complete
+    [Range(0,100)] private readonly float complexity; //how complex this action is to complete
     public readonly List<int> utilityPosTraits; //the traits that will have an positive impact on perceived utility
     public readonly List<int> utilityNegTraits; //the traits that will have an negative impact on perceived utility
     public readonly List<int> successPosTraits; //the traits that will have a positive impact on the action success
@@ -24,11 +25,6 @@ public abstract class ActionBase<T> : IActionBase
     public abstract float getTimeToComplete(NPC performer, T receiver); //calculate how much time it would take for the NPC to complete this action
     public abstract float getEnergyToComplete(NPC performer, T receiver); //calculate how much energy it would take the NPC to compelete this action
     public readonly char actionType;
-
-    protected ActionBase(char actionType)
-    {
-        this.actionType = actionType;
-    }
 }
 
 public abstract class BuildingAction : ActionBase<Building>
@@ -41,11 +37,11 @@ public abstract class NPCAction : ActionBase<NPC>
 }
 public abstract class SelfAction : ActionBase<byte?>
 {
-    public BuildingAction(char actionType = 'S') : base(actionType){}
+    public SelfAction(char actionType = 'S') : base(actionType){}
 }
 public abstract class EnvironmentAction : ActionBase<byte?>
 {
-    public BuildingAction(char actionType = 'E') : base(actionType){}
+    public EnvironmentAction(char actionType = 'E') : base(actionType){}
 }
 
 public interface IActionBase

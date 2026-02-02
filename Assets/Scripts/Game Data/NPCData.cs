@@ -11,6 +11,7 @@ public class NPCData
     public int[] traits; //list of ids of the traits that this NPC has
     public int spriteType; //the code of the sprite
     public int parentBuilding;
+    public bool hasJob;
 
     public NPCData() { }
 
@@ -23,6 +24,7 @@ public class NPCData
         traits = npc.traits.ToArray(); //converts into array 
         spriteType = npc.spriteType;
         parentBuilding = npc.parentBuilding;
+        hasJob = npc.hasJob;
     }
 }
 
