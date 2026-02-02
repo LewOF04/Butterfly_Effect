@@ -7,12 +7,14 @@ public class WorldManager : MonoBehaviour
 {
     public float gameTime;
     public float costPerNutrition;
+    [Range(0,100)] public float chaosModifier;
     public float[] costPerBuilding;
     private DataController dataController;
 
-    public WorldManager(float time)
+    public WorldManager()
     {
-        gameTime = time;
+        gameTime = 0f;
+        chaosModifier = 0f;
     }
 
     public void Awake()

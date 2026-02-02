@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.Scripting;
 using System.Collections.Generic;
 
+DataController dataController = DataController.Instance;
+
 [Preserve]
 public class WorkJob : SelfAction
 {
@@ -52,10 +54,19 @@ public class WorkJob : SelfAction
     //calculate how much time it would take for the NPC to complete this action
     public override float getTimeToComplete(NPC performer, byte? _)
     {
-        //dexterity, constitution, energy, nutrition, condition
-        float dextWeight = ActionMaths.calcMultiplier(performer.attributes.dexterity, 0.5, 1.5, 1);
+        List<float> multipliers = new List<float>{};
 
-        float constWeight = ActionMaths.calcMultiplier(performer.attributes.constitution, 0.5, 1.5, 1);
+        //dexterity, constitution, energy, nutrition, condition
+        multipliers.Add(ActionMaths.calcMultiplier(performer.attributes.dexterity, 0.5, 1.5)); //dexterity multiplier
+        multipliers.Add(ActionMaths.calcMultiplier(performer.attributes.constitution, 0.5, 1.5)); //constitution multiplier
+        multipliers.Add(ActionMaths.calcMultiplier(performer.stats.energy, 0.5, 1.5)); //energy multiplier
+        multipliers.Add(ActionMaths.calcMultiplier(performer.stats.nutrition, 0.5, 1.5)); //nutrition multiplier
+        multipliers.Add(ActionMaths.calcMultiplier(performer.stats.condition, 0.5, 1.5)); //condition multiplier
+
+        List<float> weights = new List<float>{1, 0.7, 0.5, 0.2, 0.2};
+
+        float weightedBase = ActionMaths.ApplyWeightedMultipliers(baseTime, multipliers, weights);
+        return ActionMaths.addChaosRandomness(weightedBase, dataController.worldManager.chaosModifier);
     }
 
     //calculate how much energy it would take the NPC to compelete this action
