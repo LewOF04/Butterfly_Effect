@@ -44,6 +44,6 @@ using System.Collections.Generic;
         stats = inputStats;
         traits = inputTraits;
         spriteType = inputSpriteType;
-        parentBuilding = inputParentBuilding;
+        parentBuilding = inputParentBuilding; 
     }
 }

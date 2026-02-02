@@ -12,7 +12,7 @@ public class BuildingEvent
     public bool wasSuccessful; //if the action was successful
     public bool wasPositive; //if the action was positive (for the building)
     public float buildingImportance; //how important this action is for the building
-    public float npcImportance; //how important this action is for the npc
+    public float npcImportance; //how important this action is for the npc 
 
     public BuildingEvent(BuildingEventKey key, string name, string desc, float time, float sev, bool succ, bool pos, float buildImp, float npcImp)
     {

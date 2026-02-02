@@ -6,6 +6,8 @@ using System;
 public class WorldManager : MonoBehaviour
 {
     public float gameTime;
+    public float costPerNutrition;
+    public float[] costPerBuilding;
     private DataController dataController;
 
     public WorldManager(float time)

@@ -27,7 +27,7 @@ public class DataController : MonoBehaviour
     public Dictionary<int, NPC> NPCStorage;
     public Dictionary<int, Building> BuildingStorage;
     public Dictionary<int, TraitData> TraitStorage;
-    public Dictionary<string, Action> ActionStorage;
+    public Dictionary<string, ActionBase> ActionStorage;
 
     [Header("<i>Relationship</i>")]
     public Dictionary<RelationshipKey, Relationship> RelationshipStorage; //dictionary that stores every relationship
@@ -39,6 +39,12 @@ public class DataController : MonoBehaviour
     public Dictionary<BuildingRelationshipKey, Dictionary<BuildingEventKey, BuildingEvent>> buildingEventStorage;
     public Dictionary<int, List<BuildingEvent>> buildingEventsPerBuildingStorage; 
     public Dictionary<int, List<BuildingEvent>> buildingEventsPerNPCStorage;
+
+    [Header("Actions")]
+    public List<BuildingAction> buildingActions;
+    public List<NPCAction> npcActions;
+    public List<SelfAction> selfActions;
+    public List<EnvironmentAction> environmentActions;
 
     [Header("Other stores")]
     public Dictionary<int, List<int>> NPCBuildingLinks = new Dictionary<int, List<int>>();

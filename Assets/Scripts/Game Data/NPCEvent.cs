@@ -12,7 +12,7 @@ public class NPCEvent
     public int performer; //the npc that performed the action
     public int receiver; //the npc that received the action
     public bool wasPositive; //was the action positive for the performer
-    public bool wasSuccessful; //was the action positive for the performer
+    public bool wasSuccessful; //was the action positive for the performer 
     public float performerImportance; //how important the event is in the performing NPCs mind
     public float receiverImportance; //how important the event is in the receiving NPCs mind
 

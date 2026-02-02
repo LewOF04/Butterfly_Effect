@@ -70,6 +70,10 @@ public class BuildingMenu : MonoBehaviour
         backToMainButton.gameObject.SetActive(false);
         saveButton.gameObject.SetActive(true);
     }
+
+    /*
+    Return to the main canvas after being in a menu subpage
+    */
     public void backToMain()
     {
         historyCanvas.enabled = false;

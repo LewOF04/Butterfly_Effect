@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class Relationship
 {
     public RelationshipKey key;
-    [Range(0,100)] public float value;
+    [Range(0,100)] public float value; 
 
     public Relationship(){}
 

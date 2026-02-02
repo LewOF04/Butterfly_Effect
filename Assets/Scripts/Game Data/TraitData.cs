@@ -26,5 +26,5 @@ public class TraitData
 [System.Serializable]
 public class TraitDatabase
 {
-    public List<TraitData> items = new List<TraitData>();
+    public List<TraitData> items = new List<TraitData>(); 
 }

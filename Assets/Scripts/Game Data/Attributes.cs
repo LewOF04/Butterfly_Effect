@@ -13,7 +13,7 @@ public class Attributes
     [Range(0,100)] public float fortitude;
     [Range(0,100)] public float charisma;
     [Range(0,100)] public float aesthetic_sensitivity;
-    [Range(0,100)] public float perception;
+    [Range(0,100)] public float perception; 
     [Range(0,100)] public float dexterity;
     [Range(0,100)] public float constitution;
     [Range(0,100)] public float wisdom;

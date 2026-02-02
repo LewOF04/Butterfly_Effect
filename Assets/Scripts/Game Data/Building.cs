@@ -13,7 +13,7 @@ using System.Collections.Generic;
     public List<int> inhabitants; //string of inhabitant NPCs
 
     //load the object with a building Data object
-    public void Load(BuildingData data)
+    public void Load(BuildingData data) 
     {
         id = data.id;
         buildingName = data.buildingName;
