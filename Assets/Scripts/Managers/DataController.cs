@@ -27,7 +27,7 @@ public class DataController : MonoBehaviour
     public Dictionary<int, NPC> NPCStorage;
     public Dictionary<int, Building> BuildingStorage;
     public Dictionary<int, TraitData> TraitStorage;
-    public Dictionary<string, ActionBase> ActionStorage;
+    public Dictionary<string, IActionBase> ActionStorage;
 
     [Header("<i>Relationship</i>")]
     public Dictionary<RelationshipKey, Relationship> RelationshipStorage; //dictionary that stores every relationship

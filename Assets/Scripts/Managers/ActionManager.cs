@@ -10,15 +10,39 @@ public class ActionManager : MonoBehaviour
         List<NPCAction> npcActions = new List<NPCAction>();
         List<SelfAction> selfActions = new List<SelfAction>();
         List<EnvironmentAction> environmentActions = new List<EnvironmentAction>();
-        Dictionary<string, ActionBase> ActionStorage = new Dictionart<string, ActionBase>();
+        Dictionary<string, IActionBase> ActionStorage = new Dictionart<string, IActionBase>();
 
-        //Add each building Action
+        //get each class derived from the IActionBase interface
+        var types = AppDomain.CurrentDomain.GetAssemblies()
+            .SelectMany(a =>
+            {
+                try { return a.GetTypes(); }
+                catch (System.Reflection.ReflectionTypeLoadException e)
+                {
+                    return e.Types.Where(t => t != null);
+                }
+            })
+            .Where(t => typeof(IActionBase).IsAssignableFrom(t) &&
+                        !t.IsAbstract &&
+                        !t.IsInterface);
 
-        //Add each npc Action
 
-        //Add each self Action
+        //iterate over each type and save accordingly
+        foreach (var t in types)
+        {
+            if (t.GetConstructor(Type.EmptyTypes) == null)
+                continue;
 
-        //Add each environment Action
+            var instance = (IActionBase)Activator.CreateInstance(t);
+
+            actionStorage[instance.name] = instance;
+
+            // Also bucket them by category
+            if (instance is BuildingAction ba) buildingActions.Add(ba);
+            else if (instance is NPCAction na) npcActions.Add(na);
+            else if (instance is SelfAction sa) selfActions.Add(sa);
+            else if (instance is EnvironmentAction ea) environmentActions.Add(ea);
+        }
 
         dataController.buildingActions = buildingActions;
         dataController.npcActions = npcActions;

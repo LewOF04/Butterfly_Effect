@@ -1,12 +1,14 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public abstract class ActionBase<T>
+public abstract class ActionBase<T> : IActionBase
 {
     /*
     Accurately determine the exact utility of the 
     */
-    public readonly char actionType; //action type ("N" = NPC, "B" = Building, "E" = Environment, "S" = Self)
+    public char ActionType { get; }
+    protected ActionBase(char actionType) => ActionType = actionType;
+    public virtual string name => GetType().FullName;
     private readonly float baseTime; //the time it would take for a completely "normal" npc to complete (in hours)
     private readonly float baseEnergy; //the energy it would take for a completely "normal" npc to complete (in energy ramge 1-100)
     public readonly List<int> utilityPosTraits; //the traits that will have an positive impact on perceived utility
@@ -44,4 +46,10 @@ public abstract class SelfAction : ActionBase<byte?>
 public abstract class EnvironmentAction : ActionBase<byte?>
 {
     public BuildingAction(char actionType = 'E') : base(actionType){}
+}
+
+public interface IActionBase
+{
+    char ActionType {get;} //action type ("N" = NPC, "B" = Building, "E" = Environment, "S" = Self)
+    string name {get;}
 }
