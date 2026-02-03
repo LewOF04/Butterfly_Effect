@@ -2,21 +2,22 @@ using UnityEngine;
 using UnityEngine.Scripting;
 using System.Collections.Generic;
 
-DataController dataController = DataController.Instance;
-
 [Preserve]
 public class WorkJob : SelfAction
 {
     public WorkJob() : base('S'){}
 
-    private override readonly float baseTime = 8.0f; 
-    private override readonly float baseEnergy = 50.0f; 
-    private override readonly float complexity = 30.0f;
+    public override char actionType => 'S';
+    public override string name => "Work Job";
 
-    private override readonly List<int> utilityPosTraits = new List<int>{3}; 
-    private override readonly List<int> utilityNegTraits = new List<int>{4};
-    private override readonly List<int> successPosTraits = new List<int>{}; 
-    private override readonly List<int> successNegTraits = new List<int>{};
+    protected override float baseTime => 8f;
+    protected override float baseEnergy => 50f;
+    protected override float complexity => 30f;
+
+    protected override List<int> utilityPosTraits => new List<int>{3}; 
+    protected override List<int> utilityNegTraits => new List<int>{4};
+    protected override List<int> successPosTraits => new List<int>{}; 
+    protected override List<int> successNegTraits => new List<int>{};
 
     //compute the empirical utility of the action
     public override double computeUtility(NPC performer, byte? _)
@@ -83,7 +84,7 @@ public class WorkJob : SelfAction
     {
         if(timeToComplete != -1) return timeToComplete;
 
-        List<float> multipliers = getTimeAndEnergyMultipliers();
+        List<float> multipliers = getTimeAndEnergyMultipliers(performer);
         List<float> weights = new List<float>{0.7, 0.7, 0.5, 0.2, 0.2};
 
         float weightedBase = ActionMaths.ApplyWeightedMultipliers(baseTime, multipliers, weights);
@@ -99,7 +100,7 @@ public class WorkJob : SelfAction
     {
         if(energyToComplete != -1) return energyToComplete;
 
-        List<float> multipliers = getTimeAndEnergyMultipliers();
+        List<float> multipliers = getTimeAndEnergyMultipliers(performer);
         List<float> weights = new List<float>{0.3, 0.3, 0.8, 0.7, 0.5};
 
         float weightedBase = ActionMaths.ApplyWeightedMultipliers(baseEnergy, multipliers, weights);
@@ -110,7 +111,7 @@ public class WorkJob : SelfAction
         return result;
     }
 
-    public override List<float> getTimeAndEnergyMultipliers()
+    public override List<float> getTimeAndEnergyMultipliers(NPC performer)
     {
         List<float> multipliers = new List<float>{};
 

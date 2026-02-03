@@ -3,8 +3,9 @@ using System.Collections.Generic;
 
 public abstract class ActionBase<T> : IActionBase
 {
-    public char actionType => ActionType;
-    public string name => GetType().FullName;
+    protected DataController dataController => DataController.Instance;
+    public abstract char actionType {get;}
+    public virtual string name => GetType().Name;
 
     //stores for quick reference is talking about the same npc
     protected int currentActor = -1;
@@ -17,15 +18,15 @@ public abstract class ActionBase<T> : IActionBase
     protected float estSuccess = -1f;
     protected float actSuccess = -1f;
 
-    [Range(0,24)] protected abstract float baseTime; //the time it would take for a completely "normal" npc to complete
-    [Range(0,100)] protected abstract float baseEnergy; //the energy it would take for a completely "normal" npc to complete
-    [Range(0,100)] protected abstract float complexity; //how complex this action is to complete
-    protected abstract List<int> utilityPosTraits; //the traits that will have an positive impact on perceived utility
-    protected abstract List<int> utilityNegTraits; //the traits that will have an negative impact on perceived utility
-    protected abstract List<int> successPosTraits; //the traits that will have a positive impact on the action success
-    protected abstract List<int> successNegTraits; //the traits that will have a negative impact on the action success
-    protected abstract double computeUtility(NPC performer, T receiver); //compute the empirical utility of the action 
-    protected abstract double estimateUtility(NPC performer, T receiver); //compute the performers perceived utility of the action
+    [Range(0,24)] protected abstract float baseTime {get;} //the time it would take for a completely "normal" npc to complete
+    [Range(0,100)] protected abstract float baseEnergy {get;} //the energy it would take for a completely "normal" npc to complete
+    [Range(0,100)] protected abstract float complexity {get;} //how complex this action is to complete
+    protected abstract List<int> utilityPosTraits {get;} //the traits that will have an positive impact on perceived utility
+    protected abstract List<int> utilityNegTraits {get;} //the traits that will have an negative impact on perceived utility
+    protected abstract List<int> successPosTraits {get;}//the traits that will have a positive impact on the action success
+    protected abstract List<int> successNegTraits {get;} //the traits that will have a negative impact on the action success
+    protected abstract float computeUtility(NPC performer, T receiver); //compute the empirical utility of the action 
+    protected abstract float estimateUtility(NPC performer, T receiver); //compute the performers perceived utility of the action
     protected abstract void actionResult(NPC performer, T receiver); //compute the result of the action being performed
     protected abstract float computeSuccess(NPC performer, T receiver); //computer the likelihood this action will be a success
     protected abstract float estimateSuccess(NPC performer, T receiver); //compute the estimated chance this action will be a succss from the performers perspective
