@@ -1,5 +1,5 @@
-using System.Random;
 using UnityEngine;
+using System.Collections.Generic;
 
 public static class ActionMaths
 {
@@ -57,7 +57,7 @@ public static class ActionMaths
 
     public static float addChaosRandomness(float baseValue, float chaos)
     {
-        if(chaos = 0) return baseValue;
+        if(chaos == 0) return baseValue;
 
         chaos = Mathf.Clamp01(chaos);
 
