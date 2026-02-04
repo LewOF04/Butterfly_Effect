@@ -1,10 +1,15 @@
 using UnityEngine;
 using System.Collections.Generic;
+using NoTarget = System.ValueTuple;
 
 public abstract class ActionBase<T> : IActionBase
 {
+    protected ActionBase() { }
+    protected ActionBase(char _actionType) { }
+
     protected DataController dataController => DataController.Instance;
-    public abstract char actionType {get;}
+
+    public abstract char actionType { get; }
     public virtual string name => GetType().Name;
 
     //stores for quick reference is talking about the same npc
@@ -33,19 +38,18 @@ public abstract class ActionBase<T> : IActionBase
     protected abstract bool isKnown(NPC performer, T receiver); //check that this action would be known to the NPC
     protected abstract float getTimeToComplete(NPC performer, T receiver); //calculate how much time it would take for the NPC to complete this action
     protected abstract float getEnergyToComplete(NPC performer, T receiver); //calculate how much energy it would take the NPC to compelete this action
-    protected abstract List<float> getTimeAndEnergyMultipliers(); //get the list of multipliers that effect this actions time and energy consumption
-    
-    /*
-
-    */
+    protected abstract List<float> getTimeAndEnergyMultipliers(NPC performer); //get the list of multipliers that effect this actions time and energy consumption
     public ActionInfoWrapper computeAction(NPC performer, T receiver)
     {
         this.resetAction();
         this.currentActor = performer.id;
 
-        int? rec;
-        if(receiver == null) {rec = null;  this.receiver = null;}
-        else {rec = receiver.id; this.receiver = receiver.id;}
+        this.receiver = receiver switch
+        {
+            NPC npc         => npc.id,
+            Building build  => build.id,
+            _               => null
+        };
 
 
         float energyToComplete = this.getEnergyToComplete(performer, receiver);
@@ -56,7 +60,7 @@ public abstract class ActionBase<T> : IActionBase
         float actSuccess = this.computeSuccess(performer, receiver);
         float estSuccess = this.estimateSuccess(performer, receiver);
 
-        return new ActionInfoWrapper(performer.id, rec, timeToComplete, energyToComplete, known, estUtility, actUtility, estSuccess, actSuccess);
+        return new ActionInfoWrapper(performer.id, this.receiver, timeToComplete, energyToComplete, known, estUtility, actUtility, estSuccess, actSuccess);
     }
 
     /*
@@ -66,8 +70,8 @@ public abstract class ActionBase<T> : IActionBase
     {
         this.currentActor = -1;
         this.receiver = null;
-        this.timeToComplete = -1;
-        this.energyToComplete = -1;
+        this.timeToComplete = -1f;
+        this.energyToComplete = -1f;
         this.known = null;
         this.estUtility = -1f;
         this.actUtility = -1f;
@@ -84,11 +88,11 @@ public abstract class NPCAction : ActionBase<NPC>
 {
     public NPCAction(char actionType = 'N') : base(actionType){}
 }
-public abstract class SelfAction : ActionBase<byte?>
+public abstract class SelfAction : ActionBase<NoTarget>
 {
     public SelfAction(char actionType = 'S') : base(actionType){}
 }
-public abstract class EnvironmentAction : ActionBase<byte?>
+public abstract class EnvironmentAction : ActionBase<NoTarget>
 {
     public EnvironmentAction(char actionType = 'E') : base(actionType){}
 }

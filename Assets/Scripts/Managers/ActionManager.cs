@@ -8,7 +8,7 @@ public class ActionManager : MonoBehaviour
 
     public void LoadActions()
     {
-        List<BuildingAction> buildingActions = new Lists<BuildingAction>();
+        List<BuildingAction> buildingActions = new List<BuildingAction>();
         List<NPCAction> npcActions = new List<NPCAction>();
         List<SelfAction> selfActions = new List<SelfAction>();
         List<EnvironmentAction> environmentActions = new List<EnvironmentAction>();

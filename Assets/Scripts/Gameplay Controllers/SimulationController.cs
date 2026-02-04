@@ -19,7 +19,7 @@ public class SimulationController : MonoBehaviour
     {
         Dictionary<int, NPC> npcDict = dataController.NPCStorage;
         Dictionary<int, Building> buildings = dataController.BuildingStorage;
-        Dictionary<int, List<Relationship>> relationships = dataController.RelationshipStorage;
+        Dictionary<RelationshipKey, Relationship> relationships = dataController.RelationshipStorage;
         Dictionary<int, List<NPCEvent>> npcEvents = dataController.eventsPerNPCStorage;
         Dictionary<int, List<BuildingEvent>> perBuildingBuildingEvents = dataController.buildingEventsPerBuildingStorage;
         Dictionary<int, List<BuildingEvent>> perNPCBuildngEvents = dataController.buildingEventsPerNPCStorage;

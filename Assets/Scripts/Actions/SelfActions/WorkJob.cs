@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Scripting;
 using System.Collections.Generic;
+using NoTarget = System.ValueTuple;
 
 [Preserve]
 public class WorkJob : SelfAction
@@ -20,72 +21,74 @@ public class WorkJob : SelfAction
     protected override List<int> successNegTraits => new List<int>{};
 
     //compute the empirical utility of the action
-    public override double computeUtility(NPC performer, byte? _)
+    protected override float computeUtility(NPC performer, NoTarget _)
     {
         if(this.actUtility != -1) return this.actUtility;
         float baseUtility = 50.0f;
 
-        float timeToComplete = getTimeToComplete(performer, null);
-        float energyToComplete = getEnergyToComplete(performer, null);
-        float successChance = computeSuccess(performer, null);
+        float timeToComplete = getTimeToComplete(performer, default);
+        float energyToComplete = getEnergyToComplete(performer, default);
+        float successChance = computeSuccess(performer, default);
 
         List<float> effectors = new List<float>();
-        effectors.Add(ActionMaths.calcMultiplier(performer.stats.happiness, 0.5, 1.5)); 
-        effectors.Add(ActionMaths.calcMultiplier(performer.stats.nutrition, 0.5, 1.5)); 
-        effectors.Add(ActionMaths.calcMultiplier(performer.stats.condition, 0.5, 1.5)); 
+        effectors.Add(ActionMaths.calcMultiplier(performer.stats.happiness, 0.5f, 1.5f)); 
+        effectors.Add(ActionMaths.calcMultiplier(performer.stats.nutrition, 0.5f, 1.5f)); 
+        effectors.Add(ActionMaths.calcMultiplier(performer.stats.condition, 0.5f, 1.5f)); 
 
-        effectors.Add(ActionMaths.calcMultiplier(performer.stats.wealth, 1.5, 0.5));
+        effectors.Add(ActionMaths.calcMultiplier(performer.stats.wealth, 1.5f, 0.5f));
 
-        List<float> weights = new List<float>{0.3, 0.6, 0.5, 0.8};
+        List<float> weights = new List<float>{0.3f, 0.6f, 0.5f, 0.8f};
 
 
-
+        return 0.0f;
     }
 
     //compute the performers perceived utility of the action
-    public override double estimateUtility(NPC performer, byte? _)
+    protected override float estimateUtility(NPC performer, NoTarget _)
     {
-        
+        return 0.0f;
     }
 
     //compute the result of the action being performed
-    public override void actionResult(NPC performer, byte? _)
+    protected override void actionResult(NPC performer, NoTarget _)
     {
-        
+
     }
 
     //computer the likelihood this action will be a success
-    public override float computeSuccess(NPC performer, byte? _)
+    protected override float computeSuccess(NPC performer, NoTarget _)
     {
         List<float> multipliers = new List<float>{};
 
         //dexterity, constitution, energy, nutrition, condition
-        multipliers.Add(ActionMaths.calcMultiplier(performer.attributes.dexterity, 1.5, 0.5)); //dexterity multiplier
-        multipliers.Add(ActionMaths.calcMultiplier(performer.attributes.constitution, 1.5, 0.5)); //constitution multiplier
-        multipliers.Add(ActionMaths.calcMultiplier(performer.stats.energy, 1.5, 0.5)); //energy multiplier
-        multipliers.Add(ActionMaths.calcMultiplier(performer.stats.nutrition, 1.5, 0.5)); //nutrition multiplier
-        multipliers.Add(ActionMaths.calcMultiplier(performer.stats.condition, 1.5, 0.5)); //condition multiplier
+        multipliers.Add(ActionMaths.calcMultiplier(performer.attributes.dexterity, 1.5f, 0.5f)); //dexterity multiplier
+        multipliers.Add(ActionMaths.calcMultiplier(performer.attributes.constitution, 1.5f, 0.5f)); //constitution multiplier
+        multipliers.Add(ActionMaths.calcMultiplier(performer.stats.energy, 1.5f, 0.5f)); //energy multiplier
+        multipliers.Add(ActionMaths.calcMultiplier(performer.stats.nutrition, 1.5f, 0.5f)); //nutrition multiplier
+        multipliers.Add(ActionMaths.calcMultiplier(performer.stats.condition, 1.5f, 0.5f)); //condition multiplier
+
+        return 0.0f;
     }
 
     //compute the estimated chance this action will be a succss from the performers perspective
-    public override float estimateSuccess(NPC performer, byte? _)
+    protected override float estimateSuccess(NPC performer, NoTarget _)
     {
-        
+        return 0.0f;
     }
 
     //check that this action would be known to the NPC
-    public override bool isKnown(NPC performer, byte? _)
+    protected override bool isKnown(NPC performer, NoTarget _)
     {
-        
+        return false;
     }
 
     //calculate how much time it would take for the NPC to complete this action
-    public override float getTimeToComplete(NPC performer, byte? _)
+    protected override float getTimeToComplete(NPC performer, NoTarget _)
     {
         if(timeToComplete != -1) return timeToComplete;
 
         List<float> multipliers = getTimeAndEnergyMultipliers(performer);
-        List<float> weights = new List<float>{0.7, 0.7, 0.5, 0.2, 0.2};
+        List<float> weights = new List<float>{0.7f, 0.7f, 0.5f, 0.2f, 0.2f};
 
         float weightedBase = ActionMaths.ApplyWeightedMultipliers(baseTime, multipliers, weights);
 
@@ -96,12 +99,12 @@ public class WorkJob : SelfAction
     }
 
     //calculate how much energy it would take the NPC to compelete this action
-    public override float getEnergyToComplete(NPC performer, byte? _)
+    protected override float getEnergyToComplete(NPC performer, NoTarget _)
     {
         if(energyToComplete != -1) return energyToComplete;
 
         List<float> multipliers = getTimeAndEnergyMultipliers(performer);
-        List<float> weights = new List<float>{0.3, 0.3, 0.8, 0.7, 0.5};
+        List<float> weights = new List<float>{0.3f, 0.3f, 0.8f, 0.7f, 0.5f};
 
         float weightedBase = ActionMaths.ApplyWeightedMultipliers(baseEnergy, multipliers, weights);
 
@@ -111,16 +114,16 @@ public class WorkJob : SelfAction
         return result;
     }
 
-    public override List<float> getTimeAndEnergyMultipliers(NPC performer)
+    protected override List<float> getTimeAndEnergyMultipliers(NPC performer)
     {
         List<float> multipliers = new List<float>{};
 
         //dexterity, constitution, energy, nutrition, condition
-        multipliers.Add(ActionMaths.calcMultiplier(performer.attributes.dexterity, 1.5, 0.5)); //dexterity multiplier
-        multipliers.Add(ActionMaths.calcMultiplier(performer.attributes.constitution, 1.5, 0.5)); //constitution multiplier
-        multipliers.Add(ActionMaths.calcMultiplier(performer.stats.energy, 1.5, 0.5)); //energy multiplier
-        multipliers.Add(ActionMaths.calcMultiplier(performer.stats.nutrition, 1.5, 0.5)); //nutrition multiplier
-        multipliers.Add(ActionMaths.calcMultiplier(performer.stats.condition, 1.5, 0.5)); //condition multiplier
+        multipliers.Add(ActionMaths.calcMultiplier(performer.attributes.dexterity, 1.5f, 0.5f)); //dexterity multiplier
+        multipliers.Add(ActionMaths.calcMultiplier(performer.attributes.constitution, 1.5f, 0.5f)); //constitution multiplier
+        multipliers.Add(ActionMaths.calcMultiplier(performer.stats.energy, 1.5f, 0.5f)); //energy multiplier
+        multipliers.Add(ActionMaths.calcMultiplier(performer.stats.nutrition, 1.5f, 0.5f)); //nutrition multiplier
+        multipliers.Add(ActionMaths.calcMultiplier(performer.stats.condition, 1.5f, 0.5f)); //condition multiplier
 
         return multipliers;
     }
