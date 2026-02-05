@@ -25,14 +25,15 @@ public static class ActionMaths
         return Mathf.Lerp(lowBound, highBound, normal);
     }
 
-    public static float rationalityNoise(float value)
+    public static float rationalityNoise(float value, float rationality)
     {
-        float range = Mathf.Clamp01(value);
+        float range = Mathf.Clamp01(rationality);
         float min = 1.0f - range;
         float max = 1.0f + range;
 
-        float t = (Random.value + Random.value) * 0.5f;
-        return Mathf.Lerp(min, max, t);
+        float multiplier = Mathf.Lerp(min, max, Random.value);
+
+        return value * multiplier;
     }
 
     public static float ApplyWeightedMultipliers(float baseValue, List<float> multipliers, List<float> weights)
@@ -55,7 +56,7 @@ public static class ActionMaths
         return baseValue * weightedProduct;
     }
 
-    public static float addChaosRandomness(float baseValue, float chaos)
+    public static float addChaos(float baseValue, float chaos)
     {
         if(chaos == 0) return baseValue;
 
@@ -64,11 +65,31 @@ public static class ActionMaths
         float min = 1.0f - chaos;
         float max = 1.0f + chaos;
 
-        float t = (Random.value + Random.value) * 0.5f;
-
-        float multiplier = Mathf.Lerp(min, max, t);
+        float multiplier = Mathf.Lerp(min, max, Random.value);
 
         return baseValue * multiplier;
+    }
+
+    public static float scarcityMultiplier(float remainingAfter, float minValue, float maxValue, float lowRemainingMult, float highRemainingMult)
+    {
+        remainingAfter = Mathf.Clamp(remainingAfter, minValue, maxValue); //clamp between max and min values
+
+        float temp = Mathf.InverseLerp(minValue, maxValue, remainingAfter); 
+
+        return Mathf.Lerp(lowRemainingMult, highRemainingMult, temp);
+    }
+
+    public static float addTraitWeights(NPC npc, float baseValue, List<int> traitList, bool positive)
+    {
+        foreach(int id in traitList)
+        {
+            if (npc.traits.Contains(id))
+            {
+                if(positive) baseValue += baseValue * 0.1f;
+                else baseValue -= baseValue * 0.1f;
+            }
+        }
+        return baseValue;
     }
 }
 

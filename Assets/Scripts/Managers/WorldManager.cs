@@ -5,7 +5,7 @@ using System;
 [System.Serializable]
 public class WorldManager : MonoBehaviour
 {
-    public float gameTime;
+    public float gameTime; //the time of the game in hours
     public float costPerNutrition;
     [Range(0,100)] public float chaosModifier;
     public float[] costPerBuilding;
@@ -34,6 +34,6 @@ public class WorldManager : MonoBehaviour
 
     public void GenerateWorldData(System.Random rng)
     {
-        gameTime = 0.0f;
+        gameTime = 0f;
     }
 }

@@ -23,7 +23,7 @@ public class WorkJob : SelfAction
     //compute the empirical utility of the action
     protected override float computeUtility(NPC performer, NoTarget _)
     {
-        if(this.actUtility != -1) return this.actUtility;
+        if(actUtility != -1) return actUtility;
         float baseUtility = 50.0f;
 
         float timeToComplete = getTimeToComplete(performer, default);
@@ -31,25 +31,39 @@ public class WorkJob : SelfAction
         float successChance = computeSuccess(performer, default);
 
         List<float> effectors = new List<float>();
-        effectors.Add(ActionMaths.calcMultiplier(performer.stats.happiness, 0.5f, 1.5f)); 
-        effectors.Add(ActionMaths.calcMultiplier(performer.stats.nutrition, 0.5f, 1.5f)); 
-        effectors.Add(ActionMaths.calcMultiplier(performer.stats.condition, 0.5f, 1.5f)); 
+        List<float> weights = new List<float>();
 
-        effectors.Add(ActionMaths.calcMultiplier(performer.stats.wealth, 1.5f, 0.5f));
+        //npc stat/attribute effectors
+        effectors.Add(ActionMaths.calcMultiplier(performer.stats.happiness, 0.25f, 2f)); weights.Add(0.3f);
+        effectors.Add(ActionMaths.calcMultiplier(performer.stats.nutrition, 0.25f, 2f)); weights.Add(0.6f);
+        effectors.Add(ActionMaths.calcMultiplier(performer.stats.condition, 0.25f, 2f)); weights.Add(0.5f);
+        effectors.Add(ActionMaths.calcMultiplier(performer.stats.wealth, 2f, 0.25f)); weights.Add(0.8f);
 
-        List<float> weights = new List<float>{0.3f, 0.6f, 0.5f, 0.8f};
+        //energy and time effectors
+        effectors.Add(ActionMaths.scarcityMultiplier(performer.stats.energy - energyToComplete, 0f, 100f, 0.25f, 2f)); weights.Add(0.2f);
+        effectors.Add(ActionMaths.scarcityMultiplier(dataController.worldManager.gameTime % 24f - timeToComplete, 0f, 24f, 0.25f, 2f)); weights.Add(0.2f);
+        effectors.Add(ActionMaths.calcMultiplier(successChance, 0.25f, 2f)); weights.Add(0.2f);
 
-
-        return 0.0f;
+        actUtility = ActionMaths.ApplyWeightedMultipliers(50f, effectors, weights);
+        return actUtility;
     }
 
     //compute the performers perceived utility of the action
     protected override float estimateUtility(NPC performer, NoTarget _)
     {
-        return 0.0f;
+        if(estUtility != -1) return estUtility;
+        
+        float baseUtility;
+        if(actUtility == -1) baseUtility = computeUtility(performer, default);
+        else baseUtility = actUtility;
+
+        baseUtility = ActionMaths.addTraitWeights(performer, baseUtility, utilityPosTraits, true);
+        baseUtility = ActionMaths.addTraitWeights(performer, baseUtility, utilityNegTraits, false); 
+
+        estUtility = ActionMaths.rationalityNoise(baseUtility, performer.attributes.rationality);
+        return estUtility;
     }
 
-    //compute the result of the action being performed
     protected override void actionResult(NPC performer, NoTarget _)
     {
 
@@ -58,28 +72,33 @@ public class WorkJob : SelfAction
     //computer the likelihood this action will be a success
     protected override float computeSuccess(NPC performer, NoTarget _)
     {
-        List<float> multipliers = new List<float>{};
+        if(actSuccess != -1) return actSuccess;
+
+        List<float> multipliers = new List<float>();
+        List<float> weights = new List<float>();
 
         //dexterity, constitution, energy, nutrition, condition
-        multipliers.Add(ActionMaths.calcMultiplier(performer.attributes.dexterity, 1.5f, 0.5f)); //dexterity multiplier
-        multipliers.Add(ActionMaths.calcMultiplier(performer.attributes.constitution, 1.5f, 0.5f)); //constitution multiplier
-        multipliers.Add(ActionMaths.calcMultiplier(performer.stats.energy, 1.5f, 0.5f)); //energy multiplier
-        multipliers.Add(ActionMaths.calcMultiplier(performer.stats.nutrition, 1.5f, 0.5f)); //nutrition multiplier
-        multipliers.Add(ActionMaths.calcMultiplier(performer.stats.condition, 1.5f, 0.5f)); //condition multiplier
+        multipliers.Add(ActionMaths.calcMultiplier(performer.attributes.dexterity, 0.25f, 2f)); weights.Add(0.3f); //dexterity multiplier
+        multipliers.Add(ActionMaths.calcMultiplier(performer.attributes.constitution, 0.25f, 2f)); weights.Add(0.3f); //constitution multiplier
+        multipliers.Add(ActionMaths.calcMultiplier(performer.stats.energy, 0.25f, 2f)); weights.Add(0.8f); //energy multiplier
+        multipliers.Add(ActionMaths.calcMultiplier(performer.stats.nutrition, 0.25f, 2f)); weights.Add(0.2f); //nutrition multiplier
+        multipliers.Add(ActionMaths.calcMultiplier(performer.stats.condition, 0.25f, 2f)); weights.Add(0.6f); //condition multiplier
 
-        return 0.0f;
+        actSuccess = ActionMaths.ApplyWeightedMultipliers(50f, multipliers, weights);
+        return actSuccess;
     }
 
     //compute the estimated chance this action will be a succss from the performers perspective
     protected override float estimateSuccess(NPC performer, NoTarget _)
     {
-        return 0.0f;
-    }
+        if(estSuccess != -1) return estSuccess;
+        
+        float baseSuccess;
+        if(actSuccess == -1) baseSuccess = computeSuccess(performer, default);
+        else baseSuccess = actSuccess;
 
-    //check that this action would be known to the NPC
-    protected override bool isKnown(NPC performer, NoTarget _)
-    {
-        return false;
+        estSuccess = ActionMaths.rationalityNoise(baseSuccess, performer.attributes.rationality);
+        return estSuccess;
     }
 
     //calculate how much time it would take for the NPC to complete this action
@@ -92,10 +111,8 @@ public class WorkJob : SelfAction
 
         float weightedBase = ActionMaths.ApplyWeightedMultipliers(baseTime, multipliers, weights);
 
-        float result = ActionMaths.addChaosRandomness(weightedBase, dataController.worldManager.chaosModifier);
-
-        timeToComplete = result;
-        return result;
+        timeToComplete = ActionMaths.addChaos(weightedBase, dataController.worldManager.chaosModifier);
+        return timeToComplete;
     }
 
     //calculate how much energy it would take the NPC to compelete this action
@@ -108,10 +125,8 @@ public class WorkJob : SelfAction
 
         float weightedBase = ActionMaths.ApplyWeightedMultipliers(baseEnergy, multipliers, weights);
 
-        float result = ActionMaths.addChaosRandomness(weightedBase, dataController.worldManager.chaosModifier);
-
-        energyToComplete = result;
-        return result;
+        energyToComplete = ActionMaths.addChaos(weightedBase, dataController.worldManager.chaosModifier);
+        return energyToComplete;
     }
 
     protected override List<float> getTimeAndEnergyMultipliers(NPC performer)
@@ -119,11 +134,11 @@ public class WorkJob : SelfAction
         List<float> multipliers = new List<float>{};
 
         //dexterity, constitution, energy, nutrition, condition
-        multipliers.Add(ActionMaths.calcMultiplier(performer.attributes.dexterity, 1.5f, 0.5f)); //dexterity multiplier
-        multipliers.Add(ActionMaths.calcMultiplier(performer.attributes.constitution, 1.5f, 0.5f)); //constitution multiplier
-        multipliers.Add(ActionMaths.calcMultiplier(performer.stats.energy, 1.5f, 0.5f)); //energy multiplier
-        multipliers.Add(ActionMaths.calcMultiplier(performer.stats.nutrition, 1.5f, 0.5f)); //nutrition multiplier
-        multipliers.Add(ActionMaths.calcMultiplier(performer.stats.condition, 1.5f, 0.5f)); //condition multiplier
+        multipliers.Add(ActionMaths.calcMultiplier(performer.attributes.dexterity, 2f, 0.25f)); //dexterity multiplier
+        multipliers.Add(ActionMaths.calcMultiplier(performer.attributes.constitution, 2f, 0.25f)); //constitution multiplier
+        multipliers.Add(ActionMaths.calcMultiplier(performer.stats.energy, 2f, 0.25f)); //energy multiplier
+        multipliers.Add(ActionMaths.calcMultiplier(performer.stats.nutrition, 2f, 0.25f)); //nutrition multiplier
+        multipliers.Add(ActionMaths.calcMultiplier(performer.stats.condition, 2f, 0.25f)); //condition multiplier
 
         return multipliers;
     }

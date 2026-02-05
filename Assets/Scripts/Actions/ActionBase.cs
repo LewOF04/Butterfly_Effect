@@ -35,10 +35,26 @@ public abstract class ActionBase<T> : IActionBase
     protected abstract void actionResult(NPC performer, T receiver); //compute the result of the action being performed
     protected abstract float computeSuccess(NPC performer, T receiver); //computer the likelihood this action will be a success
     protected abstract float estimateSuccess(NPC performer, T receiver); //compute the estimated chance this action will be a succss from the performers perspective
-    protected abstract bool isKnown(NPC performer, T receiver); //check that this action would be known to the NPC
     protected abstract float getTimeToComplete(NPC performer, T receiver); //calculate how much time it would take for the NPC to complete this action
     protected abstract float getEnergyToComplete(NPC performer, T receiver); //calculate how much energy it would take the NPC to compelete this action
-    protected abstract List<float> getTimeAndEnergyMultipliers(NPC performer); //get the list of multipliers that effect this actions time and energy consumption
+    protected abstract List<float> getTimeAndEnergyMultipliers(NPC performer); //get the list of multipliers that effect this actions time and energy 
+    
+    //check that this action would be known to the NPC
+    protected bool isKnown(NPC performer)
+    {
+        //either the action is known because they're smart enough
+        if (complexity <= performer.attributes.intelligence) return true;
+
+        //or they have memory of a similar event
+        List<NPCEvent> npcEvents = dataController.eventsPerNPCStorage[performer.id];
+        foreach(NPCEvent thisEvent in npcEvents)  if(thisEvent.actionName == name) return true;
+
+        List<BuildingEvent> buildingEvents = dataController.buildingEventsPerNPCStorage[performer.id];
+        foreach(BuildingEvent thisEvent in buildingEvents) if(thisEvent.actionName == name) return true;
+
+        return false;
+    } 
+
     public ActionInfoWrapper computeAction(NPC performer, T receiver)
     {
         this.resetAction();
@@ -52,13 +68,13 @@ public abstract class ActionBase<T> : IActionBase
         };
 
 
-        float energyToComplete = this.getEnergyToComplete(performer, receiver);
-        float timeToComplete = this.getTimeToComplete(performer, receiver);
-        bool known = this.isKnown(performer, receiver);
-        float actUtility = this.computeUtility(performer, receiver);
-        float estUtility = this.estimateUtility(performer, receiver);
-        float actSuccess = this.computeSuccess(performer, receiver);
-        float estSuccess = this.estimateSuccess(performer, receiver);
+        energyToComplete = getEnergyToComplete(performer, receiver);
+        timeToComplete = getTimeToComplete(performer, receiver);
+        known = isKnown(performer);
+        actUtility = computeUtility(performer, receiver);
+        estUtility = estimateUtility(performer, receiver);
+        actSuccess = computeSuccess(performer, receiver);
+        estSuccess = estimateSuccess(performer, receiver);
 
         return new ActionInfoWrapper(performer.id, this.receiver, timeToComplete, energyToComplete, known, estUtility, actUtility, estSuccess, actSuccess);
     }
@@ -68,15 +84,15 @@ public abstract class ActionBase<T> : IActionBase
     */
     public void resetAction()
     {
-        this.currentActor = -1;
-        this.receiver = null;
-        this.timeToComplete = -1f;
-        this.energyToComplete = -1f;
-        this.known = null;
-        this.estUtility = -1f;
-        this.actUtility = -1f;
-        this.estSuccess = -1f;
-        this.actSuccess = -1f;
+        currentActor = -1;
+        receiver = null;
+        timeToComplete = -1f;
+        energyToComplete = -1f;
+        known = null;
+        estUtility = -1f;
+        actUtility = -1f;
+        estSuccess = -1f;
+        actSuccess = -1f;
     }
 }
 
@@ -109,12 +125,12 @@ public struct ActionInfoWrapper
     public int? receiver;
     public float timeToComplete;
     public float energyToComplete;
-    public bool known;
+    public bool? known;
     public float estUtility;
     public float actUtility;
     public float estSuccess;
     public float actSuccess;
-    public ActionInfoWrapper(int currentActor, int? receiver, float timeToComplete, float energyToComplete, bool known, float estUtility, float actUtility, float estSuccess, float actSuccess)
+    public ActionInfoWrapper(int currentActor, int? receiver, float timeToComplete, float energyToComplete, bool? known, float estUtility, float actUtility, float estSuccess, float actSuccess)
     {
         this.receiver = receiver;
         this.currentActor = currentActor;
