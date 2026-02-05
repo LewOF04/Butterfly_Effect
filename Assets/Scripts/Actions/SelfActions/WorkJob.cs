@@ -10,6 +10,7 @@ public class WorkJob : SelfAction
 
     public override char actionType => 'S';
     public override string name => "Work Job";
+    public override string baseDescription => "The NPC if they have a job, can go to work to earn some money at the cost of energy and time.";
 
     protected override float baseTime => 8f;
     protected override float baseEnergy => 50f;
@@ -24,11 +25,10 @@ public class WorkJob : SelfAction
     protected override float computeUtility(NPC performer, NoTarget _)
     {
         if(actUtility != -1) return actUtility;
-        float baseUtility = 50.0f;
 
-        float timeToComplete = getTimeToComplete(performer, default);
-        float energyToComplete = getEnergyToComplete(performer, default);
-        float successChance = computeSuccess(performer, default);
+        getTimeToComplete(performer, default);
+        getEnergyToComplete(performer, default);
+        computeSuccess(performer, default);
 
         List<float> effectors = new List<float>();
         List<float> weights = new List<float>();
@@ -42,7 +42,7 @@ public class WorkJob : SelfAction
         //energy and time effectors
         effectors.Add(ActionMaths.scarcityMultiplier(performer.stats.energy - energyToComplete, 0f, 100f, 0.25f, 2f)); weights.Add(0.2f);
         effectors.Add(ActionMaths.scarcityMultiplier(dataController.worldManager.gameTime % 24f - timeToComplete, 0f, 24f, 0.25f, 2f)); weights.Add(0.2f);
-        effectors.Add(ActionMaths.calcMultiplier(successChance, 0.25f, 2f)); weights.Add(0.2f);
+        effectors.Add(ActionMaths.calcMultiplier(actSuccess, 0.25f, 2f)); weights.Add(0.2f);
 
         actUtility = ActionMaths.ApplyWeightedMultipliers(50f, effectors, weights);
         return actUtility;
@@ -64,9 +64,9 @@ public class WorkJob : SelfAction
         return estUtility;
     }
 
-    protected override void actionResult(NPC performer, NoTarget _)
+    public override void performAction(NPC performer, NoTarget _)
     {
-
+        
     }
 
     //computer the likelihood this action will be a success
@@ -142,4 +142,18 @@ public class WorkJob : SelfAction
 
         return multipliers;
     }
+
+    protected override bool isKnown(NPC performer)
+    {
+        if(performer.hasJob == false) return false;
+
+        //either the action is known because they're smart enough
+        if (complexity <= performer.attributes.intelligence) return true;
+
+        //or they have memory of a similar event
+        List<NPCEvent> npcEvents = dataController.eventsPerNPCStorage[performer.id];
+        foreach(NPCEvent thisEvent in npcEvents)  if(thisEvent.actionName == name) return true;
+
+        return false;
+    } 
 }
