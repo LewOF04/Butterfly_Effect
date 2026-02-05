@@ -94,13 +94,13 @@ public class DataController : MonoBehaviour
 
         buildingManager.LoadBuildings();
 
-        actionManager.LoadActions();
-
         relationshipManager.LoadRelationships();
 
         historyManager.LoadHistory();
 
         worldManager.LoadWorldData();
+
+        actionManager.LoadActions();
         
         foreach (var (id, building) in BuildingStorage)
         {
@@ -132,8 +132,6 @@ public class DataController : MonoBehaviour
         
         traitManager.LoadTraits(); //loads traits from memory
 
-        actionManager.LoadActions(); //load actions from memory
-
         buildingManager.GenerateBuildings(rng); //use rng to produce buildings
 
         npcManager.GenerateNPCs(rng, TraitStorage.Count); //use rng to produce npcs
@@ -143,6 +141,8 @@ public class DataController : MonoBehaviour
         historyManager.GenerateHistory(rng); //generate history and NPC history tracker
 
         worldManager.GenerateWorldData(rng); //generate world data
+
+        actionManager.LoadActions(); //load actions from memory
 
         linkNPCsAndBuildings(rng);
         

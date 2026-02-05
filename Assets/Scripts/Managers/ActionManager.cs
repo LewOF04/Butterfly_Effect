@@ -4,7 +4,11 @@ using UnityEngine;
 using System.Collections.Generic;
 public class ActionManager : MonoBehaviour
 {
-    public DataController dataController = DataController.Instance;
+    private DataController dataController;
+    public void Awake()
+    {
+        dataController = DataController.Instance;
+    }
 
     public void LoadActions()
     {
