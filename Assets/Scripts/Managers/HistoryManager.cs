@@ -356,7 +356,7 @@ public class HistoryManager : MonoBehaviour
         npcEvents[relKey][key] = thisEvent;
     }
 
-    
+     
     /*
     Adds a Building memory to the stores
 

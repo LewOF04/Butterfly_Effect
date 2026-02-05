@@ -41,7 +41,7 @@ public class WorkJob : SelfAction
 
         //energy and time effectors
         effectors.Add(ActionMaths.scarcityMultiplier(performer.stats.energy - energyToComplete, 0f, 100f, 0.25f, 2f)); weights.Add(0.2f);
-        effectors.Add(ActionMaths.scarcityMultiplier(dataController.worldManager.gameTime % 24f - timeToComplete, 0f, 24f, 0.25f, 2f)); weights.Add(0.2f);
+        effectors.Add(ActionMaths.scarcityMultiplier(performer.timeLeft - timeToComplete, 0f, 24f, 0.25f, 2f)); weights.Add(0.2f);
         effectors.Add(ActionMaths.calcMultiplier(actSuccess, 0.25f, 2f)); weights.Add(0.2f);
 
         actUtility = ActionMaths.ApplyWeightedMultipliers(50f, effectors, weights);
@@ -66,7 +66,35 @@ public class WorkJob : SelfAction
 
     public override void performAction(NPC performer, NoTarget _)
     {
+        string description = performer.npcName + " spent " + timeToComplete + " hours at work.";
+        ActionResult successInfo = ActionMaths.calcActionSuccess(actSuccess);
+
+        float wealthMultiplier;
+        if(successInfo.success == true) {
+            description += "They successfully completed their work ";
+            
+            if(successInfo.quality < 0.25f) {description += "but it was a terrible work performance."; wealthMultiplier = 0.666f;}
+            else if(successInfo.quality < 0.5f) {description += "but they didn't do a great job."; wealthMultiplier = 0.832f;}
+            else if(successInfo.quality < 0.75f) {description += "and they did a good job."; wealthMultiplier = 1f;}
+            else {description += "and they did some amazing work."; wealthMultiplier = 1.166f;}
+        }
+        else {
+            description += "Their work was not a success ";
+            if(successInfo.quality < 0.25f) {description += "but they'll finish off their next shift."; wealthMultiplier = 0.5f;}
+            else if(successInfo.quality < 0.5f) {description += "but they made a good effort."; wealthMultiplier = 0.332f;}
+            else if(successInfo.quality < 0.75f) {description += "and they made no effort to correct it."; wealthMultiplier = 0.166f;}
+            else {description += "and they caused a lot of problems."; wealthMultiplier = 0f;}
+        }
         
+        float actionTime = dataController.worldManager.gameTime + (24f - performer.timeLeft);
+        performer.stats.energy -= energyToComplete;
+        performer.timeLeft -= timeToComplete;
+        performer.stats.wealth += 5f * wealthMultiplier;
+
+        float severity = 1f;
+        int receiver = -1;
+        bool wasPositive = true;
+        dataController.historyManager.AddNPCMemory(name, description, severity, actionTime, performer.id, receiver, wasPositive, successInfo.success);
     }
 
     //computer the likelihood this action will be a success

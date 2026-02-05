@@ -91,5 +91,24 @@ public static class ActionMaths
         }
         return baseValue;
     }
+
+    public static ActionResult calcActionSuccess(float successChance)
+    {
+        float roll = Random.Range(0f, 100f);
+
+        ActionResult result;
+        result.success = roll <= successChance;
+
+        if (result.success) result.quality = Mathf.InverseLerp(successChance, 0f, roll); //closer to the roll the better success
+        else result.quality = Mathf.InverseLerp(successChance, 100f, roll); //further from the roll the worse the failure
+
+        return result;
+    }
+}
+
+public struct ActionResult
+{
+    public bool success; //if the action succeeded or not
+    public float quality; //how good/bad the actions success/failure was
 }
 

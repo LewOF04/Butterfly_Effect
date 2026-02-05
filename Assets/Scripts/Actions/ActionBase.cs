@@ -15,7 +15,7 @@ public abstract class ActionBase<T> : IActionBase
 
     //stores for quick reference is talking about the same npc
     protected int currentActor = -1;
-    protected int? receiver = null;
+    protected int receiver = -1;
     protected float timeToComplete = -1f;
     protected float energyToComplete = -1f;
     protected bool? known = null;
@@ -70,9 +70,8 @@ public abstract class ActionBase<T> : IActionBase
         {
             NPC npc         => npc.id,
             Building build  => build.id,
-            _               => null
+            _               => -1
         };
-
 
         energyToComplete = getEnergyToComplete(performer, receiver);
         timeToComplete = getTimeToComplete(performer, receiver);
@@ -106,7 +105,7 @@ public abstract class ActionBase<T> : IActionBase
     public void resetAction()
     {
         currentActor = -1;
-        receiver = null;
+        receiver = -1;
         timeToComplete = -1f;
         energyToComplete = -1f;
         known = null;
@@ -143,7 +142,7 @@ public interface IActionBase
 public struct ActionInfoWrapper
 {
     public int currentActor;
-    public int? receiver;
+    public int receiver;
     public float timeToComplete;
     public float energyToComplete;
     public bool? known;
@@ -152,7 +151,7 @@ public struct ActionInfoWrapper
     public float estSuccess;
     public float actSuccess;
     public IActionBase action;
-    public ActionInfoWrapper(int currentActor, int? receiver, float timeToComplete, float energyToComplete, bool? known, float estUtility, float actUtility, float estSuccess, float actSuccess, IActionBase action)
+    public ActionInfoWrapper(int currentActor, int receiver, float timeToComplete, float energyToComplete, bool? known, float estUtility, float actUtility, float estSuccess, float actSuccess, IActionBase action)
     {
         this.receiver = receiver;
         this.currentActor = currentActor;
