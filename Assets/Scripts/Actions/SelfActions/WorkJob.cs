@@ -64,10 +64,10 @@ public class WorkJob : SelfAction
         return estUtility;
     }
 
-    public override void performAction(NPC performer, NoTarget _)
+    public override void performAction(NPC performer, NoTarget _, float percentComplete)
     {
         string description = performer.npcName + " spent " + timeToComplete + " hours at work.";
-        ActionResult successInfo = ActionMaths.calcActionSuccess(actSuccess);
+        ActionResult successInfo = ActionMaths.calcActionSuccess(actSuccess, percentComplete);
 
         float wealthMultiplier;
         if(successInfo.success == true) {
@@ -80,11 +80,13 @@ public class WorkJob : SelfAction
         }
         else {
             description += "Their work was not a success ";
-            if(successInfo.quality < 0.25f) {description += "but they'll finish off their next shift."; wealthMultiplier = 0.5f;}
+            if(successInfo.quality < 0.25f) {description += "but they'll finish off on their next shift."; wealthMultiplier = 0.5f;}
             else if(successInfo.quality < 0.5f) {description += "but they made a good effort."; wealthMultiplier = 0.332f;}
             else if(successInfo.quality < 0.75f) {description += "and they made no effort to correct it."; wealthMultiplier = 0.166f;}
             else {description += "and they caused a lot of problems."; wealthMultiplier = 0f;}
         }
+
+        if(percentComplete != 100f) description += " They had to stop working after doing "+percentComplete.ToString()+"% completion.";
         
         float actionTime = dataController.worldManager.gameTime + (24f - performer.timeLeft);
         performer.stats.energy -= energyToComplete;

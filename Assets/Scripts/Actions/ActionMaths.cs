@@ -92,15 +92,28 @@ public static class ActionMaths
         return baseValue;
     }
 
-    public static ActionResult calcActionSuccess(float successChance)
+    public static ActionResult calcActionSuccess(float successChance, float percentComplete)
     {
+        float chance = Mathf.Clamp(successChance, 0f, 100f);
+        float complete = Mathf.Clamp(percentComplete, 0f, 100f) / 100f;
+
         float roll = Random.Range(0f, 100f);
 
-        ActionResult result;
-        result.success = roll <= successChance;
+        float completionMult = Mathf.Lerp(0.5f, 1.5f, complete);
+        float weightedChance = Mathf.Clamp(chance * completionMult, 0f, 100f);
 
-        if (result.success) result.quality = Mathf.InverseLerp(successChance, 0f, roll); //closer to the roll the better success
-        else result.quality = Mathf.InverseLerp(successChance, 100f, roll); //further from the roll the worse the failure
+        ActionResult result;
+        result.success = roll <= weightedChance;
+
+        float rollQuality = result.success
+        ? Mathf.InverseLerp(weightedChance, 0f, roll)     //0 at barely success, 1 at great success
+        : Mathf.InverseLerp(weightedChance, 100f, roll);  //0 at barely fail, 1 at awful fail
+
+        float completionQuality = result.success
+            ? complete          
+            : (1f - complete);   
+
+        result.quality = Mathf.Clamp01(rollQuality * 0.7f + completionQuality * 0.3f);
 
         return result;
     }
