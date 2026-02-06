@@ -31,6 +31,17 @@ public class NPCMenu : MonoBehaviour
     public NPCMemoryPanel npcMemoryPrefab;
     public BuildingMemoryPanel buildingMemoryPrefab;
 
+    [Header("Action Page")]
+    public Canvas actionCanvas;
+    public GameObject npcView;
+    public GameObject npcContainer;
+    public GameObject ActionView;
+    public GameObject actionContainer;
+    public NPCViewPrefab<NPC> actionNPCView;
+    public NPCViewPrefab<Building> actionBuildingView;
+    public NPCActionPrefab<NPC> npcActPrefab;
+    public NPCActionPrefab<Building> buildingActPrefab;
+
 
     private DataController dataController = DataController.Instance;
     
@@ -83,8 +94,7 @@ public class NPCMenu : MonoBehaviour
             buildingButton.enabled = true;
         }
 
-        Sprite npcSprite = npc.GetComponent<SpriteRenderer>().sprite;
-        spriteImageLoc.sprite = npcSprite;
+        spriteImageLoc.sprite = npc.GetComponent<SpriteRenderer>().sprite;
         spriteImageLoc.preserveAspect = true;
 
         menuTitle.text = "(NPC) Name: "+npc.npcName+" ID: "+npc.id;
@@ -133,7 +143,7 @@ public class NPCMenu : MonoBehaviour
         List<NPCEvent> thisNPCEvents = dataController.eventsPerNPCStorage[npc.id];
         foreach(NPCEvent thisEvent in thisNPCEvents)
         {
-            NPCMemoryPanel memPanel = Instantiate(npcMemoryPrefab, memoryInfoContainer.transform);
+            NPCMemoryPanel memPanel = Instantiate(npcMemoryPrefab, memoryInfoContainer.transform); 
             
             memPanel.performer = npc;
             memPanel.thisEvent = thisEvent;
@@ -214,7 +224,9 @@ public class NPCMenu : MonoBehaviour
             Canvas buidlingCanvas = buildingMenu.GetComponent<Canvas>();
             Camera camera = FindFirstObjectByType<Camera>();
             buildingMenu.transform.position = camera.transform.position;
-            buildingMenu.transform.position += new Vector3(0.0f, 0.0f, 0.5f);
+            buildingMenu.transform.position += new Vector3(0.0f, 0.0f, 5.0f);
+
+            gameObject.transform.position -= new Vector3(0.0f, 0.0f, 5.0f);
             
             buildingMenu.building = building;
             buildingMenu.displayData();

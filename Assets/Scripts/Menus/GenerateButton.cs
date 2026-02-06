@@ -17,6 +17,7 @@ public class GenerateButton : MonoBehaviour
     //converts a given string into an integer representation
     public static int SeedFromString(string s)
     {
+        Debug.Log("Inputted seed: "+s);
         unchecked
         //implementation of the Fowler–Noll–Vo hashing algorithm
         {

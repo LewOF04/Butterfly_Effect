@@ -13,7 +13,7 @@ public class BuildingMenu : MonoBehaviour
     public Slider conditionSlider;
     public Image spriteImageLoc;
     public GameObject npcViewer;
-    public NPCViewButton npcWindowPrefab;
+    public NPCViewButton npcWindowPrefab; 
 
     [Header("History Page")]
     public Canvas historyCanvas;
@@ -99,6 +99,7 @@ public class BuildingMenu : MonoBehaviour
 
     public void exitMenu()
     {
+        gameObject.transform.position -= new Vector3(0.0f, 0.0f, 5.0f);
         Canvas canvas = GetComponent<Canvas>();
         canvas.enabled = false; //disable the canvas
         removeButtons();

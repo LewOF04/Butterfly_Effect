@@ -26,7 +26,7 @@ public class NPCViewButton : MonoBehaviour
         //move the building canvas to the right place
         Camera camera = FindFirstObjectByType<Camera>();
         npcMenu.transform.position = camera.transform.position;
-        npcMenu.transform.position += new Vector3(0.0f, 0.0f, 0.5f);
+        npcMenu.transform.position += new Vector3(0.0f, 0.0f, 5.0f);
         
         //update the data for the npc
         npcMenu.npc = npc;
@@ -34,6 +34,8 @@ public class NPCViewButton : MonoBehaviour
 
         //make the npc canvas viewable and the building canvas invisible
         buildingCanvas.enabled = false;
+        buildingMenu.transform.position -= new Vector3(0.0f, 0.0f, 5.0f);
+        
         npcCanvas.enabled = true;
 
         //delete the gameObjects of the npc buttons
