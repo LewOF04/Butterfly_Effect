@@ -137,6 +137,7 @@ public interface IActionBase
 {
     char actionType {get;} //action type ("N" = NPC, "B" = Building, "E" = Environment, "S" = Self)
     string name {get;}
+    string baseDescription {get;}
 }
 
 public struct ActionInfoWrapper

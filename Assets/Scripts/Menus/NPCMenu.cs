@@ -41,6 +41,7 @@ public class NPCMenu : MonoBehaviour
     public NPCViewPrefab<Building> actionBuildingView;
     public NPCActionPrefab<NPC> npcActPrefab;
     public NPCActionPrefab<Building> buildingActPrefab;
+    public NonNPCActionPrefab envOrSelfPrefab;
 
 
     private DataController dataController = DataController.Instance;

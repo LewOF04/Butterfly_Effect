@@ -2,10 +2,9 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
-public class NPCActionPrefab<T>
+public class NonNPCActionPrefab
 {
     ActionInfoWrapper actionInfo;
-    T receiver;
 
     public TextMeshProUGUI actionNameField;
     public TextMeshProUGUI descriptionField;
@@ -16,9 +15,6 @@ public class NPCActionPrefab<T>
     public TextMeshProUGUI actUtilityField;
     public Image actUtilBg;
 
-    public TextMeshProUGUI recNameField;
-    public TextMeshProUGUI recIDField;
-    public Image recSpriteLoc = null;
     public TextMeshProUGUI isKnownField;
     public Image isKnownBg;
 
@@ -40,20 +36,6 @@ public class NPCActionPrefab<T>
         descriptionField.text = actionInfo.action.baseDescription;
         estUtilityField.text = actionInfo.estUtility.ToString("0.000"); setColour(0f, 100f, actionInfo.estUtility, estUtilBg);
         actUtilityField.text = actionInfo.actUtility.ToString("0.000"); setColour(0f, 100f, actionInfo.actUtility, actUtilBg);
-
-        if(receiver is Building building)
-        {
-            recNameField.text = building.buildingName;
-            recIDField.text = building.id.ToString();
-            recSpriteLoc.sprite = building.GetComponent<SpriteRenderer>().sprite;
-        } 
-        if(receiver is NPC npc)
-        {
-            recNameField.text = npc.npcName;
-            recIDField.text = npc.id.ToString();
-            recSpriteLoc.sprite = npc.GetComponent<SpriteRenderer>().sprite;
-        }
-        recSpriteLoc.preserveAspect = true;
         
         if(actionInfo.known != true) {isKnownField.text = "Unknown"; setColour(0f, 1f, 1f, isKnownBg);}
         else {isKnownField.text = "Known"; setColour(0f, 1f, 0f, isKnownBg);}
