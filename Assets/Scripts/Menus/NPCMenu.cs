@@ -37,11 +37,17 @@ public class NPCMenu : MonoBehaviour
     public GameObject npcContainer;
     public GameObject ActionView;
     public GameObject actionContainer;
-    public NPCViewPrefab<NPC> actionNPCView;
-    public NPCViewPrefab<Building> actionBuildingView;
-    public NPCActionPrefab<NPC> npcActPrefab;
-    public NPCActionPrefab<Building> buildingActPrefab;
-    public NonNPCActionPrefab envOrSelfPrefab;
+    public NPCViewPrefab<NPC> actionNPCViewPref;
+    public NPCViewPrefab<Building> actionBuildingViewPref;
+    public NPCActionPrefab<NPC> npcActViewPref;
+    public NPCActionPrefab<Building> buildingActViewPref;
+    public NonNPCActionPrefab envOrSelfViewPref;
+    public Button npcActButton;
+    public Button buildActButton;
+    public Button selfActButton;
+    public Button envActButton;
+    private ActionFrontier possibleActions;
+
 
 
     private DataController dataController = DataController.Instance;
@@ -163,6 +169,8 @@ public class NPCMenu : MonoBehaviour
             memPanel.displayData();
         }
 
+        possibleActions = new ActionFrontier(dataController);
+
         mainCanvas.enabled = true;
         backToMainButton.gameObject.SetActive(false);
         saveButton.gameObject.SetActive(true);
@@ -175,7 +183,11 @@ public class NPCMenu : MonoBehaviour
         removeButtons();
 
         backToMainButton.gameObject.SetActive(false);
+
         relationshipCanvas.enabled = false;
+        actionCanvas.enabled = false;
+        memoryCanvas.enabled = false;
+
         InputLocker.Unlock(); //unlock the inputs
 
     }
@@ -195,7 +207,11 @@ public class NPCMenu : MonoBehaviour
 
     public void openActions()
     {
-        Debug.Log("Clicked Actions!");
+        mainCanvas.enabled = false;
+        backToMainButton.gameObject.SetActive(true);
+        actionCanvas.enabled = true;
+        saveButton.gameObject.SetActive(false);
+        possibleActions.produceFrontier(npc);
     }
 
     public void openMemories()
@@ -238,6 +254,51 @@ public class NPCMenu : MonoBehaviour
     }
 
     /*
+    public NPCViewPrefab<NPC> actionNPCView;
+    public NPCViewPrefab<Building> actionBuildingView;
+    public NPCActionPrefab<NPC> npcActPrefab;
+    public NPCActionPrefab<Building> buildingActPrefab;
+    public NonNPCActionPrefab envOrSelfPrefab;
+    */
+
+    public void selfActPress()
+    {
+        removeActionViews();
+        removeNPCViews();
+        foreach(ActionInfoWrapper info in possibleActions.selfActions)
+        {
+            var inst = instantiate(envOrSelfViewPref, actionContainer.transform);
+            inst.actionInfo = info;
+            inst.displayData();
+        }
+    }
+
+    public void envActPres()
+    {
+        removeActionViews();
+        removeNPCViews();
+        foreach(ActionInfoWrapper info in possibleActions.environmentActions)
+        {
+            var inst = instantiate(envOrSelfViewPref, actionContainer.transform);
+            inst.actionInfo = info;
+            inst.displayData();
+        }
+    }
+
+    public void npcActPress()
+    {
+        removeActionViews();
+        removeNPCViews();
+        
+    }
+
+    public void buildActPress()
+    {
+        removeActionViews();
+        removeNPCViews();
+    }
+
+    /*
     Delete the any instantiated prefabs within the menu
     */
     public void removeButtons()
@@ -251,6 +312,24 @@ public class NPCMenu : MonoBehaviour
             Destroy(child.gameObject);
         }
         foreach (Transform child in memoryInfoContainer.transform)
+        {
+            Destroy(child.gameObject);
+        }
+        removeNPCViews();
+        removeActionViews();
+    }
+
+    public void removeNPCViews()
+    {
+        foreach(Transform child in npcContainer.transform)
+        {
+            Destroy(child.gameObject);
+        }
+    }
+
+    public void removeActionViews()
+    {
+        foreach(Transform child in actionContainer.transform)
         {
             Destroy(child.gameObject);
         }
