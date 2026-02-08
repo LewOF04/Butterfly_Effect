@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using NoTarget = System.ValueTuple;
 
 public class ActionViewPrefab : MonoBehaviour
 {
@@ -63,13 +64,35 @@ public class ActionViewPrefab : MonoBehaviour
 
     public void actionClick()
     {
-        if(actionInfo.known == false)
+        NPCMenu npcMenu = FindFirstObjectByType<NPCMenu>();
+        npcMenu.errorTextField.text = "";
+        Debug.Log("Action clicked");
+        if(actionInfo.known == false) {npcMenu.errorTextField.text = "Cannot perform action as it is unknown."; return;}
+        if(actionInfo.timeToComplete > npcMenu.npc.timeLeft) {npcMenu.errorTextField.text = "Cannot perform action as the NPC does not have enough time."; return;}
+        if(actionInfo.energyToComplete > npcMenu.npc.stats.energy) {npcMenu.errorTextField.text = "Cannot perform action as the NPC does not have enough energy."; return;}
+        
+        npcMenu.actionConfirm.gameObject.SetActive(true);
+        npcMenu.actionConfirm.actionNameField.text = "Action: "+actionInfo.action.name;
+        npcMenu.actionConfirm.sourceAction = this;
+        
+        Debug.Log("Action performed");
+    }
+
+    public void actionConfirmed()
+    {
+        IActionBase act = actionInfo.action;
+        if(act is ActionBase<NPC> npcAct)
         {
-            Debug.Log("Cannot perform action as it is unknown.");
-        }
-        else
+            npcAct.reloadAction(actionInfo);
+            npcAct.performAction(100f);
+        } else if(act is ActionBase<Building> buildAction)
         {
-            
+            buildAction.reloadAction(actionInfo);
+            buildAction.performAction(100f); 
+        } else if(act is ActionBase<NoTarget> nonAction)
+        {
+            nonAction.reloadAction(actionInfo);
+            nonAction.performAction(100f); 
         }
     }
 }

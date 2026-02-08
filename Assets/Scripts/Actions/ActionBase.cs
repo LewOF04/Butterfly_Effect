@@ -5,7 +5,7 @@ using NoTarget = System.ValueTuple;
 public abstract class ActionBase<T> : IActionBase
 {
     protected ActionBase() { }
-    protected ActionBase(char _actionType) { }
+    protected ActionBase(char actionType) { }
 
     protected DataController dataController => DataController.Instance;
 
@@ -38,7 +38,7 @@ public abstract class ActionBase<T> : IActionBase
     protected abstract float getTimeToComplete(NPC performer, T receiver); //calculate how much time it would take for the NPC to complete this action
     protected abstract float getEnergyToComplete(NPC performer, T receiver); //calculate how much energy it would take the NPC to compelete this action
     protected abstract List<float> getTimeAndEnergyMultipliers(NPC performer); //get the list of multipliers that effect this actions time and energy 
-    public abstract void performAction(NPC performer, T receiver, float percentComplete); //make the changes of the action, with results affected by percentage completed
+    public abstract void performAction(float percentComplete); //make the changes of the action, with results affected by percentage completed
     
     //check that this action would be known to the NPC
     protected virtual bool isKnown(NPC performer)

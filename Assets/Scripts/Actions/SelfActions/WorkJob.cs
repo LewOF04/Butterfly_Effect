@@ -14,7 +14,7 @@ public class WorkJob : SelfAction
 
     protected override float baseTime => 8f;
     protected override float baseEnergy => 50f;
-    protected override float complexity => 30f;
+    protected override float complexity => 5f;
 
     protected override List<int> utilityPosTraits => new List<int>{3}; 
     protected override List<int> utilityNegTraits => new List<int>{4};
@@ -64,8 +64,9 @@ public class WorkJob : SelfAction
         return estUtility;
     }
 
-    public override void performAction(NPC performer, NoTarget _, float percentComplete)
+    public override void performAction(float percentComplete)
     {
+        NPC performer = dataController.NPCStorage[currentActor];
         float percentMulti = percentComplete/100;
         string description = performer.npcName + " spent " + percentMulti.ToString("0.00") + " hours at work.";
         ActionResult successInfo = ActionMaths.calcActionSuccess(actSuccess, percentComplete);
@@ -90,6 +91,7 @@ public class WorkJob : SelfAction
         if(percentComplete != 100f) description += " They had to stop working after doing "+percentComplete.ToString()+"% completion.";
         
         float actionTime = dataController.worldManager.gameTime + (24f - performer.timeLeft);
+
         performer.stats.energy -= energyToComplete*percentMulti;
         performer.timeLeft -= timeToComplete*percentMulti;
         performer.stats.wealth += 5f * wealthMultiplier;

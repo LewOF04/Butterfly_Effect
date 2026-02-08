@@ -39,6 +39,9 @@ public class NPCMenu : MonoBehaviour
     public GameObject actionContainer;
     public NPCViewPrefab npcViewPref;
     public ActionViewPrefab actionViewPref;
+    public TextMeshProUGUI errorTextField;
+    public ActionConfirm actionConfirm;
+
     [Header("<i>Buttons</i>")]
     public Button npcActButton;
     public Button buildActButton;
@@ -86,6 +89,10 @@ public class NPCMenu : MonoBehaviour
             RelationshipPanel info = child.gameObject.GetComponent<RelationshipPanel>();
             info.save(); 
         }
+
+        //reset action calculations
+        possibleActions = new ActionFrontier(dataController);
+        possibleActions.produceFrontier(npc);
     }
 
     /*
@@ -186,6 +193,7 @@ public class NPCMenu : MonoBehaviour
         mainCanvas.enabled = true;
         backToMainButton.gameObject.SetActive(false);
         saveButton.gameObject.SetActive(true);
+        actionConfirm.gameObject.SetActive(false);
 
         //calculate all actions available to npc
         possibleActions = new ActionFrontier(dataController);
@@ -255,6 +263,7 @@ public class NPCMenu : MonoBehaviour
         buildActButton.interactable = true;
         npcActButton.interactable = true;
 
+        errorTextField.text = "";
         saveButton.gameObject.SetActive(false);
     }
 
@@ -332,6 +341,7 @@ public class NPCMenu : MonoBehaviour
             inst.displayData();
         }
 
+        errorTextField.text = "";
         //ensure the npc view is hidden
         npcView.gameObject.SetActive(false);
     }
@@ -357,6 +367,8 @@ public class NPCMenu : MonoBehaviour
             inst.actionInfo = info;
             inst.displayData();
         }
+
+        errorTextField.text = "";
         npcView.gameObject.SetActive(false);
     }
 
@@ -388,6 +400,8 @@ public class NPCMenu : MonoBehaviour
             inst.receiver = thisNPC;
             inst.displayData();
         }
+
+        errorTextField.text = "";
         ActionView.gameObject.SetActive(false);
     }
 
@@ -417,6 +431,8 @@ public class NPCMenu : MonoBehaviour
             inst.receiver = building;
             inst.displayData();
         }
+
+        errorTextField.text = "";
         ActionView.gameObject.SetActive(false);
     }
 
