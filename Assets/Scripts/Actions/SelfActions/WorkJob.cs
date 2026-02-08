@@ -34,15 +34,15 @@ public class WorkJob : SelfAction
         List<float> weights = new List<float>();
 
         //npc stat/attribute effectors
-        effectors.Add(ActionMaths.calcMultiplier(performer.stats.happiness, 0.25f, 2f)); weights.Add(0.3f);
-        effectors.Add(ActionMaths.calcMultiplier(performer.stats.nutrition, 0.25f, 2f)); weights.Add(0.6f);
-        effectors.Add(ActionMaths.calcMultiplier(performer.stats.condition, 0.25f, 2f)); weights.Add(0.5f);
-        effectors.Add(ActionMaths.calcMultiplier(performer.stats.wealth, 2f, 0.25f)); weights.Add(0.8f);
+        effectors.Add(ActionMaths.calcMultiplier(performer.stats.happiness, 0f, 100f, 0.25f, 2f)); weights.Add(0.3f);
+        effectors.Add(ActionMaths.calcMultiplier(performer.stats.nutrition, 0f, 100f, 0.25f, 2f)); weights.Add(0.6f);
+        effectors.Add(ActionMaths.calcMultiplier(performer.stats.condition, 0f, 100f, 0.25f, 2f)); weights.Add(0.5f);
+        effectors.Add(ActionMaths.calcMultiplier(performer.stats.wealth, 0f, 100f, 2f, 0.25f)); weights.Add(0.8f);
 
         //energy and time effectors
         effectors.Add(ActionMaths.scarcityMultiplier(performer.stats.energy - energyToComplete, 0f, 100f, 0.25f, 2f)); weights.Add(0.2f);
         effectors.Add(ActionMaths.scarcityMultiplier(performer.timeLeft - timeToComplete, 0f, 24f, 0.25f, 2f)); weights.Add(0.2f);
-        effectors.Add(ActionMaths.calcMultiplier(actSuccess, 0.25f, 2f)); weights.Add(0.2f);
+        effectors.Add(ActionMaths.calcMultiplier(actSuccess, 0f, 100f, 0.25f, 2f)); weights.Add(0.2f);
 
         actUtility = ActionMaths.ApplyWeightedMultipliers(50f, effectors, weights);
         return actUtility;
@@ -66,7 +66,8 @@ public class WorkJob : SelfAction
 
     public override void performAction(NPC performer, NoTarget _, float percentComplete)
     {
-        string description = performer.npcName + " spent " + timeToComplete + " hours at work.";
+        float percentMulti = percentComplete/100;
+        string description = performer.npcName + " spent " + percentMulti.ToString("0.00") + " hours at work.";
         ActionResult successInfo = ActionMaths.calcActionSuccess(actSuccess, percentComplete);
 
         float wealthMultiplier;
@@ -89,8 +90,8 @@ public class WorkJob : SelfAction
         if(percentComplete != 100f) description += " They had to stop working after doing "+percentComplete.ToString()+"% completion.";
         
         float actionTime = dataController.worldManager.gameTime + (24f - performer.timeLeft);
-        performer.stats.energy -= energyToComplete;
-        performer.timeLeft -= timeToComplete;
+        performer.stats.energy -= energyToComplete*percentMulti;
+        performer.timeLeft -= timeToComplete*percentMulti;
         performer.stats.wealth += 5f * wealthMultiplier;
 
         float severity = 1f;
@@ -108,11 +109,11 @@ public class WorkJob : SelfAction
         List<float> weights = new List<float>();
 
         //dexterity, constitution, energy, nutrition, condition
-        multipliers.Add(ActionMaths.calcMultiplier(performer.attributes.dexterity, 0.25f, 2f)); weights.Add(0.3f); //dexterity multiplier
-        multipliers.Add(ActionMaths.calcMultiplier(performer.attributes.constitution, 0.25f, 2f)); weights.Add(0.3f); //constitution multiplier
-        multipliers.Add(ActionMaths.calcMultiplier(performer.stats.energy, 0.25f, 2f)); weights.Add(0.8f); //energy multiplier
-        multipliers.Add(ActionMaths.calcMultiplier(performer.stats.nutrition, 0.25f, 2f)); weights.Add(0.2f); //nutrition multiplier
-        multipliers.Add(ActionMaths.calcMultiplier(performer.stats.condition, 0.25f, 2f)); weights.Add(0.6f); //condition multiplier
+        multipliers.Add(ActionMaths.calcMultiplier(performer.attributes.dexterity, 0f, 100f, 0.25f, 2f)); weights.Add(0.3f); //dexterity multiplier
+        multipliers.Add(ActionMaths.calcMultiplier(performer.attributes.constitution, 0f, 100f, 0.25f, 2f)); weights.Add(0.3f); //constitution multiplier
+        multipliers.Add(ActionMaths.calcMultiplier(performer.stats.energy, 0f, 100f, 0.25f, 2f)); weights.Add(0.8f); //energy multiplier
+        multipliers.Add(ActionMaths.calcMultiplier(performer.stats.nutrition, 0f, 100f, 0.25f, 2f)); weights.Add(0.2f); //nutrition multiplier
+        multipliers.Add(ActionMaths.calcMultiplier(performer.stats.condition, 0f, 100f, 0.25f, 2f)); weights.Add(0.6f); //condition multiplier
 
         actSuccess = ActionMaths.ApplyWeightedMultipliers(50f, multipliers, weights);
         return actSuccess;
@@ -164,11 +165,11 @@ public class WorkJob : SelfAction
         List<float> multipliers = new List<float>{};
 
         //dexterity, constitution, energy, nutrition, condition
-        multipliers.Add(ActionMaths.calcMultiplier(performer.attributes.dexterity, 2f, 0.25f)); //dexterity multiplier
-        multipliers.Add(ActionMaths.calcMultiplier(performer.attributes.constitution, 2f, 0.25f)); //constitution multiplier
-        multipliers.Add(ActionMaths.calcMultiplier(performer.stats.energy, 2f, 0.25f)); //energy multiplier
-        multipliers.Add(ActionMaths.calcMultiplier(performer.stats.nutrition, 2f, 0.25f)); //nutrition multiplier
-        multipliers.Add(ActionMaths.calcMultiplier(performer.stats.condition, 2f, 0.25f)); //condition multiplier
+        multipliers.Add(ActionMaths.calcMultiplier(performer.attributes.dexterity, 0f, 100f, 2f, 0.25f)); //dexterity multiplier
+        multipliers.Add(ActionMaths.calcMultiplier(performer.attributes.constitution, 0f, 100f, 2f, 0.25f)); //constitution multiplier
+        multipliers.Add(ActionMaths.calcMultiplier(performer.stats.energy, 0f, 100f, 2f, 0.25f)); //energy multiplier
+        multipliers.Add(ActionMaths.calcMultiplier(performer.stats.nutrition, 0f, 100f, 2f, 0.25f)); //nutrition multiplier
+        multipliers.Add(ActionMaths.calcMultiplier(performer.stats.condition, 0f, 100f, 2f, 0.25f)); //condition multiplier
 
         return multipliers;
     }

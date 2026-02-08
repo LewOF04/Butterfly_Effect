@@ -11,11 +11,13 @@ public class NPCViewPrefab : MonoBehaviour
     public TextMeshProUGUI idField;
     public Image spriteImageLoc;
     public SpriteRenderer relationshipColour;
+    public TextMeshProUGUI relationshipText;
     private DataController dataController = DataController.Instance;
     public void displayData()
     {
         if(receiver is NPC npc) 
         {
+            relationshipText.gameObject.SetActive(true);
             nameField.text = "Name: "+npc.npcName; 
             idField.text = "ID: "+npc.id.ToString();
             spriteImageLoc.sprite = npc.GetComponent<SpriteRenderer>().sprite;
@@ -27,6 +29,7 @@ public class NPCViewPrefab : MonoBehaviour
         }
         if(receiver is Building building) 
         {
+            relationshipText.gameObject.SetActive(false);
             nameField.text = "Name: "+building.buildingName; 
             idField.text = "ID: "+building.id.ToString();
             spriteImageLoc.sprite = building.GetComponent<SpriteRenderer>().sprite;
@@ -39,11 +42,13 @@ public class NPCViewPrefab : MonoBehaviour
     private void setColour(float minVal, float maxVal, float val, SpriteRenderer background)
     {
         val = Mathf.Clamp(val, minVal, maxVal);
-        float t = Mathf.InverseLerp(minVal, maxVal, val);
+        float t = Mathf.InverseLerp(Mathf.Min(minVal, maxVal), Mathf.Max(minVal, maxVal), val);
+
+        Color amber = new Color(1f, 0.75f, 0f);
 
         Color colour = t < 0.5f
-            ? Color.Lerp(Color.green, new Color(1f, 0.75f, 0f), t * 2f)
-            : Color.Lerp(new Color(1f, 0.75f, 0f), Color.red, (t - 0.5f) * 2f);
+            ? Color.Lerp(Color.green, amber, t * 2f)
+            : Color.Lerp(amber, Color.red, (t - 0.5f) * 2f);
 
         background.color = colour;
     }

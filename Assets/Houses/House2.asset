@@ -23,10 +23,10 @@ MonoBehaviour:
   - {fileID: 6008755849024553855, guid: 1136c5c8177498f4fb8515d67d350289, type: 3}
   - {fileID: 6008755849024553855, guid: 1136c5c8177498f4fb8515d67d350289, type: 3}
   - {fileID: 6008755849024553855, guid: 1136c5c8177498f4fb8515d67d350289, type: 3}
-  - {fileID: 21300000, guid: 625006b58205d80448fc8bf824d97423, type: 3}
-  - {fileID: 21300000, guid: 5cd2f134794194a4bb5f029aec1be43b, type: 3}
-  - {fileID: 21300000, guid: ae1f2cb37b2210d4db567fa9d72c216a, type: 3}
-  - {fileID: 21300000, guid: 15ad39aaae2bce94ab14e4675e6851c0, type: 3}
+  - {fileID: 99612922483688807, guid: 625006b58205d80448fc8bf824d97423, type: 3}
+  - {fileID: -515420464755338084, guid: 5cd2f134794194a4bb5f029aec1be43b, type: 3}
+  - {fileID: 8501199437743977124, guid: ae1f2cb37b2210d4db567fa9d72c216a, type: 3}
+  - {fileID: -5274078672832802197, guid: 15ad39aaae2bce94ab14e4675e6851c0, type: 3}
   scale: {x: 0.23, y: 0.23, z: 0.23}
   defaultPosition: {x: 1.21, y: -0.2, z: 0}
   colliderShape:

@@ -51,11 +51,12 @@ public class NPCMenu : MonoBehaviour
     public TextMeshProUGUI recNameField;
     public TextMeshProUGUI recIDField;
 
-
-
     private DataController dataController = DataController.Instance;
     
 
+    /*
+    When save button is clicked, take all changes made to the values and set them to the npc
+    */
     public void saveNPC()
     {
         Attributes attrs = npc.attributes;
@@ -87,6 +88,9 @@ public class NPCMenu : MonoBehaviour
         }
     }
 
+    /*
+    Load the NPC menu with the data of the npc
+    */
     public void displayData()
     {
         InputLocker.Lock(); //locks the input 
@@ -95,6 +99,7 @@ public class NPCMenu : MonoBehaviour
         Attributes attrs = npc.attributes;
         Stats stats = npc.stats;
 
+        //determine whether to show parent building
         if(npc.parentBuilding < 0)
         {
             buildingButton.enabled = false;
@@ -104,6 +109,7 @@ public class NPCMenu : MonoBehaviour
             buildingButton.enabled = true;
         }
 
+        //set npc values into main page
         spriteImageLoc.sprite = npc.GetComponent<SpriteRenderer>().sprite;
         spriteImageLoc.preserveAspect = true;
 
@@ -128,6 +134,7 @@ public class NPCMenu : MonoBehaviour
         statSliders[4].value = stats.food;
         statSliders[5].value = stats.wealth;
 
+        //populate traits data storage
         List<int> npcTraits = npc.traits;
         Dictionary<int, TraitData> traitDatabase = dataController.TraitStorage;
         foreach (int id in npcTraits)
@@ -172,8 +179,6 @@ public class NPCMenu : MonoBehaviour
             memPanel.displayData();
         }
 
-        possibleActions = new ActionFrontier(dataController);
-
         recGameObj.gameObject.SetActive(false);
         ActionView.gameObject.SetActive(false);
         npcView.gameObject.SetActive(false);
@@ -181,13 +186,20 @@ public class NPCMenu : MonoBehaviour
         mainCanvas.enabled = true;
         backToMainButton.gameObject.SetActive(false);
         saveButton.gameObject.SetActive(true);
+
+        //calculate all actions available to npc
+        possibleActions = new ActionFrontier(dataController);
+        possibleActions.produceFrontier(npc);
     }
 
+    /*
+    When the exit button is clicked, reset the menu and close
+    */
     public void exitMenu()
     {
         Canvas canvas = GetComponent<Canvas>();
         canvas.enabled = false; //disable the canvas
-        removeButtons();
+        removeButtons(); //remove prefabs
 
         backToMainButton.gameObject.SetActive(false);
 
@@ -198,17 +210,25 @@ public class NPCMenu : MonoBehaviour
         InputLocker.Unlock(); //unlock the inputs
     }
 
+    /*
+    When the back button on the sub pages is clicked, return the main menu page
+    Reset any containers and gameobjects
+    */
     public void backToMain()
     {
         backToMainButton.gameObject.SetActive(false);
+
+        //if returning from the relationship page
         if(relationshipCanvas.enabled == true) relationshipCanvas.enabled = false;
 
+        //if returning from the memory page
         if(memoryCanvas.enabled == true)
         {
             memoryCanvas.enabled = false;
             saveButton.gameObject.SetActive(true);
         }
 
+        //if returning from the action page
         if(actionCanvas.enabled == true)
         {
             actionCanvas.enabled = false;
@@ -221,6 +241,9 @@ public class NPCMenu : MonoBehaviour
         mainCanvas.enabled = true;
     }
 
+    /*
+    Open the actions sub page of the npc menu
+    */
     public void openActions()
     {
         mainCanvas.enabled = false;
@@ -233,9 +256,11 @@ public class NPCMenu : MonoBehaviour
         npcActButton.interactable = true;
 
         saveButton.gameObject.SetActive(false);
-        possibleActions.produceFrontier(npc);
     }
 
+    /*
+    Open the memory sub page of the npc menu
+    */
     public void openMemories()
     {
         mainCanvas.enabled = false;
@@ -244,6 +269,9 @@ public class NPCMenu : MonoBehaviour
         saveButton.gameObject.SetActive(false);
     }
 
+    /*
+    Open the relationship sub page of the npc menu
+    */
     public void openRelationships()
     {
         mainCanvas.enabled = false;
@@ -251,6 +279,9 @@ public class NPCMenu : MonoBehaviour
         relationshipCanvas.enabled = true;
     }
 
+    /*
+    Open the building menu from the reference in the npc menu
+    */
     public void openBuilding()
     {
         if (npc.parentBuilding >= 0)
@@ -275,27 +306,39 @@ public class NPCMenu : MonoBehaviour
         }
     }
 
+    /*
+    Upon clicking for self actions, show all actions that can be performed to themselves.
+    */
     public void selfActPress()
     {
-        ActionView.gameObject.SetActive(true);
+        ActionView.gameObject.SetActive(true); //show the container for the actions
 
+        //set the buttons to the relevant setup
         selfActButton.interactable = false;
         buildActButton.interactable = true;
         envActButton.interactable = true;
         npcActButton.interactable = true;
         recGameObj.gameObject.SetActive(false);
 
+        //remove any existing prefabs in the containers
         removeActionViews();
         removeNPCViews();
+
+        //iterate over all self actions and instantiate the relevant prefab
         foreach(ActionInfoWrapper info in possibleActions.selfActions)
         {
             ActionViewPrefab inst = Instantiate(actionViewPref, actionContainer.transform);
             inst.actionInfo = info;
             inst.displayData();
         }
+
+        //ensure the npc view is hidden
         npcView.gameObject.SetActive(false);
     }
 
+    /*
+    Upon clicking for environment actions, show all actions that we could perform to the environment
+    */
     public void envActPres()
     {
         ActionView.gameObject.SetActive(true);
@@ -317,6 +360,9 @@ public class NPCMenu : MonoBehaviour
         npcView.gameObject.SetActive(false);
     }
 
+    /*
+    Upon clicking for npc actions, show each npc that we could perform an action to
+    */
     public void npcActButtPress()
     {
         npcView.gameObject.SetActive(true);
@@ -330,6 +376,7 @@ public class NPCMenu : MonoBehaviour
         removeActionViews();
         removeNPCViews();
 
+        //iterate over all npcs and create the prefab to view the npcs information
         Dictionary<int, NPC> npcs = dataController.NPCStorage;
         List<int> npcKeys = new List<int>(npcs.Keys);
         foreach(int npcKey in npcKeys)
@@ -344,6 +391,9 @@ public class NPCMenu : MonoBehaviour
         ActionView.gameObject.SetActive(false);
     }
 
+    /*
+    Upon clicking for building actions, show each building that we could perform an action to
+    */
     public void buildActButtPress()
     {
         npcView.gameObject.SetActive(true);
@@ -370,12 +420,17 @@ public class NPCMenu : MonoBehaviour
         ActionView.gameObject.SetActive(false);
     }
 
+    /*
+    Show Npc and Building Actions upon click of NPC or Building view prefab
+    */
     public void showNPCBuildActs(MonoBehaviour receiver)
     {
+        //check that the relevant objects are set correctly
         recGameObj.gameObject.SetActive(true);
         ActionView.gameObject.SetActive(true);
         removeActionViews();
 
+        //get the actions which could be performed to this building/npc
         List<ActionInfoWrapper> actions = new List<ActionInfoWrapper>();
         if(receiver is Building building) {
             actions = possibleActions.buildingActions[building.id];
@@ -384,6 +439,7 @@ public class NPCMenu : MonoBehaviour
             actions = possibleActions.npcActions[thisNpc.id];
         }
 
+        //iterate over all actions and display them
         foreach(ActionInfoWrapper info in actions)
         {
             ActionViewPrefab inst = Instantiate(actionViewPref, actionContainer.transform);

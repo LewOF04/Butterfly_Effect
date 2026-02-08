@@ -3,11 +3,6 @@ using System.Collections.Generic;
 
 public static class ActionMaths
 {
-    public static float normalize(float value, float min, float max)
-    {
-        return Mathf.Clamp01((value - min) / (max - min));
-    }
-
     /*
     Given a value calculate the weighting for this value
 
@@ -18,21 +13,17 @@ public static class ActionMaths
 
     @return - the weighting for this particular value
     */
-    public static float calcMultiplier(float value, float lowBound, float highBound)
+    public static float calcMultiplier(float value, float minVal, float maxVal, float lowBound, float highBound)
     {
-        float normal = Mathf.Clamp01(value);
-        //normal = Mathf.Pow(normal, boost);
-        return Mathf.Lerp(lowBound, highBound, normal);
+        float t = Mathf.InverseLerp(minVal, maxVal, value);
+        return Mathf.Lerp(lowBound, highBound, t);
     }
 
     public static float rationalityNoise(float value, float rationality)
     {
-        float range = Mathf.Clamp01(rationality);
-        float min = 1.0f - range;
-        float max = 1.0f + range;
-
-        float multiplier = Mathf.Lerp(min, max, Random.value);
-
+        float r = Mathf.InverseLerp(0f, 100f, rationality);
+        float swing = Mathf.Lerp(0.5f, 0f, r);       
+        float multiplier = 1f + Random.Range(-swing, swing);
         return value * multiplier;
     }
 
@@ -52,15 +43,17 @@ public static class ActionMaths
             totalWeight += weight; 
         }
 
+        float combinedMultiplier = Mathf.Pow(weightedProduct, 1f / totalWeight);
+
         //if (totalWeight > 0f) weightedProduct = Mathf.Pow(weightedProduct, 1f / totalWeight); //alter by total weight to reduce huge weights
-        return baseValue * weightedProduct;
+        return baseValue * combinedMultiplier;
     }
 
     public static float addChaos(float baseValue, float chaos)
     {
         if(chaos == 0) return baseValue;
 
-        chaos = Mathf.Clamp01(chaos);
+        chaos = Mathf.InverseLerp(0f, 1f, chaos);
 
         float min = 1.0f - chaos;
         float max = 1.0f + chaos;
