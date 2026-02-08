@@ -37,16 +37,19 @@ public class NPCMenu : MonoBehaviour
     public GameObject npcContainer;
     public GameObject ActionView;
     public GameObject actionContainer;
-    public NPCViewPrefab<NPC> actionNPCViewPref;
-    public NPCViewPrefab<Building> actionBuildingViewPref;
-    public NPCActionPrefab<NPC> npcActViewPref;
-    public NPCActionPrefab<Building> buildingActViewPref;
-    public NonNPCActionPrefab envOrSelfViewPref;
+    public NPCViewPrefab npcViewPref;
+    public ActionViewPrefab actionViewPref;
+    [Header("<i>Buttons</i>")]
     public Button npcActButton;
     public Button buildActButton;
     public Button selfActButton;
     public Button envActButton;
     private ActionFrontier possibleActions;
+    [Header("<i>Receiver Info</i>")]
+    public GameObject recGameObj;
+    public Image recSpriteLoc;
+    public TextMeshProUGUI recNameField;
+    public TextMeshProUGUI recIDField;
 
 
 
@@ -104,7 +107,7 @@ public class NPCMenu : MonoBehaviour
         spriteImageLoc.sprite = npc.GetComponent<SpriteRenderer>().sprite;
         spriteImageLoc.preserveAspect = true;
 
-        menuTitle.text = "(NPC) Name: "+npc.npcName+" ID: "+npc.id;
+        menuTitle.text = "(NPC) Name: "+npc.npcName+" ID: "+npc.id.ToString();
 
         attributeSliders[0].value = attrs.morality;
         attributeSliders[1].value = attrs.intelligence;
@@ -171,6 +174,10 @@ public class NPCMenu : MonoBehaviour
 
         possibleActions = new ActionFrontier(dataController);
 
+        recGameObj.gameObject.SetActive(false);
+        ActionView.gameObject.SetActive(false);
+        npcView.gameObject.SetActive(false);
+
         mainCanvas.enabled = true;
         backToMainButton.gameObject.SetActive(false);
         saveButton.gameObject.SetActive(true);
@@ -189,17 +196,26 @@ public class NPCMenu : MonoBehaviour
         memoryCanvas.enabled = false;
 
         InputLocker.Unlock(); //unlock the inputs
-
     }
 
     public void backToMain()
     {
         backToMainButton.gameObject.SetActive(false);
         if(relationshipCanvas.enabled == true) relationshipCanvas.enabled = false;
+
         if(memoryCanvas.enabled == true)
         {
             memoryCanvas.enabled = false;
             saveButton.gameObject.SetActive(true);
+        }
+
+        if(actionCanvas.enabled == true)
+        {
+            actionCanvas.enabled = false;
+            saveButton.gameObject.SetActive(true);
+            recGameObj.gameObject.SetActive(false);
+            removeNPCViews();
+            removeActionViews();
         }
 
         mainCanvas.enabled = true;
@@ -210,6 +226,12 @@ public class NPCMenu : MonoBehaviour
         mainCanvas.enabled = false;
         backToMainButton.gameObject.SetActive(true);
         actionCanvas.enabled = true;
+
+        envActButton.interactable = true;
+        selfActButton.interactable = true;
+        buildActButton.interactable = true;
+        npcActButton.interactable = true;
+
         saveButton.gameObject.SetActive(false);
         possibleActions.produceFrontier(npc);
     }
@@ -253,49 +275,124 @@ public class NPCMenu : MonoBehaviour
         }
     }
 
-    /*
-    public NPCViewPrefab<NPC> actionNPCView;
-    public NPCViewPrefab<Building> actionBuildingView;
-    public NPCActionPrefab<NPC> npcActPrefab;
-    public NPCActionPrefab<Building> buildingActPrefab;
-    public NonNPCActionPrefab envOrSelfPrefab;
-    */
-
     public void selfActPress()
     {
+        ActionView.gameObject.SetActive(true);
+
+        selfActButton.interactable = false;
+        buildActButton.interactable = true;
+        envActButton.interactable = true;
+        npcActButton.interactable = true;
+        recGameObj.gameObject.SetActive(false);
+
         removeActionViews();
         removeNPCViews();
         foreach(ActionInfoWrapper info in possibleActions.selfActions)
         {
-            var inst = instantiate(envOrSelfViewPref, actionContainer.transform);
+            ActionViewPrefab inst = Instantiate(actionViewPref, actionContainer.transform);
             inst.actionInfo = info;
             inst.displayData();
         }
+        npcView.gameObject.SetActive(false);
     }
 
     public void envActPres()
     {
+        ActionView.gameObject.SetActive(true);
+
+        envActButton.interactable = false;
+        selfActButton.interactable = true;
+        buildActButton.interactable = true;
+        npcActButton.interactable = true;
+        recGameObj.gameObject.SetActive(false);
+
         removeActionViews();
         removeNPCViews();
         foreach(ActionInfoWrapper info in possibleActions.environmentActions)
         {
-            var inst = instantiate(envOrSelfViewPref, actionContainer.transform);
+            ActionViewPrefab inst = Instantiate(actionViewPref, actionContainer.transform);
             inst.actionInfo = info;
             inst.displayData();
         }
+        npcView.gameObject.SetActive(false);
     }
 
-    public void npcActPress()
+    public void npcActButtPress()
     {
+        npcView.gameObject.SetActive(true);
+
+        npcActButton.interactable = false;
+        selfActButton.interactable = true;
+        buildActButton.interactable = true;
+        envActButton.interactable = true;
+        recGameObj.gameObject.SetActive(false);
+
         removeActionViews();
         removeNPCViews();
-        
+
+        Dictionary<int, NPC> npcs = dataController.NPCStorage;
+        List<int> npcKeys = new List<int>(npcs.Keys);
+        foreach(int npcKey in npcKeys)
+        {
+            if(npcKey == npc.id) continue;
+            NPC thisNPC = npcs[npcKey];
+            NPCViewPrefab inst = Instantiate(npcViewPref, npcContainer.transform);
+            inst.performer = npc;
+            inst.receiver = thisNPC;
+            inst.displayData();
+        }
+        ActionView.gameObject.SetActive(false);
     }
 
-    public void buildActPress()
+    public void buildActButtPress()
     {
+        npcView.gameObject.SetActive(true);
+
+        buildActButton.interactable = false;
+        selfActButton.interactable = true;
+        envActButton.interactable = true;
+        npcActButton.interactable = true;
+        recGameObj.gameObject.SetActive(false);
+
         removeActionViews();
         removeNPCViews();
+
+        Dictionary<int, Building> buildings = dataController.BuildingStorage;
+        List<int> buildingKeys = new List<int>(buildings.Keys);
+        foreach(int buildingKey in buildingKeys)
+        {
+            Building building = buildings[buildingKey];
+            NPCViewPrefab inst = Instantiate(npcViewPref, npcContainer.transform);
+            inst.performer = npc;
+            inst.receiver = building;
+            inst.displayData();
+        }
+        ActionView.gameObject.SetActive(false);
+    }
+
+    public void showNPCBuildActs(MonoBehaviour receiver)
+    {
+        recGameObj.gameObject.SetActive(true);
+        ActionView.gameObject.SetActive(true);
+        removeActionViews();
+
+        List<ActionInfoWrapper> actions = new List<ActionInfoWrapper>();
+        if(receiver is Building building) {
+            actions = possibleActions.buildingActions[building.id];
+        }
+        if(receiver is NPC thisNpc) {
+            actions = possibleActions.npcActions[thisNpc.id];
+        }
+
+        foreach(ActionInfoWrapper info in actions)
+        {
+            ActionViewPrefab inst = Instantiate(actionViewPref, actionContainer.transform);
+            inst.actionInfo = info;
+            inst.displayData();
+        }
+
+        removeNPCViews();
+        npcView.gameObject.SetActive(false);
     }
 
     /*

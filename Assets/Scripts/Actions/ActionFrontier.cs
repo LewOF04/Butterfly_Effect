@@ -31,7 +31,7 @@ public class ActionFrontier
         environmentActions = new List<ActionInfoWrapper>();
     }
 
-    public produceFrontier(NPC performer)
+    public void produceFrontier(NPC performer)
     {
         Dictionary<int, NPC> npcStorage = dataController.NPCStorage;
         List<int> npcKeys = new List<int>(npcStorage.Keys);
@@ -59,7 +59,7 @@ public class ActionFrontier
             {
                 Building building = buildingStorage[buildingKey];
                 
-                ActionInfoWrapper info = buildingAct.computeAction(performer, building);
+                ActionInfoWrapper info = buildAct.computeAction(performer, building);
                 buildingActions[building.id].Add(info);
 
                 if(info.estUtility > bestAction.estUtility) bestAction = info;

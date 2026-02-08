@@ -2,22 +2,22 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
-public class NPCViewPrefab<T>
+public class NPCViewPrefab : MonoBehaviour
 {
     public NPC performer;
-    public T receiver;
+    public MonoBehaviour receiver;
 
     public TextMeshProUGUI nameField;
     public TextMeshProUGUI idField;
     public Image spriteImageLoc;
-    public Image relationshipColour;
+    public SpriteRenderer relationshipColour;
     private DataController dataController = DataController.Instance;
     public void displayData()
     {
         if(receiver is NPC npc) 
         {
-            nameField.text = npc.npcName; 
-            idField.text = npc.id.ToString();
+            nameField.text = "Name: "+npc.npcName; 
+            idField.text = "ID: "+npc.id.ToString();
             spriteImageLoc.sprite = npc.GetComponent<SpriteRenderer>().sprite;
             spriteImageLoc.preserveAspect = true;
             relationshipColour.gameObject.SetActive(true); 
@@ -27,8 +27,8 @@ public class NPCViewPrefab<T>
         }
         if(receiver is Building building) 
         {
-            nameField.text = building.buildingName; 
-            idField.text = building.id.ToString();
+            nameField.text = "Name: "+building.buildingName; 
+            idField.text = "ID: "+building.id.ToString();
             spriteImageLoc.sprite = building.GetComponent<SpriteRenderer>().sprite;
             spriteImageLoc.preserveAspect = true;
             relationshipColour.gameObject.SetActive(false);
@@ -36,7 +36,7 @@ public class NPCViewPrefab<T>
         
     }
 
-    private void setColour(float minVal, float maxVal, float val, Image background)
+    private void setColour(float minVal, float maxVal, float val, SpriteRenderer background)
     {
         val = Mathf.Clamp(val, minVal, maxVal);
         float t = Mathf.InverseLerp(minVal, maxVal, val);
@@ -46,5 +46,11 @@ public class NPCViewPrefab<T>
             : Color.Lerp(new Color(1f, 0.75f, 0f), Color.red, (t - 0.5f) * 2f);
 
         background.color = colour;
+    }
+
+    public void onPress()
+    {
+        NPCMenu npcMenu = FindFirstObjectByType<NPCMenu>();
+        npcMenu.showNPCBuildActs(receiver);
     }
 }
