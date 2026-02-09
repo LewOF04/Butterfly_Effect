@@ -34,7 +34,7 @@ public class NPCViewButton : MonoBehaviour
 
         //make the npc canvas viewable and the building canvas invisible
         buildingCanvas.enabled = false;
-        buildingMenu.transform.position -= new Vector3(0.0f, 0.0f, 5.0f);
+        buildingMenu.transform.position -= new Vector3(0.0f, 0.0f, 5.0f); 
         
         npcCanvas.enabled = true;
 

@@ -215,6 +215,8 @@ public class NPCMenu : MonoBehaviour
         actionCanvas.enabled = false;
         memoryCanvas.enabled = false;
 
+        gameObject.transform.position -= new Vector3(0.0f, 0.0f, 5.0f);
+
         InputLocker.Unlock(); //unlock the inputs
     }
 
@@ -304,11 +306,10 @@ public class NPCMenu : MonoBehaviour
             Camera camera = FindFirstObjectByType<Camera>();
             buildingMenu.transform.position = camera.transform.position;
             buildingMenu.transform.position += new Vector3(0.0f, 0.0f, 5.0f);
-
-            gameObject.transform.position -= new Vector3(0.0f, 0.0f, 5.0f);
             
             buildingMenu.building = building;
             buildingMenu.displayData();
+            gameObject.transform.position -= new Vector3(0.0f, 0.0f, 5.0f);
 
             removeButtons();
             buidlingCanvas.enabled = true;

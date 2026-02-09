@@ -11,7 +11,7 @@ public class ObjectSelector : MonoBehaviour
             return;
         }
 
-        if (TryGetComponent<Building>(out Building building))
+        if (TryGetComponent<Building>(out Building building)) 
         {
             BuildingMenu buildingMenu = FindFirstObjectByType<BuildingMenu>();
             Canvas canvas = buildingMenu.GetComponent<Canvas>();

@@ -45,6 +45,7 @@ public class HistoryManager : MonoBehaviour
 
             //add secondary storage for easy access to each npc information
             eventsPerNPCStorage[kvp.Key] = new List<NPCEvent>();
+            NPCEventStorage[selfRel] = new Dictionary<NPCEventKey, NPCEvent>();
         }
 
         dataController.NPCEventStorage = NPCEventStorage;

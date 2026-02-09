@@ -91,7 +91,7 @@ public class BuildingMenu : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
-        foreach (Transform child in memoryInfoContainer.transform)
+        foreach (Transform child in memoryInfoContainer.transform) 
         {
             Destroy(child.gameObject);
         }

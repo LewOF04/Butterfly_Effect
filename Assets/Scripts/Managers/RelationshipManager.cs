@@ -16,19 +16,16 @@ public class RelationshipManager : MonoBehaviour
 
         Dictionary<RelationshipKey, Relationship> RelationshipStorage = new Dictionary<RelationshipKey, Relationship>();
         Dictionary<int, List<Relationship>> RelationshipPerNPC = new Dictionary<int, List<Relationship>>();
-        foreach(var kvp_1 in npcs)
+        List<int> npcKeys = new List<int>(npcs.Keys);
+        foreach(int npcKey1 in npcKeys)
         {
-            NPC npc_1 = kvp_1.Value;
-            foreach(var kvp_2 in npcs)
+            NPC npc_1 = npcs[npcKey1];
+            foreach(int npcKey2 in npcKeys)
             {
-                NPC npc_2 = kvp_2.Value;
-                //check we're not duplicating npcs or relationships
-                if(npc_1.id >= npc_2.id)
-                {
-                    continue;
-                }
-
-                RelationshipKey key = new RelationshipKey(npc_1.id, npc_2.id); //calculate key of the relationship
+                if(npcKey1 >= npcKey2) continue; //check we're not duplicating npcs or relationships
+                
+                NPC npc_2 = npcs[npcKey2];
+                RelationshipKey key = new RelationshipKey(npcKey1, npcKey2); //calculate key of the relationship
 
                 Relationship rel = new Relationship(key, rng.Next(0,101));
                 RelationshipStorage[key] = rel;  
@@ -39,7 +36,6 @@ public class RelationshipManager : MonoBehaviour
 
                 RelationshipPerNPC[npc_1.id].Add(rel);
                 RelationshipPerNPC[npc_2.id].Add(rel);
-                
             }
         }
 
