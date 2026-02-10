@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4866134272393305384}
   - component: {fileID: 1370293024334038459}
   m_Layer: 5
-  m_Name: Perf Name
+  m_Name: Rec Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -495,7 +495,7 @@ GameObject:
   - component: {fileID: 382483364515925986}
   - component: {fileID: 1225546419150695370}
   m_Layer: 5
-  m_Name: Rec Name
+  m_Name: Perf Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1632,12 +1632,14 @@ MonoBehaviour:
   descriptionField: {fileID: 2942285118011613825}
   performerIDField: {fileID: 352070194271378068}
   receiverIDField: {fileID: 5173830613124017954}
-  performerNameField: {fileID: 1370293024334038459}
-  receiverNameField: {fileID: 1225546419150695370}
+  performerNameField: {fileID: 1225546419150695370}
+  receiverNameField: {fileID: 1370293024334038459}
   performerSpriteImageLoc: {fileID: 2319177536655792448}
   receiverSpriteImageLoc: {fileID: 6332479171889867686}
   perfImpField: {fileID: 8965760628746672803}
   recImpField: {fileID: 2890454787489478811}
+  receiverText: {fileID: 104134252701338555}
+  receiverNameText: {fileID: 0}
   dataController: {fileID: 0}
 --- !u!1 &8911904040858699006
 GameObject:

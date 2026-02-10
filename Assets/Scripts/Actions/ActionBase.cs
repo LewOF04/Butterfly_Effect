@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using NoTarget = System.ValueTuple;
+using System;
 
 public abstract class ActionBase<T> : IActionBase
 {
@@ -27,6 +28,7 @@ public abstract class ActionBase<T> : IActionBase
     [Range(0,24)] protected abstract float baseTime {get;} //the time it would take for a completely "normal" npc to complete
     [Range(0,100)] protected abstract float baseEnergy {get;} //the energy it would take for a completely "normal" npc to complete
     [Range(0,100)] protected abstract float complexity {get;} //how complex this action is to complete
+    [Range(0,100)] protected abstract float baseUtility {get;} //how inheritly useful the action is
     protected abstract List<int> utilityPosTraits {get;} //the traits that will have an positive impact on perceived utility
     protected abstract List<int> utilityNegTraits {get;} //the traits that will have an negative impact on perceived utility
     protected abstract List<int> successPosTraits {get;}//the traits that will have a positive impact on the action success
@@ -140,7 +142,7 @@ public interface IActionBase
     string baseDescription {get;}
 }
 
-public struct ActionInfoWrapper
+public struct ActionInfoWrapper : IEquatable<ActionInfoWrapper>
 {
     public int currentActor;
     public int receiver;
@@ -165,4 +167,23 @@ public struct ActionInfoWrapper
         this.actSuccess = actSuccess;
         this.action = action;
     }
+    public bool Equals(ActionInfoWrapper other)
+    {
+        if(receiver == other.receiver && currentActor == other.currentActor && action.name == other.action.name) return true;
+        return false;
+    }
+
+    public override bool Equals(object other)
+    {
+        if(other is ActionInfoWrapper otherInf) return Equals(otherInf);
+        return false;
+    }
+
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(receiver, currentActor, action.name);
+    }
+
+    public static bool operator == (ActionInfoWrapper a, ActionInfoWrapper b) => a.Equals(b);
+    public static bool operator != (ActionInfoWrapper a, ActionInfoWrapper b) => !a.Equals(b);
 }

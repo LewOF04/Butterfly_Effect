@@ -24,6 +24,11 @@
       "id": 4,
       "displayName": "Lazy Bones",
       "description": "Work or don't work; that is the question. Answer: don't." 
+    },
+    {
+      "id": 5,
+      "displayName": "Serial Killer",
+      "description": "They like to kill people, needn't say more." 
     }
   ]
 }

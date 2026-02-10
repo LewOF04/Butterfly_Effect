@@ -339,7 +339,11 @@ public class NPCMenu : MonoBehaviour
         {
             ActionViewPrefab inst = Instantiate(actionViewPref, actionContainer.transform);
             inst.actionInfo = info;
-            inst.displayData();
+
+            //tell it to display that this is the best action
+            bool isBestAction = false;
+            if(possibleActions.bestAction == info) isBestAction = true;
+            inst.displayData(isBestAction);
         }
 
         errorTextField.text = "";
@@ -366,7 +370,11 @@ public class NPCMenu : MonoBehaviour
         {
             ActionViewPrefab inst = Instantiate(actionViewPref, actionContainer.transform);
             inst.actionInfo = info;
-            inst.displayData();
+
+            //tell it to display that this is the best action
+            bool isBestAction = false;
+            if(possibleActions.bestAction == info) isBestAction = true;
+            inst.displayData(isBestAction);
         }
 
         errorTextField.text = "";
@@ -451,9 +459,21 @@ public class NPCMenu : MonoBehaviour
         List<ActionInfoWrapper> actions = new List<ActionInfoWrapper>();
         if(receiver is Building building) {
             actions = possibleActions.buildingActions[building.id];
+            Sprite theSprite = building.gameObject.GetComponent<SpriteRenderer>().sprite;
+            ReceiverInfo objScript = recGameObj.GetComponent<ReceiverInfo>();
+            objScript.spriteImageLoc.sprite = theSprite;
+            objScript.spriteImageLoc.preserveAspect = true;
+            objScript.nameField.text = "Name: "+building.buildingName;
+            objScript.idField.text = "ID: "+building.id.ToString();
         }
         if(receiver is NPC thisNpc) {
             actions = possibleActions.npcActions[thisNpc.id];
+            Sprite theSprite = thisNpc.gameObject.GetComponent<SpriteRenderer>().sprite;
+            ReceiverInfo objScript = recGameObj.GetComponent<ReceiverInfo>();
+            objScript.spriteImageLoc.sprite = theSprite;
+            objScript.spriteImageLoc.preserveAspect = true;
+            objScript.nameField.text = "Name: "+thisNpc.npcName;
+            objScript.idField.text = "ID: "+thisNpc.id.ToString();
         }
 
         //iterate over all actions and display them
@@ -461,7 +481,11 @@ public class NPCMenu : MonoBehaviour
         {
             ActionViewPrefab inst = Instantiate(actionViewPref, actionContainer.transform);
             inst.actionInfo = info;
-            inst.displayData();
+
+            //tell it to display that this is the best action
+            bool isBestAction = false;
+            if(info == possibleActions.bestAction) isBestAction = true;
+            inst.displayData(isBestAction);
         }
 
         removeNPCViews();

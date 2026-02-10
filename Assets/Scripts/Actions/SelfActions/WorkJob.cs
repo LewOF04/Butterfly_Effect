@@ -6,6 +6,7 @@ using NoTarget = System.ValueTuple;
 [Preserve]
 public class WorkJob : SelfAction
 {
+    private const float baseEarning = 5f;
     public WorkJob() : base('S'){}
 
     public override char actionType => 'S';
@@ -15,6 +16,7 @@ public class WorkJob : SelfAction
     protected override float baseTime => 8f;
     protected override float baseEnergy => 50f;
     protected override float complexity => 5f;
+    protected override float baseUtility => 50f;
 
     protected override List<int> utilityPosTraits => new List<int>{3}; 
     protected override List<int> utilityNegTraits => new List<int>{4};
@@ -26,9 +28,9 @@ public class WorkJob : SelfAction
     {
         if(actUtility != -1) return actUtility;
 
-        getTimeToComplete(performer, default);
-        getEnergyToComplete(performer, default);
-        computeSuccess(performer, default);
+        if(timeToComplete == -1) getTimeToComplete(performer, default);
+        if(energyToComplete == -1) getEnergyToComplete(performer, default);
+        if(actSuccess == -1) computeSuccess(performer, default);
 
         List<float> effectors = new List<float>();
         List<float> weights = new List<float>();
@@ -38,13 +40,14 @@ public class WorkJob : SelfAction
         effectors.Add(ActionMaths.calcMultiplier(performer.stats.nutrition, 0f, 100f, 0.25f, 2f)); weights.Add(0.6f);
         effectors.Add(ActionMaths.calcMultiplier(performer.stats.condition, 0f, 100f, 0.25f, 2f)); weights.Add(0.5f);
         effectors.Add(ActionMaths.calcMultiplier(performer.stats.wealth, 0f, 100f, 2f, 0.25f)); weights.Add(0.8f);
+        effectors.Add(ActionMaths.calcMultiplier(baseEarning, 0f, 100f, 0.75f, 1.25f)); weights.Add(0.8f);
 
         //energy and time effectors
         effectors.Add(ActionMaths.scarcityMultiplier(performer.stats.energy - energyToComplete, 0f, 100f, 0.25f, 2f)); weights.Add(0.2f);
         effectors.Add(ActionMaths.scarcityMultiplier(performer.timeLeft - timeToComplete, 0f, 24f, 0.25f, 2f)); weights.Add(0.2f);
         effectors.Add(ActionMaths.calcMultiplier(actSuccess, 0f, 100f, 0.25f, 2f)); weights.Add(0.2f);
 
-        actUtility = ActionMaths.ApplyWeightedMultipliers(50f, effectors, weights);
+        actUtility = ActionMaths.ApplyWeightedMultipliers(baseUtility, effectors, weights);
         return actUtility;
     }
 
@@ -53,14 +56,12 @@ public class WorkJob : SelfAction
     {
         if(estUtility != -1) return estUtility;
         
-        float baseUtility;
-        if(actUtility == -1) baseUtility = computeUtility(performer, default);
-        else baseUtility = actUtility;
+        if(actUtility == -1) actUtility = computeUtility(performer, default);
 
-        baseUtility = ActionMaths.addTraitWeights(performer, baseUtility, utilityPosTraits, true);
-        baseUtility = ActionMaths.addTraitWeights(performer, baseUtility, utilityNegTraits, false); 
+        estUtility = ActionMaths.addTraitWeights(performer, actUtility, utilityPosTraits, true);
+        estUtility = ActionMaths.addTraitWeights(performer, estUtility, utilityNegTraits, false); 
 
-        estUtility = ActionMaths.rationalityNoise(baseUtility, performer.attributes.rationality);
+        estUtility = ActionMaths.rationalityNoise(estUtility, performer.attributes.rationality);
         return estUtility;
     }
 
@@ -94,7 +95,7 @@ public class WorkJob : SelfAction
 
         performer.stats.energy -= energyToComplete*percentMulti;
         performer.timeLeft -= timeToComplete*percentMulti;
-        performer.stats.wealth += 5f * wealthMultiplier;
+        performer.stats.wealth += baseEarning * wealthMultiplier;
 
         float severity = 1f;
         int receiver = -1;

@@ -18,6 +18,14 @@ public static class ActionMaths
         float t = Mathf.InverseLerp(minVal, maxVal, value);
         return Mathf.Lerp(lowBound, highBound, t);
     }
+    public static float scarcityMultiplier(float remainingAfter, float minValue, float maxValue, float lowRemainingMult, float highRemainingMult)
+    {
+        remainingAfter = Mathf.Clamp(remainingAfter, minValue, maxValue); //clamp between max and min values
+
+        float temp = Mathf.InverseLerp(minValue, maxValue, remainingAfter); 
+
+        return Mathf.Lerp(lowRemainingMult, highRemainingMult, temp);
+    }
 
     public static float rationalityNoise(float value, float rationality)
     {
@@ -61,15 +69,6 @@ public static class ActionMaths
         float multiplier = Mathf.Lerp(min, max, Random.value);
 
         return baseValue * multiplier;
-    }
-
-    public static float scarcityMultiplier(float remainingAfter, float minValue, float maxValue, float lowRemainingMult, float highRemainingMult)
-    {
-        remainingAfter = Mathf.Clamp(remainingAfter, minValue, maxValue); //clamp between max and min values
-
-        float temp = Mathf.InverseLerp(minValue, maxValue, remainingAfter); 
-
-        return Mathf.Lerp(lowRemainingMult, highRemainingMult, temp);
     }
 
     public static float addTraitWeights(NPC npc, float baseValue, List<int> traitList, bool positive)

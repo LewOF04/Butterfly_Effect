@@ -37,7 +37,7 @@ public struct RelationshipKey : IEquatable<RelationshipKey>
 
     public bool Equals(RelationshipKey other) => npcA == other.npcA && npcB == other.npcB; //check if two relationship keys are the same
     public override int GetHashCode() => HashCode.Combine(npcA, npcB); //produce a hash code for the two IDs
-    public string ToString()
+    public override string ToString()
     {
         return GetHashCode().ToString();
     }

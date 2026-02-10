@@ -31,7 +31,7 @@ public class ActionViewPrefab : MonoBehaviour
     public TextMeshProUGUI energyField;
     public SpriteRenderer energyBg;
     private DataController dataController = DataController.Instance;
-    public void displayData()
+    public void displayData(bool isBest)
     {
         actionNameField.text = "Action: "+actionInfo.action.name;
         descriptionField.text = "Description: "+actionInfo.action.baseDescription;
@@ -46,6 +46,12 @@ public class ActionViewPrefab : MonoBehaviour
 
         timeField.text = actionInfo.timeToComplete.ToString("0.00"); setColour(24f, 0f, actionInfo.timeToComplete, timeBg);
         energyField.text = actionInfo.energyToComplete.ToString("0.00"); setColour(100f, 0f, actionInfo.energyToComplete, energyBg);
+
+        if (isBest)
+        {
+            Image tileBg = gameObject.GetComponent<Image>();
+            tileBg.color = new Color32(212, 175, 55, 120);
+        }
     }
 
     private void setColour(float minVal, float maxVal, float val, SpriteRenderer background)
@@ -96,5 +102,9 @@ public class ActionViewPrefab : MonoBehaviour
             nonAction.reloadAction(actionInfo);
             nonAction.performAction(100f); 
         }
+
+        NPCMenu npcMenu = FindFirstObjectByType<NPCMenu>();
+        npcMenu.backToMain();
+        npcMenu.displayData();
     }
 }

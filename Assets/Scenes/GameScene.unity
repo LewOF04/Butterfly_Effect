@@ -1064,6 +1064,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 132355188}
+  - component: {fileID: 132355189}
   m_Layer: 5
   m_Name: Receiver Info
   m_TagString: Untagged
@@ -1093,6 +1094,21 @@ RectTransform:
   m_AnchoredPosition: {x: 255, y: 385}
   m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &132355189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 132355187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29a2fff7249831a4e9f7bf5b78f67fba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  spriteImageLoc: {fileID: 2098632911}
+  nameField: {fileID: 374832881}
+  idField: {fileID: 1077823828}
 --- !u!1 &139884929
 GameObject:
   m_ObjectHideFlags: 0

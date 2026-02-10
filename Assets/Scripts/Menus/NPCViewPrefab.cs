@@ -35,6 +35,13 @@ public class NPCViewPrefab : MonoBehaviour
             spriteImageLoc.sprite = building.GetComponent<SpriteRenderer>().sprite;
             spriteImageLoc.preserveAspect = true;
             relationshipColour.gameObject.SetActive(false);
+
+            NPCMenu npcMenu = FindFirstObjectByType<NPCMenu>();
+            if(npcMenu.npc.parentBuilding == building.id)
+            {
+                Image tileBg = gameObject.GetComponent<Image>();
+                tileBg.color = new Color32(0, 122, 255, 120); 
+            }
         }
         
     }

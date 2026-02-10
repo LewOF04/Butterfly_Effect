@@ -17,6 +17,7 @@ public class NPCMemoryPanel : MonoBehaviour
     public Image receiverSpriteImageLoc;
     public TextMeshProUGUI perfImpField;
     public TextMeshProUGUI recImpField;
+    public TextMeshProUGUI receiverText;
     public DataController dataController = DataController.Instance;
 
     public void displayData()
@@ -30,18 +31,25 @@ public class NPCMemoryPanel : MonoBehaviour
 
         if(thisEvent.receiver == -1)
         {
-            receiverNameField.text = "No Target";
+            //hide the receiver section of the memory
+            receiverNameField.text = "";
             receiverIDField.text = "";
-            receiverSpriteImageLoc.sprite = null; 
-            recImpField.text = ""; 
+            receiverSpriteImageLoc.gameObject.SetActive(false);
+            recImpField.text = "";
+            receiverText.text = "No Target";
         }
         else
         {
+            //make sure all receiver game objects are active
+            receiverSpriteImageLoc.gameObject.SetActive(true);
+
+            //populate receiver field
             receiver = dataController.NPCStorage[thisEvent.receiver];
             receiverNameField.text = "Name: "+receiver.npcName;
             receiverIDField.text = "ID: "+receiver.id.ToString();
             receiverSpriteImageLoc.sprite = receiver.GetComponent<SpriteRenderer>().sprite;
             recImpField.text = "Importance: "+thisEvent.receiverImportance;
+            receiverText.text = "Receiver";
         }
     }
 }
