@@ -92,10 +92,11 @@ public class NPCManager : MonoBehaviour
         for (int j = 0; j < numberOfTraits; j++)
         {
             //gets a trait ID number that isn't already in the traits list
-            do
+            traitNum = rng.Next(0, maxTrait);
+            while (traits.Contains(traitNum))
             {
                 traitNum = rng.Next(0, maxTrait);
-            } while (traits.Contains(traitNum));
+            }
 
             traits.Add(traitNum); //adss the trait to the list
         }

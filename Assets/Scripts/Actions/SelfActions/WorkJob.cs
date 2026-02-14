@@ -39,13 +39,15 @@ public class WorkJob : SelfAction
         effectors.Add(ActionMaths.calcMultiplier(performer.stats.happiness, 0f, 100f, 0.25f, 2f)); weights.Add(0.3f);
         effectors.Add(ActionMaths.calcMultiplier(performer.stats.nutrition, 0f, 100f, 0.25f, 2f)); weights.Add(0.6f);
         effectors.Add(ActionMaths.calcMultiplier(performer.stats.condition, 0f, 100f, 0.25f, 2f)); weights.Add(0.5f);
-        effectors.Add(ActionMaths.calcMultiplier(performer.stats.wealth, 0f, 100f, 2f, 0.25f)); weights.Add(0.8f);
-        effectors.Add(ActionMaths.calcMultiplier(baseEarning, 0f, 100f, 0.75f, 1.25f)); weights.Add(0.8f);
+        effectors.Add(ActionMaths.calcExpMultiplier(performer.stats.wealth, 0f, 100f, 5f, 0.25f, 5f)); weights.Add(0.8f);
 
         //energy and time effectors
         effectors.Add(ActionMaths.scarcityMultiplier(performer.stats.energy - energyToComplete, 0f, 100f, 0.25f, 2f)); weights.Add(0.2f);
         effectors.Add(ActionMaths.scarcityMultiplier(performer.timeLeft - timeToComplete, 0f, 24f, 0.25f, 2f)); weights.Add(0.2f);
         effectors.Add(ActionMaths.calcMultiplier(actSuccess, 0f, 100f, 0.25f, 2f)); weights.Add(0.2f);
+
+        //multiplier to make result benefits relative
+        effectors.Add(ActionMaths.calcMultiplier(baseEarning, 0f, 100f, 1f, 1.5f)); weights.Add(0.8f); 
 
         actUtility = ActionMaths.ApplyWeightedMultipliers(baseUtility, effectors, weights);
         return actUtility;
@@ -69,7 +71,7 @@ public class WorkJob : SelfAction
     {
         NPC performer = dataController.NPCStorage[currentActor];
         float percentMulti = percentComplete/100;
-        string description = performer.npcName + " spent " + percentMulti.ToString("0.00") + " hours at work.";
+        string description = performer.npcName + " spent " + (percentMulti*timeToComplete).ToString("0.00") + " hours at work.";
         ActionResult successInfo = ActionMaths.calcActionSuccess(actSuccess, percentComplete);
 
         float wealthMultiplier;
@@ -93,8 +95,8 @@ public class WorkJob : SelfAction
         
         float actionTime = dataController.worldManager.gameTime + (24f - performer.timeLeft);
 
-        performer.stats.energy -= energyToComplete*percentMulti;
-        performer.timeLeft -= timeToComplete*percentMulti;
+        performer.stats.energy -= energyToComplete * percentMulti;
+        performer.timeLeft -= timeToComplete * percentMulti;
         performer.stats.wealth += baseEarning * wealthMultiplier;
 
         float severity = 1f;

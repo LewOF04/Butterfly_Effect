@@ -72,7 +72,7 @@ public class ActionViewPrefab : MonoBehaviour
     {
         NPCMenu npcMenu = FindFirstObjectByType<NPCMenu>();
         npcMenu.errorTextField.text = "";
-        Debug.Log("Action clicked");
+        
         if(actionInfo.known == false) {npcMenu.errorTextField.text = "Cannot perform action as it is unknown."; return;}
         if(actionInfo.timeToComplete > npcMenu.npc.timeLeft) {npcMenu.errorTextField.text = "Cannot perform action as the NPC does not have enough time."; return;}
         if(actionInfo.energyToComplete > npcMenu.npc.stats.energy) {npcMenu.errorTextField.text = "Cannot perform action as the NPC does not have enough energy."; return;}
@@ -80,8 +80,6 @@ public class ActionViewPrefab : MonoBehaviour
         npcMenu.actionConfirm.gameObject.SetActive(true);
         npcMenu.actionConfirm.actionNameField.text = "Action: "+actionInfo.action.name;
         npcMenu.actionConfirm.sourceAction = this;
-        
-        Debug.Log("Action performed");
     }
 
     public void actionConfirmed()

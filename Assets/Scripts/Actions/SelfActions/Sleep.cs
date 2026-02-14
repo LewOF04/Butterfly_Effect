@@ -6,6 +6,8 @@ using NoTarget = System.ValueTuple;
 [Preserve]
 public class Sleep : SelfAction
 {
+    private float baseEnergyAdd = 20f;
+    private float baseConditionAdd = 10f;
     public Sleep() : base('S'){}
 
     public override char actionType => 'S';
@@ -35,15 +37,19 @@ public class Sleep : SelfAction
         List<float> weights = new List<float>();
 
         //npc stat/attribute effectors
-        effectors.Add(ActionMaths.calcMultiplier(performer.stats.energy, 0f, 100f, 2f, 0.25f)); weights.Add(0.8f);
+        effectors.Add(ActionMaths.calcExpMultiplier(performer.stats.energy, 0f, 100f, 2f, 0.25f, 5f)); weights.Add(0.8f);
         effectors.Add(ActionMaths.calcMultiplier(performer.stats.happiness, 0f, 100f, 2f, 0.25f)); weights.Add(0.3f);
         effectors.Add(ActionMaths.calcMultiplier(performer.stats.nutrition, 0f, 100f, 0.25f, 2f)); weights.Add(0.3f);
-        effectors.Add(ActionMaths.calcMultiplier(performer.stats.condition, 0f, 100f, 2f, 0.25f)); weights.Add(0.3f);
+        effectors.Add(ActionMaths.calcExpMultiplier(performer.stats.condition, 0f, 100f, 2f, 0.25f, 5f)); weights.Add(0.3f);
         effectors.Add(ActionMaths.calcMultiplier(performer.attributes.strength, 0f, 100f, 2f, 0.25f)); weights.Add(0.2f);
 
         //energy and time effectors
         effectors.Add(ActionMaths.scarcityMultiplier(performer.timeLeft - timeToComplete, 0f, 24f, 0.25f, 2f)); weights.Add(0.5f);
         effectors.Add(ActionMaths.calcMultiplier(actSuccess, 0f, 100f, 0.25f, 2f)); weights.Add(0.2f);
+
+        //multiplier to make result benefits relative
+        effectors.Add(ActionMaths.calcMultiplier(baseEnergyAdd, 0f, 100f, 1f, 1.5f)); weights.Add(1f);
+        effectors.Add(ActionMaths.calcMultiplier(baseConditionAdd, 0f, 100f, 1f, 1.5f)); weights.Add(0.8f);
 
         actUtility = ActionMaths.ApplyWeightedMultipliers(baseUtility, effectors, weights);
         return actUtility;
@@ -71,7 +77,7 @@ public class Sleep : SelfAction
     {
         NPC performer = dataController.NPCStorage[currentActor];
         float percentMulti = percentComplete/100;
-        string description = performer.npcName + " spent " + percentMulti.ToString("0.00") + " hours sleeping.";
+        string description = performer.npcName + " spent " + (timeToComplete*percentMulti).ToString("0.00") + " hours sleeping.";
         ActionResult successInfo = ActionMaths.calcActionSuccess(actSuccess, percentComplete);
 
         float sleepMultiplier;
@@ -84,7 +90,7 @@ public class Sleep : SelfAction
             else {description += "and they felt like a new person when they woke up."; sleepMultiplier = 1.166f;}
         }
         else {
-            description += "Their sleep was not a success";
+            description += "Their sleep was not a success ";
             if(successInfo.quality < 0.25f) {description += "but they did manage to get a few winks."; sleepMultiplier = 0.5f;}
             else if(successInfo.quality < 0.5f) {description += "they tried counting sheep, but there were only cows."; sleepMultiplier = 0.332f;}
             else if(successInfo.quality < 0.75f) {description += "and they had a nightmare about their neighbour killing them."; sleepMultiplier = 0.166f;}
@@ -95,9 +101,9 @@ public class Sleep : SelfAction
         
         float actionTime = dataController.worldManager.gameTime + (24f - performer.timeLeft);
 
-        performer.stats.energy += 20f*sleepMultiplier;
+        performer.stats.energy += baseEnergyAdd*sleepMultiplier;
         performer.timeLeft -= timeToComplete*percentMulti;
-        performer.stats.condition += 10f * sleepMultiplier;
+        performer.stats.condition += baseConditionAdd * sleepMultiplier;
 
         float severity = 1f;
         int receiver = -1;
@@ -126,6 +132,7 @@ public class Sleep : SelfAction
         if(estSuccess != -1) return estSuccess;
         
         if(actSuccess == -1) estSuccess = computeSuccess(performer, default);
+        else estSuccess = actSuccess;
 
         estSuccess = ActionMaths.rationalityNoise(estSuccess, performer.attributes.rationality);
         return estSuccess;

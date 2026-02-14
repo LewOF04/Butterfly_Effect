@@ -163,7 +163,28 @@ public class NPCMenu : MonoBehaviour
             relInsts.displayData();
         }
 
-        //memory page
+        removeMemoryViews();
+        populateMemories();
+
+        recGameObj.gameObject.SetActive(false);
+        ActionView.gameObject.SetActive(false);
+        npcView.gameObject.SetActive(false);
+
+        mainCanvas.enabled = true;
+        backToMainButton.gameObject.SetActive(false);
+        saveButton.gameObject.SetActive(true);
+        actionConfirm.gameObject.SetActive(false);
+
+        //calculate all actions available to npc
+        possibleActions = new ActionFrontier(dataController);
+        possibleActions.produceFrontier(npc);
+    }
+
+    /*
+    Populate the memory container with memories
+    */
+    public void populateMemories()
+    {
         List<NPCEvent> thisNPCEvents = dataController.eventsPerNPCStorage[npc.id];
         foreach(NPCEvent thisEvent in thisNPCEvents)
         {
@@ -185,19 +206,6 @@ public class NPCMenu : MonoBehaviour
 
             memPanel.displayData();
         }
-
-        recGameObj.gameObject.SetActive(false);
-        ActionView.gameObject.SetActive(false);
-        npcView.gameObject.SetActive(false);
-
-        mainCanvas.enabled = true;
-        backToMainButton.gameObject.SetActive(false);
-        saveButton.gameObject.SetActive(true);
-        actionConfirm.gameObject.SetActive(false);
-
-        //calculate all actions available to npc
-        possibleActions = new ActionFrontier(dataController);
-        possibleActions.produceFrontier(npc);
     }
 
     /*
@@ -505,14 +513,18 @@ public class NPCMenu : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
-        foreach (Transform child in memoryInfoContainer.transform)
-        {
-            Destroy(child.gameObject);
-        }
+        removeMemoryViews();
         removeNPCViews();
         removeActionViews();
     }
 
+    public void removeMemoryViews()
+    {
+        foreach (Transform child in memoryInfoContainer.transform)
+        {
+            Destroy(child.gameObject);
+        }
+    }
     public void removeNPCViews()
     {
         foreach(Transform child in npcContainer.transform)

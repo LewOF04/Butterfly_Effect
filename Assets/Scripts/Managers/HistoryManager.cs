@@ -413,10 +413,11 @@ public class HistoryManager : MonoBehaviour
             return -1;
         }
 
-        float worldTime = dataController.worldManager.gameTime;
+        float worldTime = dataController.worldManager.gameTime; 
         float timeDiff = worldTime - time;
 
-        return(10/timeDiff) * sev;
+        if(timeDiff <= 0) timeDiff = 1f; //check for if the time difference is zero
+        return 10/timeDiff * sev;
     }
 
     /*

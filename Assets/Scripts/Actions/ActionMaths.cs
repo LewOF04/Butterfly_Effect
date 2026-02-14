@@ -27,6 +27,15 @@ public static class ActionMaths
         return Mathf.Lerp(lowRemainingMult, highRemainingMult, temp);
     }
 
+    public static float calcExpMultiplier(float value, float minVal, float maxVal, float lowBound, float highBound, float sharpness)
+    {
+        //sharpness of 2 gives the best result
+        float t = Mathf.InverseLerp(minVal, maxVal, value); //calculate position between max and minimum possibilities
+        float curvedT = Mathf.Pow(t, sharpness); //calculate exponential curve
+
+        return Mathf.Lerp(lowBound, highBound, curvedT); //create multiplier from exponential and bounds
+    }
+
     public static float rationalityNoise(float value, float rationality)
     {
         float r = Mathf.InverseLerp(0f, 100f, rationality);
