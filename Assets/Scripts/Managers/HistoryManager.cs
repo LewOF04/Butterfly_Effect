@@ -329,7 +329,7 @@ public class HistoryManager : MonoBehaviour
     @param wasPositive - was the action positive or negative for the performer?
     @param wasSuccessful - was the action successful for the performer?
     */
-    public void AddNPCMemory(string actionName, string description, float severity, float timeOfAction, int performer, int receiver, bool wasPositive, bool wasSuccessful)
+    public void AddNPCMemory(string actionName, string description, float severity, float timeOfAction, int performer, int receiver, bool wasPosPerf, bool wasPosRec)
     {
 
         RelationshipKey relKey = new RelationshipKey(performer, receiver);
@@ -348,7 +348,7 @@ public class HistoryManager : MonoBehaviour
 
         if(!(storeForPerformer || storeForReceiver)) return; //if this won't be stored for either
 
-        NPCEvent thisEvent = new NPCEvent(key, actionName, description, severity, timeOfAction, performer, receiver, wasPositive, wasSuccessful, performerImportance, receiverImportance);
+        NPCEvent thisEvent = new NPCEvent(key, actionName, description, severity, timeOfAction, performer, receiver, wasPosPerf, wasPosRec, performerImportance, receiverImportance);
 
         //add to per NPC storage
         Dictionary<int, List<NPCEvent>> perNPCEvents = dataController.eventsPerNPCStorage;
@@ -373,7 +373,7 @@ public class HistoryManager : MonoBehaviour
     @param wasSucc - whether or not the action was successful as intended
     @param wasPos - whether or not this action was positive for the building
     */
-    public void AddBuildingMemory(string name, string desc, float severity, float time, int building, int npc, bool wasSucc, bool wasPos)
+    public void AddBuildingMemory(string name, string desc, float severity, float time, int building, int npc, bool wasPosPerf, bool wasPosRec)
     {
         BuildingRelationshipKey relKey = new BuildingRelationshipKey(building, npc);
 
@@ -391,7 +391,7 @@ public class HistoryManager : MonoBehaviour
 
         if(!(storeForBuilding || storeForNPC)) return;
 
-        BuildingEvent thisEvent = new BuildingEvent(key, name, desc, time, severity, wasSucc, wasPos, buildingImportance, npcImportance);
+        BuildingEvent thisEvent = new BuildingEvent(key, name, desc, time, severity, wasPosPerf, wasPosRec, buildingImportance, npcImportance);
 
         //add to per Building Storage
         Dictionary<int, List<BuildingEvent>> perBuilding = dataController.buildingEventsPerBuildingStorage;

@@ -34,6 +34,18 @@
       "id": 6,
       "displayName": "Jealous",
       "description": "Thou shall covet, constantly. They get jealous of what others have." 
+    },
+    {
+      "id": 7,
+      "displayName": "Neat Freak",
+      "description": "It is very important to be neat, they really need that to be the case." 
+    },
+    {
+      "id": 8,
+      "displayName": "Handyman",
+      "description": "They're very talented at fixing, making and...well crafting." 
     }
+    
+
   ]
 }

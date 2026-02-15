@@ -84,21 +84,65 @@ public class HighFive : NPCAction
         string description = performer.npcName + " spent " + timeToComplete.ToString("0.00") + " giving "+target.npcName+" a high five.";
         ActionResult successInfo = ActionMaths.calcActionSuccess(actSuccess, 100f);
 
+        bool wasPosRec;
+        bool wasPosPerf;
         float relMultiplier;
+
+        //determine results based on the success of the action
         if(successInfo.success == true) {
             description += "They successfully had a high five ";
             
-            if(successInfo.quality < 0.25f) {description += "but it was an awkward collision of pinkies."; relMultiplier = 0.33f;}
-            else if(successInfo.quality < 0.5f) {description += "but their hands stung afterwards."; relMultiplier = 0.66f;}
-            else if(successInfo.quality < 0.75f) {description += "enthusiastically jumping in the air as they did."; relMultiplier = 1f;}
-            else {description += "and the sound produced from it reverberated for all to hear."; relMultiplier = 1.33f;}
+            if(successInfo.quality < 0.25f) {
+                description += "but it was an awkward collision of pinkies."; 
+                relMultiplier = 0.33f;
+                wasPosPerf = true;
+                wasPosRec = true;
+            }
+            else if(successInfo.quality < 0.5f) {
+                description += "but their hands stung afterwards."; 
+                relMultiplier = 0.66f;
+                wasPosPerf = true;
+                wasPosRec = true;
+            }
+            else if(successInfo.quality < 0.75f) {
+                description += "enthusiastically jumping in the air as they did."; 
+                relMultiplier = 1f;
+                wasPosPerf = true;
+                wasPosRec = true;
+            }
+            else {
+                description += "and the sound produced from it reverberated for all to hear."; 
+                relMultiplier = 1.33f;
+                wasPosPerf = true;
+                wasPosRec = true;
+            }
         }
         else {
             description += "Their high five was not a success ";
-            if(successInfo.quality < 0.25f) {description += "they somehow managed to miss hands entirely."; relMultiplier = -0.33f;}
-            else if(successInfo.quality < 0.5f) {description += "and they were left with the embarrassment of a poor attempt."; relMultiplier = -0.66f;}
-            else if(successInfo.quality < 0.75f) {description += target.npcName+" looked at "+performer.npcName+" with disgust when they attempted it."; relMultiplier = -1f;}
-            else {description += "they were too scared to attempt it with "+target.npcName; relMultiplier = -1.33f;}
+            if(successInfo.quality < 0.25f) {
+                description += "they somehow managed to miss hands entirely."; 
+                relMultiplier = -0.33f;
+                wasPosPerf = false;
+                wasPosRec = false;
+            }
+            else if(successInfo.quality < 0.5f) {
+                description += "and they were left with the embarrassment of a poor attempt."; 
+                relMultiplier = -0.66f;
+                wasPosPerf = false;
+                wasPosRec = false;
+            }
+            else if(successInfo.quality < 0.75f) {
+                description += target.npcName+" looked at "+performer.npcName+" with disgust when they attempted it."; 
+                relMultiplier = -1f;
+                wasPosPerf = false;
+                wasPosRec = true;
+            }
+            else {
+                description += "they were too scared to attempt it with "+target.npcName; 
+                relMultiplier = -1.33f;
+                wasPosPerf = false;
+                wasPosRec = true;
+            }
         }
         
         float actionTime = dataController.worldManager.gameTime + (24f - performer.timeLeft);
@@ -111,6 +155,7 @@ public class HighFive : NPCAction
         performer.timeLeft -= timeToComplete;
         description += timeToComplete.ToString("0.00")+" hours ";
 
+        //determine change to relationship
         Relationship rel = dataController.RelationshipStorage[new RelationshipKey(performer.id, target.id)];
         float relGain = 5f * relMultiplier;
         rel.value += relGain;
@@ -119,21 +164,12 @@ public class HighFive : NPCAction
         else description += "-";
         description += relGain.ToString("0.00")+".";
 
-        bool wasPositive = false;
+        //determine severity based on relationship
         float severity;
-
-        if(successInfo.success == true)
-        {
-            wasPositive = true;
-            severity = ActionMaths.calcMultiplier(rel.value, 0f, 100f, 2f, 0.25f) * Mathf.Abs(relMultiplier); //the worse their relationship the more positive the outcome
-        }
-        else
-        {
-            wasPositive = false;
-            severity = ActionMaths.calcMultiplier(rel.value, 0f, 100f, 0.25f, 2f) * Mathf.Abs(relMultiplier); //the worse the relationship the less negative the outcome
-        }
+        if(successInfo.success == true) severity = ActionMaths.calcMultiplier(rel.value, 0f, 100f, 2f, 0.25f) * Mathf.Abs(relMultiplier); //the worse their relationship the more positive the outcome
+        else severity = ActionMaths.calcMultiplier(rel.value, 0f, 100f, 0.25f, 2f) * Mathf.Abs(relMultiplier); //the worse the relationship the less negative the outcome
         
-        dataController.historyManager.AddNPCMemory(name, description, severity, actionTime, performer.id, target.id, wasPositive, successInfo.success);
+        dataController.historyManager.AddNPCMemory(name, description, severity, actionTime, performer.id, target.id, wasPosPerf, wasPosRec);
     }
 
     //computer the likelihood this action will be a success
