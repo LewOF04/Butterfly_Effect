@@ -18,7 +18,11 @@ public class NPCMemoryPanel : MonoBehaviour
     public TextMeshProUGUI perfImpField;
     public TextMeshProUGUI recImpField;
     public TextMeshProUGUI receiverText;
-    public DataController dataController = DataController.Instance;
+    private DataController dataController;
+    public void Awake()
+    {
+        dataController = DataController.Instance;
+    }
 
     public void displayData()
     {
@@ -44,6 +48,8 @@ public class NPCMemoryPanel : MonoBehaviour
             receiverSpriteImageLoc.gameObject.SetActive(true);
 
             //populate receiver field
+            Debug.Log("Receiver Num = "+thisEvent.receiver.ToString());
+            
             receiver = dataController.NPCStorage[thisEvent.receiver];
             receiverNameField.text = "Name: "+receiver.npcName;
             receiverIDField.text = "ID: "+receiver.id.ToString();

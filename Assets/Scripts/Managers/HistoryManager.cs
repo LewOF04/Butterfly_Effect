@@ -16,6 +16,9 @@ public class HistoryManager : MonoBehaviour
         GenerateHistoryFramework();
     }
 
+    /*
+    Generate the data structures to store history information during runtime
+    */
     public void GenerateHistoryFramework()
     {
         

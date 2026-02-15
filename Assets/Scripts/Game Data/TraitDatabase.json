@@ -29,6 +29,11 @@
       "id": 5,
       "displayName": "Serial Killer",
       "description": "They like to kill people, needn't say more." 
+    },
+    {
+      "id": 6,
+      "displayName": "Jealous",
+      "description": "Thou shall covet, constantly. They get jealous of what others have." 
     }
   ]
 }

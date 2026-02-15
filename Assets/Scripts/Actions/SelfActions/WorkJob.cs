@@ -95,9 +95,19 @@ public class WorkJob : SelfAction
         
         float actionTime = dataController.worldManager.gameTime + (24f - performer.timeLeft);
 
-        performer.stats.energy -= energyToComplete * percentMulti;
-        performer.timeLeft -= timeToComplete * percentMulti;
-        performer.stats.wealth += baseEarning * wealthMultiplier;
+        description += "\n";
+
+        float energyMinus = energyToComplete * percentMulti;
+        performer.stats.energy -= energyMinus;
+        description += "They spent "+energyMinus.ToString("0.00")+" energy, ";
+
+        float timeMinus = timeToComplete * percentMulti;
+        performer.timeLeft -= timeMinus;
+        description += timeMinus.ToString("0.00")+" hours ";
+
+        float wealthGain = baseEarning * wealthMultiplier;
+        performer.stats.wealth += wealthGain;
+        description += "and increased their wealth by "+wealthGain.ToString("0.00");
 
         float severity = 1f;
         int receiver = -1;

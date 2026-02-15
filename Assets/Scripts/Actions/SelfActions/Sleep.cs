@@ -101,9 +101,19 @@ public class Sleep : SelfAction
         
         float actionTime = dataController.worldManager.gameTime + (24f - performer.timeLeft);
 
-        performer.stats.energy += baseEnergyAdd*sleepMultiplier;
-        performer.timeLeft -= timeToComplete*percentMulti;
-        performer.stats.condition += baseConditionAdd * sleepMultiplier;
+        description += "\n";
+
+        float energyGain = baseEnergyAdd * sleepMultiplier;
+        performer.stats.energy += energyGain;
+        description += "They gained "+energyGain.ToString("0.00")+" energy, ";
+
+        float timeMinus = timeToComplete * percentMulti;
+        performer.timeLeft -= timeMinus;
+        description += "with "+timeMinus.ToString("0.00")+" hours of sleep ";
+
+        float conditionGain = baseConditionAdd * sleepMultiplier;
+        performer.stats.condition += conditionGain;
+        description += "and increased their condition by "+conditionGain.ToString("0.00")+".";
 
         float severity = 1f;
         int receiver = -1;
