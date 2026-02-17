@@ -44,7 +44,7 @@ public class Sleep : SelfAction
         effectors.Add(ActionMaths.calcMultiplier(performer.attributes.strength, 0f, 100f, 2f, 0.25f)); weights.Add(0.2f);
 
         //energy and time effectors
-        effectors.Add(ActionMaths.scarcityMultiplier(performer.timeLeft - timeToComplete, 0f, 24f, 0.25f, 2f)); weights.Add(0.5f);
+        effectors.Add(ActionMaths.scarcityMultiplier(performer.timeLeft - timeToComplete, 0f, 24f, 0.1f, 2f)); weights.Add(0.5f);
         effectors.Add(ActionMaths.calcMultiplier(actSuccess, 0f, 100f, 0.25f, 2f)); weights.Add(0.2f);
 
         //multiplier to make result benefits relative
@@ -73,7 +73,7 @@ public class Sleep : SelfAction
         return estUtility;
     }
 
-    public override void performAction(float percentComplete)
+    protected override void innerPerformAction(float percentComplete)
     {
         NPC performer = dataController.NPCStorage[currentActor];
         float percentMulti = percentComplete/100;

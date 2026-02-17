@@ -38,6 +38,7 @@ public class BuildingMemoryPanel : MonoBehaviour
         buildingNameField.text = "Building Name: "+building.buildingName;
         buildImpField.text = "Importance: "+thisEvent.buildingImportance;
         buildingSpriteImageLoc.sprite = building.GetComponent<SpriteRenderer>().sprite;
+        buildingSpriteImageLoc.preserveAspect = true;
         if(thisEvent.wasPositiveRec) wasPosBuildField.color = Color.green;
         else wasPosBuildField.color = Color.red;
 
@@ -62,6 +63,8 @@ public class BuildingMemoryPanel : MonoBehaviour
             npcNameField.text = "Name: "+npc.npcName;
             npcIDField.text = "ID: "+npc.id.ToString();
             npcSpriteImageLoc.sprite = npc.GetComponent<SpriteRenderer>().sprite;
+            npcSpriteImageLoc.preserveAspect = true;
+
             npcImpField.text = "Importance: " + thisEvent.npcImportance;
             if(thisEvent.wasPositivePerf) wasPosPerfField.color = Color.green;
             else wasPosPerfField.color = Color.red;

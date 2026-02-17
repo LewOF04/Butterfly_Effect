@@ -39,8 +39,8 @@ public class HighFive : NPCAction
         effectors.Add(ActionMaths.calcMultiplier(performer.stats.happiness, 0f, 100f, 0.25f, 2f)); weights.Add(0.8f);   
 
         //energy and time effectors
-        effectors.Add(ActionMaths.scarcityMultiplier(performer.stats.energy - energyToComplete, 0f, 100f, 0.25f, 2f)); weights.Add(0.5f);
-        effectors.Add(ActionMaths.scarcityMultiplier(performer.timeLeft - timeToComplete, 0f, 24f, 0.25f, 2f)); weights.Add(0.5f);
+        effectors.Add(ActionMaths.scarcityMultiplier(performer.stats.energy - energyToComplete, 0f, 100f, 0.1f, 2f)); weights.Add(0.8f);
+        effectors.Add(ActionMaths.scarcityMultiplier(performer.timeLeft - timeToComplete, 0f, 24f, 0.1f, 2f)); weights.Add(0.8f);
         effectors.Add(ActionMaths.calcMultiplier(actSuccess, 0f, 100f, 0.25f, 2f)); weights.Add(0.2f);
 
         //add a weighter based on the npcs relationship with the other
@@ -76,7 +76,7 @@ public class HighFive : NPCAction
         return estUtility;
     }
 
-    public override void performAction(float _)
+    protected override void innerPerformAction(float _)
     {
         NPC performer = dataController.NPCStorage[currentActor];
         NPC target = dataController.NPCStorage[receiver];

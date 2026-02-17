@@ -100,6 +100,7 @@ public class NPCMenu : MonoBehaviour
     */
     public void displayData()
     {
+        removeButtons();
         InputLocker.Lock(); //locks the input 
 
         //main page
@@ -163,7 +164,6 @@ public class NPCMenu : MonoBehaviour
             relInsts.displayData();
         }
 
-        removeMemoryViews();
         populateMemories();
 
         recGameObj.gameObject.SetActive(false);

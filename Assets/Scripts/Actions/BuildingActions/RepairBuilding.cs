@@ -42,9 +42,9 @@ public class RepairBuilding : BuildingAction
         effectors.Add(ActionMaths.calcExpMultiplier(target.condition, 0f, 100f, 5f, 0.25f, 5f)); weights.Add(0.8f); //the worse the condition the more important to fix
 
         //energy and time effectors
-        effectors.Add(ActionMaths.scarcityMultiplier(performer.stats.energy - energyToComplete, 0f, 100f, 0.25f, 2f)); weights.Add(0.2f);
-        effectors.Add(ActionMaths.scarcityMultiplier(performer.timeLeft - timeToComplete, 0f, 24f, 0.25f, 2f)); weights.Add(0.2f);
-        effectors.Add(ActionMaths.scarcityMultiplier(performer.stats.wealth - baseCost, 0f, 100f, 0.25f, 2f)); weights.Add(0.2f);
+        effectors.Add(ActionMaths.scarcityMultiplier(performer.stats.energy - energyToComplete, 0f, 100f, 0.1f, 2f)); weights.Add(0.8f);
+        effectors.Add(ActionMaths.scarcityMultiplier(performer.timeLeft - timeToComplete, 0f, 24f, 0.1f, 2f)); weights.Add(0.8f);
+        effectors.Add(ActionMaths.scarcityMultiplier(performer.stats.wealth - baseCost, 0f, 100f, 0.1f, 2f)); weights.Add(0.8f);
         effectors.Add(ActionMaths.calcMultiplier(actSuccess, 0f, 100f, 0.25f, 2f)); weights.Add(0.2f);
 
         effectors.Add(ActionMaths.calcExpMultiplier(target.condition, 100f, 0f, 0.25f, 5f, 5f)); weights.Add(0.9f);
@@ -80,7 +80,7 @@ public class RepairBuilding : BuildingAction
         return estUtility;
     }
 
-    public override void performAction(float percentComplete)
+    protected override void innerPerformAction(float percentComplete)
     {
         NPC performer = dataController.NPCStorage[currentActor];
         Building target = dataController.BuildingStorage[receiver];
@@ -129,9 +129,9 @@ public class RepairBuilding : BuildingAction
         else description += "-";
         description+=repairGain.ToString("0.00");
 
-        float repairCost = baseCost * percentComplete;
+        float repairCost = baseCost * percentMulti;
         performer.stats.wealth -= repairCost;
-        description += "and cost "+repairCost.ToString("0.00");
+        description += " and cost "+repairCost.ToString("0.00");
 
         //calculate relationship changes to inhabitants
         if (!target.inhabitants.Contains(performer.id))
@@ -140,7 +140,7 @@ public class RepairBuilding : BuildingAction
             foreach(int inhabitantID in target.inhabitants)
             {
                 Relationship rel = dataController.RelationshipStorage[new RelationshipKey(performer.id, inhabitantID)];
-                float relChange = Mathf.Lerp(0f, 1f, rel.value) * 5f * fixMultiplier; //create the resltionship change weighted by current relationship and outcome
+                float relChange = Mathf.InverseLerp(0f, 100f, rel.value) * 5f * fixMultiplier; //create the relationship change weighted by current relationship and outcome
 
                 rel.value += relChange;
 

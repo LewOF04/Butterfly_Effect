@@ -83,20 +83,19 @@ public class NPCManager : MonoBehaviour
         stats.condition = rng.Next(0, 101);
         stats.nutrition = rng.Next(0, 101);
         stats.happiness = rng.Next(0, 101);
-        stats.energy = rng.Next(0, 101);
+        stats.energy = 100f;
         stats.food = rng.Next(0, 101);
         stats.wealth = rng.Next(0, 101);
 
         int numberOfTraits = rng.Next(0, maxTrait);
         int traitNum;
+        
         for (int j = 0; j < numberOfTraits; j++)
         {
             //gets a trait ID number that isn't already in the traits list
             traitNum = rng.Next(0, maxTrait);
-            while (traits.Contains(traitNum))
-            {
-                traitNum = rng.Next(0, maxTrait);
-            }
+            
+            while (traits.Contains(traitNum)) traitNum = rng.Next(0, maxTrait);
 
             traits.Add(traitNum); //adss the trait to the list
         }

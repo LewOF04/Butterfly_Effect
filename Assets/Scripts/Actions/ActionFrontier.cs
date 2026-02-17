@@ -46,6 +46,7 @@ public class ActionFrontier
                 ActionInfoWrapper info = npcAct.computeAction(performer, npc);
                 npcActions[npc.id].Add(info);
 
+                //check if this is the new best action
                 if(info.estUtility > bestAction.estUtility) bestAction = info;
             } 
         }

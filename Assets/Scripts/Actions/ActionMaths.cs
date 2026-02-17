@@ -22,9 +22,11 @@ public static class ActionMaths
     {
         remainingAfter = Mathf.Clamp(remainingAfter, minValue, maxValue); //clamp between max and min values
 
-        float temp = Mathf.InverseLerp(minValue, maxValue, remainingAfter); 
+        float frac = Mathf.InverseLerp(minValue, maxValue, remainingAfter); 
 
-        return Mathf.Lerp(lowRemainingMult, highRemainingMult, temp);
+        float curvedT = Mathf.Pow(frac, 5f);
+
+        return Mathf.Lerp(lowRemainingMult, highRemainingMult, curvedT);
     }
 
     public static float calcExpMultiplier(float value, float minVal, float maxVal, float lowBound, float highBound, float sharpness)

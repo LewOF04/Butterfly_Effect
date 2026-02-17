@@ -42,8 +42,8 @@ public class WorkJob : SelfAction
         effectors.Add(ActionMaths.calcExpMultiplier(performer.stats.wealth, 0f, 100f, 5f, 0.25f, 5f)); weights.Add(0.8f);
 
         //energy and time effectors
-        effectors.Add(ActionMaths.scarcityMultiplier(performer.stats.energy - energyToComplete, 0f, 100f, 0.25f, 2f)); weights.Add(0.2f);
-        effectors.Add(ActionMaths.scarcityMultiplier(performer.timeLeft - timeToComplete, 0f, 24f, 0.25f, 2f)); weights.Add(0.2f);
+        effectors.Add(ActionMaths.scarcityMultiplier(performer.stats.energy - energyToComplete, 0f, 100f, 0.1f, 2f)); weights.Add(0.8f);
+        effectors.Add(ActionMaths.scarcityMultiplier(performer.timeLeft - timeToComplete, 0f, 24f, 0.1f, 2f)); weights.Add(0.8f);
         effectors.Add(ActionMaths.calcMultiplier(actSuccess, 0f, 100f, 0.25f, 2f)); weights.Add(0.2f);
 
         //multiplier to make result benefits relative
@@ -67,7 +67,7 @@ public class WorkJob : SelfAction
         return estUtility;
     }
 
-    public override void performAction(float percentComplete)
+    protected override void innerPerformAction(float percentComplete)
     {
         NPC performer = dataController.NPCStorage[currentActor];
         float percentMulti = percentComplete/100;

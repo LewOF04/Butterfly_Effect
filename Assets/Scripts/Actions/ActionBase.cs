@@ -40,7 +40,22 @@ public abstract class ActionBase<T> : IActionBase
     protected abstract float getTimeToComplete(NPC performer, T receiver); //calculate how much time it would take for the NPC to complete this action
     protected abstract float getEnergyToComplete(NPC performer, T receiver); //calculate how much energy it would take the NPC to compelete this action
     protected abstract List<float> getTimeAndEnergyMultipliers(NPC performer); //get the list of multipliers that effect this actions time and energy 
-    public abstract void performAction(float percentComplete); //make the changes of the action, with results affected by percentage completed
+    protected abstract void innerPerformAction(float percentComplete); //make the changes of the action, with results affected by percentage completed
+    public string performAction(float percentComplete)
+    {
+        //calculate if the NPC would have run out of time or energy before completion
+        NPC thisNPC = dataController.NPCStorage[currentActor];
+
+        float energyPerc = (energyToComplete / thisNPC.stats.energy) * 100; //percent of action completed within energy
+        float timePerc = (timeToComplete / thisNPC.timeLeft) * 100; //percent of action completed within time
+
+        innerPerformAction(Mathf.Min(energyPerc, timePerc, percentComplete)); //perform the action with whatever perc would've run out first
+        
+        //return string for whichever aspect was the finishing decider
+        if(energyPerc == Mathf.Min(energyPerc, timePerc, percentComplete)) return "energy";
+        else if(timePerc == Mathf.Min(energyPerc, timePerc, percentComplete)) return "time";
+        else return "perc";
+    }
     
     //check that this action would be known to the NPC
     protected virtual bool isKnown(NPC performer)
