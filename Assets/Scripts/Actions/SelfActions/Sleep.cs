@@ -8,6 +8,7 @@ public class Sleep : SelfAction
 {
     private float baseEnergyAdd = 20f;
     private float baseConditionAdd = 10f;
+    private float baseHappinessGain = 10f;
     public Sleep() : base('S'){}
 
     public override char actionType => 'S';
@@ -106,6 +107,10 @@ public class Sleep : SelfAction
         float energyGain = baseEnergyAdd * sleepMultiplier;
         performer.stats.energy += energyGain;
         description += "They gained "+energyGain.ToString("0.00")+" energy, ";
+
+        float happinessGain = baseHappinessGain * sleepMultiplier;
+        performer.stats.happiness += happinessGain;
+        description += happinessGain.ToString()+" happiness, ";
 
         float timeMinus = timeToComplete * percentMulti;
         performer.timeLeft -= timeMinus;
