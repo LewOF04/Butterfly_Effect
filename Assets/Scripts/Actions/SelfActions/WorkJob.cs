@@ -36,7 +36,7 @@ public class WorkJob : SelfAction
         List<float> weights = new List<float>();
 
         //npc stat/attribute effectors
-        effectors.Add(ActionMaths.calcMultiplier(performer.stats.happiness, 0f, 100f, 0.25f, 2f)); weights.Add(0.3f);
+        effectors.Add(ActionMaths.calcMultiplier(performer.stats.happiness, 0f, 100f, 0.25f, 2f)); weights.Add(1 - Mathf.InverseLerp(0f, 100f, performer.attributes.fortitude));
         effectors.Add(ActionMaths.calcMultiplier(performer.stats.nutrition, 0f, 100f, 0.25f, 2f)); weights.Add(0.6f);
         effectors.Add(ActionMaths.calcMultiplier(performer.stats.condition, 0f, 100f, 0.25f, 2f)); weights.Add(0.5f);
         effectors.Add(ActionMaths.calcExpMultiplier(performer.stats.wealth, 0f, 100f, 5f, 0.25f, 5f)); weights.Add(0.8f);

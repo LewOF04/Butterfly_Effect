@@ -39,7 +39,7 @@ public class Sleep : SelfAction
 
         //npc stat/attribute effectors
         effectors.Add(ActionMaths.calcExpMultiplier(performer.stats.energy, 0f, 100f, 2f, 0.25f, 5f)); weights.Add(0.8f);
-        effectors.Add(ActionMaths.calcMultiplier(performer.stats.happiness, 0f, 100f, 2f, 0.25f)); weights.Add(0.3f);
+        effectors.Add(ActionMaths.calcMultiplier(performer.stats.happiness, 0f, 100f, 2f, 0.25f)); weights.Add(1f - Mathf.InverseLerp(0f, 100f, performer.attributes.fortitude));
         effectors.Add(ActionMaths.calcMultiplier(performer.stats.nutrition, 0f, 100f, 0.25f, 2f)); weights.Add(0.3f);
         effectors.Add(ActionMaths.calcExpMultiplier(performer.stats.condition, 0f, 100f, 2f, 0.25f, 5f)); weights.Add(0.3f);
         effectors.Add(ActionMaths.calcMultiplier(performer.attributes.strength, 0f, 100f, 2f, 0.25f)); weights.Add(0.2f);
@@ -116,7 +116,7 @@ public class Sleep : SelfAction
         performer.timeLeft -= timeMinus;
         description += "with "+timeMinus.ToString("0.00")+" hours of sleep ";
 
-        float conditionGain = baseConditionAdd * sleepMultiplier;
+        float conditionGain = baseConditionAdd * sleepMultiplier * Mathf.InverseLerp(0f, 100f, performer.attributes.constitution);
         performer.stats.condition += conditionGain;
         description += "and increased their condition by "+conditionGain.ToString("0.00")+".";
 

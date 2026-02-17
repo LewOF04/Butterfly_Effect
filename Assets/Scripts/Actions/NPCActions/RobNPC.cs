@@ -73,7 +73,7 @@ public class RobNPC : NPCAction
         Relationship thisRel = dataController.RelationShipStorage[new RelationshipKey(performer.id, target.id)];
         effectors.Add(ActionMaths.calcMultiplier(thisRel.value, 0f, 100f, 2f, 0.25f)); weights.Add(0.7f);
         effectors.Add(ActionMaths.calcMultiplier(target.stats.wealth, 0f, 100f, 0.25f, 2f)); weights.Add(Mathf.InverseLerp(0f, 100f, performer.attributes.perception));
-        effectors.Add(ActionMaths.calcMultiplier(performer.stats.happiness, 0f, 100f, 0.25f, 2f)); weights.Add(0.5f);
+        effectors.Add(ActionMaths.calcMultiplier(performer.stats.happiness, 0f, 100f, 0.25f, 2f)); weights.Add(1 - Mathf.InverseLerp(0f, 100f, performer.attributes.fortitude));
 
         estUtility = ActionMaths.ApplyWeightedMultipliers(estUtility, effectors, weights);      
 
@@ -172,19 +172,34 @@ public class RobNPC : NPCAction
     {
         if(actSuccess != -1) return actSuccess;
 
-        List<float> multipliers = new List<float>();
+        List<float> effectors = new List<float>();
         List<float> weights = new List<float>();
 
-        //dexterity, constitution, energy, nutrition, condition
-        multipliers.Add(ActionMaths.calcMultiplier(performer.attributes.dexterity, 0f, 100f, 0.25f, 2f)); weights.Add(0.3f); //dexterity multiplier
-        multipliers.Add(ActionMaths.calcExpMultiplier(performer.attributes.constitution, 100f, 0f, 1.5f, 0.25f, 4f)); weights.Add(0.3f); //constitution multiplier
-        multipliers.Add(ActionMaths.calcMultiplier(performer.stats.energy, 0f, 100f, 0.25f, 1.75f)); weights.Add(0.8f); //energy multiplier
-        multipliers.Add(ActionMaths.calcMultiplier(performer.stats.nutrition, 0f, 100f, 0.25f, 1.5f)); weights.Add(0.2f); //nutrition multiplier
-        multipliers.Add(ActionMaths.calcMultiplier(performer.stats.condition, 0f, 100f, 0.25f, 1.5f)); weights.Add(0.6f); //condition multiplier
-        multipliers.Add(ActionMaths.calcMultiplier(performer.attributes.strength, 0f, 100f, 0.25f, 2f)); weights.Add(0.7f); //strength multiplier
-        float weightedSucc = ActionMaths.ApplyWeightedMultipliers(50f, multipliers, weights);
+        //==================Relationship Outline==================
+        Relationship thisRel = dataController.RelationshipStorage[new RelationshipKey(performer.id, receiver.id)];
+        effectors.Add(ActionMaths.calcMultiplier(thisRel.value, 0f, 100f, 0.25f, 2f)); weights.Add(0.5f); //better relationship makes it more likely that they'll succeed
 
-        if(performer.traits.Contains(8)) weightedSucc += weightedSucc * 0.5f;
+        //==================Performer Stats==================
+        effectors.Add(ActionMaths.calcExpMultiplier(performer.stats.condition, 100f, 0f, 2f, 0.25f, 5f)); weights.Add(0.8f); 
+        effectors.Add(ActionMaths.calcMultiplier(performer.stats.energy, 0f, 100f, 0.25f, 2f)); weights.Add(0.3f);
+
+        //==================Performer Attributes==================
+        effectors.Add(ActionMaths.calcMultiplier(performer.stats.fortitude, 0f, 100f, 0.25f, 2f)); weights.Add(0.5f);
+        effectors.Add(ActionMaths.calcMultiplier(performer.stats.perception, 0f, 100f, 0.25f, 2f)); weights.Add(0.7f);
+        effectors.Add(ActionMaths.calcMultiplier(performer.stats.dexterity, 0f, 100f, 0.25f, 2f)); weights.Add(0.6f);
+        effectors.Add(ActionMaths.calcMultiplier(performer.stats.strength, 0f, 100f, 0.25f, 2f)); weights.Add(0.9f);
+
+        //==================Target Stats==================
+        effectors.Add(ActionMaths.calcMultiplier(target.stats.condition, 0f, 100f, 2f, 0.5f)); weights.Add(0.8f);
+        effectors.Add(ActionMaths.calcMultiplier(target.stats.energy, 0f, 100f, 0.25f, 2f)); weights.Add(0.3f);
+
+        //==================Target Attributes==================
+        effectors.Add(ActionMaths.calcMultiplier(target.stats.charisma, 0f, 100f, 1.25f, 0.75f)); weights.Add(0.2f);
+        effectors.Add(ActionMaths.calcMultiplier(target.stats.perception, 0f, 100f, 2f, 0.25f)); weights.Add(0.7f);
+        effectors.Add(ActionMaths.calcMultiplier(target.stats.dexterity, 0f, 100f, 2f, 0.25f)); weights.Add(0.6f);
+        effectors.Add(ActionMaths.calcMultiplier(target.stats.strength, 0f, 100f, 2f, 0.25f)); weights.Add(0.9f);
+
+        float weightedSucc = ActionMaths.ApplyWeightedMultipliers(50f, multipliers, weights);
 
         actSuccess = weightedSucc;
         return actSuccess;
@@ -208,14 +223,33 @@ public class RobNPC : NPCAction
     {
         if(timeToComplete != -1) return timeToComplete;
 
-        List<float> multipliers = getTimeAndEnergyMultipliers(performer);
-        List<float> weights = new List<float>{0.7f, 0.7f, 0.5f, 0.2f, 0.2f, 0.6f};
+        List<float> effectors = new List<float>();
+        List<float> weights = new List<float>();
 
-        float weightedBase = ActionMaths.ApplyWeightedMultipliers(baseTime, multipliers, weights);
+        //==================Performer Stats==================
+        effectors.Add(ActionMaths.calcExpMultiplier(performer.stats.condition, 100f, 0f, 0.25f, 2f, 5f)); weights.Add(0.8f); 
+        effectors.Add(ActionMaths.calcMultiplier(performer.stats.energy, 0f, 100f, 2f, 0.25f)); weights.Add(0.3f);
 
-        if(performer.traits.Contains(8)) weightedBase -= weightedBase * 0.4f;
+        //==================Performer Attributes==================
+        effectors.Add(ActionMaths.calcMultiplier(performer.stats.fortitude, 0f, 100f, 2f, 0.25f)); weights.Add(0.5f);
+        effectors.Add(ActionMaths.calcMultiplier(performer.stats.perception, 0f, 100f, 2f, 0.25f)); weights.Add(0.7f);
+        effectors.Add(ActionMaths.calcMultiplier(performer.stats.dexterity, 0f, 100f, 2f, 0.25f)); weights.Add(0.6f);
+        effectors.Add(ActionMaths.calcMultiplier(performer.stats.strength, 0f, 100f, 2f, 0.25f)); weights.Add(0.9f);
 
-        timeToComplete = ActionMaths.addChaos(weightedBase, dataController.worldManager.chaosModifier);
+        //==================Target Stats==================
+        effectors.Add(ActionMaths.calcMultiplier(target.stats.condition, 0f, 100f, 2f, 0.5f)); weights.Add(0.8f);
+        effectors.Add(ActionMaths.calcMultiplier(target.stats.energy, 0f, 100f, 0.25f, 2f)); weights.Add(0.3f);
+
+        //==================Target Attributes==================
+        effectors.Add(ActionMaths.calcMultiplier(target.stats.charisma, 0f, 100f, 0.75f, 1.25f)); weights.Add(0.2f);
+        effectors.Add(ActionMaths.calcMultiplier(target.stats.perception, 0f, 100f, 0.25f, 3f)); weights.Add(0.7f);
+        effectors.Add(ActionMaths.calcMultiplier(target.stats.dexterity, 0f, 100f, 0.25f, 3f)); weights.Add(0.6f);
+        effectors.Add(ActionMaths.calcMultiplier(target.stats.strength, 0f, 100f, 0.25f, 2f)); weights.Add(0.9f);
+
+        float weightedTime = ActionMaths.ApplyWeightedMultipliers(baseTime, multipliers, weights);
+        weightedTime = ActionMaths.addChaos(weightedTime, dataController.worldManager.chaosModifier);
+
+        timeToComplete = weightedTime;
         return timeToComplete;
     }
 
@@ -224,36 +258,39 @@ public class RobNPC : NPCAction
     {
         if(energyToComplete != -1) return energyToComplete;
 
-        List<float> multipliers = getTimeAndEnergyMultipliers(performer);
-        List<float> weights = new List<float>{0.3f, 0.3f, 0.8f, 0.7f, 0.5f, 0.6f};
+        List<float> effectors = new List<float>();
+        List<float> weights = new List<float>();
 
-        float weightedBase = ActionMaths.ApplyWeightedMultipliers(baseEnergy, multipliers, weights);
+        //==================Performer Stats==================
+        effectors.Add(ActionMaths.calcExpMultiplier(performer.stats.condition, 100f, 0f, 0.25f, 2f, 5f)); weights.Add(0.8f); 
+        effectors.Add(ActionMaths.calcMultiplier(performer.stats.energy, 0f, 100f, 2f, 0.25f)); weights.Add(0.3f);
 
-        if(performer.traits.Contains(8)) weightedBase -= weightedBase * 0.2f;
+        //==================Performer Attributes==================
+        effectors.Add(ActionMaths.calcMultiplier(performer.stats.fortitude, 0f, 100f, 2f, 0.25f)); weights.Add(0.5f);
+        effectors.Add(ActionMaths.calcMultiplier(performer.stats.perception, 0f, 100f, 2f, 0.25f)); weights.Add(0.7f);
+        effectors.Add(ActionMaths.calcMultiplier(performer.stats.dexterity, 0f, 100f, 2f, 0.25f)); weights.Add(0.6f);
+        effectors.Add(ActionMaths.calcMultiplier(performer.stats.strength, 0f, 100f, 2f, 0.25f)); weights.Add(0.9f);
 
-        energyToComplete = ActionMaths.addChaos(weightedBase, dataController.worldManager.chaosModifier);
+        //==================Target Stats==================
+        effectors.Add(ActionMaths.calcMultiplier(target.stats.condition, 0f, 100f, 2f, 0.5f)); weights.Add(0.8f);
+        effectors.Add(ActionMaths.calcMultiplier(target.stats.energy, 0f, 100f, 0.25f, 2f)); weights.Add(0.3f);
+
+        //==================Target Attributes==================
+        effectors.Add(ActionMaths.calcMultiplier(target.stats.charisma, 0f, 100f, 0.75f, 1.25f)); weights.Add(0.2f);
+        effectors.Add(ActionMaths.calcMultiplier(target.stats.perception, 0f, 100f, 0.25f, 3f)); weights.Add(0.7f);
+        effectors.Add(ActionMaths.calcMultiplier(target.stats.dexterity, 0f, 100f, 0.25f, 3f)); weights.Add(0.6f);
+        effectors.Add(ActionMaths.calcMultiplier(target.stats.strength, 0f, 100f, 0.25f, 2f)); weights.Add(0.9f);
+
+        float weightedEnergy = ActionMaths.ApplyWeightedMultipliers(baseEnergy, multipliers, weights);
+        weightedEnergy = ActionMaths.addChaos(weightedEnergy, dataController.worldManager.chaosModifier);
+
+        energyToComplete = weightedEnergy;
         return energyToComplete;
-    }
-
-    protected override List<float> getTimeAndEnergyMultipliers(NPC performer)
-    {
-        List<float> multipliers = new List<float>{};
-
-        //dexterity, constitution, energy, nutrition, condition
-        multipliers.Add(ActionMaths.calcMultiplier(performer.attributes.dexterity, 0f, 100f, 2f, 0.25f)); //dexterity multiplier
-        multipliers.Add(ActionMaths.calcMultiplier(performer.attributes.constitution, 0f, 100f, 2f, 0.25f)); //constitution multiplier
-        multipliers.Add(ActionMaths.calcMultiplier(performer.stats.energy, 0f, 100f, 2f, 0.25f)); //energy multiplier
-        multipliers.Add(ActionMaths.calcMultiplier(performer.stats.nutrition, 0f, 100f, 2f, 0.25f)); //nutrition multiplier
-        multipliers.Add(ActionMaths.calcMultiplier(performer.stats.condition, 0f, 100f, 2f, 0.25f)); //condition multiplier
-        multipliers.Add(ActionMaths.calcMultiplier(performer.attributes.strength, 0f, 100f, 2f, 0.25f)); //strength multiplier
-
-        return multipliers;
     }
 
     protected override bool isKnown(NPC performer)
     {
         float thisComplexity = complexity;
-        if(performer.traits.Contains(8)) thisComplexity -= thisComplexity * 0.3f;
 
         //either the action is known because they're smart enough
         if (complexity <= performer.attributes.intelligence) return true;

@@ -197,19 +197,19 @@ public class WorkJob : SelfAction
 List<float> effectors = new List<float>();
 List<float> weights = new List<float>();
 
-==================Relationship Outline==================
+//==================Relationship Outline==================
 Relationship thisRel = dataController.RelationshipStorage[new RelationshipKey(performer.id, receiver.id)];
 effectors.Add(ActionMaths.calcMultiplier(thisRel.value, 0f, 100f, 0.25f, 2f)); weights.Add(0.5f);
 
 
-==================Performer Stats==================
+//==================Performer Stats==================
 effectors.Add(ActionMaths.calcMultiplier(performer.stats.condition, 0f, 100f, 0.25f, 2f)); weights.Add(0.8f);
 effectors.Add(ActionMaths.calcMultiplier(performer.stats.nutrition, 0f, 100f, 0.25f, 2f)); weights.Add(0.8f);
 effectors.Add(ActionMaths.calcMultiplier(performer.stats.happiness, 0f, 100f, 0.25f, 2f)); weights.Add(0.8f);
 effectors.Add(ActionMaths.calcMultiplier(performer.stats.food, 0f, 100f, 0.25f, 2f)); weights.Add(0.8f);
 effectors.Add(ActionMaths.calcMultiplier(performer.stats.wealth, 0f, 100f, 0.25f, 2f)); weights.Add(0.8f);
 
-==================Performer Attributes==================
+//==================Performer Attributes==================
 effectors.Add(ActionMaths.calcMultiplier(performer.stats.morality, 0f, 100f, 0.25f, 2f)); weights.Add(0.8f);
 effectors.Add(ActionMaths.calcMultiplier(performer.stats.intelligence, 0f, 100f, 0.25f, 2f)); weights.Add(0.8f);
 effectors.Add(ActionMaths.calcMultiplier(performer.stats.rationality, 0f, 100f, 0.25f, 2f)); weights.Add(0.8f);
@@ -223,14 +223,14 @@ effectors.Add(ActionMaths.calcMultiplier(performer.stats.wisdom, 0f, 100f, 0.25f
 effectors.Add(ActionMaths.calcMultiplier(performer.stats.strength, 0f, 100f, 0.25f, 2f)); weights.Add(0.8f);
 
 
-==================Target Stats==================
+//==================Target Stats==================
 effectors.Add(ActionMaths.calcMultiplier(target.stats.condition, 0f, 100f, 0.25f, 2f)); weights.Add(0.8f);
 effectors.Add(ActionMaths.calcMultiplier(target.stats.nutrition, 0f, 100f, 0.25f, 2f)); weights.Add(0.8f);
 effectors.Add(ActionMaths.calcMultiplier(target.stats.happiness, 0f, 100f, 0.25f, 2f)); weights.Add(0.8f);
 effectors.Add(ActionMaths.calcMultiplier(target.stats.food, 0f, 100f, 0.25f, 2f)); weights.Add(0.8f);
 effectors.Add(ActionMaths.calcMultiplier(target.stats.wealth, 0f, 100f, 0.25f, 2f)); weights.Add(0.8f);
 
-==================Target Attributes==================
+//==================Target Attributes==================
 effectors.Add(ActionMaths.calcMultiplier(target.stats.morality, 0f, 100f, 0.25f, 2f)); weights.Add(0.8f);
 effectors.Add(ActionMaths.calcMultiplier(target.stats.intelligence, 0f, 100f, 0.25f, 2f)); weights.Add(0.8f);
 effectors.Add(ActionMaths.calcMultiplier(target.stats.rationality, 0f, 100f, 0.25f, 2f)); weights.Add(0.8f);
