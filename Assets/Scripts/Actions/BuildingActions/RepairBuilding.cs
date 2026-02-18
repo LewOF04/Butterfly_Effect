@@ -72,7 +72,7 @@ public class RepairBuilding : BuildingAction
                 Relationship thisRel = dataController.RelationshipStorage[new RelationshipKey(npcID, performer.id)];
                 float relLevel = ActionMaths.calcMultiplier(thisRel.value, 0f, 100f, -1f, 2f);
 
-                estUtility += estUtility * (0.1f * relLevel);
+                estUtility += estUtility * (0.1f * Mathf.Clamp(Mathf.InverseLerp(0f, 100f, relLevel), 0.1f, 0.9f));
             }
         }
 
@@ -123,14 +123,14 @@ public class RepairBuilding : BuildingAction
         description += timeMinus.ToString("0.00")+" hours";
 
         float repairGain = baseConditionGain * fixMultiplier;
-        target.condition += repairGain;
+        target.condition = Mathf.Min(100f, target.condition + repairGain);
         description += ", altered the building condition by ";
         if(repairGain >= 0) description += "+";
         else description += "-";
         description+=repairGain.ToString("0.00");
 
         float repairCost = baseCost * percentMulti;
-        performer.stats.wealth -= repairCost;
+        performer.stats.wealth = Mathf.Max(0f, performer.stats.wealth - repairCost);
         description += " and cost "+repairCost.ToString("0.00");
 
         //calculate relationship changes to inhabitants
@@ -161,8 +161,7 @@ public class RepairBuilding : BuildingAction
         bool wasPosRec = false;
         if(fixMultiplier > 0) {wasPosPerf = true; wasPosRec = true;}//if the fix wasn't negative then considered successful
 
-        float severity;
-        severity = ActionMaths.calcMultiplier(target.condition, 0f, 100f, 2f, 1f) * Mathf.Abs(fixMultiplier);
+        float severity = ActionMaths.calcMultiplier(target.condition, 0f, 100f, 2f, 1f) * Mathf.Abs(fixMultiplier);
         dataController.historyManager.AddBuildingMemory(name, description, severity, actionTime, target.id, performer.id, wasPosPerf, wasPosRec);
     }
 
@@ -234,7 +233,7 @@ public class RepairBuilding : BuildingAction
         return energyToComplete;
     }
 
-    protected override List<float> getTimeAndEnergyMultipliers(NPC performer)
+    protected List<float> getTimeAndEnergyMultipliers(NPC performer)
     {
         List<float> multipliers = new List<float>{};
 

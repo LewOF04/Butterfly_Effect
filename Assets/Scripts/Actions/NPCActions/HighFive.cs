@@ -65,7 +65,7 @@ public class HighFive : NPCAction
 
         //add a weighter based on the npcs relationship with the other
         Relationship thisRel = dataController.RelationshipStorage[new RelationshipKey(performer.id, target.id)]; //get the relationship between these two npcs
-        effectors.Add(ActionMaths.calcExpMultiplier(thisRel.value, 0f, 100f, 0.1f, 4f, 5f)); weights.Add(0.9f); //the relatively higher the relationship the better it would be to increase it
+        effectors.Add(ActionMaths.calcExpMultiplier(thisRel.value, 0f, 100f, 0.1f, 4f, 5f)); weights.Add(Mathf.Clamp(Mathf.InverseLerp(0f, 100f, performer.attributes.wisdom), 0.4f, 0.9f)); //the relatively higher the relationship the better it would be to increase it
 
         estUtility = ActionMaths.ApplyWeightedMultipliers(actUtility, effectors, weights);
 
@@ -158,7 +158,7 @@ public class HighFive : NPCAction
         //determine change to relationship
         Relationship rel = dataController.RelationshipStorage[new RelationshipKey(performer.id, target.id)];
         float relGain = 5f * relMultiplier;
-        rel.value += relGain;
+        rel.value = Mathf.Min(100f, rel.value + relGain);
         description += "and altered their relationship with "+target.npcName+" by ";
         if(relGain >= 0) description += "+";
         else description += "-";
@@ -231,7 +231,7 @@ public class HighFive : NPCAction
         return energyToComplete;
     }
 
-    protected override List<float> getTimeAndEnergyMultipliers(NPC performer)
+    protected List<float> getTimeAndEnergyMultipliers(NPC performer)
     {
         List<float> multipliers = new List<float>{};
 

@@ -106,7 +106,7 @@ public class WorkJob : SelfAction
         description += timeMinus.ToString("0.00")+" hours ";
 
         float wealthGain = baseEarning * wealthMultiplier;
-        performer.stats.wealth += wealthGain;
+        performer.stats.wealth = Mathf.Min(100f, performer.stats.wealth + wealthGain);
         description += "and increased their wealth by "+wealthGain.ToString("0.00");
 
         float severity = 1f;
@@ -175,7 +175,7 @@ public class WorkJob : SelfAction
         return energyToComplete;
     }
 
-    protected override List<float> getTimeAndEnergyMultipliers(NPC performer)
+    protected List<float> getTimeAndEnergyMultipliers(NPC performer)
     {
         List<float> multipliers = new List<float>{};
 

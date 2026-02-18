@@ -109,7 +109,7 @@ public class Sleep : SelfAction
         description += "They gained "+energyGain.ToString("0.00")+" energy, ";
 
         float happinessGain = baseHappinessGain * sleepMultiplier;
-        performer.stats.happiness += happinessGain;
+        performer.stats.happiness = Mathf.Min(100f, performer.stats.happiness + happinessGain);
         description += happinessGain.ToString()+" happiness, ";
 
         float timeMinus = timeToComplete * percentMulti;
@@ -117,7 +117,7 @@ public class Sleep : SelfAction
         description += "with "+timeMinus.ToString("0.00")+" hours of sleep ";
 
         float conditionGain = baseConditionAdd * sleepMultiplier * Mathf.InverseLerp(0f, 100f, performer.attributes.constitution);
-        performer.stats.condition += conditionGain;
+        performer.stats.condition = Mathf.Min(100f, performer.stats.condition + conditionGain);
         description += "and increased their condition by "+conditionGain.ToString("0.00")+".";
 
         float severity = 1f;
@@ -173,7 +173,7 @@ public class Sleep : SelfAction
         return baseEnergy;
     }
 
-    protected override List<float> getTimeAndEnergyMultipliers(NPC performer)
+    protected List<float> getTimeAndEnergyMultipliers(NPC performer)
     {
         List<float> multipliers = new List<float>{};
 

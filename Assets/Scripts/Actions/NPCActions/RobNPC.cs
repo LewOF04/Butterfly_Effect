@@ -43,7 +43,7 @@ public class RobNPC : NPCAction
         effectors.Add(ActionMaths.calcExpMultiplier(performer.stats.wealth, 100f, 0f, 0.25f, 2f, 5f)); weights.Add(0.6f);
         effectors.Add(ActionMaths.calcMultiplier(performer.attributes.morality, 0f, 100f, 2f, 0.25f)); weights.Add(0.7f);
 
-        effectors.Add(ActionMaths.calcMultiplier(performer.attributes.constituion, 0f, 100f, 0.25f, 2f)); weights.Add(0.4f);
+        effectors.Add(ActionMaths.calcMultiplier(performer.attributes.constitution, 0f, 100f, 0.25f, 2f)); weights.Add(0.4f);
         effectors.Add(ActionMaths.calcExpMultiplier(performer.attributes.morality, 100f, 0f, 2f, 0.25f, 5f)); weights.Add(0.9f);
         effectors.Add(ActionMaths.calcMultiplier(performer.stats.nutrition, 0f, 100f, 0.25f, 2f)); weights.Add(0.2f);
         effectors.Add(ActionMaths.calcMultiplier(performer.stats.condition, 0f, 100f, 2f, 0.25f)); weights.Add(0.3f);
@@ -70,12 +70,12 @@ public class RobNPC : NPCAction
         List<float> effectors = new List<float>();
         List<float> weights = new List<float>();
 
-        Relationship thisRel = dataController.RelationShipStorage[new RelationshipKey(performer.id, target.id)];
-        effectors.Add(ActionMaths.calcMultiplier(thisRel.value, 0f, 100f, 2f, 0.25f)); weights.Add(0.7f);
+        Relationship thisRel = dataController.RelationshipStorage[new RelationshipKey(performer.id, target.id)];
+        effectors.Add(ActionMaths.calcMultiplier(thisRel.value, 0f, 100f, 2f, 0.25f)); weights.Add(Mathf.Clamp(Mathf.InverseLerp(0f, 100f, performer.attributes.wisdom), 0.2f, 0.8f));
         effectors.Add(ActionMaths.calcMultiplier(target.stats.wealth, 0f, 100f, 0.25f, 2f)); weights.Add(Mathf.InverseLerp(0f, 100f, performer.attributes.perception));
         effectors.Add(ActionMaths.calcMultiplier(performer.stats.happiness, 0f, 100f, 0.25f, 2f)); weights.Add(1 - Mathf.InverseLerp(0f, 100f, performer.attributes.fortitude));
 
-        estUtility = ActionMaths.ApplyWeightedMultipliers(estUtility, effectors, weights);      
+        estUtility = ActionMaths.ApplyWeightedMultipliers(estUtility, effectors, weights);    
 
         estUtility = ActionMaths.rationalityNoise(estUtility, performer.attributes.rationality);
         return estUtility;
@@ -84,87 +84,100 @@ public class RobNPC : NPCAction
     protected override void innerPerformAction(float percentComplete)
     {
         NPC performer = dataController.NPCStorage[currentActor];
-        NPC target = dataController.BuildingStorage[receiver];
+        NPC target = dataController.NPCStorage[receiver];
 
         float percentMulti = percentComplete / 100;
-        string description = performer.npcName + " spent " + (percentMulti*timeToComplete).ToString("0.00") + " hours fixing the "+target.buildingName+" building.";
+        string description = performer.npcName + " spent " + (percentMulti*timeToComplete).ToString("0.00") + " hours robbing "+target.npcName+".";
         ActionResult successInfo = ActionMaths.calcActionSuccess(actSuccess, percentComplete);
 
         //add description and result levels based on success
-        float fixMultiplier;
+        float robMultiplier;
         if(successInfo.success == true) {
-            description += "They successfully completed fixing the house ";
+            description += "They successfully robbed them ";
             
-            if(successInfo.quality < 0.25f) {description += "but it was a bit of a shoddy job."; fixMultiplier = 0.7f;}
-            else if(successInfo.quality < 0.5f) {description += "but they got paint on the scurting boards."; fixMultiplier = 0.85f;}
-            else if(successInfo.quality < 0.75f) {description += "it looks as good as new."; fixMultiplier = 1f;}
-            else {description += "and they even added some extra insulation."; fixMultiplier = 1.166f;}
+            if(successInfo.quality < 0.25f) {description += "but "+target.npcName+" saw them coming and defended themselves well."; robMultiplier = 0.33f;}
+            else if(successInfo.quality < 0.5f) {description += "but they weren't able to grab everything they wanted."; robMultiplier = 0.66f;}
+            else if(successInfo.quality < 0.75f) {description += "and they took everything they could find from "+target.npcName+"."; robMultiplier = 1f;}
+            else {description += "and they even found cash hidden in the victims shoes."; robMultiplier = 1.33f;}
         }
         else {
-            description += "Their attempt to fix the house was not successful ";
-            if(successInfo.quality < 0.25f) {description += "but it can be finished off another time."; fixMultiplier = 0.6f;}
-            else if(successInfo.quality < 0.5f) {description += "but their attempt was appreciated by the inhabitants."; fixMultiplier = 0.4f;}
-            else if(successInfo.quality < 0.75f) {description += "and they made the problems a little bit worse."; fixMultiplier = -0.2f;}
-            else {description += "and they managed to break another part of the house."; fixMultiplier = -0.5f;}
+            description += "Their attempt rob was not a success ";
+            if(successInfo.quality < 0.25f) {description += "they got spotted too soon and couldn't make an attempt to rob."; robMultiplier = 0f;}
+            else if(successInfo.quality < 0.5f) {description += "they got spotted and the victim was able to slap them."; robMultiplier = -0.1f;}
+            else if(successInfo.quality < 0.75f) {description += "they were way too loud and got punched squarely in the face for their troubles."; robMultiplier = -0.2f;}
+            else {description += "and they'll be aching from bruises and cuts for a while..."; robMultiplier = -0.3f;}
         }
 
-        if(percentComplete != 100f) description += " They had to stop working after doing "+percentComplete.ToString()+"% of the repair.";
+        if(percentComplete != 100f) description += " The robbery attempt concluded "+percentComplete.ToString()+"% of the way through.";
         
         float actionTime = dataController.worldManager.gameTime + (24f - performer.timeLeft);
 
         //perform changes to stats/attributes
         description += "\n";
 
+        //energy changes
         float energyMinus = energyToComplete * percentMulti;
         performer.stats.energy -= energyMinus;
         description += "They spent "+energyMinus.ToString("0.00")+" energy, ";
 
+        //time changes
         float timeMinus = timeToComplete * percentMulti;
         performer.timeLeft -= timeMinus;
         description += timeMinus.ToString("0.00")+" hours";
 
-        float repairGain = baseConditionGain * fixMultiplier;
-        target.condition += repairGain;
-        description += ", altered the building condition by ";
-        if(repairGain >= 0) description += "+";
-        else description += "-";
-        description+=repairGain.ToString("0.00");
+        //wealth changes
+        float wealthTake = Mathf.Max(0f, robMultiplier) * (baseTakePerc/100f) * target.stats.wealth; 
+        performer.stats.wealth += wealthTake;
+        target.stats.wealth -= wealthTake;
+        description += " and took "+wealthTake.ToString("0.00")+" wealth from the target.";
 
-        float repairCost = baseCost * percentMulti;
-        performer.stats.wealth -= repairCost;
-        description += " and cost "+repairCost.ToString("0.00");
-
-        //calculate relationship changes to inhabitants
-        if (!target.inhabitants.Contains(performer.id))
+        //health changes
+        float healthDiff = Mathf.Abs(robMultiplier) * 15f;
+        if(robMultiplier < 0)
         {
-            float totalRelChange = 0f;
-            foreach(int inhabitantID in target.inhabitants)
-            {
-                Relationship rel = dataController.RelationshipStorage[new RelationshipKey(performer.id, inhabitantID)];
-                float relChange = Mathf.InverseLerp(0f, 100f, rel.value) * 5f * fixMultiplier; //create the relationship change weighted by current relationship and outcome
+            float condChange = Mathf.Pow(healthDiff, 1 - Mathf.InverseLerp(0f, 100f, performer.attributes.constitution));
+            performer.stats.condition = Mathf.Max(0f, performer.stats.condition - condChange);
+            description += " The performer was damaged by "+condChange.ToString("0.00")+" health.";
+        } else if (robMultiplier > 0)
+        {
+            float condChange = Mathf.Pow(healthDiff, 1 - Mathf.InverseLerp(0f, 100f, target.attributes.constitution));
+            target.stats.condition = Mathf.Max(0f, target.stats.condition - condChange);
+            description += " The target was damaged by "+condChange.ToString("0.00")+" health.";
+        }
+        else
+        {
+            description += " No damage was taken by any involved.";
+        }
 
-                rel.value += relChange;
+        //relationship changes
+        float relChange = 40f * Mathf.Pow(Mathf.Abs(robMultiplier), 1 - Mathf.InverseLerp(0f, 100f, target.attributes.perception));
+        Relationship rel = dataController.RelationshipStorage[new RelationshipKey(target.id, performer.id)];
+        rel.value = Mathf.Max(0f, rel.value - relChange);
 
-                if(rel.value > 100f) rel.value = 100f;
-                if(rel.value < 0f) rel.value = 0f;
+        //happiness changes
+        if(robMultiplier >= 0) 
+        {
+            performer.stats.happiness = Mathf.Min(100f, performer.stats.happiness + (1f + 9f * robMultiplier)); 
+            target.stats.happiness = Mathf.Max(0f, target.stats.happiness - Mathf.Pow(1f + 9f * robMultiplier, Mathf.InverseLerp(0f, 100f, target.attributes.fortitude)));
+        }
+        else
+        {
+            performer.stats.happiness = Mathf.Max(0f, performer.stats.happiness - Mathf.Pow(1f + 9f * Mathf.Abs(robMultiplier), Mathf.InverseLerp(0f, 100f, performer.attributes.fortitude)));
+            target.stats.happiness = Mathf.Min(100f, target.stats.happiness + (1f + 4f * Mathf.Abs(robMultiplier)));
+        }
 
-                totalRelChange += relChange;
-            }
-
-            description += " and altered their relationship with the inhabitants by ";
-            float avgGain = totalRelChange / target.inhabitants.Count;
-            if(avgGain >= 0) description += "+";
-            else description += "-";
-            description += avgGain.ToString("0.00")+" on average.";
-        } else description += ".";
+        //morality changes
+        if(robMultiplier >= 0) performer.attributes.morality = Mathf.Max(0f, performer.attributes.morality - (1f + 9f * robMultiplier)); 
+        else performer.attributes.morality = Mathf.Min(100f, performer.attributes.morality + 1f);
 
         bool wasPosPerf = false;
         bool wasPosRec = false;
-        if(fixMultiplier > 0) {wasPosPerf = true; wasPosRec = true;}//if the fix wasn't negative then considered successful
+        if(robMultiplier > 0) {wasPosPerf = true; wasPosRec = false;}
+        else if(robMultiplier == 0) {wasPosPerf = false; wasPosRec = false;}
+        else {wasPosPerf = false; wasPosRec = true;}
 
-        float severity;
-        severity = ActionMaths.calcMultiplier(target.condition, 0f, 100f, 2f, 1f) * Mathf.Abs(fixMultiplier);
-        dataController.historyManager.AddBuildingMemory(name, description, severity, actionTime, target.id, performer.id, wasPosPerf, wasPosRec);
+        float severity = 30f * Mathf.Abs(robMultiplier);
+        dataController.historyManager.AddNPCMemory(name, description, severity, actionTime, performer.id, target.id, wasPosPerf, wasPosRec);
     }
 
     //computer the likelihood this action will be a success
@@ -176,7 +189,7 @@ public class RobNPC : NPCAction
         List<float> weights = new List<float>();
 
         //==================Relationship Outline==================
-        Relationship thisRel = dataController.RelationshipStorage[new RelationshipKey(performer.id, receiver.id)];
+        Relationship thisRel = dataController.RelationshipStorage[new RelationshipKey(performer.id, target.id)];
         effectors.Add(ActionMaths.calcMultiplier(thisRel.value, 0f, 100f, 0.25f, 2f)); weights.Add(0.5f); //better relationship makes it more likely that they'll succeed
 
         //==================Performer Stats==================
@@ -184,22 +197,32 @@ public class RobNPC : NPCAction
         effectors.Add(ActionMaths.calcMultiplier(performer.stats.energy, 0f, 100f, 0.25f, 2f)); weights.Add(0.3f);
 
         //==================Performer Attributes==================
-        effectors.Add(ActionMaths.calcMultiplier(performer.stats.fortitude, 0f, 100f, 0.25f, 2f)); weights.Add(0.5f);
-        effectors.Add(ActionMaths.calcMultiplier(performer.stats.perception, 0f, 100f, 0.25f, 2f)); weights.Add(0.7f);
-        effectors.Add(ActionMaths.calcMultiplier(performer.stats.dexterity, 0f, 100f, 0.25f, 2f)); weights.Add(0.6f);
-        effectors.Add(ActionMaths.calcMultiplier(performer.stats.strength, 0f, 100f, 0.25f, 2f)); weights.Add(0.9f);
+        effectors.Add(ActionMaths.calcMultiplier(performer.attributes.fortitude, 0f, 100f, 0.25f, 2f)); weights.Add(0.2f);
+        effectors.Add(ActionMaths.calcMultiplier(performer.attributes.perception, 0f, 100f, 0.25f, 2f)); weights.Add(0.7f);
+        effectors.Add(ActionMaths.calcMultiplier(performer.attributes.dexterity, 0f, 100f, 0.25f, 2f)); weights.Add(0.6f);
+        effectors.Add(ActionMaths.calcMultiplier(performer.attributes.strength, 0f, 100f, 0.25f, 2f)); weights.Add(0.9f);
 
         //==================Target Stats==================
         effectors.Add(ActionMaths.calcMultiplier(target.stats.condition, 0f, 100f, 2f, 0.5f)); weights.Add(0.8f);
         effectors.Add(ActionMaths.calcMultiplier(target.stats.energy, 0f, 100f, 0.25f, 2f)); weights.Add(0.3f);
 
         //==================Target Attributes==================
-        effectors.Add(ActionMaths.calcMultiplier(target.stats.charisma, 0f, 100f, 1.25f, 0.75f)); weights.Add(0.2f);
-        effectors.Add(ActionMaths.calcMultiplier(target.stats.perception, 0f, 100f, 2f, 0.25f)); weights.Add(0.7f);
-        effectors.Add(ActionMaths.calcMultiplier(target.stats.dexterity, 0f, 100f, 2f, 0.25f)); weights.Add(0.6f);
-        effectors.Add(ActionMaths.calcMultiplier(target.stats.strength, 0f, 100f, 2f, 0.25f)); weights.Add(0.9f);
+        effectors.Add(ActionMaths.calcMultiplier(target.attributes.charisma, 0f, 100f, 1.25f, 0.75f)); weights.Add(0.2f);
+        effectors.Add(ActionMaths.calcMultiplier(target.attributes.perception, 0f, 100f, 2f, 0.25f)); weights.Add(0.7f);
+        effectors.Add(ActionMaths.calcMultiplier(target.attributes.dexterity, 0f, 100f, 2f, 0.25f)); weights.Add(0.6f);
+        effectors.Add(ActionMaths.calcMultiplier(target.attributes.strength, 0f, 100f, 2f, 0.25f)); weights.Add(0.9f);
 
-        float weightedSucc = ActionMaths.ApplyWeightedMultipliers(50f, multipliers, weights);
+        float weightedSucc = ActionMaths.ApplyWeightedMultipliers(50f, effectors, weights);
+
+        //add 5% for each time this NPC has performed the action in the past
+        List<NPCEvent> events = dataController.eventsPerNPCStorage[currentActor];
+        foreach(NPCEvent thisEvent in events)
+        {
+            if(thisEvent.actionName == name && thisEvent.performer == currentActor)
+            {
+               weightedSucc += weightedSucc * 0.05f; 
+            }
+        }  
 
         actSuccess = weightedSucc;
         return actSuccess;
@@ -231,22 +254,22 @@ public class RobNPC : NPCAction
         effectors.Add(ActionMaths.calcMultiplier(performer.stats.energy, 0f, 100f, 2f, 0.25f)); weights.Add(0.3f);
 
         //==================Performer Attributes==================
-        effectors.Add(ActionMaths.calcMultiplier(performer.stats.fortitude, 0f, 100f, 2f, 0.25f)); weights.Add(0.5f);
-        effectors.Add(ActionMaths.calcMultiplier(performer.stats.perception, 0f, 100f, 2f, 0.25f)); weights.Add(0.7f);
-        effectors.Add(ActionMaths.calcMultiplier(performer.stats.dexterity, 0f, 100f, 2f, 0.25f)); weights.Add(0.6f);
-        effectors.Add(ActionMaths.calcMultiplier(performer.stats.strength, 0f, 100f, 2f, 0.25f)); weights.Add(0.9f);
+        effectors.Add(ActionMaths.calcMultiplier(performer.attributes.fortitude, 0f, 100f, 2f, 0.25f)); weights.Add(0.5f);
+        effectors.Add(ActionMaths.calcMultiplier(performer.attributes.perception, 0f, 100f, 2f, 0.25f)); weights.Add(0.7f);
+        effectors.Add(ActionMaths.calcMultiplier(performer.attributes.dexterity, 0f, 100f, 2f, 0.25f)); weights.Add(0.6f);
+        effectors.Add(ActionMaths.calcMultiplier(performer.attributes.strength, 0f, 100f, 2f, 0.25f)); weights.Add(0.9f);
 
         //==================Target Stats==================
         effectors.Add(ActionMaths.calcMultiplier(target.stats.condition, 0f, 100f, 2f, 0.5f)); weights.Add(0.8f);
         effectors.Add(ActionMaths.calcMultiplier(target.stats.energy, 0f, 100f, 0.25f, 2f)); weights.Add(0.3f);
 
         //==================Target Attributes==================
-        effectors.Add(ActionMaths.calcMultiplier(target.stats.charisma, 0f, 100f, 0.75f, 1.25f)); weights.Add(0.2f);
-        effectors.Add(ActionMaths.calcMultiplier(target.stats.perception, 0f, 100f, 0.25f, 3f)); weights.Add(0.7f);
-        effectors.Add(ActionMaths.calcMultiplier(target.stats.dexterity, 0f, 100f, 0.25f, 3f)); weights.Add(0.6f);
-        effectors.Add(ActionMaths.calcMultiplier(target.stats.strength, 0f, 100f, 0.25f, 2f)); weights.Add(0.9f);
+        effectors.Add(ActionMaths.calcMultiplier(target.attributes.charisma, 0f, 100f, 0.75f, 1.25f)); weights.Add(0.2f);
+        effectors.Add(ActionMaths.calcMultiplier(target.attributes.perception, 0f, 100f, 0.25f, 3f)); weights.Add(0.7f);
+        effectors.Add(ActionMaths.calcMultiplier(target.attributes.dexterity, 0f, 100f, 0.25f, 3f)); weights.Add(0.6f);
+        effectors.Add(ActionMaths.calcMultiplier(target.attributes.strength, 0f, 100f, 0.25f, 2f)); weights.Add(0.9f);
 
-        float weightedTime = ActionMaths.ApplyWeightedMultipliers(baseTime, multipliers, weights);
+        float weightedTime = ActionMaths.ApplyWeightedMultipliers(baseTime, effectors, weights);
         weightedTime = ActionMaths.addChaos(weightedTime, dataController.worldManager.chaosModifier);
 
         timeToComplete = weightedTime;
@@ -266,22 +289,22 @@ public class RobNPC : NPCAction
         effectors.Add(ActionMaths.calcMultiplier(performer.stats.energy, 0f, 100f, 2f, 0.25f)); weights.Add(0.3f);
 
         //==================Performer Attributes==================
-        effectors.Add(ActionMaths.calcMultiplier(performer.stats.fortitude, 0f, 100f, 2f, 0.25f)); weights.Add(0.5f);
-        effectors.Add(ActionMaths.calcMultiplier(performer.stats.perception, 0f, 100f, 2f, 0.25f)); weights.Add(0.7f);
-        effectors.Add(ActionMaths.calcMultiplier(performer.stats.dexterity, 0f, 100f, 2f, 0.25f)); weights.Add(0.6f);
-        effectors.Add(ActionMaths.calcMultiplier(performer.stats.strength, 0f, 100f, 2f, 0.25f)); weights.Add(0.9f);
+        effectors.Add(ActionMaths.calcMultiplier(performer.attributes.fortitude, 0f, 100f, 2f, 0.25f)); weights.Add(0.5f);
+        effectors.Add(ActionMaths.calcMultiplier(performer.attributes.perception, 0f, 100f, 2f, 0.25f)); weights.Add(0.7f);
+        effectors.Add(ActionMaths.calcMultiplier(performer.attributes.dexterity, 0f, 100f, 2f, 0.25f)); weights.Add(0.6f);
+        effectors.Add(ActionMaths.calcMultiplier(performer.attributes.strength, 0f, 100f, 2f, 0.25f)); weights.Add(0.9f);
 
         //==================Target Stats==================
         effectors.Add(ActionMaths.calcMultiplier(target.stats.condition, 0f, 100f, 2f, 0.5f)); weights.Add(0.8f);
         effectors.Add(ActionMaths.calcMultiplier(target.stats.energy, 0f, 100f, 0.25f, 2f)); weights.Add(0.3f);
 
         //==================Target Attributes==================
-        effectors.Add(ActionMaths.calcMultiplier(target.stats.charisma, 0f, 100f, 0.75f, 1.25f)); weights.Add(0.2f);
-        effectors.Add(ActionMaths.calcMultiplier(target.stats.perception, 0f, 100f, 0.25f, 3f)); weights.Add(0.7f);
-        effectors.Add(ActionMaths.calcMultiplier(target.stats.dexterity, 0f, 100f, 0.25f, 3f)); weights.Add(0.6f);
-        effectors.Add(ActionMaths.calcMultiplier(target.stats.strength, 0f, 100f, 0.25f, 2f)); weights.Add(0.9f);
+        effectors.Add(ActionMaths.calcMultiplier(target.attributes.charisma, 0f, 100f, 0.75f, 1.25f)); weights.Add(0.2f);
+        effectors.Add(ActionMaths.calcMultiplier(target.attributes.perception, 0f, 100f, 0.25f, 3f)); weights.Add(0.7f);
+        effectors.Add(ActionMaths.calcMultiplier(target.attributes.dexterity, 0f, 100f, 0.25f, 3f)); weights.Add(0.6f);
+        effectors.Add(ActionMaths.calcMultiplier(target.attributes.strength, 0f, 100f, 0.25f, 2f)); weights.Add(0.9f);
 
-        float weightedEnergy = ActionMaths.ApplyWeightedMultipliers(baseEnergy, multipliers, weights);
+        float weightedEnergy = ActionMaths.ApplyWeightedMultipliers(baseEnergy, effectors, weights);
         weightedEnergy = ActionMaths.addChaos(weightedEnergy, dataController.worldManager.chaosModifier);
 
         energyToComplete = weightedEnergy;

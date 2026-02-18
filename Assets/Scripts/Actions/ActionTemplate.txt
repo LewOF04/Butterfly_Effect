@@ -210,17 +210,17 @@ effectors.Add(ActionMaths.calcMultiplier(performer.stats.food, 0f, 100f, 0.25f, 
 effectors.Add(ActionMaths.calcMultiplier(performer.stats.wealth, 0f, 100f, 0.25f, 2f)); weights.Add(0.8f);
 
 //==================Performer Attributes==================
-effectors.Add(ActionMaths.calcMultiplier(performer.stats.morality, 0f, 100f, 0.25f, 2f)); weights.Add(0.8f);
-effectors.Add(ActionMaths.calcMultiplier(performer.stats.intelligence, 0f, 100f, 0.25f, 2f)); weights.Add(0.8f);
-effectors.Add(ActionMaths.calcMultiplier(performer.stats.rationality, 0f, 100f, 0.25f, 2f)); weights.Add(0.8f);
-effectors.Add(ActionMaths.calcMultiplier(performer.stats.fortitude, 0f, 100f, 0.25f, 2f)); weights.Add(0.8f);
-effectors.Add(ActionMaths.calcMultiplier(performer.stats.charisma, 0f, 100f, 0.25f, 2f)); weights.Add(0.8f);
-effectors.Add(ActionMaths.calcMultiplier(performer.stats.aesthetic_sensitivity, 0f, 100f, 0.25f, 2f)); weights.Add(0.8f);
-effectors.Add(ActionMaths.calcMultiplier(performer.stats.perception, 0f, 100f, 0.25f, 2f)); weights.Add(0.8f);
-effectors.Add(ActionMaths.calcMultiplier(performer.stats.dexterity, 0f, 100f, 0.25f, 2f)); weights.Add(0.8f);
-effectors.Add(ActionMaths.calcMultiplier(performer.stats.constitution, 0f, 100f, 0.25f, 2f)); weights.Add(0.8f);
-effectors.Add(ActionMaths.calcMultiplier(performer.stats.wisdom, 0f, 100f, 0.25f, 2f)); weights.Add(0.8f);
-effectors.Add(ActionMaths.calcMultiplier(performer.stats.strength, 0f, 100f, 0.25f, 2f)); weights.Add(0.8f);
+effectors.Add(ActionMaths.calcMultiplier(performer.attributes.morality, 0f, 100f, 0.25f, 2f)); weights.Add(0.8f);
+effectors.Add(ActionMaths.calcMultiplier(performer.attributes.intelligence, 0f, 100f, 0.25f, 2f)); weights.Add(0.8f);
+effectors.Add(ActionMaths.calcMultiplier(performer.attributes.rationality, 0f, 100f, 0.25f, 2f)); weights.Add(0.8f);
+effectors.Add(ActionMaths.calcMultiplier(performer.attributes.fortitude, 0f, 100f, 0.25f, 2f)); weights.Add(0.8f);
+effectors.Add(ActionMaths.calcMultiplier(performer.attributes.charisma, 0f, 100f, 0.25f, 2f)); weights.Add(0.8f);
+effectors.Add(ActionMaths.calcMultiplier(performer.attributes.aesthetic_sensitivity, 0f, 100f, 0.25f, 2f)); weights.Add(0.8f);
+effectors.Add(ActionMaths.calcMultiplier(performer.attributes.perception, 0f, 100f, 0.25f, 2f)); weights.Add(0.8f);
+effectors.Add(ActionMaths.calcMultiplier(performer.attributes.dexterity, 0f, 100f, 0.25f, 2f)); weights.Add(0.8f);
+effectors.Add(ActionMaths.calcMultiplier(performer.attributes.constitution, 0f, 100f, 0.25f, 2f)); weights.Add(0.8f);
+effectors.Add(ActionMaths.calcMultiplier(performer.attributes.wisdom, 0f, 100f, 0.25f, 2f)); weights.Add(0.8f);
+effectors.Add(ActionMaths.calcMultiplier(performer.attributes.strength, 0f, 100f, 0.25f, 2f)); weights.Add(0.8f);
 
 
 //==================Target Stats==================
@@ -231,14 +231,54 @@ effectors.Add(ActionMaths.calcMultiplier(target.stats.food, 0f, 100f, 0.25f, 2f)
 effectors.Add(ActionMaths.calcMultiplier(target.stats.wealth, 0f, 100f, 0.25f, 2f)); weights.Add(0.8f);
 
 //==================Target Attributes==================
-effectors.Add(ActionMaths.calcMultiplier(target.stats.morality, 0f, 100f, 0.25f, 2f)); weights.Add(0.8f);
-effectors.Add(ActionMaths.calcMultiplier(target.stats.intelligence, 0f, 100f, 0.25f, 2f)); weights.Add(0.8f);
-effectors.Add(ActionMaths.calcMultiplier(target.stats.rationality, 0f, 100f, 0.25f, 2f)); weights.Add(0.8f);
-effectors.Add(ActionMaths.calcMultiplier(target.stats.fortitude, 0f, 100f, 0.25f, 2f)); weights.Add(0.8f);
-effectors.Add(ActionMaths.calcMultiplier(target.stats.charisma, 0f, 100f, 0.25f, 2f)); weights.Add(0.8f);
-effectors.Add(ActionMaths.calcMultiplier(target.stats.aesthetic_sensitivity, 0f, 100f, 0.25f, 2f)); weights.Add(0.8f);
-effectors.Add(ActionMaths.calcMultiplier(target.stats.perception, 0f, 100f, 0.25f, 2f)); weights.Add(0.8f);
-effectors.Add(ActionMaths.calcMultiplier(target.stats.dexterity, 0f, 100f, 0.25f, 2f)); weights.Add(0.8f);
-effectors.Add(ActionMaths.calcMultiplier(target.stats.constitution, 0f, 100f, 0.25f, 2f)); weights.Add(0.8f);
-effectors.Add(ActionMaths.calcMultiplier(target.stats.wisdom, 0f, 100f, 0.25f, 2f)); weights.Add(0.8f);
-effectors.Add(ActionMaths.calcMultiplier(target.stats.strength, 0f, 100f, 0.25f, 2f)); weights.Add(0.8f);
+effectors.Add(ActionMaths.calcMultiplier(target.attributes.morality, 0f, 100f, 0.25f, 2f)); weights.Add(0.8f);
+effectors.Add(ActionMaths.calcMultiplier(target.attributes.intelligence, 0f, 100f, 0.25f, 2f)); weights.Add(0.8f);
+effectors.Add(ActionMaths.calcMultiplier(target.attributes.rationality, 0f, 100f, 0.25f, 2f)); weights.Add(0.8f);
+effectors.Add(ActionMaths.calcMultiplier(target.attributes.fortitude, 0f, 100f, 0.25f, 2f)); weights.Add(0.8f);
+effectors.Add(ActionMaths.calcMultiplier(target.attributes.charisma, 0f, 100f, 0.25f, 2f)); weights.Add(0.8f);
+effectors.Add(ActionMaths.calcMultiplier(target.attributes.aesthetic_sensitivity, 0f, 100f, 0.25f, 2f)); weights.Add(0.8f);
+effectors.Add(ActionMaths.calcMultiplier(target.attributes.perception, 0f, 100f, 0.25f, 2f)); weights.Add(0.8f);
+effectors.Add(ActionMaths.calcMultiplier(target.attributes.dexterity, 0f, 100f, 0.25f, 2f)); weights.Add(0.8f);
+effectors.Add(ActionMaths.calcMultiplier(target.attributes.constitution, 0f, 100f, 0.25f, 2f)); weights.Add(0.8f);
+effectors.Add(ActionMaths.calcMultiplier(target.attributes.wisdom, 0f, 100f, 0.25f, 2f)); weights.Add(0.8f);
+effectors.Add(ActionMaths.calcMultiplier(target.attributes.strength, 0f, 100f, 0.25f, 2f)); weights.Add(0.8f);
+
+Fortitude effects happiness changes
+Constitution effects condition changes
+Wisdom effects relationship impact
+
+Utility:
+    Success
+    Time
+    Energy 
+    Performer: Attributes + Stats
+    Target: Attributes + Stats
+    Relationship
+
+Success:
+    Performer: Attributes + Stats
+    Target: Attributes + Stats
+    Previous experience
+
+Perform:
+    //time changes
+    //energy changes
+    //condition changes
+    //nutrition changes
+    //happiness changes
+    //food changes
+    //wealth changes
+
+    //morality changes
+    //intelligence changes
+    //rationaility changes
+    //fortitude changes
+    //charisma changes
+    //aesthetic_sensitivity changes
+    //perception changes
+    //dexterity changes
+    //constitution changes
+    //wisdom changes
+    //strength changes
+
+    //relationship changes
