@@ -220,7 +220,7 @@ public class RobNPC : NPCAction
         {
             if(thisEvent.actionName == name && thisEvent.performer == currentActor)
             {
-               weightedSucc = Mathf.Min(100f, weightedSucc * 0.05f); 
+               weightedSucc = Mathf.Min(100f, weightedSucc + weightedSucc * 0.05f); 
             }
         }  
 

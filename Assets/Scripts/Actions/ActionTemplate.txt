@@ -136,7 +136,7 @@ public class WorkJob : SelfAction
             else {description += "and they'll be aching from bruises and cuts for a while..."; robMultiplier = -0.3f;}
         }
 
-        if(percentComplete != 100f) description += " The robbery attempt concluded "+percentComplete.ToString()+"% of the way through.";
+        if(percentComplete != 100f) description += " The robbery attempt concluded "+percentComplete.ToString("0.00")+"% of the way through.";
         
         float actionTime = dataController.worldManager.gameTime + (24f - performer.timeLeft);
 
@@ -269,7 +269,7 @@ public class WorkJob : SelfAction
         {
             if(thisEvent.actionName == name && thisEvent.performer == currentActor)
             {
-               weightedSucc = Mathf.Min(100f, weightedSucc * 0.05f); 
+               weightedSucc = Mathf.Min(100f, weightedSucc + weightedSucc * 0.05f); 
             }
         }  
 

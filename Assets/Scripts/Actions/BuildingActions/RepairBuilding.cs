@@ -190,7 +190,7 @@ public class RepairBuilding : BuildingAction
         {
             if(thisEvent.actionName == name && thisEvent.eventKey.npc == currentActor)
             {
-               weightedSucc = Mathf.Min(100f, weightedSucc * 0.05f); 
+               weightedSucc = Mathf.Min(100f, weightedSucc + weightedSucc * 0.05f); 
             }
         }  
 

@@ -4,22 +4,21 @@ using System.Collections.Generic;
 using NoTarget = System.ValueTuple;
 
 [Preserve]
-public class EatFood : SelfAction
+public class ImproveRationality : SelfAction
 {
-    private const float baseConsumption = 5f;
-    private const float baseNutritionGain = 20f;
-    public EatFood() : base('S'){}
+    private const float attributeGain = 10f;
+    public ImproveRationality() : base('S'){}
 
     public override char actionType => 'S';
-    public override string name => "Eat Food";
-    public override string baseDescription => "The NPC if they have food, can eat it to restore nutrition levelss.";
+    public override string name => "Improve Rationality";
+    public override string baseDescription => "You can always work on yourself, this NPC would like to improve their rationality.";
 
-    protected override float baseTime => 0.5f;
-    protected override float baseEnergy => 3f;
-    protected override float complexity => 0f;
+    protected override float baseTime => 4f;
+    protected override float baseEnergy => 20f;
+    protected override float complexity => 10f;
     protected override float baseUtility => 50f;
 
-    protected override List<int> utilityPosTraits => new List<int>{9}; 
+    protected override List<int> utilityPosTraits => new List<int>{6}; 
     protected override List<int> utilityNegTraits => new List<int>{};
     protected override List<int> successPosTraits => new List<int>{}; 
     protected override List<int> successNegTraits => new List<int>{};
@@ -37,21 +36,22 @@ public class EatFood : SelfAction
         List<float> weights = new List<float>();
 
         //==================Performer Stats==================
-        effectors.Add(ActionMaths.calcExpMultiplier(performer.stats.nutrition, 100f, 0f, 0.25f, 4f, 4f)); weights.Add(1f);
-        effectors.Add(ActionMaths.calcMultiplier(performer.stats.food, 0f, 100f, 0.25f, 2f)); weights.Add(0.8f);
-        effectors.Add(ActionMaths.calcMultiplier(performer.stats.wealth, 0f, 100f, 0.25f, 2f)); weights.Add(0.5f);
+        effectors.Add(ActionMaths.calcMultiplier(performer.stats.condition, 0f, 100f, 0.25f, 2f)); weights.Add(0.5f);
+        effectors.Add(ActionMaths.calcMultiplier(performer.stats.nutrition, 0f, 100f, 0.25f, 2f)); weights.Add(0.5f);
+        effectors.Add(ActionMaths.calcMultiplier(performer.stats.wealth, 0f, 100f, 0.25f, 2f)); weights.Add(0.3f);
 
         //==================Performer Attributes==================
-        effectors.Add(ActionMaths.calcMultiplier(performer.attributes.constitution, 0f, 100f, 2f, 0.25f)); weights.Add(0.4f);
+        effectors.Add(ActionMaths.calcMultiplier(performer.attributes.intelligence, 0f, 100f, 0.25f, 2f)); weights.Add(0.4f);
+        effectors.Add(ActionMaths.calcMultiplier(performer.attributes.rationality, 0f, 100f, 0.25f, 2f)); weights.Add(0.6f);
+        effectors.Add(ActionMaths.calcMultiplier(performer.attributes.wisdom, 0f, 100f, 0.25f, 2f)); weights.Add(0.6f);
 
         //==================Energy, Time and Success Effectors==================
         effectors.Add(ActionMaths.scarcityMultiplier(performer.stats.energy - energyToComplete, 0f, 100f, 0.1f, 2f)); weights.Add(1.5f);
         effectors.Add(ActionMaths.scarcityMultiplier(performer.timeLeft - timeToComplete, 0f, 24f, 0.1f, 2f)); weights.Add(1.5f);
-        effectors.Add(ActionMaths.scarcityMultiplier(performer.stats.food - baseConsumption, 0f, 100f, 0.1f, 2f)); weights.Add(0.8f);
         effectors.Add(ActionMaths.calcMultiplier(actSuccess, 0f, 100f, 0.25f, 2f)); weights.Add(Mathf.InverseLerp(0f, 100f, performer.attributes.wisdom));
 
         //==================Relative Benefit Weightings==================
-        effectors.Add(ActionMaths.calcMultiplier(baseNutritionGain, 0f, 100f, 0.25f, 2f)); weights.Add(1f);
+        effectors.Add(ActionMaths.calcMultiplier(performer.attributes.rationality, 0f, 100f, 2f, 0.25f)); weights.Add(1f);
         
         actUtility = ActionMaths.ApplyWeightedMultipliers(baseUtility, effectors, weights);
         return actUtility;
@@ -78,36 +78,28 @@ public class EatFood : SelfAction
         NPC performer = dataController.NPCStorage[currentActor];
 
         float percentMulti = percentComplete / 100;
-        string description = performer.npcName + " spent " + (percentMulti*timeToComplete).ToString("0.00") + " eating food.";
-
-        //the amount of food that needs to be consumed is relative to the condition
-        float foodConsumed = baseConsumption * Mathf.Lerp(0.75f, 1.5f, Mathf.InverseLerp(0f, 100f, performer.stats.condition));
-        float foodPerc = performer.stats.food / foodConsumed; 
-
-        //the level of completion is the lower of if we have to stop for lack of food or previous precent stoppage
-        percentMulti = Mathf.Min(percentMulti, foodPerc);
-
-        ActionResult successInfo = ActionMaths.calcActionSuccess(actSuccess, percentMulti * 100);
+        string description = performer.npcName + " spent " + (percentMulti*timeToComplete).ToString("0.00") + " hours improving their rationality.";
+        ActionResult successInfo = ActionMaths.calcActionSuccess(actSuccess, percentComplete);
 
         //add description and result levels based on success
-        float foodMultiplier;
+        float improvementMultiplier;
         if(successInfo.success == true) {
-            description += "They successfully ate food ";
+            description += "They successfully honed their rationality ";
             
-            if(successInfo.quality < 0.25f) {description += "but they found themselves feeling a bit sick whilst eating."; foodMultiplier = 0.33f;}
-            else if(successInfo.quality < 0.5f) {description += "but didn't eat as much as they would've liked."; foodMultiplier = 0.66f;}
-            else if(successInfo.quality < 0.75f) {description += "and they ate every single bite they could."; foodMultiplier = 1f;}
-            else {description += "and it reminded them of their mother's cooking."; foodMultiplier = 1.33f;}
+            if(successInfo.quality < 0.25f) {description += "although it seems they took it a bit too literally, they rationed their rationality."; improvementMultiplier = 0.33f;}
+            else if(successInfo.quality < 0.5f) {description += "but it turns out it isn't easy to become more rational."; improvementMultiplier = 0.66f;}
+            else if(successInfo.quality < 0.75f) {description += "they managed to become a more rational person it seems."; improvementMultiplier = 1f;}
+            else {description += ", \"To be rational or irrational, that is no longer the question\"."; improvementMultiplier = 1.33f;}
         }
         else {
-            description += "They didn't successfully eat food ";
-            if(successInfo.quality < 0.25f) {description += "they dropped all of their clean cutlery on the floor."; foodMultiplier = 0.2f;}
-            else if(successInfo.quality < 0.5f) {description += "they only had a spoon, which made it quite hard to eat."; foodMultiplier = 0.4f;}
-            else if(successInfo.quality < 0.75f) {description += "they found the food too spicy to eat."; foodMultiplier = 0.6f;}
-            else {description += "they found a slug on their clean lettuce!"; foodMultiplier = 0.8f;}
+            description += "Their rationality training was not a success ";
+            if(successInfo.quality < 0.25f) {description += "or maybe they just think that it wasn't..."; improvementMultiplier = 0f;}
+            else if(successInfo.quality < 0.5f) {description += "they attempted to fix their rationality issues but it wasn't to be."; improvementMultiplier = 0f;}
+            else if(successInfo.quality < 0.75f) {description += ", \"To be rational or irrational, is a question?\"."; improvementMultiplier = -0.05f;}
+            else {description += ", they are too irrational to help themselves become rational."; improvementMultiplier = -0.1f;}
         }
 
-        if(percentComplete != 100f) description += " Their meal finished after "+(percentMulti*100).ToString("0.00")+"% of the way through.";
+        if(percentComplete != 100f) description += " The rationality training concluded "+percentComplete.ToString("0.00")+"% of the way through.";
         
         float actionTime = dataController.worldManager.gameTime + (24f - performer.timeLeft);
 
@@ -124,29 +116,32 @@ public class EatFood : SelfAction
         performer.timeLeft -= timeMinus;
         description += timeMinus.ToString("0.00")+" hours";
 
-        //food changes
-        float foodMinus = baseConsumption * percentMulti * foodMultiplier; 
-        performer.stats.food = Mathf.Max(0f, performer.stats.food - foodMinus);
-        description += " and consumed "+foodMinus.ToString("0.00")+" food.";
+        bool wasPosPerf;
+        float attributeChange;
 
-        //nutrition changes
-        float nutritionChange;
-        if(successInfo.success) nutritionChange = baseNutritionGain * percentMulti;
-        else  nutritionChange = 0;
+        //intelligence changes
+        if(improvementMultiplier > 0)
+        {
+            wasPosPerf = true;
+            attributeChange = attributeGain * percentMulti * improvementMultiplier;
+            description += " and they gained "+Mathf.Abs(attributeChange).ToString("0.00")+" rationality.";
+        }
+        else
+        {
+            wasPosPerf = false;
+            attributeChange = attributeGain * percentMulti * improvementMultiplier;
+            description += " and they lost "+Mathf.Abs(attributeChange).ToString("0.00")+" rationality.";
+        }
+        performer.attributes.rationality = Mathf.Clamp(performer.attributes.rationality + attributeChange, 0f, 100f);
 
-        performer.stats.nutrition = Mathf.Min(100f, performer.stats.nutrition + nutritionChange);
-        description += " The food improved their nutrition by "+nutritionChange.ToString("0.00")+".";
+        //wisdom changes
+        float wisdomChange = improvementMultiplier * 3f;
+        performer.attributes.wisdom = Mathf.Clamp(performer.attributes.wisdom + wisdomChange, 0f, 100f);
 
         //happiness changes
-        if (performer.traits.Contains(9))
-        {
-            performer.stats.happiness = Mathf.Min(100f, performer.stats.happiness + performer.stats.happiness * 0.1f);
-        }
+        if(performer.traits.Contains(6)) performer.stats.happiness = Mathf.Clamp(performer.stats.happiness + performer.stats.happiness * 0.1f, 0, 100f);
 
-        //determine positivity
-        bool wasPosPerf = successInfo.success;
-
-        float severity = 3f;
+        float severity = 3f * Mathf.Abs(improvementMultiplier); //determine severity
         dataController.historyManager.AddNPCMemory(name, description, severity, actionTime, performer.id, -1, wasPosPerf, false); //save memory
     }
 
@@ -159,13 +154,12 @@ public class EatFood : SelfAction
         List<float> weights = new List<float>();
 
         //==================Performer Stats==================
-        effectors.Add(ActionMaths.calcMultiplier(performer.stats.condition, 0f, 100f, 0.25f, 2f)); weights.Add(0.4f);
-        effectors.Add(ActionMaths.calcMultiplier(performer.stats.nutrition, 0f, 100f, 0.25f, 2f)); weights.Add(0.6f);
-        effectors.Add(ActionMaths.calcExpMultiplier(performer.stats.food, 100f, 0f, 2f, 0.25f, 4f)); weights.Add(1f);
+        effectors.Add(ActionMaths.calcMultiplier(performer.stats.happiness, 0f, 100f, 0.5f, 2f)); weights.Add(0.1f);
 
         //==================Performer Attributes==================
-        effectors.Add(ActionMaths.calcMultiplier(performer.attributes.dexterity, 0f, 100f, 0.25f, 2f)); weights.Add(0.2f);
-        effectors.Add(ActionMaths.calcMultiplier(performer.attributes.constitution, 0f, 100f, 0.25f, 2f)); weights.Add(0.2f);
+        effectors.Add(ActionMaths.calcMultiplier(performer.attributes.intelligence, 0f, 100f, 0.75f, 2f)); weights.Add(0.1f);
+        effectors.Add(ActionMaths.calcMultiplier(performer.attributes.rationality, 0f, 100f, 0.75f, 2f)); weights.Add(0.1f);
+        effectors.Add(ActionMaths.calcMultiplier(performer.attributes.wisdom, 0f, 100f, 0.75f, 2f)); weights.Add(0.1f);
 
         float weightedSucc = ActionMaths.ApplyWeightedMultipliers(50f, effectors, weights);
 
@@ -205,14 +199,12 @@ public class EatFood : SelfAction
         List<float> weights = new List<float>();
 
         //==================Performer Stats==================
-        effectors.Add(ActionMaths.calcMultiplier(performer.stats.condition, 0f, 100f, 0.25f, 2f)); weights.Add(0.3f);
-        effectors.Add(ActionMaths.calcMultiplier(performer.stats.nutrition, 0f, 100f, 0.25f, 2f)); weights.Add(0.8f);
-        effectors.Add(ActionMaths.calcMultiplier(performer.stats.happiness, 0f, 100f, 2f, 0.25f)); weights.Add(0.2f);
-        effectors.Add(ActionMaths.calcMultiplier(performer.stats.food, 0f, 100f, 2f, 0.25f)); weights.Add(0.3f);
+        effectors.Add(ActionMaths.calcMultiplier(performer.stats.condition, 0f, 100f, 2f, 0.25f)); weights.Add(0.5f);
+        effectors.Add(ActionMaths.calcMultiplier(performer.stats.nutrition, 0f, 100f, 2f, 0.25f)); weights.Add(0.4f);
 
         //==================Performer Attributes==================
-        effectors.Add(ActionMaths.calcMultiplier(performer.attributes.dexterity, 0f, 100f, 2f, 0.25f)); weights.Add(0.4f);
-        effectors.Add(ActionMaths.calcMultiplier(performer.attributes.constitution, 0f, 100f, 2f, 0.25f)); weights.Add(0.3f);
+        effectors.Add(ActionMaths.calcMultiplier(performer.attributes.intelligence, 0f, 100f, 2, 0.25f)); weights.Add(0.7f);
+        effectors.Add(ActionMaths.calcMultiplier(performer.attributes.fortitude, 0f, 100f, 2f, 0.25f)); weights.Add(0.5f);
 
         float weightedBase = ActionMaths.ApplyWeightedMultipliers(baseTime, effectors, weights);
 
@@ -229,13 +221,12 @@ public class EatFood : SelfAction
         List<float> weights = new List<float>();
 
         //==================Performer Stats==================
-        effectors.Add(ActionMaths.calcMultiplier(performer.stats.condition, 0f, 100f, 0.25f, 2f)); weights.Add(0.3f);
-        effectors.Add(ActionMaths.calcMultiplier(performer.stats.nutrition, 0f, 100f, 0.25f, 2f)); weights.Add(0.8f);
-        effectors.Add(ActionMaths.calcMultiplier(performer.stats.happiness, 0f, 100f, 2f, 0.25f)); weights.Add(0.2f);
+        effectors.Add(ActionMaths.calcMultiplier(performer.stats.condition, 0f, 100f, 2f, 0.25f)); weights.Add(0.5f);
+        effectors.Add(ActionMaths.calcMultiplier(performer.stats.nutrition, 0f, 100f, 2f, 0.25f)); weights.Add(0.4f);
 
         //==================Performer Attributes==================
-        effectors.Add(ActionMaths.calcMultiplier(performer.attributes.dexterity, 0f, 100f, 2f, 0.25f)); weights.Add(0.4f);
-        effectors.Add(ActionMaths.calcMultiplier(performer.attributes.constitution, 0f, 100f, 2f, 0.25f)); weights.Add(0.3f);
+        effectors.Add(ActionMaths.calcMultiplier(performer.attributes.intelligence, 0f, 100f, 2, 0.25f)); weights.Add(0.7f);
+        effectors.Add(ActionMaths.calcMultiplier(performer.attributes.fortitude, 0f, 100f, 2f, 0.25f)); weights.Add(0.5f);
 
         float weightedBase = ActionMaths.ApplyWeightedMultipliers(baseEnergy, effectors, weights);
 
@@ -245,8 +236,6 @@ public class EatFood : SelfAction
 
     protected override bool isKnown(NPC performer)
     {
-        if(baseConsumption > performer.stats.food) return false; //false if they don't have enough food to eat
-
         //either the action is known because they're smart enough
         if (complexity <= performer.attributes.intelligence) return true;
 
