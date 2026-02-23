@@ -6,7 +6,7 @@ using System;
 public class WorldManager : MonoBehaviour
 {
     public float gameTime; //the time of the game in hours
-    public float costPerNutrition;
+    public float costPerFood = 1f;
     [Range(0,100)] public float chaosModifier;
     public float[] costPerBuilding;
     private DataController dataController;

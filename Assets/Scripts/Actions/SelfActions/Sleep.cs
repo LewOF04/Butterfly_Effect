@@ -46,7 +46,7 @@ public class Sleep : SelfAction
 
         //energy and time effectors
         effectors.Add(ActionMaths.scarcityMultiplier(performer.timeLeft - timeToComplete, 0f, 24f, 0.1f, 2f)); weights.Add(0.5f);
-        effectors.Add(ActionMaths.calcMultiplier(actSuccess, 0f, 100f, 0.25f, 2f)); weights.Add(0.2f);
+        effectors.Add(ActionMaths.calcMultiplier(actSuccess, 0f, 100f, 0.25f, 2f)); weights.Add(Mathf.InverseLerp(0f, 100f, performer.attributes.wisdom));
 
         //multiplier to make result benefits relative
         effectors.Add(ActionMaths.calcMultiplier(baseEnergyAdd, 0f, 100f, 1f, 1.5f)); weights.Add(1f);

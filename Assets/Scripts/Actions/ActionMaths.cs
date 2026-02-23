@@ -31,11 +31,15 @@ public static class ActionMaths
 
     public static float calcExpMultiplier(float value, float minVal, float maxVal, float lowBound, float highBound, float sharpness)
     {
-        //sharpness of 2 gives the best result
-        float t = Mathf.InverseLerp(minVal, maxVal, value); //calculate position between max and minimum possibilities
-        float curvedT = Mathf.Pow(t, sharpness); //calculate exponential curve
+        float temp = Mathf.InverseLerp(minVal, maxVal, value);
 
-        return Mathf.Lerp(lowBound, highBound, curvedT); //create multiplier from exponential and bounds
+        //apply exponential curve
+        float curvedTemp = Mathf.Pow(temp, sharpness);
+
+        //if decreasing range, invert the curve
+        if (lowBound > highBound) curvedTemp = 1f - curvedTemp;
+
+        return Mathf.Lerp(lowBound, highBound, curvedTemp);
     }
 
     public static float rationalityNoise(float value, float rationality)

@@ -42,10 +42,10 @@ public class RepairBuilding : BuildingAction
         effectors.Add(ActionMaths.calcExpMultiplier(target.condition, 0f, 100f, 5f, 0.25f, 5f)); weights.Add(0.8f); //the worse the condition the more important to fix
 
         //energy and time effectors
-        effectors.Add(ActionMaths.scarcityMultiplier(performer.stats.energy - energyToComplete, 0f, 100f, 0.1f, 2f)); weights.Add(0.8f);
-        effectors.Add(ActionMaths.scarcityMultiplier(performer.timeLeft - timeToComplete, 0f, 24f, 0.1f, 2f)); weights.Add(0.8f);
+        effectors.Add(ActionMaths.scarcityMultiplier(performer.stats.energy - energyToComplete, 0f, 100f, 0.1f, 2f)); weights.Add(1.5f);
+        effectors.Add(ActionMaths.scarcityMultiplier(performer.timeLeft - timeToComplete, 0f, 24f, 0.1f, 2f)); weights.Add(1.5f);
+        effectors.Add(ActionMaths.calcMultiplier(actSuccess, 0f, 100f, 0.25f, 2f)); weights.Add(Mathf.InverseLerp(0f, 100f, performer.attributes.wisdom));
         effectors.Add(ActionMaths.scarcityMultiplier(performer.stats.wealth - baseCost, 0f, 100f, 0.1f, 2f)); weights.Add(0.8f);
-        effectors.Add(ActionMaths.calcMultiplier(actSuccess, 0f, 100f, 0.25f, 2f)); weights.Add(0.2f);
 
         effectors.Add(ActionMaths.calcExpMultiplier(target.condition, 100f, 0f, 0.25f, 5f, 5f)); weights.Add(0.9f);
 
@@ -183,6 +183,16 @@ public class RepairBuilding : BuildingAction
         float weightedSucc = ActionMaths.ApplyWeightedMultipliers(50f, multipliers, weights);
 
         if(performer.traits.Contains(8)) weightedSucc += weightedSucc * 0.5f;
+
+        //add 5% for each time this NPC has performed the action in the past
+        List<BuildingEvent> events = dataController.buildingEventsPerNPCStorage[currentActor];
+        foreach(BuildingEvent thisEvent in events)
+        {
+            if(thisEvent.actionName == name && thisEvent.eventKey.npc == currentActor)
+            {
+               weightedSucc = Mathf.Min(100f, weightedSucc * 0.05f); 
+            }
+        }  
 
         actSuccess = weightedSucc;
         return actSuccess;

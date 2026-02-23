@@ -49,9 +49,9 @@ public class RobNPC : NPCAction
         effectors.Add(ActionMaths.calcMultiplier(performer.stats.condition, 0f, 100f, 2f, 0.25f)); weights.Add(0.3f);
 
         //energy and time effectors
-        effectors.Add(ActionMaths.scarcityMultiplier(performer.stats.energy - energyToComplete, 0f, 100f, 0.1f, 2f)); weights.Add(0.9f);
-        effectors.Add(ActionMaths.scarcityMultiplier(performer.timeLeft - timeToComplete, 0f, 24f, 0.1f, 2f)); weights.Add(0.7f);
-        effectors.Add(ActionMaths.calcMultiplier(actSuccess, 0f, 100f, 0.25f, 2f)); weights.Add(0.2f);
+        effectors.Add(ActionMaths.scarcityMultiplier(performer.stats.energy - energyToComplete, 0f, 100f, 0.1f, 2f)); weights.Add(1.5f);
+        effectors.Add(ActionMaths.scarcityMultiplier(performer.timeLeft - timeToComplete, 0f, 24f, 0.1f, 2f)); weights.Add(1.5f);
+        effectors.Add(ActionMaths.calcMultiplier(actSuccess, 0f, 100f, 0.25f, 2f)); weights.Add(Mathf.InverseLerp(0f, 100f, performer.attributes.wisdom));
 
         actUtility = ActionMaths.ApplyWeightedMultipliers(baseUtility, effectors, weights);
         return actUtility;
@@ -220,7 +220,7 @@ public class RobNPC : NPCAction
         {
             if(thisEvent.actionName == name && thisEvent.performer == currentActor)
             {
-               weightedSucc += weightedSucc * 0.05f; 
+               weightedSucc = Mathf.Min(100f, weightedSucc * 0.05f); 
             }
         }  
 
