@@ -44,6 +44,11 @@
       "id": 8,
       "displayName": "Handyman",
       "description": "They're very talented at fixing, making and...well crafting." 
+    },
+    {
+      "id": 9,
+      "displayName": "Gluttonous",
+      "description": "Who doesn't like a bit of food? In this case they love food." 
     }
     
 

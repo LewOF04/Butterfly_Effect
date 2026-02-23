@@ -28,9 +28,9 @@ public class WorkJob : SelfAction
     {
         if(actUtility != -1) return actUtility;
 
-        if(timeToComplete == -1) getTimeToComplete(performer, target);
-        if(energyToComplete == -1) getEnergyToComplete(performer, target);
-        if(actSuccess == -1) computeSuccess(performer, target);
+        if(timeToComplete == -1) getTimeToComplete(performer, default);
+        if(energyToComplete == -1) getEnergyToComplete(performer, default);
+        if(actSuccess == -1) computeSuccess(performer, default);
 
         List<float> effectors = new List<float>();
         List<float> weights = new List<float>();
@@ -89,7 +89,7 @@ public class WorkJob : SelfAction
         //==================Relative Benefit Weightings==================
         effectors.Add(ActionMaths.calcMultiplier(baseFoodIncrease, 0f, 100f, 0.25f, 2f)); weights.Add(1f);
         
-        actUtility = ActionMaths.ApplyWeightedMultipliers(50f, effectors, weights);
+        actUtility = ActionMaths.ApplyWeightedMultipliers(baseUtility, effectors, weights);
         return actUtility;
     }
 
