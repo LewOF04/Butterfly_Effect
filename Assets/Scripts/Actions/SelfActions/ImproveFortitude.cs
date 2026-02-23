@@ -4,14 +4,14 @@ using System.Collections.Generic;
 using NoTarget = System.ValueTuple;
 
 [Preserve]
-public class ImproveRationality : SelfAction
+public class ImproveFortitude : SelfAction
 {
     private const float attributeGain = 10f;
-    public ImproveRationality() : base('S'){}
+    public ImproveFortitude() : base('S'){}
 
     public override char actionType => 'S';
-    public override string name => "Improve Rationality";
-    public override string baseDescription => "You can always work on yourself, this NPC would like to improve their rationality.";
+    public override string name => "Improve Fortitude";
+    public override string baseDescription => "You can always work on yourself, this NPC would like to improve their fortitude.";
 
     protected override float baseTime => 4f;
     protected override float baseEnergy => 20f;
@@ -51,7 +51,7 @@ public class ImproveRationality : SelfAction
         effectors.Add(ActionMaths.calcMultiplier(actSuccess, 0f, 100f, 0.25f, 2f)); weights.Add(Mathf.InverseLerp(0f, 100f, performer.attributes.wisdom));
 
         //==================Relative Benefit Weightings==================
-        effectors.Add(ActionMaths.calcMultiplier(performer.attributes.rationality, 0f, 100f, 2f, 0.25f)); weights.Add(1f);
+        effectors.Add(ActionMaths.calcMultiplier(performer.attributes.fortitude, 0f, 100f, 2f, 0.25f)); weights.Add(1f);
         
         actUtility = ActionMaths.ApplyWeightedMultipliers(baseUtility, effectors, weights);
         return actUtility;
@@ -84,22 +84,21 @@ public class ImproveRationality : SelfAction
         //add description and result levels based on success
         float improvementMultiplier;
         if(successInfo.success == true) {
-            description += "They successfully honed their rationality";
-            
-            if(successInfo.quality < 0.25f) {description += " although it seems they took it a bit too literally, they rationed their rationality."; improvementMultiplier = 0.33f;}
-            else if(successInfo.quality < 0.5f) {description += " but it turns out it isn't easy to become more rational."; improvementMultiplier = 0.66f;}
-            else if(successInfo.quality < 0.75f) {description += " they managed to become a more rational person it seems."; improvementMultiplier = 1f;}
-            else {description += ", \"To be rational or irrational, that is no longer the question\"."; improvementMultiplier = 1.33f;}
+            description += "They successfully honed their fortitude";
+            if(successInfo.quality < 0.25f) {description += " but it turns out building true resilience is no easy task."; improvementMultiplier = 0.33f;}
+            else if(successInfo.quality < 0.5f) {description += " although it seems they pushed themselves too recklessly and nearly broke under the strain."; improvementMultiplier = 0.66f;}
+            else if(successInfo.quality < 0.75f) {description += " they endured the hardship well and emerged stronger for it."; improvementMultiplier = 1f;}
+            else {description += " they completed the training unbroken and stronger.";improvementMultiplier = 1.33f;}
         }
         else {
-            description += "Their rationality training was not a success";
-            if(successInfo.quality < 0.25f) {description += " or maybe they just think that it wasn't..."; improvementMultiplier = 0f;}
-            else if(successInfo.quality < 0.5f) {description += " they attempted to fix their rationality issues but it wasn't to be."; improvementMultiplier = 0f;}
-            else if(successInfo.quality < 0.75f) {description += ", \"To be rational or irrational, is a question?\"."; improvementMultiplier = -0.05f;}
-            else {description += ", they are too irrational to help themselves become rational."; improvementMultiplier = -0.1f;}
+            description += "Their fortitude training was not a success";
+            if(successInfo.quality < 0.25f) {description += " they tried to stand firm, but their resolve faltered."; improvementMultiplier = 0f;}
+            else if(successInfo.quality < 0.5f) {description += " and the pressure proved far too much to bear."; improvementMultiplier = 0f;}
+            else if(successInfo.quality < 0.75f) {description += " they began to doubt themselves, damaging their fortitude in its entirety."; improvementMultiplier = -0.05f;}
+            else {description += " their spirit cracked under the weight of adversity, it will take a while to get back up from this."; improvementMultiplier = -0.1f;}
         }
 
-        if(percentComplete != 100f) description += " The rationality training concluded "+percentComplete.ToString("0.00")+"% of the way through.";
+        if(percentComplete != 100f) description += " The fortitude training concluded "+percentComplete.ToString("0.00")+"% of the way through.";
         
         float actionTime = dataController.worldManager.gameTime + (24f - performer.timeLeft);
 
@@ -124,15 +123,15 @@ public class ImproveRationality : SelfAction
         {
             wasPosPerf = true;
             attributeChange = attributeGain * percentMulti * improvementMultiplier;
-            description += " and they gained "+Mathf.Abs(attributeChange).ToString("0.00")+" rationality.";
+            description += " and they gained "+Mathf.Abs(attributeChange).ToString("0.00")+" fortitude.";
         }
         else
         {
             wasPosPerf = false;
             attributeChange = attributeGain * percentMulti * improvementMultiplier;
-            description += " and they lost "+Mathf.Abs(attributeChange).ToString("0.00")+" rationality.";
+            description += " and they lost "+Mathf.Abs(attributeChange).ToString("0.00")+" fortitude.";
         }
-        performer.attributes.rationality = Mathf.Clamp(performer.attributes.rationality + attributeChange, 0f, 100f);
+        performer.attributes.fortitude = Mathf.Clamp(performer.attributes.fortitude + attributeChange, 0f, 100f);
 
         //wisdom changes
         float wisdomChange = improvementMultiplier * 3f;

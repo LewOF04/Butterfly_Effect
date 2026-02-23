@@ -137,9 +137,17 @@ public class ImproveIntelligence : SelfAction
         //wisdom changes
         float wisdomChange = improvementMultiplier * 3f;
         performer.attributes.wisdom = Mathf.Clamp(performer.attributes.wisdom + wisdomChange, 0f, 100f);
+        description += " Their wisdom changed by ";
+        if(improvementMultiplier < 0 ) description += "-";
+        else if(improvementMultiplier > 0) description += "+";
+        description += wisdomChange.ToString("0.00")+".";
 
         //happiness changes
-        if(performer.traits.Contains(6)) performer.stats.happiness = Mathf.Clamp(performer.stats.happiness + performer.stats.happiness * 0.1f, 0, 100f);
+        if(performer.traits.Contains(6)) {
+            float happinessGain = performer.stats.happiness * 0.1f;
+            performer.stats.happiness = Mathf.Clamp(performer.stats.happiness + happinessGain, 0, 100f);
+            description += " They gained "+happinessGain.ToString("0.00")+" happiness from performing the action.";
+        }
 
         float severity = 3f * Mathf.Abs(improvementMultiplier); //determine severity
         dataController.historyManager.AddNPCMemory(name, description, severity, actionTime, performer.id, -1, wasPosPerf, false); //save memory
@@ -160,6 +168,7 @@ public class ImproveIntelligence : SelfAction
         effectors.Add(ActionMaths.calcMultiplier(performer.attributes.intelligence, 0f, 100f, 0.75f, 2f)); weights.Add(0.1f);
         effectors.Add(ActionMaths.calcMultiplier(performer.attributes.rationality, 0f, 100f, 0.75f, 2f)); weights.Add(0.1f);
         effectors.Add(ActionMaths.calcMultiplier(performer.attributes.wisdom, 0f, 100f, 0.75f, 2f)); weights.Add(0.1f);
+        effectors.Add(ActionMaths.calcMultiplier(performer.attributes.fortitude, 0f, 100f, 0.75f, 2f)); weights.Add(0.2f);
 
         float weightedSucc = ActionMaths.ApplyWeightedMultipliers(50f, effectors, weights);
 
