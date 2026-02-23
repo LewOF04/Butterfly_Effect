@@ -4,14 +4,14 @@ using System.Collections.Generic;
 using NoTarget = System.ValueTuple;
 
 [Preserve]
-public class ImproveIntelligence : SelfAction
+public class ImproveCharisma : SelfAction
 {
     private const float attributeGain = 10f;
-    public ImproveIntelligence() : base('S'){}
+    public ImproveCharisma() : base('S'){}
 
     public override char actionType => 'S';
-    public override string name => "Improve Intelligence";
-    public override string baseDescription => "You can always work on yourself, this NPC would like to improve their intelligence.";
+    public override string name => "Improve Charisma";
+    public override string baseDescription => "You can always work on yourself, this NPC would like to improve their charisma.";
 
     protected override float baseTime => 4f;
     protected override float baseEnergy => 20f;
@@ -41,8 +41,9 @@ public class ImproveIntelligence : SelfAction
 
         //==================Performer Attributes==================
         effectors.Add(ActionMaths.calcMultiplier(performer.attributes.intelligence, 0f, 100f, 0.25f, 2f)); weights.Add(0.4f);
-        effectors.Add(ActionMaths.calcMultiplier(performer.attributes.rationality, 0f, 100f, 0.25f, 2f)); weights.Add(0.6f);
-        effectors.Add(ActionMaths.calcMultiplier(performer.attributes.wisdom, 0f, 100f, 0.25f, 2f)); weights.Add(0.6f);
+        effectors.Add(ActionMaths.calcMultiplier(performer.attributes.rationality, 0f, 100f, 0.25f, 2f)); weights.Add(0.3f);
+        effectors.Add(ActionMaths.calcMultiplier(performer.attributes.wisdom, 0f, 100f, 0.25f, 2f)); weights.Add(0.3f);
+        effectors.Add(ActionMaths.calcMultiplier(performer.attributes.perception, 0f, 100f, 0.25f, 2f)); weights.Add(0.7f);
 
         //==================Energy, Time and Success Effectors==================
         effectors.Add(ActionMaths.scarcityMultiplier(performer.stats.energy - energyToComplete, 0f, 100f, 0.1f, 2f)); weights.Add(1.5f);
@@ -50,7 +51,7 @@ public class ImproveIntelligence : SelfAction
         effectors.Add(ActionMaths.calcMultiplier(actSuccess, 0f, 100f, 0.25f, 2f)); weights.Add(Mathf.InverseLerp(0f, 100f, performer.attributes.wisdom));
 
         //==================Relative Benefit Weightings==================
-        effectors.Add(ActionMaths.calcMultiplier(performer.attributes.intelligence, 0f, 100f, 2f, 0.25f)); weights.Add(1f);
+        effectors.Add(ActionMaths.calcMultiplier(performer.attributes.charisma, 0f, 100f, 2f, 0.25f)); weights.Add(1f);
         
         actUtility = ActionMaths.ApplyWeightedMultipliers(baseUtility, effectors, weights);
         return actUtility;
@@ -77,28 +78,27 @@ public class ImproveIntelligence : SelfAction
         NPC performer = dataController.NPCStorage[currentActor];
 
         float percentMulti = percentComplete / 100;
-        string description = performer.npcName + " spent " + (percentMulti*timeToComplete).ToString("0.00") + " hours improving their intelligence.";
+        string description = performer.npcName + " spent " + (percentMulti*timeToComplete).ToString("0.00") + " hours improving their charisma.";
         ActionResult successInfo = ActionMaths.calcActionSuccess(actSuccess, percentComplete);
 
         //add description and result levels based on success
         float improvementMultiplier;
         if(successInfo.success == true) {
-            description += "They successfully honed their intelligence ";
-            
-            if(successInfo.quality < 0.25f) {description += "although they got stuck on one problem for a large chunk of the time."; improvementMultiplier = 0.33f;}
-            else if(successInfo.quality < 0.5f) {description += "although they couldn't help getting frustrated whilst working."; improvementMultiplier = 0.66f;}
-            else if(successInfo.quality < 0.75f) {description += "they were able to learn new information that'll be very helpful."; improvementMultiplier = 1f;}
-            else {description += "they had a eureka moment which taught them a lot."; improvementMultiplier = 1.33f;}
+            description += "They successfully honed their charisma";
+            if(successInfo.quality < 0.25f) {description += " but it turns out pick-up lines don't work on yourself."; improvementMultiplier = 0.33f;}
+            else if(successInfo.quality < 0.5f) {description += " according to the puddle they did pretty well."; improvementMultiplier = 0.66f;}
+            else if(successInfo.quality < 0.75f) {description += " they tested their skills against a shiny glass piece, it worked well."; improvementMultiplier = 1f;}
+            else {description += " they could charm a monarch with their new skills.";improvementMultiplier = 1.33f;}
         }
         else {
-            description += "Their intelligence training was not a success ";
-            if(successInfo.quality < 0.25f) {description += "they got stuck on one problem for the entire time and didn't solve it."; improvementMultiplier = 0f;}
-            else if(successInfo.quality < 0.5f) {description += "they even managed to get a paper cut for their troubles."; improvementMultiplier = 0f;}
-            else if(successInfo.quality < 0.75f) {description += "they somehow managed to make their understanding worse through confusion."; improvementMultiplier = -0.05f;}
-            else {description += "turns out they were wrong about a lot more than they thought."; improvementMultiplier = -0.1f;}
+            description += "Their charisma training was not a success";
+            if(successInfo.quality < 0.25f) {description += ", they ended up getting sick of their own attempts."; improvementMultiplier = 0f;}
+            else if(successInfo.quality < 0.5f) {description += ", maybe charisma was never supposed to be their thing."; improvementMultiplier = 0f;}
+            else if(successInfo.quality < 0.75f) {description += ", they felt stupider and stupider each time."; improvementMultiplier = -0.05f;}
+            else {description += ", they don't think they could be anymore uncharismatic if they tried."; improvementMultiplier = -0.1f;}
         }
 
-        if(percentComplete != 100f) description += " The intelligence training concluded "+percentComplete.ToString("0.00")+"% of the way through.";
+        if(percentComplete != 100f) description += " The charisma training concluded "+percentComplete.ToString("0.00")+"% of the way through.";
         
         float actionTime = dataController.worldManager.gameTime + (24f - performer.timeLeft);
 
@@ -123,15 +123,15 @@ public class ImproveIntelligence : SelfAction
         {
             wasPosPerf = true;
             attributeChange = attributeGain * percentMulti * improvementMultiplier;
-            description += " and they gained "+Mathf.Abs(attributeChange).ToString("0.00")+" intelligence.";
+            description += " and they gained "+Mathf.Abs(attributeChange).ToString("0.00")+" charisma.";
         }
         else
         {
             wasPosPerf = false;
             attributeChange = attributeGain * percentMulti * improvementMultiplier;
-            description += " and they lost "+Mathf.Abs(attributeChange).ToString("0.00")+" intelligence.";
+            description += " and they lost "+Mathf.Abs(attributeChange).ToString("0.00")+" charisma.";
         }
-        performer.attributes.intelligence = Mathf.Clamp(performer.attributes.intelligence + attributeChange, 0f, 100f);
+        performer.attributes.charisma = Mathf.Clamp(performer.attributes.fortitude + attributeChange, 0f, 100f);
 
         //wisdom changes
         float wisdomChange = improvementMultiplier * 3f;
