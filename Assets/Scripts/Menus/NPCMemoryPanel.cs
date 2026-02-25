@@ -21,8 +21,8 @@ public class NPCMemoryPanel : MonoBehaviour
     public TextMeshProUGUI wasPosText;
 
     [Header("Was Positive")]
-    public SpriteRenderer wasPosPerfField;
-    public SpriteRenderer wasPosRecField;
+    public Image wasPosPerfField;
+    public Image wasPosRecField;
     private DataController dataController;
     public void Awake()
     {

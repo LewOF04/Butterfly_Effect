@@ -21,8 +21,8 @@ public class BuildingMemoryPanel : MonoBehaviour
     public TextMeshProUGUI wasPosText;
 
     [Header("Was Pos")]
-    public SpriteRenderer wasPosPerfField;
-    public SpriteRenderer wasPosBuildField;
+    public Image wasPosPerfField;
+    public Image wasPosBuildField;
     private DataController dataController;
 
     public void Awake()

@@ -10,7 +10,7 @@ public class NPCViewPrefab : MonoBehaviour
     public TextMeshProUGUI nameField;
     public TextMeshProUGUI idField;
     public Image spriteImageLoc;
-    public SpriteRenderer relationshipColour;
+    public Image relationshipColour;
     public TextMeshProUGUI relationshipText;
     private DataController dataController = DataController.Instance;
     public void displayData()
@@ -46,7 +46,7 @@ public class NPCViewPrefab : MonoBehaviour
         
     }
 
-    private void setColour(float minVal, float maxVal, float val, SpriteRenderer background)
+    private void setColour(float minVal, float maxVal, float val, Image background)
     {
         val = Mathf.Clamp(val, minVal, maxVal);
         float t = Mathf.InverseLerp(Mathf.Min(minVal, maxVal), Mathf.Max(minVal, maxVal), val);

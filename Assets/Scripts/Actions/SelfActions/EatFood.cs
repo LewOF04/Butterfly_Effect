@@ -12,7 +12,7 @@ public class EatFood : SelfAction
 
     public override char actionType => 'S';
     public override string name => "Eat Food";
-    public override string baseDescription => "The NPC if they have food, can eat it to restore nutrition levelss.";
+    public override string baseDescription => "The NPC if they have food, can eat it to restore nutrition levels.";
 
     protected override float baseTime => 0.5f;
     protected override float baseEnergy => 3f;

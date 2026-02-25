@@ -11,25 +11,25 @@ public class ActionViewPrefab : MonoBehaviour
     public TextMeshProUGUI descriptionField; 
 
     public TextMeshProUGUI estUtilityField;
-    public SpriteRenderer estUtilBg;
+    public Image estUtilBg;
 
     public TextMeshProUGUI actUtilityField;
-    public SpriteRenderer actUtilBg;
+    public Image actUtilBg;
 
     public TextMeshProUGUI isKnownField;
-    public SpriteRenderer isKnownBg;
+    public Image isKnownBg;
 
     public TextMeshProUGUI estSuccessField;
-    public SpriteRenderer estSuccBg;
+    public Image estSuccBg;
 
     public TextMeshProUGUI actSuccessField;
-    public SpriteRenderer actSuccBg;
+    public Image actSuccBg;
 
     public TextMeshProUGUI timeField;
-    public SpriteRenderer timeBg;
+    public Image timeBg;
 
     public TextMeshProUGUI energyField;
-    public SpriteRenderer energyBg;
+    public Image energyBg;
     private DataController dataController = DataController.Instance;
     public void displayData(bool isBest)
     {
@@ -54,7 +54,7 @@ public class ActionViewPrefab : MonoBehaviour
         }
     }
 
-    private void setColour(float minVal, float maxVal, float val, SpriteRenderer background)
+    private void setColour(float minVal, float maxVal, float val, Image background)
     {
         val = Mathf.Clamp(val, minVal, maxVal);
         float t = Mathf.InverseLerp(Mathf.Min(minVal, maxVal), Mathf.Max(minVal, maxVal), val);
