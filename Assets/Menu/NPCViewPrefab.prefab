@@ -657,7 +657,7 @@ MonoBehaviour:
   nameField: {fileID: 8773281534267867427}
   idField: {fileID: 1723829072014926764}
   spriteImageLoc: {fileID: 6367954359384681668}
-  relationshipColour: {fileID: 0}
+  relationshipColour: {fileID: 6466388333149628603}
   relationshipText: {fileID: 7159654903211777296}
 --- !u!114 &8204361855009041117
 MonoBehaviour:

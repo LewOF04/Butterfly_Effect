@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
 
 public class TimeSkipper : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class TimeSkipper : MonoBehaviour
     private CamerMovement camMovement;  //camera script
     public Transform player; 
     private GameObject loadingScreen;
+    private DataController dataController;
 
     void Awake()
     {
@@ -15,6 +17,7 @@ public class TimeSkipper : MonoBehaviour
         camMovement = FindFirstObjectByType<CamerMovement>();
         player = FindFirstObjectByType<PlayerMovement>().gameObject.transform;
         loadingScreen = GameObject.Find("Loading Screen");
+        dataController = DataController.Instance;
     }
 
     public void skipTime(int time)
@@ -38,6 +41,15 @@ public class TimeSkipper : MonoBehaviour
         loadingScreen.transform.position = camera.transform.position;
         loadingScreen.transform.position += new Vector3(0.0f, 0.0f, 0.5f);
 
+        Dictionary<int, NPC> npcs = dataController.NPCStorage;
+        List<int> npcKeys = new List<int>(npcs.Keys);
+        foreach(int npcKey in npcKeys)
+        {
+            NPC npc = npcs[npcKey];
+            npc.timeLeft = 24f;
+            npc.stats.energy = 100f;
+        }
+
         yield return new WaitForSeconds(1f); //add a delay so that menu is shown
         loadingSlider.value = 1f;
         yield return new WaitForSeconds(1f);
@@ -58,7 +70,7 @@ public class TimeSkipper : MonoBehaviour
 
         camMovement.transform.position = startPos;
 
-        player.position = startPos + new Vector3(0, 0, 0.5f);
+        player.position = new Vector3(0,0,-0.5f);
         yield break;
     }
 }
