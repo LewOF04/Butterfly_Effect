@@ -5,76 +5,111 @@ using TMPro;
  
 public class OverviewMenu : MonoBehaviour
 {
+    [Header("Main Page")]
     public GameObject npcViewer;
     public GameObject buildingViewer;
-    public NPCViewButton npcWindowPrefab; 
-    public BuildingViewButton buildingWindowPrefab;
+    public ViewButton viewButtonPrefab; 
+    public TextMeshProUGUI dateInfo;
+    public TextMeshProUGUI timeInfo;
+    public TextMeshProUGUI npcNumInfo;
+    public TextMeshProUGUI buildingNumInfo;
+    public TextMeshProUGUI avgCondInfo;
 
-    [Header("History Page")]
-    public Canvas historyCanvas;
-    public GameObject memoryInfoContainer;
-    public BuildingMemoryPanel buildingMemoryPrefab;
+    [Header("Reload Confirmation")]
+    public GameObject reloadConfirmationObj;
 
+    [Header("Skip Time Confirmation")]
+    public GameObject skipConfirmationObj; 
+    public TextMeshProUGUI skipErrMsgField;
+    public TMP_InputField timeInput;
 
-    [Header("Others")]
-    private DataController dataController = DataController.Instance;
-    public Button backToMainButton;
-    public Button saveButton;
-    
+    [Header("Time Skipper")]
+    private TimeSkipper skipperObject;
 
-    public void saveBuilding()
+    private DataController dataController;
+
+    public void Awake()
     {
-        building.condition = conditionSlider.value;
+        dataController = DataController.Instance;
     }
 
     public void displayData()
     {
         InputLocker.Lock(); //locks the input 
+        reloadConfirmationObj.gameObject.SetActive(false);
+        skipConfirmationObj.gameObject.SetActive(false);
+        skipperObject = FindFirstObjectByType<TimeSkipper>();
 
-        Sprite buildingSprite = building.GetComponent<SpriteRenderer>().sprite;
-        spriteImageLoc.sprite = buildingSprite;
-        spriteImageLoc.preserveAspect = true;
+        //instantiate the buttons for the npcs
+        Dictionary<int, NPC> npcs = dataController.NPCStorage;
 
-        menuTitle.text = "(Building) Name: "+building.buildingName+" ID: "+building.id;
-
-        conditionSlider.value = building.condition;
-
-        //instantiate the buttons for the npcs of the Building
-        List<int> npcs = building.inhabitants;
-        foreach (int id in npcs)
+        List<int> npcKeys = new List<int>(npcs.Keys);
+        foreach (int id in npcKeys)
         {
-            NPC npc = dataController.NPCStorage[id];
-            NPCViewButton newPrefab = Instantiate(npcWindowPrefab, npcViewer.transform);
-            newPrefab.npc = npc;
+            NPC npc = npcs[id];
+            ViewButton newPrefab = Instantiate(viewButtonPrefab, npcViewer.transform);
+            newPrefab.source = npc;
+            newPrefab.overviewMenu = this;
             newPrefab.displayData();
         }
 
-        List<BuildingEvent> thisBuildingEvents = dataController.buildingEventsPerBuildingStorage[building.id];
-        foreach(BuildingEvent thisEvent in thisBuildingEvents)
+        //instantiate the buttons for the buildings
+        Dictionary<int, Building> buildings = dataController.BuildingStorage;
+        float totalCondition = 0;
+
+        List<int> buildingKeys = new List<int>(buildings.Keys);
+        foreach (int id in buildingKeys)
         {
-            BuildingMemoryPanel memPanel = Instantiate(buildingMemoryPrefab, memoryInfoContainer.transform);
-
-            memPanel.building = building;
-            memPanel.thisEvent = thisEvent;
-
-            memPanel.displayData();
+            Building building = buildings[id];
+            ViewButton newPrefab = Instantiate(viewButtonPrefab, buildingViewer.transform);
+            newPrefab.source = building;
+            newPrefab.overviewMenu = this;
+            newPrefab.displayData();
+            
+            totalCondition += building.condition;
         }
 
-        historyCanvas.enabled = false;
-        mainCanvas.enabled = true;
-        backToMainButton.gameObject.SetActive(false);
-        saveButton.gameObject.SetActive(true);
-    }
+        int totalBuildings = buildings.Count; buildingNumInfo.text = totalBuildings.ToString();
+        int totalNPCs = npcs.Count; npcNumInfo.text = totalNPCs.ToString();
+        float avgCondition = totalCondition / totalBuildings; avgCondInfo.text = avgCondition.ToString("0.00");
 
-    /*
-    Return to the main canvas after being in a menu subpage
-    */
-    public void backToMain()
-    {
-        historyCanvas.enabled = false;
-        mainCanvas.enabled = true;
-        backToMainButton.gameObject.SetActive(false);
-        saveButton.gameObject.SetActive(true);
+        WorldManager worldManager = dataController.worldManager;
+        float timeInHours = worldManager.gameTime;
+
+        //number of years
+        float hoursPerYear = 24f * 365f;
+        int years = Mathf.FloorToInt(timeInHours / hoursPerYear);
+        timeInHours -= years * hoursPerYear;
+
+        //number of hours
+        float hoursPerMonth = 24f * 30.44f;
+        int months = Mathf.FloorToInt(timeInHours / hoursPerMonth);
+        timeInHours -= months * hoursPerMonth;
+
+        //number of days
+        float hoursPerDay = 24f;
+        int days = Mathf.FloorToInt(timeInHours / hoursPerDay);
+        timeInHours -= days * hoursPerDay;
+
+        float minutesPerHour = 60f;
+        int hours = Mathf.FloorToInt(timeInHours / 1);
+        float minutes = (timeInHours - hours) * minutesPerHour;
+
+        string daysString = years.ToString();
+        string monthsString = months.ToString();
+        string yearsString = years.ToString();
+        if(daysString.Length < 2) daysString = "0"+daysString;
+        if(monthsString.Length < 2) monthsString = "0"+monthsString;
+        while(yearsString.Length < 4) yearsString = "0"+yearsString;
+        dateInfo.text = daysString +"/"+monthsString+"/"+yearsString;
+
+        string hoursString = hours.ToString();
+        string minutesString = minutes.ToString();
+        if(hoursString.Length < 2) hoursString = "0"+hoursString;
+        if(minutesString.Length < 2) minutesString = "0"+minutesString;
+        timeInfo.text = hoursString+":"+minutesString;
+
+        gameObject.GetComponent<Canvas>().enabled = true;
     }
 
     /*
@@ -86,7 +121,7 @@ public class OverviewMenu : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
-        foreach (Transform child in memoryInfoContainer.transform) 
+        foreach (Transform child in buildingViewer.transform) 
         {
             Destroy(child.gameObject);
         }
@@ -102,12 +137,42 @@ public class OverviewMenu : MonoBehaviour
         InputLocker.Unlock(); //unlock the inputs
     }
 
-    public void viewHistory()
+    public void reload()
     {
-        historyCanvas.enabled = true;
-        mainCanvas.enabled = false;
-        backToMainButton.gameObject.SetActive(true);
-        saveButton.gameObject.SetActive(false);
+        reloadConfirmationObj.gameObject.SetActive(true);
+    }
+    public void reloadYes()
+    {
+        skipperObject.reloadWorld();
+        exitMenu();
+    }
+    public void reloadNo()
+    {
+        reloadConfirmationObj.gameObject.SetActive(false);
+    }
+
+    public void skipTime()
+    {
+        skipErrMsgField.text = "";
+        skipConfirmationObj.gameObject.SetActive(true);
+    }
+    public void skipTimeYes()
+    {   
+        skipErrMsgField.text = "";
+        if(float.TryParse(timeInput.text, out float inputTime))
+        {
+            skipperObject.skipTime(inputTime);
+            exitMenu();
+        }
+        else
+        {
+            skipErrMsgField.text = "Cannot parse input to float, please input a valid float or integer.";
+        }
+    }
+         
+    public void skipTimeCancel()
+    {
+        skipConfirmationObj.gameObject.SetActive(false);
     }
 }
 

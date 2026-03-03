@@ -39,7 +39,7 @@ public class SimulationController : MonoBehaviour
     public ActionFrontier collectActions(NPC performer, float timeLeft)
     {
         ActionFrontier collection = new ActionFrontier(dataController);
-        IActionBase bestAction;
+        IAction bestAction;
         Dictionary<int, List<ActionInfoWrapper>> buildingActions = collection.buildingActions;
         Dictionary<int, List<ActionInfoWrapper>> npcActions = collection.npcActions;
         List<ActionInfoWrapper> environmentActions = collection.environmentActions;

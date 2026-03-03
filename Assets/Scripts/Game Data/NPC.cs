@@ -4,7 +4,7 @@ using System.Collections.Generic;
 /*
  * The base class for each NPC
  */
- public class NPC : MonoBehaviour
+ public class NPC : MonoBehaviour, IAgent
 {
     public int id; //unique ID identifier for the NPC
     public string npcName; //name of the NPC
@@ -14,10 +14,17 @@ using System.Collections.Generic;
     public int spriteType; //the code of the sprite
     public int parentBuilding; //the building that the NPC lives in (-1 if non)
     public bool hasJob; //whether or not this npc has a job
-
-    //action performing
     public float timeLeft = 24f; //the amount of time they have left in the day
-    public ActionInfoWrapper? action; //the action the agent is in the process of performing
+
+    int IAgent.id { get => id; set => id = value; }
+    string IAgent.npcName { get => npcName; set => npcName = value; }
+    Attributes IAgent.attributes { get => attributes; set => attributes = value; }
+    Stats IAgent.stats { get => stats; set => stats = value; }
+    List<int> IAgent.traits { get => traits; set => traits = value; }
+    int IAgent.spriteType { get => spriteType; set => spriteType = value; }
+    int IAgent.parentBuilding { get => parentBuilding; set => parentBuilding = value; }
+    bool IAgent.hasJob { get => hasJob; set => hasJob = value; }
+    float IAgent.timeLeft { get => timeLeft; set => timeLeft = value; }
 
     //extra utility functions for traits list
     public bool ContainsTrait(int id)
@@ -36,10 +43,11 @@ using System.Collections.Generic;
         npcName = data.npcName;
         attributes = data.attributes;
         stats = data.stats;
-        traits = new List<int>(data.traits ?? System.Array.Empty<int>()); //converts into list from array
+        traits = data.traits; //converts into list from array
         spriteType = data.spriteType;
         parentBuilding = data.parentBuilding;
         hasJob = data.hasJob;
+        timeLeft = data.timeLeft;
     }
 
     public void Load(int inputID, string inputNpcName, Attributes inputAttributes, Stats inputStats, List<int> inputTraits, int inputSpriteType, int inputParentBuilding, bool inputHasJob)

@@ -26,6 +26,11 @@ public class BuildingEvent
         buildingImportance = buildImp;
         npcImportance = npcImp;
     }
+
+    public BuildingEvent DeepClone()
+    {
+        return new BuildingEvent(eventKey, actionName, description, timeOfAction, severity, wasPositivePerf, wasPositiveRec, buildingImportance, npcImportance);
+    }
 }
 
 /*

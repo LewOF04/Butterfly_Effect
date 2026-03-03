@@ -17,4 +17,17 @@ public class Stats
     [Range(0, 100)] public float wealth;
 
     public Stats(){}
+
+    public Stats DeepClone()
+    {
+        Stats newStats = new Stats();
+        newStats.condition = condition;
+        newStats.nutrition = nutrition;
+        newStats.happiness = happiness;
+        newStats.energy = energy;
+        newStats.food = food;
+        newStats.wealth = wealth;
+
+        return newStats;
+    }
 } 

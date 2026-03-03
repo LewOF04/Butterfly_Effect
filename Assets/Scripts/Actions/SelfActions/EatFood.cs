@@ -12,7 +12,7 @@ public class EatFood : SelfAction
 
     public override char actionType => 'S';
     public override string name => "Eat Food";
-    public override string baseDescription => "The NPC if they have food, can eat it to restore nutrition levels.";
+    public override string baseDescription => "The IAgent if they have food, can eat it to restore nutrition levels.";
 
     protected override float baseTime => 0.5f;
     protected override float baseEnergy => 3f;
@@ -25,7 +25,7 @@ public class EatFood : SelfAction
     protected override List<int> successNegTraits => new List<int>{};
 
     //compute the empirical utility of the action
-    protected override float computeUtility(NPC performer, NoTarget _)
+    protected override float computeUtility(IAgent performer, NoTarget _)
     {
         if(actUtility != -1) return actUtility;
 
@@ -58,7 +58,7 @@ public class EatFood : SelfAction
     }
 
     //compute the performers perceived utility of the action
-    protected override float estimateUtility(NPC performer, NoTarget _)
+    protected override float estimateUtility(IAgent performer, NoTarget _)
     {
         if(estUtility != -1) return estUtility;
         
@@ -75,7 +75,7 @@ public class EatFood : SelfAction
 
     protected override void innerPerformAction(float percentComplete)
     {
-        NPC performer = dataController.NPCStorage[currentActor];
+        IAgent performer = dataController.NPCStorage[currentActor];
 
         float percentMulti = percentComplete / 100;
         string description = performer.npcName + " spent " + (percentMulti*timeToComplete).ToString("0.00") + " eating food.";
@@ -151,7 +151,7 @@ public class EatFood : SelfAction
     }
 
     //computer the likelihood this action will be a success
-    protected override float computeSuccess(NPC performer, NoTarget _)
+    protected override float computeSuccess(IAgent performer, NoTarget _)
     {
         if(actSuccess != -1) return actSuccess;
 
@@ -169,7 +169,7 @@ public class EatFood : SelfAction
 
         float weightedSucc = ActionMaths.ApplyWeightedMultipliers(50f, effectors, weights);
 
-        //add 5% for each time this NPC has performed the action in the past
+        //add 5% for each time this IAgent has performed the action in the past
         List<NPCEvent> events = dataController.eventsPerNPCStorage[currentActor];
         foreach(NPCEvent thisEvent in events)
         {
@@ -184,7 +184,7 @@ public class EatFood : SelfAction
     }
 
     //compute the estimated chance this action will be a succss from the performers perspective
-    protected override float estimateSuccess(NPC performer, NoTarget _)
+    protected override float estimateSuccess(IAgent performer, NoTarget _)
     {
         if(estSuccess != -1) return estSuccess;
         
@@ -196,8 +196,8 @@ public class EatFood : SelfAction
         return estSuccess;
     }
 
-    //calculate how much time it would take for the NPC to complete this action
-    protected override float getTimeToComplete(NPC performer, NoTarget _)
+    //calculate how much time it would take for the IAgent to complete this action
+    protected override float getTimeToComplete(IAgent performer, NoTarget _)
     {
         if(timeToComplete != -1) return timeToComplete;
 
@@ -220,8 +220,8 @@ public class EatFood : SelfAction
         return timeToComplete;
     }
 
-    //calculate how much energy it would take the NPC to compelete this action
-    protected override float getEnergyToComplete(NPC performer, NoTarget _)
+    //calculate how much energy it would take the IAgent to compelete this action
+    protected override float getEnergyToComplete(IAgent performer, NoTarget _)
     {
         if(energyToComplete != -1) return energyToComplete;
 
@@ -243,7 +243,7 @@ public class EatFood : SelfAction
         return energyToComplete;
     }
 
-    protected override bool isKnown(NPC performer)
+    protected override bool isKnown(IAgent performer)
     {
         if(baseConsumption > performer.stats.food) return false; //false if they don't have enough food to eat
 

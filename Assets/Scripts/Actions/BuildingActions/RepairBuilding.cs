@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using NoTarget = System.ValueTuple;
 
 [Preserve]
-public class RepairBuilding : BuildingAction
+public class RepairBuilding: BuildingAction
 {
     private const float baseCost = 5f;
     private const float baseConditionGain = 15f;
@@ -25,7 +25,7 @@ public class RepairBuilding : BuildingAction
     protected override List<int> successNegTraits => new List<int>{};
 
     //compute the empirical utility of the action
-    protected override float computeUtility(NPC performer, Building target)
+    protected override float computeUtility(IAgent performer, IBuilding target)
     {
         if(actUtility != -1) return actUtility;
 
@@ -36,7 +36,7 @@ public class RepairBuilding : BuildingAction
         List<float> effectors = new List<float>();
         List<float> weights = new List<float>();
 
-        //npc stat/attribute effectors
+        //IAgent stat/attribute effectors
         effectors.Add(ActionMaths.calcMultiplier(performer.attributes.perception, 0f, 100f, 0.25f, 2f)); weights.Add(0.3f);
         effectors.Add(ActionMaths.calcMultiplier(performer.attributes.aesthetic_sensitivity, 0f, 100f, 0.25f, 2f)); weights.Add(0.6f);
         effectors.Add(ActionMaths.calcExpMultiplier(target.condition, 0f, 100f, 5f, 0.25f, 5f)); weights.Add(0.8f); //the worse the condition the more important to fix
@@ -54,7 +54,7 @@ public class RepairBuilding : BuildingAction
     }
 
     //compute the performers perceived utility of the action
-    protected override float estimateUtility(NPC performer, Building target)
+    protected override float estimateUtility(IAgent performer, IBuilding target)
     {
         if(estUtility != -1) return estUtility;
         
@@ -68,7 +68,7 @@ public class RepairBuilding : BuildingAction
             //if it is not their house, weight the benefit by how much they like the inhabitants
             foreach(int npcID in target.inhabitants)
             {
-                NPC inhabitantNPC = dataController.NPCStorage[npcID];
+                IAgent inhabitantIAgent = dataController.NPCStorage[npcID];
                 Relationship thisRel = dataController.RelationshipStorage[new RelationshipKey(npcID, performer.id)];
                 float relLevel = ActionMaths.calcMultiplier(thisRel.value, 0f, 100f, -1f, 2f);
 
@@ -82,8 +82,8 @@ public class RepairBuilding : BuildingAction
 
     protected override void innerPerformAction(float percentComplete)
     {
-        NPC performer = dataController.NPCStorage[currentActor];
-        Building target = dataController.BuildingStorage[receiver];
+        IAgent performer = dataController.NPCStorage[currentActor];
+        IBuilding target = dataController.BuildingStorage[receiver];
 
         float percentMulti = percentComplete / 100;
         string description = performer.npcName + " spent " + (percentMulti*timeToComplete).ToString("0.00") + " hours fixing the "+target.buildingName+" building.";
@@ -124,7 +124,7 @@ public class RepairBuilding : BuildingAction
 
         float repairGain = baseConditionGain * fixMultiplier;
         target.condition = Mathf.Min(100f, target.condition + repairGain);
-        description += ", altered the building condition by ";
+        description += ", altered the IBuildingcondition by ";
         if(repairGain >= 0) description += "+";
         else description += "-";
         description+=repairGain.ToString("0.00");
@@ -166,7 +166,7 @@ public class RepairBuilding : BuildingAction
     }
 
     //computer the likelihood this action will be a success
-    protected override float computeSuccess(NPC performer, Building target)
+    protected override float computeSuccess(IAgent performer, IBuilding target)
     {
         if(actSuccess != -1) return actSuccess;
 
@@ -184,11 +184,11 @@ public class RepairBuilding : BuildingAction
 
         if(performer.traits.Contains(8)) weightedSucc += weightedSucc * 0.5f;
 
-        //add 5% for each time this NPC has performed the action in the past
+        //add 5% for each time this IAgent has performed the action in the past
         List<BuildingEvent> events = dataController.buildingEventsPerNPCStorage[currentActor];
         foreach(BuildingEvent thisEvent in events)
         {
-            if(thisEvent.actionName == name && thisEvent.eventKey.npc == currentActor)
+            if(thisEvent.actionName == name && thisEvent.eventKey.IAgent == currentActor)
             {
                weightedSucc = Mathf.Min(100f, weightedSucc + weightedSucc * 0.05f); 
             }
@@ -199,7 +199,7 @@ public class RepairBuilding : BuildingAction
     }
 
     //compute the estimated chance this action will be a succss from the performers perspective
-    protected override float estimateSuccess(NPC performer, Building target)
+    protected override float estimateSuccess(IAgent performer, IBuilding target)
     {
         if(estSuccess != -1) return estSuccess;
         
@@ -211,8 +211,8 @@ public class RepairBuilding : BuildingAction
         return estSuccess;
     }
 
-    //calculate how much time it would take for the NPC to complete this action
-    protected override float getTimeToComplete(NPC performer, Building target)
+    //calculate how much time it would take for the IAgent to complete this action
+    protected override float getTimeToComplete(IAgent performer, IBuilding target)
     {
         if(timeToComplete != -1) return timeToComplete;
 
@@ -227,8 +227,8 @@ public class RepairBuilding : BuildingAction
         return timeToComplete;
     }
 
-    //calculate how much energy it would take the NPC to compelete this action
-    protected override float getEnergyToComplete(NPC performer, Building target)
+    //calculate how much energy it would take the IAgent to compelete this action
+    protected override float getEnergyToComplete(IAgent performer, IBuilding target)
     {
         if(energyToComplete != -1) return energyToComplete;
 
@@ -243,7 +243,7 @@ public class RepairBuilding : BuildingAction
         return energyToComplete;
     }
 
-    protected List<float> getTimeAndEnergyMultipliers(NPC performer)
+    protected List<float> getTimeAndEnergyMultipliers(IAgent performer)
     {
         List<float> multipliers = new List<float>{};
 
@@ -258,7 +258,7 @@ public class RepairBuilding : BuildingAction
         return multipliers;
     }
 
-    protected override bool isKnown(NPC performer)
+    protected override bool isKnown(IAgent performer)
     {
         float thisComplexity = complexity;
         if(performer.traits.Contains(8)) thisComplexity -= thisComplexity * 0.3f;

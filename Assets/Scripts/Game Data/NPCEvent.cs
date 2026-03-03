@@ -31,6 +31,11 @@ public class NPCEvent
         receiverImportance = recImp;
 
     }
+
+    public NPCEvent DeepClone()
+    {
+        return new NPCEvent(eventKey, actionName, description, severity, timeOfAction, performer, receiver, wasPositivePerf, wasPositiveRec, performerImportance, receiverImportance);
+    }
 }
 
 /*

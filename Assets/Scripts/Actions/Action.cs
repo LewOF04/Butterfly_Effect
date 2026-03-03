@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using NoTarget = System.ValueTuple;
 using System;
 
-public abstract class ActionBase<T> : IActionBase
+public abstract class Action<T> : IAction
 {
-    protected ActionBase() { }
-    protected ActionBase(char actionType) { }
+    protected Action() { }
+    protected Action(char actionType) { }
 
-    protected DataController dataController => DataController.Instance;
+    protected IDataContainer dataController => DataController.Instance;
 
     public abstract char actionType {get;}
     public virtual string name => GetType().Name;
@@ -29,17 +29,34 @@ public abstract class ActionBase<T> : IActionBase
     [Range(0,100)] protected abstract float baseEnergy {get;} //the energy it would take for a completely "normal" npc to complete
     [Range(0,100)] protected abstract float complexity {get;} //how complex this action is to complete
     [Range(0,100)] protected abstract float baseUtility {get;} //how inheritly useful the action is
+    protected virtual bool interrupts => false; //whether or not this action would interrupt an npc receiver
     protected abstract List<int> utilityPosTraits {get;} //the traits that will have an positive impact on perceived utility
     protected abstract List<int> utilityNegTraits {get;} //the traits that will have an negative impact on perceived utility
     protected abstract List<int> successPosTraits {get;}//the traits that will have a positive impact on the action success
     protected abstract List<int> successNegTraits {get;} //the traits that will have a negative impact on the action success
-    protected abstract float computeUtility(NPC performer, T receiver); //compute the empirical utility of the action 
-    protected abstract float estimateUtility(NPC performer, T receiver); //compute the performers perceived utility of the action
-    protected abstract float computeSuccess(NPC performer, T receiver); //computer the likelihood this action will be a success
-    protected abstract float estimateSuccess(NPC performer, T receiver); //compute the estimated chance this action will be a succss from the performers perspective
-    protected abstract float getTimeToComplete(NPC performer, T receiver); //calculate how much time it would take for the NPC to complete this action
-    protected abstract float getEnergyToComplete(NPC performer, T receiver); //calculate how much energy it would take the NPC to compelete this action
+    protected abstract float computeUtility(IAgent performer, T receiver); //compute the empirical utility of the action 
+    protected abstract float estimateUtility(IAgent performer, T receiver); //compute the performers perceived utility of the action
+    protected abstract float computeSuccess(IAgent performer, T receiver); //computer the likelihood this action will be a success
+    protected abstract float estimateSuccess(IAgent performer, T receiver); //compute the estimated chance this action will be a succss from the performers perspective
+    protected abstract float getTimeToComplete(IAgent performer, T receiver); //calculate how much time it would take for the NPC to complete this action
+    protected abstract float getEnergyToComplete(IAgent performer, T receiver); //calculate how much energy it would take the NPC to compelete this action
     protected abstract void innerPerformAction(float percentComplete); //make the changes of the action, with results affected by percentage completed
+    public string performActionSim(float percentComplete)
+    {
+        //calculate if the NPC would have run out of time or energy before completion
+        IAgent thisNPC = dataController.NPCStorage[currentActor];
+
+        float energyPerc = (energyToComplete / thisNPC.stats.energy) * 100; //percent of action completed within energy
+        float timePerc = (timeToComplete / thisNPC.timeLeft) * 100; //percent of action completed within time
+
+        innerPerformAction(Mathf.Min(energyPerc, timePerc, percentComplete), "sim"); //perform the action with whatever perc would've run out first
+        
+        //return string for whichever aspect was the finishing decider
+        if(energyPerc == Mathf.Min(energyPerc, timePerc, percentComplete)) return "energy";
+        else if(timePerc == Mathf.Min(energyPerc, timePerc, percentComplete)) return "time";
+        else return "perc";
+    }
+
     public string performAction(float percentComplete)
     {
         //calculate if the NPC would have run out of time or energy before completion
@@ -48,7 +65,7 @@ public abstract class ActionBase<T> : IActionBase
         float energyPerc = (energyToComplete / thisNPC.stats.energy) * 100; //percent of action completed within energy
         float timePerc = (timeToComplete / thisNPC.timeLeft) * 100; //percent of action completed within time
 
-        innerPerformAction(Mathf.Min(energyPerc, timePerc, percentComplete)); //perform the action with whatever perc would've run out first
+        innerPerformAction(Mathf.Min(energyPerc, timePerc, percentComplete), "perf"); //perform the action with whatever perc would've run out first
         
         //return string for whichever aspect was the finishing decider
         if(energyPerc == Mathf.Min(energyPerc, timePerc, percentComplete)) return "energy";
@@ -57,35 +74,35 @@ public abstract class ActionBase<T> : IActionBase
     }
     
     //check that this action would be known to the NPC
-    protected virtual bool isKnown(NPC performer)
+    protected virtual bool isKnown(IAgent performer)
     {
         //either the action is known because they're smart enough
         if (complexity <= performer.attributes.intelligence) return true;
 
         //or they have memory of a similar event
         if(this is NPCAction || this is SelfAction || this is EnvironmentAction){
-            List<NPCEvent> npcEvents = dataController.eventsPerNPCStorage[performer.id];
+            List<NPCEvent> npcEvents = dataControllerSnapshot.eventsPerNPCStorage[performer.id];
             foreach(NPCEvent thisEvent in npcEvents)  if(thisEvent.actionName == name) return true;
         } 
         
         else if (this is BuildingAction)
         {
-            List<BuildingEvent> buildingEvents = dataController.buildingEventsPerNPCStorage[performer.id];
+            List<BuildingEvent> buildingEvents = dataControllerSnapshot.buildingEventsPerNPCStorage[performer.id];
             foreach(BuildingEvent thisEvent in buildingEvents) if(thisEvent.actionName == name) return true;
         }
 
         return false;
     } 
 
-    public ActionInfoWrapper computeAction(NPC performer, T receiver)
+    public ActionInfoWrapper computeAction(IAgent performer, T receiver)
     {
         resetAction();
         currentActor = performer.id;
 
         this.receiver = receiver switch
         {
-            NPC npc         => npc.id,
-            Building build  => build.id,
+            IAgent npc         => npc.id,
+            IBuilding build  => build.id,
             _               => -1
         };
 
@@ -132,24 +149,24 @@ public abstract class ActionBase<T> : IActionBase
     }
 }
 
-public abstract class BuildingAction : ActionBase<Building>
+public abstract class BuildingAction : Action<IBuilding>
 {
     public BuildingAction(char actionType = 'B') : base(actionType){}
 }
-public abstract class NPCAction : ActionBase<NPC>
+public abstract class NPCAction : Action<IAgent>
 {
     public NPCAction(char actionType = 'N') : base(actionType){}
 }
-public abstract class SelfAction : ActionBase<NoTarget>
+public abstract class SelfAction : Action<NoTarget>
 {
     public SelfAction(char actionType = 'S') : base(actionType){}
 }
-public abstract class EnvironmentAction : ActionBase<NoTarget>
+public abstract class EnvironmentAction : Action<NoTarget>
 {
     public EnvironmentAction(char actionType = 'E') : base(actionType){}
 }
 
-public interface IActionBase
+public interface IAction
 {
     char actionType {get;} //action type ("N" = NPC, "B" = Building, "E" = Environment, "S" = Self)
     string name {get;}
@@ -167,8 +184,8 @@ public struct ActionInfoWrapper : IEquatable<ActionInfoWrapper>
     public float actUtility;
     public float estSuccess;
     public float actSuccess;
-    public IActionBase action;
-    public ActionInfoWrapper(int currentActor, int receiver, float timeToComplete, float energyToComplete, bool? known, float estUtility, float actUtility, float estSuccess, float actSuccess, IActionBase action)
+    public IAction action;
+    public ActionInfoWrapper(int currentActor, int receiver, float timeToComplete, float energyToComplete, bool? known, float estUtility, float actUtility, float estSuccess, float actSuccess, IAction action)
     {
         this.receiver = receiver;
         this.currentActor = currentActor;

@@ -6,7 +6,8 @@ using System;
 public class ViewButton : MonoBehaviour
 {
     public Image spriteImageLoc;
-    public TextMeshProUGUI title; 
+    public TextMeshProUGUI IDTitle; 
+    public TextMeshProUGUI nameTitle;
     public MonoBehaviour source;
     public OverviewMenu overviewMenu;
 
@@ -16,12 +17,14 @@ public class ViewButton : MonoBehaviour
         {
             spriteImageLoc.sprite = npc.gameObject.GetComponent<SpriteRenderer>().sprite;
             spriteImageLoc.preserveAspect = true;
-            title.text = "ID: "+npc.id;
+            IDTitle.text = "ID: "+npc.id;
+            nameTitle.text = "Name: "+npc.npcName;
         } else if (source is Building building)
         {
             spriteImageLoc.sprite = building.gameObject.GetComponent<SpriteRenderer>().sprite;
             spriteImageLoc.preserveAspect = true;
-            title.text = "ID: "+building.id;  
+            IDTitle.text = "ID: "+building.id;  
+            nameTitle.text = "Name: "+building.buildingName;
         }
         
     }
@@ -42,7 +45,7 @@ public class ViewButton : MonoBehaviour
             //update the data for the npc
             npcMenu.npc = npc;
             npcMenu.displayData();
-
+            
             npcCanvas.enabled = true;
         } 
         

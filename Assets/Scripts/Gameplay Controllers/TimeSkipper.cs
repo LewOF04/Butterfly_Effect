@@ -20,11 +20,17 @@ public class TimeSkipper : MonoBehaviour
         dataController = DataController.Instance;
     }
 
-    public void skipTime(int time)
+    public void skipTime(float time)
     {
-        StartCoroutine(SkipTimeRoutine(time));
+        StartCoroutine(skipTimeRoutine(time));
     }
-    IEnumerator SkipTimeRoutine(int time)
+
+    public void reloadWorld()
+    {
+        StartCoroutine(reloadWorldRoutine());
+    }
+
+    private IEnumerator skipTimeRoutine(float time)
     {
         Camera camera = FindFirstObjectByType<Camera>();
 
@@ -36,19 +42,12 @@ public class TimeSkipper : MonoBehaviour
         loadingScreen.transform.position += new Vector3(0.0f, 0.0f, 0.5f);
         canvas.enabled = true;
         loadingSlider.value = 0f;
+
+        //SIMULATION HERE
         
-        yield return StartCoroutine(reloadWorld()); //wait for reload to complete
+        yield return StartCoroutine(reload()); //wait for reload to complete
         loadingScreen.transform.position = camera.transform.position;
         loadingScreen.transform.position += new Vector3(0.0f, 0.0f, 0.5f);
-
-        Dictionary<int, NPC> npcs = dataController.NPCStorage;
-        List<int> npcKeys = new List<int>(npcs.Keys);
-        foreach(int npcKey in npcKeys)
-        {
-            NPC npc = npcs[npcKey];
-            npc.timeLeft = 24f;
-            npc.stats.energy = 100f;
-        }
 
         yield return new WaitForSeconds(1f); //add a delay so that menu is shown
         loadingSlider.value = 1f;
@@ -57,7 +56,42 @@ public class TimeSkipper : MonoBehaviour
         InputLocker.Unlock();
     }
 
-    IEnumerator reloadWorld()
+     /*Dictionary<int, NPC> npcs = dataController.NPCStorage;
+        List<int> npcKeys = new List<int>(npcs.Keys);
+        foreach(int npcKey in npcKeys)
+        {
+            NPC npc = npcs[npcKey];
+            npc.timeLeft = 24f;
+            npc.stats.energy = 100f;
+        }*/
+
+    private IEnumerator reloadWorldRoutine()
+    {
+        Camera camera = FindFirstObjectByType<Camera>();
+
+        //setup loading screen
+        InputLocker.Lock(); //locks the input 
+        Slider loadingSlider = loadingScreen.GetComponentInChildren<Slider>();
+        Canvas canvas = loadingScreen.GetComponent<Canvas>();
+        loadingScreen.transform.position = camera.transform.position;
+        loadingScreen.transform.position += new Vector3(0.0f, 0.0f, 0.5f);
+        canvas.enabled = true;
+        loadingSlider.value = 0f;
+
+        //SIMULATION HERE
+        
+        yield return StartCoroutine(reload()); //wait for reload to complete
+        loadingScreen.transform.position = camera.transform.position;
+        loadingScreen.transform.position += new Vector3(0.0f, 0.0f, 0.5f);
+
+        yield return new WaitForSeconds(1f); //add a delay so that menu is shown
+        loadingSlider.value = 1f;
+        yield return new WaitForSeconds(1f);
+        canvas.enabled = false;;
+        InputLocker.Unlock();
+    }
+
+    private IEnumerator reload()
     {
         var sceneDecoration = GameObject.Find("SceneDecoration"); //get all of the scene decoration
 

@@ -20,4 +20,22 @@ public class Attributes
     [Range(0, 100)] public float strength;
 
     public Attributes() { }
+
+    public Attributes DeepClone()
+    {
+        Attributes newAttrs = new Attributes();
+        newAttrs.morality = morality;
+        newAttrs.intelligence = intelligence;
+        newAttrs.rationality = rationality;
+        newAttrs.fortitude = fortitude;
+        newAttrs.charisma = charisma;
+        newAttrs.aesthetic_sensitivity = aesthetic_sensitivity;
+        newAttrs.perception = perception;
+        newAttrs.dexterity = dexterity;
+        newAttrs.constitution = constitution;
+        newAttrs.wisdom = wisdom;
+        newAttrs.strength = strength;
+
+        return newAttrs;
+    }
 } 

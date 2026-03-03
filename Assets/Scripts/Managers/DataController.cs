@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System;
 
-public class DataController : MonoBehaviour
+public class DataController : MonoBehaviour, IDataContainer
 {
     public static DataController Instance;
 
@@ -24,21 +24,21 @@ public class DataController : MonoBehaviour
 
     [Header("Runtime Storage")]
     //storage containers for easy access to npcs, buildings, traits and actions
-    public Dictionary<int, NPC> NPCStorage;
-    public Dictionary<int, Building> BuildingStorage;
-    public Dictionary<int, TraitData> TraitStorage;
-    public Dictionary<string, IActionBase> ActionStorage;
+    public Dictionary<int, NPC> NPCStorage { get; set; }
+    public Dictionary<int, Building> BuildingStorage { get; set; }
+    public Dictionary<int, TraitData> TraitStorage { get; set; }
+    public Dictionary<string, IAction> ActionStorage { get; set; }
 
     [Header("<i>Relationship</i>")]
-    public Dictionary<RelationshipKey, Relationship> RelationshipStorage; //dictionary that stores every relationship
-    public Dictionary<int, List<Relationship>> RelationshipPerNPCStorage; //dicionary that stores the relationships indexable by each npc
+    public Dictionary<RelationshipKey, Relationship> RelationshipStorage { get; set; } //dictionary that stores every relationship
+    public Dictionary<int, List<Relationship>> RelationshipPerNPCStorage { get; set; } //dicionary that stores the relationships indexable by each npc
 
     [Header("<i>Memory</i>")]
-    public Dictionary<int, List<NPCEvent>> eventsPerNPCStorage; //which events each NPC remember
-    public Dictionary<RelationshipKey, Dictionary<NPCEventKey, NPCEvent>> NPCEventStorage; 
-    public Dictionary<BuildingRelationshipKey, Dictionary<BuildingEventKey, BuildingEvent>> buildingEventStorage;
-    public Dictionary<int, List<BuildingEvent>> buildingEventsPerBuildingStorage; 
-    public Dictionary<int, List<BuildingEvent>> buildingEventsPerNPCStorage;
+    public Dictionary<int, List<NPCEvent>> eventsPerNPCStorage { get; set; } //which events each NPC remember
+    public Dictionary<RelationshipKey, Dictionary<NPCEventKey, NPCEvent>> NPCEventStorage { get; set; }
+    public Dictionary<BuildingRelationshipKey, Dictionary<BuildingEventKey, BuildingEvent>> buildingEventStorage { get; set; }
+    public Dictionary<int, List<BuildingEvent>> buildingEventsPerBuildingStorage { get; set; } 
+    public Dictionary<int, List<BuildingEvent>> buildingEventsPerNPCStorage { get; set; }
 
     [Header("Actions")]
     public List<BuildingAction> buildingActions;
@@ -47,10 +47,10 @@ public class DataController : MonoBehaviour
     public List<EnvironmentAction> environmentActions;
 
     [Header("Other stores")]
-    public Dictionary<int, List<int>> NPCBuildingLinks = new Dictionary<int, List<int>>();
+    public Dictionary<int, List<int>> NPCBuildingLinks { get; set; }
 
     [Header("Game Variables")]
-    public WorldManager worldManager;
+    public WorldManager worldManager { get; set; }
 
     void Awake()
     {
@@ -71,6 +71,8 @@ public class DataController : MonoBehaviour
             newContainer.transform.SetParent(transform, false);
             buildingContainer = newContainer.transform;
         }
+
+        NPCBuildingLinks = new Dictionary<int, List<int>>();
     }
 
     public void SaveToMemory()

@@ -79,5 +79,41 @@ public class RelationshipManager : MonoBehaviour
         dataController.RelationshipStorage = RelationshipStorage;
         dataController.RelationshipPerNPCStorage = RelationshipPerNPC;
     }
+
+    public RelationshipCopyWrapper DeepClone()
+    {
+        Dictionary<RelationshipKey, Relationship> relStorage = dataController.RelationshipStorage;
+
+        Dictionary<RelationshipKey, Relationship> newRelStorage = new Dictionary<int, Relationship>();
+
+        Dictionary<int, List<Relationship>> newPerNPCStorage = new Dictionary<int, List<Relationship>>();
+
+        foreach(var kvp in dataController.NPCStorage)
+        {
+            newPerNPCStorage[kvp.Key] = new List<Relationship>();
+        }
+
+        List<RelationshipKey> relKeys = new List<RelationshipKey>(relStorage.Keys);
+        foreach(RelationshipKey relKey in relKeys)
+        {
+            Relationship relCopy = relStorage[relKey].DeepClone();
+            newRelStorage[relKey] = relCopy;
+            newPerNPCStorage[relKey.npcA].Add(relCopy);
+            newPerNPCStorage[relKey.npcB].Add(relCopy);
+        }
+
+        return new RelationshipCopyWrapper(newRelStorage, newPerNPCStorage);
+    }
 }
- 
+
+public class RelationshipCopyWrapper
+{
+    public Dictionary<RelationshipKey, Relationship> relStorage;
+    public Dictionary<int, List<Relationship>> relByNPCStorage;
+
+    public RelationshipCopyWrapper(Dictionary<RelationshipKey, Relationship> inputRels, Dictionary<int, List<Relationship>> byNPCInput)
+    {
+        relStorage = inputRels;
+        relByNPCStorage = byNPCInput;
+    }
+}

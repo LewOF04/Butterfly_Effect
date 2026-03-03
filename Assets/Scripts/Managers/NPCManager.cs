@@ -136,4 +136,19 @@ public class NPCManager : MonoBehaviour
         var npc = generateNPC(id, dataController.TraitStorage.Count, rng);
         dataController.NPCStorage.Add(npc.id, npc);
     }
+
+    public Dictionary<int, NPCData> DeepClone()
+    {
+        Dictionary<int, NPC> npcStorage = dataController.NPCStorage;
+
+        Dictionary<int, NPCData> outputDict = new Dictionary<int, NPCData>();
+
+        List<int> npcKeys = new List<int>(npcStorage.Keys);
+        foreach(int npcKey in npcKeys)
+        {
+            outputDict[npcKey] = new NPCData(npcStorage[npcKey]);
+        }
+
+        return outputDict;
+    }
 } 

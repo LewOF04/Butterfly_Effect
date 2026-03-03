@@ -11,7 +11,7 @@ public class ImproveIntelligence : SelfAction
 
     public override char actionType => 'S';
     public override string name => "Improve Intelligence";
-    public override string baseDescription => "You can always work on yourself, this NPC would like to improve their intelligence.";
+    public override string baseDescription => "You can always work on yourself, this IAgent would like to improve their intelligence.";
 
     protected override float baseTime => 4f;
     protected override float baseEnergy => 20f;
@@ -24,7 +24,7 @@ public class ImproveIntelligence : SelfAction
     protected override List<int> successNegTraits => new List<int>{};
 
     //compute the empirical utility of the action
-    protected override float computeUtility(NPC performer, NoTarget _)
+    protected override float computeUtility(IAgent performer, NoTarget _)
     {
         if(actUtility != -1) return actUtility;
 
@@ -57,7 +57,7 @@ public class ImproveIntelligence : SelfAction
     }
 
     //compute the performers perceived utility of the action
-    protected override float estimateUtility(NPC performer, NoTarget _)
+    protected override float estimateUtility(IAgent performer, NoTarget _)
     {
         if(estUtility != -1) return estUtility;
         
@@ -74,7 +74,7 @@ public class ImproveIntelligence : SelfAction
 
     protected override void innerPerformAction(float percentComplete)
     {
-        NPC performer = dataController.NPCStorage[currentActor];
+        IAgent performer = dataController.NPCStorage[currentActor];
 
         float percentMulti = percentComplete / 100;
         string description = performer.npcName + " spent " + (percentMulti*timeToComplete).ToString("0.00") + " hours improving their intelligence.";
@@ -153,7 +153,7 @@ public class ImproveIntelligence : SelfAction
     }
 
     //computer the likelihood this action will be a success
-    protected override float computeSuccess(NPC performer, NoTarget _)
+    protected override float computeSuccess(IAgent performer, NoTarget _)
     {
         if(actSuccess != -1) return actSuccess;
 
@@ -171,7 +171,7 @@ public class ImproveIntelligence : SelfAction
 
         float weightedSucc = ActionMaths.ApplyWeightedMultipliers(50f, effectors, weights);
 
-        //add 5% for each time this NPC has performed the action in the past
+        //add 5% for each time this IAgent has performed the action in the past
         List<NPCEvent> events = dataController.eventsPerNPCStorage[currentActor];
         foreach(NPCEvent thisEvent in events)
         {
@@ -186,7 +186,7 @@ public class ImproveIntelligence : SelfAction
     }
 
     //compute the estimated chance this action will be a succss from the performers perspective
-    protected override float estimateSuccess(NPC performer, NoTarget _)
+    protected override float estimateSuccess(IAgent performer, NoTarget _)
     {
         if(estSuccess != -1) return estSuccess;
         
@@ -198,8 +198,8 @@ public class ImproveIntelligence : SelfAction
         return estSuccess;
     }
 
-    //calculate how much time it would take for the NPC to complete this action
-    protected override float getTimeToComplete(NPC performer, NoTarget _)
+    //calculate how much time it would take for the IAgent to complete this action
+    protected override float getTimeToComplete(IAgent performer, NoTarget _)
     {
         if(timeToComplete != -1) return timeToComplete;
 
@@ -220,8 +220,8 @@ public class ImproveIntelligence : SelfAction
         return timeToComplete;
     }
 
-    //calculate how much energy it would take the NPC to compelete this action
-    protected override float getEnergyToComplete(NPC performer, NoTarget _)
+    //calculate how much energy it would take the IAgent to compelete this action
+    protected override float getEnergyToComplete(IAgent performer, NoTarget _)
     {
         if(energyToComplete != -1) return energyToComplete;
 
@@ -242,7 +242,7 @@ public class ImproveIntelligence : SelfAction
         return energyToComplete;
     }
 
-    protected override bool isKnown(NPC performer)
+    protected override bool isKnown(IAgent performer)
     {
         //either the action is known because they're smart enough
         if (complexity <= performer.attributes.intelligence) return true;

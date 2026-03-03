@@ -17,6 +17,7 @@ public class RobNPC : NPCAction
     protected override float baseEnergy => 60f;
     protected override float complexity => 15f;
     protected override float baseUtility => 50f;
+    protected override bool interrupts => true;
 
     protected override List<int> utilityPosTraits => new List<int>{2}; 
     protected override List<int> utilityNegTraits => new List<int>{1};
@@ -24,7 +25,7 @@ public class RobNPC : NPCAction
     protected override List<int> successNegTraits => new List<int>{};
 
     //compute the empirical utility of the action
-    protected override float computeUtility(NPC performer, NPC target)
+    protected override float computeUtility(IAgent performer, IAgent target)
     {
         if(actUtility != -1) return actUtility;
 
@@ -35,7 +36,7 @@ public class RobNPC : NPCAction
         List<float> effectors = new List<float>();
         List<float> weights = new List<float>();
 
-        //npc stat/attribute effectors
+        //IAgent stat/attribute effectors
         effectors.Add(ActionMaths.calcMultiplier(target.stats.wealth, 0f, 100f, 0.25f, 2f)); weights.Add(0.8f);
         effectors.Add(ActionMaths.calcMultiplier(target.attributes.strength, 0f, 100f, 2f, 0.25f)); weights.Add(0.8f);
 
@@ -58,7 +59,7 @@ public class RobNPC : NPCAction
     }
 
     //compute the performers perceived utility of the action
-    protected override float estimateUtility(NPC performer, NPC target)
+    protected override float estimateUtility(IAgent performer, IAgent target)
     {
         if(estUtility != -1) return estUtility;
         
@@ -83,8 +84,8 @@ public class RobNPC : NPCAction
 
     protected override void innerPerformAction(float percentComplete)
     {
-        NPC performer = dataController.NPCStorage[currentActor];
-        NPC target = dataController.NPCStorage[receiver];
+        IAgent performer = dataController.NPCStorage[currentActor];
+        IAgent target = dataController.NPCStorage[receiver];
 
         float percentMulti = percentComplete / 100;
         string description = performer.npcName + " spent " + (percentMulti*timeToComplete).ToString("0.00") + " hours robbing "+target.npcName+".";
@@ -181,7 +182,7 @@ public class RobNPC : NPCAction
     }
 
     //computer the likelihood this action will be a success
-    protected override float computeSuccess(NPC performer, NPC target)
+    protected override float computeSuccess(IAgent performer, IAgent target)
     {
         if(actSuccess != -1) return actSuccess;
 
@@ -214,7 +215,7 @@ public class RobNPC : NPCAction
 
         float weightedSucc = ActionMaths.ApplyWeightedMultipliers(50f, effectors, weights);
 
-        //add 5% for each time this NPC has performed the action in the past
+        //add 5% for each time this IAgent has performed the action in the past
         List<NPCEvent> events = dataController.eventsPerNPCStorage[currentActor];
         foreach(NPCEvent thisEvent in events)
         {
@@ -229,7 +230,7 @@ public class RobNPC : NPCAction
     }
 
     //compute the estimated chance this action will be a succss from the performers perspective
-    protected override float estimateSuccess(NPC performer, NPC target)
+    protected override float estimateSuccess(IAgent performer, IAgent target)
     {
         if(estSuccess != -1) return estSuccess;
         
@@ -241,8 +242,8 @@ public class RobNPC : NPCAction
         return estSuccess;
     }
 
-    //calculate how much time it would take for the NPC to complete this action
-    protected override float getTimeToComplete(NPC performer, NPC target)
+    //calculate how much time it would take for the IAgent to complete this action
+    protected override float getTimeToComplete(IAgent performer, IAgent target)
     {
         if(timeToComplete != -1) return timeToComplete;
 
@@ -276,8 +277,8 @@ public class RobNPC : NPCAction
         return timeToComplete;
     }
 
-    //calculate how much energy it would take the NPC to compelete this action
-    protected override float getEnergyToComplete(NPC performer, NPC target)
+    //calculate how much energy it would take the IAgent to compelete this action
+    protected override float getEnergyToComplete(IAgent performer, IAgent target)
     {
         if(energyToComplete != -1) return energyToComplete;
 
@@ -311,7 +312,7 @@ public class RobNPC : NPCAction
         return energyToComplete;
     }
 
-    protected override bool isKnown(NPC performer)
+    protected override bool isKnown(IAgent performer)
     {
         float thisComplexity = complexity;
 

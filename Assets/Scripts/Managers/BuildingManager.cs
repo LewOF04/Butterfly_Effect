@@ -99,4 +99,19 @@ public class BuildingManager : MonoBehaviour
         var building = generateBuilding(id, rng);
         dataController.BuildingStorage.Add(building.id, building);
     }
+
+    public Dictionary<int, BuildingData> DeepClone()
+    {
+        Dictionary<int, Building> buildingStorage = dataController.BuildingStorage;
+
+        Dictionary<int, BuildingData> outputDict = new Dictionary<int, BuildingData>();
+
+        List<int> buildingKeys = new List<int>(buildingStorage.Keys);
+        foreach(int buildingKey in buildingKeys)
+        {
+            outputDict[buildingKey] = new BuildingData(buildingStorage[buildingKey]);
+        }
+
+        return outputDict;
+    }
 }

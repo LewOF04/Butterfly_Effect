@@ -14,6 +14,11 @@ public class Relationship
         key = inputKey;
         value = inputValue;
     } 
+
+    public Relationship DeepClone()
+    {
+        return new Relationship(key, value);
+    }
 }
 
 /*

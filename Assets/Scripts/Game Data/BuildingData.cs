@@ -2,14 +2,19 @@ using UnityEngine;
 using System.Collections.Generic;
 
 [System.Serializable]
-public class BuildingData
+public class BuildingData : IBuilding
 {
     public int id; //unique ID identifier for the Building
     public string buildingName; //name of the building
     [Range(1,5)] public int buildingType; //the type of building [0,1,2,3,4]
     [Range(0, 100)] public float condition; //the condition of the building from 0-100
     public List<int> inhabitants = new List<int>(); //string of inhabitant NPCs
- 
+
+    int IBuilding.id { get => id; set => id = value; }
+    string IBuilding.buildingName { get => buildingName; set => buildingName = value; }
+    int IBuilding.buildingType { get => buildingType; set => buildingType = value; }
+    float IBuilding.condition { get => condition; set => condition = value; }
+    List<int> IBuilding.inhabitants { get => inhabitants; set => inhabitants = value; }
 
     public BuildingData() { }
 
@@ -19,7 +24,7 @@ public class BuildingData
         buildingName = building.buildingName;
         buildingType = building.buildingType;
         condition = building.condition;
-        inhabitants = building.inhabitants;
+        inhabitants = new List<int>(building.inhabitants);
     }
 }
 

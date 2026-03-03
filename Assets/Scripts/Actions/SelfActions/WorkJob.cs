@@ -11,7 +11,7 @@ public class WorkJob : SelfAction
 
     public override char actionType => 'S';
     public override string name => "Work Job";
-    public override string baseDescription => "The NPC if they have a job, can go to work to earn some money at the cost of energy and time.";
+    public override string baseDescription => "The IAgent if they have a job, can go to work to earn some money at the cost of energy and time.";
 
     protected override float baseTime => 8f;
     protected override float baseEnergy => 50f;
@@ -24,7 +24,7 @@ public class WorkJob : SelfAction
     protected override List<int> successNegTraits => new List<int>{};
 
     //compute the empirical utility of the action
-    protected override float computeUtility(NPC performer, NoTarget _)
+    protected override float computeUtility(IAgent performer, NoTarget _)
     {
         if(actUtility != -1) return actUtility;
 
@@ -35,7 +35,7 @@ public class WorkJob : SelfAction
         List<float> effectors = new List<float>();
         List<float> weights = new List<float>();
 
-        //npc stat/attribute effectors
+        //IAgent stat/attribute effectors
         effectors.Add(ActionMaths.calcMultiplier(performer.stats.happiness, 0f, 100f, 0.25f, 2f)); weights.Add(1 - Mathf.InverseLerp(0f, 100f, performer.attributes.fortitude));
         effectors.Add(ActionMaths.calcMultiplier(performer.stats.nutrition, 0f, 100f, 0.25f, 2f)); weights.Add(0.6f);
         effectors.Add(ActionMaths.calcMultiplier(performer.stats.condition, 0f, 100f, 0.25f, 2f)); weights.Add(0.5f);
@@ -54,7 +54,7 @@ public class WorkJob : SelfAction
     }
 
     //compute the performers perceived utility of the action
-    protected override float estimateUtility(NPC performer, NoTarget _)
+    protected override float estimateUtility(IAgent performer, NoTarget _)
     {
         if(estUtility != -1) return estUtility;
         
@@ -69,7 +69,7 @@ public class WorkJob : SelfAction
 
     protected override void innerPerformAction(float percentComplete)
     {
-        NPC performer = dataController.NPCStorage[currentActor];
+        IAgent performer = dataController.NPCStorage[currentActor];
         float percentMulti = percentComplete/100;
         string description = performer.npcName + " spent " + (percentMulti*timeToComplete).ToString("0.00") + " hours at work.";
         ActionResult successInfo = ActionMaths.calcActionSuccess(actSuccess, percentComplete);
@@ -116,7 +116,7 @@ public class WorkJob : SelfAction
     }
 
     //computer the likelihood this action will be a success
-    protected override float computeSuccess(NPC performer, NoTarget _)
+    protected override float computeSuccess(IAgent performer, NoTarget _)
     {
         if(actSuccess != -1) return actSuccess;
 
@@ -135,7 +135,7 @@ public class WorkJob : SelfAction
     }
 
     //compute the estimated chance this action will be a succss from the performers perspective
-    protected override float estimateSuccess(NPC performer, NoTarget _)
+    protected override float estimateSuccess(IAgent performer, NoTarget _)
     {
         if(estSuccess != -1) return estSuccess;
         
@@ -147,8 +147,8 @@ public class WorkJob : SelfAction
         return estSuccess;
     }
 
-    //calculate how much time it would take for the NPC to complete this action
-    protected override float getTimeToComplete(NPC performer, NoTarget _)
+    //calculate how much time it would take for the IAgent to complete this action
+    protected override float getTimeToComplete(IAgent performer, NoTarget _)
     {
         if(timeToComplete != -1) return timeToComplete;
 
@@ -161,8 +161,8 @@ public class WorkJob : SelfAction
         return timeToComplete;
     }
 
-    //calculate how much energy it would take the NPC to compelete this action
-    protected override float getEnergyToComplete(NPC performer, NoTarget _)
+    //calculate how much energy it would take the IAgent to compelete this action
+    protected override float getEnergyToComplete(IAgent performer, NoTarget _)
     {
         if(energyToComplete != -1) return energyToComplete;
 
@@ -175,7 +175,7 @@ public class WorkJob : SelfAction
         return energyToComplete;
     }
 
-    protected List<float> getTimeAndEnergyMultipliers(NPC performer)
+    protected List<float> getTimeAndEnergyMultipliers(IAgent performer)
     {
         List<float> multipliers = new List<float>{};
 
@@ -189,7 +189,7 @@ public class WorkJob : SelfAction
         return multipliers;
     }
 
-    protected override bool isKnown(NPC performer)
+    protected override bool isKnown(IAgent performer)
     {
         if(performer.hasJob == false) return false;
 

@@ -533,4 +533,80 @@ public class HistoryManager : MonoBehaviour
 
         return false;
     }
+
+    public HistoryCopyWrapper DeepClone()
+    {
+        //copy NPC Events
+        Dictionary<RelationshipKey, Dictionary<NPCEventKey, NPCEvent>> npcEventStorage = dataController.NPCEventStorage;
+
+        Dictionary<RelationshipKey, Dictionary<NPCEventKey, NPCEvent>> newNPCEventStorage = new Dictionary<RelationshipKey, Dictionary<NPCEventKey, NPCEvent>>();
+        Dictionary<int, List<NPCEvent>> newEventsPerNPCStorage = new Dictionary<int, List<NPCEvent>>();
+
+        foreach(var kvp in dataController.NPCStorage) newEventsPerNPCStorage[kvp.Key] = new List<NPCEvent>();
+
+        List<RelationshipKey> relKeys = new List<RelationshipKey>(npcEventStorage.Keys);
+        foreach(RelationshipKey relKey in relKeys)
+        {
+            newNPCEventStorage[relKey] = new Dictionary<NPCEventKey, NPCEvent>();
+            List<NPCEventKey> eventKeys = new List<NPCEventKey>(npcEventStorage[relKey].Keys);
+
+            foreach(NPCEventKey eventKey in eventKeys)
+            {
+                NPCEvent eventCopy = npcEventStorage[relKey][eventKey].DeepClone();
+
+                newNPCEventStorage[relKey][eventKey] = eventCopy;
+                if(eventKey.npcA != -1) newEventsPerNPCStorage[eventKey.npcA].Add(eventCopy);
+                if(eventKey.npcB != -1) newEventsPerNPCStorage[eventKey.npcB].Add(eventCopy);
+            }
+        }
+
+        Dictionary<BuildingRelationshipKey, Dictionary<BuildingEventKey, BuildingEvent>> buildingEventStorage = dataController.buildingEventStorage;
+
+        Dictionary<BuildingRelationshipKey, Dictionary<BuildingEventKey, BuildingEvent>> newBuildingEventStorage = new Dictionary<BuildingRelationshipKey, Dictionary<BuildingEventKey, BuildingEvent>>();
+        Dictionary<int, List<BuildingEvent>> newBuildingEventsPerBuilding = new Dictionary<int, List<BuildingEvent>>();
+        Dictionary<int, List<BuildingEvent>> newBuildingEventsPerNPC = new Dictionary<int, List<BuildingEvent>>();
+
+        foreach(var kvp in dataController.NPCStorage) newBuildingEventsPerNPC[kvp.Key] = new List<BuildingEvent>();
+        foreach(var kvp in dataController.BuildingStorage) newBuildingEventsPerBuilding[kvp.Key] = new List<BuildingEvent>();
+
+        List<BuildingRelationshipKey> relKeys = new List<BuildingRelationshipKey>(buildingEventStorage.Keys);
+        foreach(BuildingRelationshipKey relKey in relKeys)
+        {
+            newBuildingEventStorage[relKey] = new Dictionary<BuildingEventKey, BuildingEvent>();
+            List<BuildingEventKey> eventKeys = new List<BuildingEventKey>(buildingEventStorage[relKey].Keys);
+
+            foreach(BuildingEventKey eventKey in eventKeys)
+            {
+                BuildingEvent eventCopy = buildingEventStorage[relKey][eventKey].DeepClone();
+
+                newBuildingEventStorage[relKey][eventKey] = eventCopy;
+                if(eventKey.building != -1) newBuildingEventsPerBuilding[eventKey.building].Add(eventCopy);
+                if(eventKey.npc != -1) newBuildingEventsPerNPC[eventKey.npc].Add(eventCopy);
+            }
+        }
+
+        return new HistoryCopyWrapper(newEventsPerNPCStorage, newNPCEventStorage, newBuildingEventStorage, newBuildingEventsPerBuilding, newBuildingEventsPerNPC);
+    }
+}
+
+public class HistoryCopyWrapper
+{
+    public Dictionary<int, List<NPCEvent>> eventsPerNPC;
+    public Dictionary<RelationshipKey, Dictionary<NPCEventKey, NPCEvent>> NPCEventStorage;
+    public Dictionary<BuildingRelationshipKey, Dictionary<BuildingEventKey, BuildingEvent>> buildingEventStorage;
+    public Dictionary<int, List<BuildingEvent>> buildingEventsPerBuildingStorage;
+    public Dictionary<int, List<BuildingEvent>> buildingEventsPerNPCStorage;
+
+    public HistoryCopyWrapper(Dictionary<int, List<NPCEvent>> eventsPerNPCInput, 
+                              Dictionary<RelationshipKey, Dictionary<NPCEventKey, NPCEvent>> NPCEventStorageInput,
+                              Dictionary<BuildingRelationshipKey, Dictionary<BuildingEventKey, BuildingEvent>> buildingEventStorageInput, 
+                              Dictionary<int, List<BuildingEvent>> buildingEventsPerBuildingStorageInput,
+                              Dictionary<int, List<BuildingEvent>> buildingEventsPerNPCStorageInput)
+    {
+        eventsPerNPC = eventsPerNPCInput;
+        NPCEventStorage = NPCEventStorageInput;
+        buildingEventStorage = buildingEventStorageInput;
+        buildingEventsPerBuildingStorage = buildingEventsPerBuildingStorageInput;
+        buildingEventsPerNPCStorage = buildingEventsPerNPCStorageInput;
+    }
 }
