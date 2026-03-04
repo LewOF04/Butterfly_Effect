@@ -84,8 +84,8 @@ public class RobNPC : NPCAction
 
     protected override void innerPerformAction(float percentComplete)
     {
-        IAgent performer = dataController.NPCStorage[currentActor];
-        IAgent target = dataController.NPCStorage[receiver];
+        if(!dataController.TryGetAgent(currentActor, out var performer)) return;
+        if(!dataController.TryGetAgent(receiver, out var target)) return;
 
         float percentMulti = percentComplete / 100;
         string description = performer.npcName + " spent " + (percentMulti*timeToComplete).ToString("0.00") + " hours robbing "+target.npcName+".";
@@ -111,7 +111,7 @@ public class RobNPC : NPCAction
 
         if(percentComplete != 100f) description += " The robbery attempt concluded "+percentComplete.ToString()+"% of the way through.";
         
-        float actionTime = dataController.worldManager.gameTime + (24f - performer.timeLeft);
+        float actionTime = dataController.World.gameTime + (24f - performer.timeLeft);
 
         //perform changes to stats/attributes
         description += "\n";
@@ -178,7 +178,7 @@ public class RobNPC : NPCAction
         else {wasPosPerf = false; wasPosRec = true;}
 
         float severity = 30f * Mathf.Abs(robMultiplier);
-        dataController.historyManager.AddNPCMemory(name, description, severity, actionTime, performer.id, target.id, wasPosPerf, wasPosRec);
+        //dataController.historyManager.AddNPCMemory(name, description, severity, actionTime, performer.id, target.id, wasPosPerf, wasPosRec);
     }
 
     //computer the likelihood this action will be a success
@@ -271,7 +271,7 @@ public class RobNPC : NPCAction
         effectors.Add(ActionMaths.calcMultiplier(target.attributes.strength, 0f, 100f, 0.25f, 2f)); weights.Add(0.9f);
 
         float weightedTime = ActionMaths.ApplyWeightedMultipliers(baseTime, effectors, weights);
-        weightedTime = ActionMaths.addChaos(weightedTime, dataController.worldManager.chaosModifier);
+        weightedTime = ActionMaths.addChaos(weightedTime, dataController.World.chaosModifier);
 
         timeToComplete = weightedTime;
         return timeToComplete;
@@ -306,7 +306,7 @@ public class RobNPC : NPCAction
         effectors.Add(ActionMaths.calcMultiplier(target.attributes.strength, 0f, 100f, 0.25f, 2f)); weights.Add(0.9f);
 
         float weightedEnergy = ActionMaths.ApplyWeightedMultipliers(baseEnergy, effectors, weights);
-        weightedEnergy = ActionMaths.addChaos(weightedEnergy, dataController.worldManager.chaosModifier);
+        weightedEnergy = ActionMaths.addChaos(weightedEnergy, dataController.World.chaosModifier);
 
         energyToComplete = weightedEnergy;
         return energyToComplete;

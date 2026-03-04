@@ -76,7 +76,8 @@ public class Sleep : SelfAction
 
     protected override void innerPerformAction(float percentComplete)
     {
-        IAgent performer = dataController.NPCStorage[currentActor];
+        if(!dataController.TryGetAgent(currentActor, out var performer)) return;
+        
         float percentMulti = percentComplete/100;
         string description = performer.npcName + " spent " + (timeToComplete*percentMulti).ToString("0.00") + " hours sleeping.";
         ActionResult successInfo = ActionMaths.calcActionSuccess(actSuccess, percentComplete);
@@ -100,7 +101,7 @@ public class Sleep : SelfAction
 
         if(percentComplete != 100f) description += " They were woken up "+percentComplete.ToString()+"% through their sleep.";
         
-        float actionTime = dataController.worldManager.gameTime + (24f - performer.timeLeft);
+        float actionTime = dataController.World.gameTime + (24f - performer.timeLeft);
 
         description += "\n";
 
@@ -123,7 +124,7 @@ public class Sleep : SelfAction
         float severity = 1f;
         int receiver = -1;
         bool wasPositive = true;
-        dataController.historyManager.AddNPCMemory(name, description, severity, actionTime, performer.id, receiver, wasPositive, false);
+        //dataController.historyManager.AddNPCMemory(name, description, severity, actionTime, performer.id, receiver, wasPositive, false);
     }
 
     //computer the likelihood this action will be a success
@@ -163,7 +164,7 @@ public class Sleep : SelfAction
 
         float weightedBase = ActionMaths.ApplyWeightedMultipliers(baseTime, multipliers, weights);
 
-        timeToComplete = ActionMaths.addChaos(weightedBase, dataController.worldManager.chaosModifier);
+        timeToComplete = ActionMaths.addChaos(weightedBase, dataController.World.chaosModifier);
         return timeToComplete;
     }
 

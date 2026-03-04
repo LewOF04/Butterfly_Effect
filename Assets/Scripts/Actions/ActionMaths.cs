@@ -86,7 +86,7 @@ public static class ActionMaths
         return baseValue * multiplier;
     }
 
-    public static float addTraitWeights(NPC npc, float baseValue, List<int> traitList, bool positive)
+    public static float addTraitWeights(IAgent npc, float baseValue, List<int> traitList, bool positive)
     {
         foreach(int id in traitList)
         {

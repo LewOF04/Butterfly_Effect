@@ -41,31 +41,15 @@ public abstract class Action<T> : IAction
     protected abstract float getTimeToComplete(IAgent performer, T receiver); //calculate how much time it would take for the NPC to complete this action
     protected abstract float getEnergyToComplete(IAgent performer, T receiver); //calculate how much energy it would take the NPC to compelete this action
     protected abstract void innerPerformAction(float percentComplete); //make the changes of the action, with results affected by percentage completed
-    public string performActionSim(float percentComplete)
-    {
-        //calculate if the NPC would have run out of time or energy before completion
-        IAgent thisNPC = dataController.NPCStorage[currentActor];
-
-        float energyPerc = (energyToComplete / thisNPC.stats.energy) * 100; //percent of action completed within energy
-        float timePerc = (timeToComplete / thisNPC.timeLeft) * 100; //percent of action completed within time
-
-        innerPerformAction(Mathf.Min(energyPerc, timePerc, percentComplete), "sim"); //perform the action with whatever perc would've run out first
-        
-        //return string for whichever aspect was the finishing decider
-        if(energyPerc == Mathf.Min(energyPerc, timePerc, percentComplete)) return "energy";
-        else if(timePerc == Mathf.Min(energyPerc, timePerc, percentComplete)) return "time";
-        else return "perc";
-    }
-
     public string performAction(float percentComplete)
     {
         //calculate if the NPC would have run out of time or energy before completion
-        NPC thisNPC = dataController.NPCStorage[currentActor];
+        if(!dataController.TryGetAgent(currentActor, out var thisAgent)) return "fail";
 
-        float energyPerc = (energyToComplete / thisNPC.stats.energy) * 100; //percent of action completed within energy
-        float timePerc = (timeToComplete / thisNPC.timeLeft) * 100; //percent of action completed within time
+        float energyPerc = (energyToComplete / thisAgent.stats.energy) * 100; //percent of action completed within energy
+        float timePerc = (timeToComplete / thisAgent.timeLeft) * 100; //percent of action completed within time
 
-        innerPerformAction(Mathf.Min(energyPerc, timePerc, percentComplete), "perf"); //perform the action with whatever perc would've run out first
+        innerPerformAction(Mathf.Min(energyPerc, timePerc, percentComplete)); //perform the action with whatever perc would've run out first
         
         //return string for whichever aspect was the finishing decider
         if(energyPerc == Mathf.Min(energyPerc, timePerc, percentComplete)) return "energy";
@@ -81,13 +65,13 @@ public abstract class Action<T> : IAction
 
         //or they have memory of a similar event
         if(this is NPCAction || this is SelfAction || this is EnvironmentAction){
-            List<NPCEvent> npcEvents = dataControllerSnapshot.eventsPerNPCStorage[performer.id];
+            List<NPCEvent> npcEvents = dataController.eventsPerNPCStorage[performer.id];
             foreach(NPCEvent thisEvent in npcEvents)  if(thisEvent.actionName == name) return true;
         } 
         
         else if (this is BuildingAction)
         {
-            List<BuildingEvent> buildingEvents = dataControllerSnapshot.buildingEventsPerNPCStorage[performer.id];
+            List<BuildingEvent> buildingEvents = dataController.buildingEventsPerNPCStorage[performer.id];
             foreach(BuildingEvent thisEvent in buildingEvents) if(thisEvent.actionName == name) return true;
         }
 

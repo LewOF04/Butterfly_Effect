@@ -68,7 +68,6 @@ public class RepairBuilding: BuildingAction
             //if it is not their house, weight the benefit by how much they like the inhabitants
             foreach(int npcID in target.inhabitants)
             {
-                IAgent inhabitantIAgent = dataController.NPCStorage[npcID];
                 Relationship thisRel = dataController.RelationshipStorage[new RelationshipKey(npcID, performer.id)];
                 float relLevel = ActionMaths.calcMultiplier(thisRel.value, 0f, 100f, -1f, 2f);
 
@@ -82,8 +81,8 @@ public class RepairBuilding: BuildingAction
 
     protected override void innerPerformAction(float percentComplete)
     {
-        IAgent performer = dataController.NPCStorage[currentActor];
-        IBuilding target = dataController.BuildingStorage[receiver];
+        if(!dataController.TryGetAgent(currentActor, out var performer)) return;
+        if(!dataController.TryGetBuilding(receiver, out var target)) return;
 
         float percentMulti = percentComplete / 100;
         string description = performer.npcName + " spent " + (percentMulti*timeToComplete).ToString("0.00") + " hours fixing the "+target.buildingName+" building.";
@@ -109,7 +108,7 @@ public class RepairBuilding: BuildingAction
 
         if(percentComplete != 100f) description += " They had to stop working after doing "+percentComplete.ToString()+"% of the repair.";
         
-        float actionTime = dataController.worldManager.gameTime + (24f - performer.timeLeft);
+        float actionTime = dataController.World.gameTime + (24f - performer.timeLeft);
 
         //perform changes to stats/attributes
         description += "\n";
@@ -162,7 +161,7 @@ public class RepairBuilding: BuildingAction
         if(fixMultiplier > 0) {wasPosPerf = true; wasPosRec = true;}//if the fix wasn't negative then considered successful
 
         float severity = ActionMaths.calcMultiplier(target.condition, 0f, 100f, 2f, 1f) * Mathf.Abs(fixMultiplier);
-        dataController.historyManager.AddBuildingMemory(name, description, severity, actionTime, target.id, performer.id, wasPosPerf, wasPosRec);
+        //dataController.historyManager.AddBuildingMemory(name, description, severity, actionTime, target.id, performer.id, wasPosPerf, wasPosRec);
     }
 
     //computer the likelihood this action will be a success
@@ -188,7 +187,7 @@ public class RepairBuilding: BuildingAction
         List<BuildingEvent> events = dataController.buildingEventsPerNPCStorage[currentActor];
         foreach(BuildingEvent thisEvent in events)
         {
-            if(thisEvent.actionName == name && thisEvent.eventKey.IAgent == currentActor)
+            if(thisEvent.actionName == name && thisEvent.eventKey.npc == currentActor)
             {
                weightedSucc = Mathf.Min(100f, weightedSucc + weightedSucc * 0.05f); 
             }
@@ -223,7 +222,7 @@ public class RepairBuilding: BuildingAction
 
         if(performer.traits.Contains(8)) weightedBase -= weightedBase * 0.4f;
 
-        timeToComplete = ActionMaths.addChaos(weightedBase, dataController.worldManager.chaosModifier);
+        timeToComplete = ActionMaths.addChaos(weightedBase, dataController.World.chaosModifier);
         return timeToComplete;
     }
 
@@ -239,7 +238,7 @@ public class RepairBuilding: BuildingAction
 
         if(performer.traits.Contains(8)) weightedBase -= weightedBase * 0.2f;
 
-        energyToComplete = ActionMaths.addChaos(weightedBase, dataController.worldManager.chaosModifier);
+        energyToComplete = ActionMaths.addChaos(weightedBase, dataController.World.chaosModifier);
         return energyToComplete;
     }
 

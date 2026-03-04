@@ -33,7 +33,7 @@ public class ActionManager : MonoBehaviour
                         !t.IsInterface);
 
 
-        //iterate over each type and save accordingly
+        //iterate over each type and save accordingly 
         foreach (var t in types)
         {
             if (t.GetConstructor(Type.EmptyTypes) == null) //try to get the constructor for this type

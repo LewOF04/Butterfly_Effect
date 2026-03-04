@@ -70,8 +70,8 @@ public class BuyFood : EnvironmentAction
 
     protected override void innerPerformAction(float percentComplete)
     {
-        IAgent performer = dataController.NPCStorage[currentActor];
-        float baseCost = dataController.worldManager.costPerFood * baseFoodIncrease;
+        if(!dataController.TryGetAgent(currentActor, out var performer)) return;
+        float baseCost = dataController.World.costPerFood * baseFoodIncrease;
 
         float percentMulti = percentComplete / 100;
         string description = performer.npcName + " spent " + (percentMulti*timeToComplete).ToString("0.00") + " hours shopping for food.";
@@ -96,7 +96,7 @@ public class BuyFood : EnvironmentAction
 
         if(percentComplete != 100f) description += " They had to stop buying "+percentComplete.ToString()+"% of the way through.";
         
-        float actionTime = dataController.worldManager.gameTime + (24f - performer.timeLeft);
+        float actionTime = dataController.World.gameTime + (24f - performer.timeLeft);
 
         //perform changes to stats/attributes
         description += "\n";
@@ -132,7 +132,7 @@ public class BuyFood : EnvironmentAction
         bool wasPosPerf = successInfo.success;
 
         float severity = 5f; //determine severity
-        dataController.historyManager.AddNPCMemory(name, description, severity, actionTime, performer.id, -1, wasPosPerf, false); //save memory
+        //dataController.historyManager.AddNPCMemory(name, description, severity, actionTime, performer.id, -1, wasPosPerf, false); //save memory
     }
 
     //computer the likelihood this action will be a success
@@ -190,7 +190,7 @@ public class BuyFood : EnvironmentAction
 
         float weightedBase = ActionMaths.ApplyWeightedMultipliers(baseTime, effectors, weights);
 
-        timeToComplete = ActionMaths.addChaos(weightedBase, dataController.worldManager.chaosModifier);
+        timeToComplete = ActionMaths.addChaos(weightedBase, dataController.World.chaosModifier);
         return timeToComplete;
     }
 
@@ -218,13 +218,13 @@ public class BuyFood : EnvironmentAction
 
         float weightedBase = ActionMaths.ApplyWeightedMultipliers(baseEnergy, effectors, weights);
 
-        energyToComplete = ActionMaths.addChaos(weightedBase, dataController.worldManager.chaosModifier);
+        energyToComplete = ActionMaths.addChaos(weightedBase, dataController.World.chaosModifier);
         return energyToComplete;
     }
 
     protected override bool isKnown(IAgent performer)
     {
-        float baseCost = dataController.worldManager.costPerFood * baseFoodIncrease;
+        float baseCost = dataController.World.costPerFood * baseFoodIncrease;
         //action isn't possible because of a lack of money
         if (baseCost > performer.stats.wealth) return false;
 

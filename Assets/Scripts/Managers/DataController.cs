@@ -154,7 +154,7 @@ public class DataController : MonoBehaviour, IDataContainer
         }
     }
 
-    IWorldData IDataContainer.World { get => worldManager; set => worldManager = value; }
+    IWorldData IDataContainer.World { get => worldManager; }
 
     //--------------------Interface Methods--------------------
     //====================Agents====================

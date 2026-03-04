@@ -20,6 +20,7 @@ public class WorldData : IWorldData
         gameTime = inputTime;
         costPerFood = foodCostInput;
         chaosModifier = chaosInput;
-        costPerBuilding = new float[](buildingCostInput);
+        costPerBuilding = new float[buildingCostInput.Length];
+        Array.Copy(buildingCostInput, costPerBuilding, buildingCostInput.Length);
     }
 }

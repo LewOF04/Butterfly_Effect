@@ -79,8 +79,8 @@ public class HighFive : NPCAction
 
     protected override void innerPerformAction(float _)
     {
-        IAgent performer = dataController.NPCStorage[currentActor];
-        IAgent target = dataController.NPCStorage[receiver];
+        if(!dataController.TryGetAgent(currentActor, out var performer)) return;
+        if(!dataController.TryGetAgent(receiver, out var target)) return;
 
         string description = performer.npcName + " spent " + timeToComplete.ToString("0.00") + " giving "+target.npcName+" a high five.";
         ActionResult successInfo = ActionMaths.calcActionSuccess(actSuccess, 100f);
@@ -146,7 +146,7 @@ public class HighFive : NPCAction
             }
         }
         
-        float actionTime = dataController.worldManager.gameTime + (24f - performer.timeLeft);
+        float actionTime = dataController.World.gameTime + (24f - performer.timeLeft);
 
         description += "\n";
 
@@ -170,7 +170,7 @@ public class HighFive : NPCAction
         if(successInfo.success == true) severity = ActionMaths.calcMultiplier(rel.value, 0f, 100f, 2f, 0.25f) * Mathf.Abs(relMultiplier); //the worse their relationship the more positive the outcome
         else severity = ActionMaths.calcMultiplier(rel.value, 0f, 100f, 0.25f, 2f) * Mathf.Abs(relMultiplier); //the worse the relationship the less negative the outcome
         
-        dataController.historyManager.AddNPCMemory(name, description, severity, actionTime, performer.id, target.id, wasPosPerf, wasPosRec);
+        //dataController.historyManager.AddNPCMemory(name, description, severity, actionTime, performer.id, target.id, wasPosPerf, wasPosRec);
     }
 
     //computer the likelihood this action will be a success
@@ -214,7 +214,7 @@ public class HighFive : NPCAction
     {
         if(timeToComplete != -1) return timeToComplete;
 
-        timeToComplete = ActionMaths.addChaos(baseTime, dataController.worldManager.chaosModifier);
+        timeToComplete = ActionMaths.addChaos(baseTime, dataController.World.chaosModifier);
         return timeToComplete;
     }
 
@@ -228,7 +228,7 @@ public class HighFive : NPCAction
 
         float weightedBase = ActionMaths.ApplyWeightedMultipliers(baseEnergy, multipliers, weights);
 
-        energyToComplete = ActionMaths.addChaos(weightedBase, dataController.worldManager.chaosModifier);
+        energyToComplete = ActionMaths.addChaos(weightedBase, dataController.World.chaosModifier);
         return energyToComplete;
     }
 

@@ -17,7 +17,7 @@ public interface IDataContainer
     Dictionary<int, List<BuildingEvent>> buildingEventsPerNPCStorage { get; set; }
 
     Dictionary<int, List<int>> NPCBuildingLinks { get; set; }
-    IWorldData World { get; set; }
+    IWorldData World { get; }
 
     //IAgent and IBuilding differences 
     //Agents

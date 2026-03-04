@@ -21,7 +21,7 @@ public class HistoryManager : MonoBehaviour
     */
     public void GenerateHistoryFramework()
     {
-        
+        dataController = DataController.Instance;
         Dictionary<int, NPC> npcStorage = dataController.NPCStorage;
         Dictionary<int, Building> buildingStorage = dataController.BuildingStorage;
 
@@ -93,6 +93,7 @@ public class HistoryManager : MonoBehaviour
 
     public void SaveHistory() 
     {
+        dataController = DataController.Instance;
         SaveSys.SaveNPCHistory(dataController.NPCEventStorage);
         SaveSys.SaveNPCHistoryTracker(dataController.npcHistoryTracker);
         SaveSys.SaveBuildingHistory(dataController.buildingEventStorage);
@@ -101,6 +102,7 @@ public class HistoryManager : MonoBehaviour
 
     public void LoadHistory()
     {
+        dataController = DataController.Instance;
         GenerateHistoryFramework(); //ensure all data structures are initialised
 
         //=====================LOADING NPC EVENTS===========================
@@ -544,8 +546,8 @@ public class HistoryManager : MonoBehaviour
 
         foreach(var kvp in dataController.NPCStorage) newEventsPerNPCStorage[kvp.Key] = new List<NPCEvent>();
 
-        List<RelationshipKey> relKeys = new List<RelationshipKey>(npcEventStorage.Keys);
-        foreach(RelationshipKey relKey in relKeys)
+        List<RelationshipKey> npcRelKeys = new List<RelationshipKey>(npcEventStorage.Keys);
+        foreach(RelationshipKey relKey in npcRelKeys)
         {
             newNPCEventStorage[relKey] = new Dictionary<NPCEventKey, NPCEvent>();
             List<NPCEventKey> eventKeys = new List<NPCEventKey>(npcEventStorage[relKey].Keys);
@@ -560,6 +562,8 @@ public class HistoryManager : MonoBehaviour
             }
         }
 
+
+        //copy building events
         Dictionary<BuildingRelationshipKey, Dictionary<BuildingEventKey, BuildingEvent>> buildingEventStorage = dataController.buildingEventStorage;
 
         Dictionary<BuildingRelationshipKey, Dictionary<BuildingEventKey, BuildingEvent>> newBuildingEventStorage = new Dictionary<BuildingRelationshipKey, Dictionary<BuildingEventKey, BuildingEvent>>();
@@ -569,8 +573,8 @@ public class HistoryManager : MonoBehaviour
         foreach(var kvp in dataController.NPCStorage) newBuildingEventsPerNPC[kvp.Key] = new List<BuildingEvent>();
         foreach(var kvp in dataController.BuildingStorage) newBuildingEventsPerBuilding[kvp.Key] = new List<BuildingEvent>();
 
-        List<BuildingRelationshipKey> relKeys = new List<BuildingRelationshipKey>(buildingEventStorage.Keys);
-        foreach(BuildingRelationshipKey relKey in relKeys)
+        List<BuildingRelationshipKey> buildingRelKeys = new List<BuildingRelationshipKey>(buildingEventStorage.Keys);
+        foreach(BuildingRelationshipKey relKey in buildingRelKeys)
         {
             newBuildingEventStorage[relKey] = new Dictionary<BuildingEventKey, BuildingEvent>();
             List<BuildingEventKey> eventKeys = new List<BuildingEventKey>(buildingEventStorage[relKey].Keys);

@@ -84,7 +84,7 @@ public class RelationshipManager : MonoBehaviour
     {
         Dictionary<RelationshipKey, Relationship> relStorage = dataController.RelationshipStorage;
 
-        Dictionary<RelationshipKey, Relationship> newRelStorage = new Dictionary<int, Relationship>();
+        Dictionary<RelationshipKey, Relationship> newRelStorage = new Dictionary<RelationshipKey, Relationship>();
 
         Dictionary<int, List<Relationship>> newPerNPCStorage = new Dictionary<int, List<Relationship>>();
 

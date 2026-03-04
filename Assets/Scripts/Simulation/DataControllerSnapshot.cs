@@ -28,7 +28,7 @@ public class DataControllerSnapshot : IDataContainer
         //base storage cloning
         NPCStorage = dataController.npcManager.DeepClone();
         BuildingStorage = dataController.buildingManager.DeepClone();
-        TraitStorage = dataController.traitStorage;
+        TraitStorage = dataController.TraitStorage;
 
         //relationship cloning
         RelationshipCopyWrapper relCopies = dataController.relationshipManager.DeepClone();
@@ -51,7 +51,7 @@ public class DataControllerSnapshot : IDataContainer
         worldManager = dataController.worldManager.DeepClone();
     }
 
-    IWorldData IDataContainer.World { get => worldManager; set => worldManager = value; }
+    IWorldData IDataContainer.World { get => worldManager; }
 
     //--------------------Interface Methods--------------------
     //====================Agents====================

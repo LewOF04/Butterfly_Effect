@@ -69,7 +69,8 @@ public class WorkJob : SelfAction
 
     protected override void innerPerformAction(float percentComplete)
     {
-        IAgent performer = dataController.NPCStorage[currentActor];
+        if(!dataController.TryGetAgent(currentActor, out var performer)) return;
+        
         float percentMulti = percentComplete/100;
         string description = performer.npcName + " spent " + (percentMulti*timeToComplete).ToString("0.00") + " hours at work.";
         ActionResult successInfo = ActionMaths.calcActionSuccess(actSuccess, percentComplete);
@@ -93,7 +94,7 @@ public class WorkJob : SelfAction
 
         if(percentComplete != 100f) description += " They had to stop working after doing "+percentComplete.ToString()+"% completion.";
         
-        float actionTime = dataController.worldManager.gameTime + (24f - performer.timeLeft);
+        float actionTime = dataController.World.gameTime + (24f - performer.timeLeft);
 
         description += "\n";
 
@@ -112,7 +113,7 @@ public class WorkJob : SelfAction
         float severity = 1f;
         int receiver = -1;
         bool wasPositive = true;
-        dataController.historyManager.AddNPCMemory(name, description, severity, actionTime, performer.id, receiver, wasPositive, false);
+        //dataController.historyManager.AddNPCMemory(name, description, severity, actionTime, performer.id, receiver, wasPositive, false);
     }
 
     //computer the likelihood this action will be a success
@@ -157,7 +158,7 @@ public class WorkJob : SelfAction
 
         float weightedBase = ActionMaths.ApplyWeightedMultipliers(baseTime, multipliers, weights);
 
-        timeToComplete = ActionMaths.addChaos(weightedBase, dataController.worldManager.chaosModifier);
+        timeToComplete = ActionMaths.addChaos(weightedBase, dataController.World.chaosModifier);
         return timeToComplete;
     }
 
@@ -171,7 +172,7 @@ public class WorkJob : SelfAction
 
         float weightedBase = ActionMaths.ApplyWeightedMultipliers(baseEnergy, multipliers, weights);
 
-        energyToComplete = ActionMaths.addChaos(weightedBase, dataController.worldManager.chaosModifier);
+        energyToComplete = ActionMaths.addChaos(weightedBase, dataController.World.chaosModifier);
         return energyToComplete;
     }
 
