@@ -19,6 +19,9 @@ public interface IDataContainer
     Dictionary<int, List<int>> NPCBuildingLinks { get; set; }
     IWorldData World { get; }
 
+    NPCHistoryTracker npcHistoryTracker { get; set; }
+    BuildingHistoryTracker buildingHistoryTracker { get; set; }
+
     //IAgent and IBuilding differences 
     //Agents
     IEnumerable<IAgent> Agents { get; }

@@ -14,8 +14,8 @@ public class DataController : MonoBehaviour, IDataContainer
     public ActionManager actionManager;
     public RelationshipManager relationshipManager;
     public HistoryManager historyManager;
-    public NPCHistoryTracker npcHistoryTracker; //npcHistoryTracker to record npc related interactions
-    public BuildingHistoryTracker buildingHistoryTracker; //buildingHistoryTracker to record building related interactions
+    public NPCHistoryTracker npcHistoryTracker { get; set; } //npcHistoryTracker to record npc related interactions
+    public BuildingHistoryTracker buildingHistoryTracker { get; set; } //buildingHistoryTracker to record building related interactions
 
     [Header("Runtime Containers")]
     //containers to hold instantiated buildings and npcs
@@ -73,6 +73,9 @@ public class DataController : MonoBehaviour, IDataContainer
         }
 
         NPCBuildingLinks = new Dictionary<int, List<int>>();
+
+        npcHistoryTracker = new NPCHistoryTracker();
+        buildingHistoryTracker = new BuildingHistoryTracker();
     }
 
     public void SaveToMemory()

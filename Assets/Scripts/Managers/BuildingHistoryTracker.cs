@@ -1,13 +1,13 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System;
-
-public class BuildingHistoryTracker : MonoBehaviour
+ 
+public class BuildingHistoryTracker
 {
     public Dictionary<BuildingRelationshipKey, int> largestInt; //stores the largest ints for each building history database
     public Dictionary<BuildingRelationshipKey, List<int>> missingInts; //stores the ints removed from the building history database
 
-    public void Awake()
+    public BuildingHistoryTracker()
     {
         largestInt = new Dictionary<BuildingRelationshipKey, int>();
         missingInts = new Dictionary<BuildingRelationshipKey, List<int>>();
@@ -64,6 +64,23 @@ public class BuildingHistoryTracker : MonoBehaviour
         { //if this isn't the largest int add it to the removedInts store
             missingInts[rel].Add(removedInt);
         }
+    }
+
+    public BuildingHistoryTracker DeepCopy()
+    {
+        BuildingHistoryTracker newTracker = new BuildingHistoryTracker();
+
+        List<RelationshipKey> oldLargestKeys = new List<RelationshipKey>(largestInt.Keys);
+        
+        Dictionary<RelationshipKey, int> newLargestInt = newTracker.largestInt;
+        Dictionary<RelationshipKey, List<int>> newMissingInts = newTracker.missingInts;
+        foreach(RelationshipKey relKey in oldLargestKeys)
+        {
+            newLargestInt[relKey] = largestInt[relKey];
+            newMissingInts[relKey] = new List<int>(missingInts[relKey]);
+        } 
+
+        return newTracker;
     }
 }
 

@@ -1,13 +1,13 @@
 using UnityEngine;
 using System.Collections.Generic;
-using System;
+using System; 
 
-public class NPCHistoryTracker : MonoBehaviour
+public class NPCHistoryTracker
 {
     public Dictionary<RelationshipKey, int> largestInt; //stores the largest ints for each npc history database
     public Dictionary<RelationshipKey, List<int>> missingInts; //stores the ints removed from the npc history database 
 
-    public void Awake()
+    public NPCHistoryTracker()
     {
         largestInt = new Dictionary<RelationshipKey, int>();
         missingInts = new Dictionary<RelationshipKey, List<int>>();
@@ -64,6 +64,23 @@ public class NPCHistoryTracker : MonoBehaviour
         { //if this isn't the largest int add it to the removedInts store
             missingInts[rel].Add(removedInt);
         }
+    }
+
+    public NPCHistoryTracker DeepCopy()
+    {
+        NPCHistoryTracker newTracker = new NPCHistoryTracker();
+
+        List<RelationshipKey> oldLargestKeys = new List<RelationshipKey>(largestInt.Keys);
+
+        Dictionary<RelationshipKey, int> newLargestInt = newTracker.largestInt;
+        Dictionary<RelationshipKey, List<int>> newMissingInts = newTracker.missingInts;
+        foreach(RelationshipKey relKey in oldLargestKeys)
+        {
+            newLargestInt[relKey] = largestInt[relKey];
+            newMissingInts[relKey] = new List<int>(missingInts[relKey]);
+        } 
+
+        return newTracker;
     }
 }
 

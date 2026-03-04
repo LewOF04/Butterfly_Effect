@@ -21,6 +21,9 @@ public class DataControllerSnapshot : IDataContainer
     public Dictionary<int, List<int>> NPCBuildingLinks { get; set; }
     public WorldData worldManager;
 
+    public NPCHistoryTracker npcHistoryTracker { get; set; }
+    public BuildingHistoryTracker buildingHistoryTracker { get; set; }
+
     public DataControllerSnapshot()
     {
         DataController dataController = DataController.Instance;
