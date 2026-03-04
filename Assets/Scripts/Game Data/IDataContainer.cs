@@ -2,8 +2,8 @@ using System.Collections.Generic;
 
 public interface IDataContainer
 {
-    Dictionary<int, IAgent> NPCStorage { get; set; }
-    Dictionary<int, IBuilding> BuildingStorage { get; set; }
+    //Dictionary<int, IAgent> NPCStorage { get; set; }
+    //Dictionary<int, IBuilding> BuildingStorage { get; set; }
     Dictionary<int, TraitData> TraitStorage { get; set; }
     Dictionary<string, IAction> ActionStorage { get; set; }
 
@@ -17,5 +17,24 @@ public interface IDataContainer
     Dictionary<int, List<BuildingEvent>> buildingEventsPerNPCStorage { get; set; }
 
     Dictionary<int, List<int>> NPCBuildingLinks { get; set; }
-    IWorldData worldManager { get; set; }
+    IWorldData World { get; set; }
+
+    //IAgent and IBuilding differences 
+    //Agents
+    IEnumerable<IAgent> Agents { get; }
+    int AgentCount { get; }
+    bool ContainsAgent(int id);
+    bool TryGetAgent(int id, out IAgent agent);
+
+    bool TryAddAgent(IAgent agent);
+    bool TryRemoveAgent(int id);
+
+    //Buildings
+    IEnumerable<IBuilding> Buildings { get; }
+    int BuildingCount { get; }
+    bool ContainsBuilding(int id);
+    bool TryGetBuilding(int id, out IBuilding building);
+
+    bool TryAddBuilding(IBuilding building);
+    bool TryRemoveBuilding(int id);
 }

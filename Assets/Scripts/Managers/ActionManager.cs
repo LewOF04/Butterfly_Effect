@@ -16,9 +16,9 @@ public class ActionManager : MonoBehaviour
         List<NPCAction> npcActions = new List<NPCAction>();
         List<SelfAction> selfActions = new List<SelfAction>();
         List<EnvironmentAction> environmentActions = new List<EnvironmentAction>();
-        Dictionary<string, IActionBase> actionStorage = new Dictionary<string, IActionBase>();
+        Dictionary<string, IAction> actionStorage = new Dictionary<string, IAction>();
 
-        //get each class derived from the IActionBase interface
+        //get each class derived from the IAction interface
         var types = AppDomain.CurrentDomain.GetAssemblies() //in the current game get all the dynamically linked libraries (including the types we've created)
             .SelectMany(a => //for each assembly
             {
@@ -28,7 +28,7 @@ public class ActionManager : MonoBehaviour
                     return e.Types.Where(t => t != null); //return all the valid types in the assembly
                 }
             })
-            .Where(t => typeof(IActionBase).IsAssignableFrom(t) && //limit to those that are a derivation of IActionBase and isn't abstract or an interface
+            .Where(t => typeof(IAction).IsAssignableFrom(t) && //limit to those that are a derivation of IAction and isn't abstract or an interface
                         !t.IsAbstract &&
                         !t.IsInterface);
 
@@ -39,7 +39,7 @@ public class ActionManager : MonoBehaviour
             if (t.GetConstructor(Type.EmptyTypes) == null) //try to get the constructor for this type
                 continue;
 
-            var instance = (IActionBase)Activator.CreateInstance(t); //create an instance of it
+            var instance = (IAction)Activator.CreateInstance(t); //create an instance of it
 
             actionStorage[instance.name] = instance; //store is in our action storage by the actions name
 

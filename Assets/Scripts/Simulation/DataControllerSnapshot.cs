@@ -19,7 +19,7 @@ public class DataControllerSnapshot : IDataContainer
     public Dictionary<int, List<BuildingEvent>> buildingEventsPerNPCStorage { get; set; }
 
     public Dictionary<int, List<int>> NPCBuildingLinks { get; set; }
-    public WorldData worldManager { get; set; }
+    public WorldData worldManager;
 
     public DataControllerSnapshot()
     {
@@ -50,4 +50,65 @@ public class DataControllerSnapshot : IDataContainer
 
         worldManager = dataController.worldManager.DeepClone();
     }
+
+    IWorldData IDataContainer.World { get => worldManager; set => worldManager = value; }
+
+    //--------------------Interface Methods--------------------
+    //====================Agents====================
+    public IEnumerable<IAgent> Agents => NPCStorage.Values; 
+    public int AgentCount => NPCStorage.Count;
+
+    public bool ContainsAgent(int id) => NPCStorage.ContainsKey(id);
+
+    public bool TryGetAgent(int id, out IAgent agent)
+    {
+        if (NPCStorage.TryGetValue(id, out NPCData npc))
+        {
+            agent = npc;
+            return true;
+        }
+
+        agent = null;
+        return false;
+    }
+
+    public bool TryAddAgent(IAgent agent)
+    {
+        if (agent is not NPCData npc) return false;
+        if (NPCStorage.ContainsKey(npc.id)) return false;
+
+        NPCStorage.Add(npc.id, npc);
+        return true;
+    }
+
+    public bool TryRemoveAgent(int id) => NPCStorage.Remove(id);
+
+    //====================Buildings====================
+    public IEnumerable<IBuilding> Buildings => BuildingStorage.Values;
+    public int BuildingCount => BuildingStorage.Count;
+
+    public bool ContainsBuilding(int id) => BuildingStorage.ContainsKey(id);
+
+    public bool TryGetBuilding(int id, out IBuilding building)
+    {
+        if (BuildingStorage.TryGetValue(id, out BuildingData b))
+        {
+            building = b;
+            return true;
+        }
+
+        building = null;
+        return false;
+    }
+
+    public bool TryAddBuilding(IBuilding building)
+    {
+        if (building is not BuildingData b) return false;
+        if (BuildingStorage.ContainsKey(b.id)) return false;
+
+        BuildingStorage.Add(b.id, b);
+        return true;
+    }
+
+    public bool TryRemoveBuilding(int id) => BuildingStorage.Remove(id);
 }
