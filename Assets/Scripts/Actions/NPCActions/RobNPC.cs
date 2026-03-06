@@ -178,7 +178,7 @@ public class RobNPC : NPCAction
         else {wasPosPerf = false; wasPosRec = true;}
 
         float severity = 30f * Mathf.Abs(robMultiplier);
-        //dataController.historyManager.AddNPCMemory(name, description, severity, actionTime, performer.id, target.id, wasPosPerf, wasPosRec);
+        HistoryManager.Instance.AddNPCMemory(name, description, severity, actionTime, performer.id, target.id, wasPosPerf, wasPosRec);
     }
 
     //computer the likelihood this action will be a success

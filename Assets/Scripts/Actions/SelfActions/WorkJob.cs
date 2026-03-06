@@ -113,7 +113,7 @@ public class WorkJob : SelfAction
         float severity = 1f;
         int receiver = -1;
         bool wasPositive = true;
-        //dataController.historyManager.AddNPCMemory(name, description, severity, actionTime, performer.id, receiver, wasPositive, false);
+        HistoryManager.Instance.AddNPCMemory(name, description, severity, actionTime, performer.id, receiver, wasPositive, false);
     }
 
     //computer the likelihood this action will be a success

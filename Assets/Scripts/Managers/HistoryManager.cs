@@ -4,11 +4,13 @@ using System;
 
 public class HistoryManager : MonoBehaviour
 {
-    private DataController dataController; 
+    public static HistoryManager Instance;
+    private IDataContainer dataController => DomainContext.DataController; 
 
     private void Awake()
     {
-        dataController = DataController.Instance;
+        if (Instance != null && Instance != this) { Destroy(Instance);}
+        Instance = this;
     }
 
     public void GenerateHistory(System.Random rng)
@@ -21,175 +23,179 @@ public class HistoryManager : MonoBehaviour
     */
     public void GenerateHistoryFramework()
     {
-        dataController = DataController.Instance;
-        Dictionary<int, NPC> npcStorage = dataController.NPCStorage;
-        Dictionary<int, Building> buildingStorage = dataController.BuildingStorage;
-
-        //NPC History
-        NPCHistoryTracker npcHistoryTracker = dataController.npcHistoryTracker;
-        Dictionary<RelationshipKey, Dictionary<NPCEventKey, NPCEvent>> NPCEventStorage = new Dictionary<RelationshipKey, Dictionary<NPCEventKey, NPCEvent>>();
-        foreach(var kvp in dataController.RelationshipStorage)
+        if(dataController is DataController dc)
         {
-            //add to npc history tracker for each relationship with other npcs
-            npcHistoryTracker.largestInt[kvp.Key] = 0;
-            npcHistoryTracker.missingInts[kvp.Key] = new List<int>();
-
-            //add for event storage location for each npc pair
-            NPCEventStorage[kvp.Key] = new Dictionary<NPCEventKey, NPCEvent>();
-        }
-
-        Dictionary<int, List<NPCEvent>> eventsPerNPCStorage = new Dictionary<int, List<NPCEvent>>();
-        foreach(var kvp in dataController.NPCStorage)
-        {
-            //add to npc history tracker for npcs self relationships
-            RelationshipKey selfRel = new RelationshipKey(kvp.Key, -1); //create a self relationship key
-            npcHistoryTracker.largestInt[selfRel] = 0;
-            npcHistoryTracker.missingInts[selfRel] = new List<int>();
-
-            //add secondary storage for easy access to each npc information
-            eventsPerNPCStorage[kvp.Key] = new List<NPCEvent>();
-            NPCEventStorage[selfRel] = new Dictionary<NPCEventKey, NPCEvent>();
-        }
-
-        dataController.NPCEventStorage = NPCEventStorage;
-        dataController.eventsPerNPCStorage = eventsPerNPCStorage;
-
-
-        //Building History
-        BuildingHistoryTracker buildingHistoryTracker = dataController.buildingHistoryTracker;
-        Dictionary<BuildingRelationshipKey, Dictionary<BuildingEventKey, BuildingEvent>> buildingEventStorage = new Dictionary<BuildingRelationshipKey, Dictionary<BuildingEventKey, BuildingEvent>>();
-        Dictionary<int, List<BuildingEvent>> buildingEventsPerNPCStorage = new Dictionary<int, List<BuildingEvent>>();
-        foreach(var npcPair in dataController.NPCStorage)
-        {
-            buildingEventsPerNPCStorage[npcPair.Key] = new List<BuildingEvent>(); //populate per NPC
-            foreach(var buildingPair in dataController.BuildingStorage)
+            Debug.Log("Generate History Framework");
+            //NPC History
+            NPCHistoryTracker npcHistoryTracker = dc.npcHistoryTracker;
+            Dictionary<RelationshipKey, Dictionary<NPCEventKey, NPCEvent>> NPCEventStorage = new Dictionary<RelationshipKey, Dictionary<NPCEventKey, NPCEvent>>();
+            foreach(var kvp in dc.RelationshipStorage)
             {
-                //populate npc and building stores
-                BuildingRelationshipKey rel = new BuildingRelationshipKey(buildingPair.Key, npcPair.Key);
-                buildingHistoryTracker.largestInt[rel] = 0;
-                buildingHistoryTracker.missingInts[rel] = new List<int>();
+                //add to npc history tracker for each relationship with other npcs
+                npcHistoryTracker.largestInt[kvp.Key] = 0;
+                npcHistoryTracker.missingInts[kvp.Key] = new List<int>();
 
-                buildingEventStorage[rel] = new Dictionary<BuildingEventKey, BuildingEvent>();
+                //add for event storage location for each npc pair
+                NPCEventStorage[kvp.Key] = new Dictionary<NPCEventKey, NPCEvent>();
             }
+
+            Dictionary<int, List<NPCEvent>> eventsPerNPCStorage = new Dictionary<int, List<NPCEvent>>();
+            foreach(var kvp in dc.NPCStorage)
+            {
+                //add to npc history tracker for npcs self relationships
+                RelationshipKey selfRel = new RelationshipKey(kvp.Key, -1); //create a self relationship key
+                npcHistoryTracker.largestInt[selfRel] = 0;
+                npcHistoryTracker.missingInts[selfRel] = new List<int>();
+
+                //add secondary storage for easy access to each npc information
+                eventsPerNPCStorage[kvp.Key] = new List<NPCEvent>();
+                NPCEventStorage[selfRel] = new Dictionary<NPCEventKey, NPCEvent>();
+            }
+
+            dc.NPCEventStorage = NPCEventStorage;
+            dc.eventsPerNPCStorage = eventsPerNPCStorage;
+
+
+            //Building History
+            BuildingHistoryTracker buildingHistoryTracker = dc.buildingHistoryTracker;
+            Dictionary<BuildingRelationshipKey, Dictionary<BuildingEventKey, BuildingEvent>> buildingEventStorage = new Dictionary<BuildingRelationshipKey, Dictionary<BuildingEventKey, BuildingEvent>>();
+            Dictionary<int, List<BuildingEvent>> buildingEventsPerNPCStorage = new Dictionary<int, List<BuildingEvent>>();
+            foreach(var npcPair in dc.NPCStorage)
+            {
+                buildingEventsPerNPCStorage[npcPair.Key] = new List<BuildingEvent>(); //populate per NPC
+                foreach(var buildingPair in dc.BuildingStorage)
+                {
+                    //populate npc and building stores
+                    BuildingRelationshipKey rel = new BuildingRelationshipKey(buildingPair.Key, npcPair.Key);
+                    buildingHistoryTracker.largestInt[rel] = 0;
+                    buildingHistoryTracker.missingInts[rel] = new List<int>();
+
+                    buildingEventStorage[rel] = new Dictionary<BuildingEventKey, BuildingEvent>();
+                }
+            }
+
+            Dictionary<int, List<BuildingEvent>> buildingEventsPerBuildingStorage = new Dictionary<int, List<BuildingEvent>>();
+            foreach(var buildingPair in dc.BuildingStorage)
+            {
+                //populate overall relationship storage
+                BuildingRelationshipKey selfRel = new BuildingRelationshipKey(buildingPair.Key, -1);
+                buildingHistoryTracker.largestInt[selfRel] = 0;
+                buildingHistoryTracker.missingInts[selfRel] = new List<int>();
+                buildingEventStorage[selfRel] = new Dictionary<BuildingEventKey, BuildingEvent>();
+
+                //populate per building storage
+                buildingEventsPerBuildingStorage[buildingPair.Key] = new List<BuildingEvent>();
+            }
+
+            dc.buildingEventStorage = buildingEventStorage;
+            dc.buildingEventsPerNPCStorage = buildingEventsPerNPCStorage;
+            dc.buildingEventsPerBuildingStorage = buildingEventsPerBuildingStorage;
         }
-
-        Dictionary<int, List<BuildingEvent>> buildingEventsPerBuildingStorage = new Dictionary<int, List<BuildingEvent>>();
-        foreach(var buildingPair in dataController.BuildingStorage)
-        {
-            //populate overall relationship storage
-            BuildingRelationshipKey selfRel = new BuildingRelationshipKey(buildingPair.Key, -1);
-            buildingHistoryTracker.largestInt[selfRel] = 0;
-            buildingHistoryTracker.missingInts[selfRel] = new List<int>();
-            buildingEventStorage[selfRel] = new Dictionary<BuildingEventKey, BuildingEvent>();
-
-            //populate per building storage
-            buildingEventsPerBuildingStorage[buildingPair.Key] = new List<BuildingEvent>();
-        }
-
-        dataController.buildingEventStorage = buildingEventStorage;
-        dataController.buildingEventsPerNPCStorage = buildingEventsPerNPCStorage;
-        dataController.buildingEventsPerBuildingStorage = buildingEventsPerBuildingStorage;
     }
 
     public void SaveHistory() 
     {
-        dataController = DataController.Instance;
-        SaveSys.SaveNPCHistory(dataController.NPCEventStorage);
-        SaveSys.SaveNPCHistoryTracker(dataController.npcHistoryTracker);
-        SaveSys.SaveBuildingHistory(dataController.buildingEventStorage);
-        SaveSys.SaveBuildingHistoryTracker(dataController.buildingHistoryTracker);
+        if(dataController is DataController dc)
+        {
+            SaveSys.SaveNPCHistory(dc.NPCEventStorage);
+            SaveSys.SaveNPCHistoryTracker(dc.npcHistoryTracker);
+            SaveSys.SaveBuildingHistory(dc.buildingEventStorage);
+            SaveSys.SaveBuildingHistoryTracker(dc.buildingHistoryTracker);
+        }
     }
 
     public void LoadHistory()
     {
-        dataController = DataController.Instance;
         GenerateHistoryFramework(); //ensure all data structures are initialised
 
-        //=====================LOADING NPC EVENTS===========================
-        Dictionary<RelationshipKey, Dictionary<NPCEventKey, NPCEvent>> npcEvents = dataController.NPCEventStorage;
-        Dictionary<int, List<NPCEvent>> perNPCEvents = dataController.eventsPerNPCStorage;
+        if(dataController is DataController dc)
+        {   
+            //=====================LOADING NPC EVENTS===========================
+            Dictionary<RelationshipKey, Dictionary<NPCEventKey, NPCEvent>> npcEvents = dc.NPCEventStorage;
+            Dictionary<int, List<NPCEvent>> perNPCEvents = dc.eventsPerNPCStorage;
 
-        List<NPCEvent> npcEventsList = SaveSys.LoadNPCHistory();
+            List<NPCEvent> npcEventsList = SaveSys.LoadNPCHistory();
 
-        //take each stored NPCEvent and move it into the necessary storage structures
-        foreach(NPCEvent anEvent in npcEventsList)
-        {
-            NPCEventKey thisKey = anEvent.eventKey; //get the unique event key
-            RelationshipKey relKey = new RelationshipKey(thisKey.npcA, thisKey.npcB); //get the relationship for these two npcs
-
-            npcEvents[relKey][thisKey] = anEvent; //store the event
-
-            //add event to both per NPC events
-            perNPCEvents[thisKey.npcA].Add(anEvent);
-            perNPCEvents[thisKey.npcB].Add(anEvent);
-        }
-
-        //=====================LOADING NPC HISTORY TRACKER===========================
-        NPCHistoryTrackerDatabase db = SaveSys.LoadNPCHistoryTracker();
-        dataController.npcHistoryTracker.SetValues(db.largestInts, db.largestIntKeys, db.missingInts, db.missingIntsKeys);
-        NPCHistoryTracker npcHistoryTracker = dataController.npcHistoryTracker;
-
-        //trim down missing lists to as small as possible
-        var keys = new List<RelationshipKey>(npcHistoryTracker.largestInt.Keys);
-        foreach(var rel in keys) //iterate overl keys
-        {
-            int largInt = npcHistoryTracker.largestInt[rel];
-            List<int> list = npcHistoryTracker.missingInts[rel];
-
-            while (list.Remove(largInt - 1)) 
+            //take each stored NPCEvent and move it into the necessary storage structures
+            foreach(NPCEvent anEvent in npcEventsList)
             {
-                //if one less than the largest int is in it, remove that and set it to be the largest int
-                largInt--;
+                NPCEventKey thisKey = anEvent.eventKey; //get the unique event key
+                RelationshipKey relKey = new RelationshipKey(thisKey.npcA, thisKey.npcB); //get the relationship for these two npcs
+
+                npcEvents[relKey][thisKey] = anEvent; //store the event
+
+                //add event to both per NPC events
+                perNPCEvents[thisKey.npcA].Add(anEvent);
+                perNPCEvents[thisKey.npcB].Add(anEvent);
             }
-            npcHistoryTracker.largestInt[rel] = largInt;
-        }
 
-        dataController.npcHistoryTracker = npcHistoryTracker;
+            //=====================LOADING NPC HISTORY TRACKER===========================
+            NPCHistoryTrackerDatabase db = SaveSys.LoadNPCHistoryTracker();
+            dc.npcHistoryTracker.SetValues(db.largestInts, db.largestIntKeys, db.missingInts, db.missingIntsKeys);
+            NPCHistoryTracker npcHistoryTracker = dc.npcHistoryTracker;
 
-
-        //=============LOADING BUILDING HISTORY===============================
-        Dictionary<BuildingRelationshipKey, Dictionary<BuildingEventKey, BuildingEvent>> buildingEventStorage = dataController.buildingEventStorage;
-        Dictionary<int, List<BuildingEvent>> buildingEventsPerBuildingStorage = dataController.buildingEventsPerBuildingStorage; 
-        Dictionary<int, List<BuildingEvent>> buildingEventsPerNPCStorage = dataController.buildingEventsPerNPCStorage;
-
-        List<BuildingEvent> buildingEventList = SaveSys.LoadBuildingEvents();
-
-        foreach(var buildingEvent in buildingEventList)
-        {
-            BuildingEventKey key = buildingEvent.eventKey;
-            BuildingRelationshipKey relKey = new BuildingRelationshipKey(key.building, key.npc);
-
-            buildingEventStorage[relKey][key] = buildingEvent;
-            buildingEventsPerBuildingStorage[key.building].Add(buildingEvent);
-
-            if(key.npc != -1)
+            //trim down missing lists to as small as possible
+            var keys = new List<RelationshipKey>(npcHistoryTracker.largestInt.Keys);
+            foreach(var rel in keys) //iterate overl keys
             {
-                buildingEventsPerNPCStorage[key.npc].Add(buildingEvent);
+                int largInt = npcHistoryTracker.largestInt[rel];
+                List<int> list = npcHistoryTracker.missingInts[rel];
+
+                while (list.Remove(largInt - 1)) 
+                {
+                    //if one less than the largest int is in it, remove that and set it to be the largest int
+                    largInt--;
+                }
+                npcHistoryTracker.largestInt[rel] = largInt;
             }
-        }
+
+            dc.npcHistoryTracker = npcHistoryTracker;
 
 
-        //============LOADING BUILDING HISTORY TRACKER=======================
-        BuildingHistoryTrackerDatabase buildDB = SaveSys.LoadBuildingHistoryTracker();
-        dataController.buildingHistoryTracker.SetValues(buildDB.largestInts, buildDB.largestIntKeys, buildDB.missingInts, buildDB.missingIntsKeys);
-        BuildingHistoryTracker buildingHistoryTracker = dataController.buildingHistoryTracker;
+            //=============LOADING BUILDING HISTORY===============================
+            Dictionary<BuildingRelationshipKey, Dictionary<BuildingEventKey, BuildingEvent>> buildingEventStorage = dc.buildingEventStorage;
+            Dictionary<int, List<BuildingEvent>> buildingEventsPerBuildingStorage = dc.buildingEventsPerBuildingStorage; 
+            Dictionary<int, List<BuildingEvent>> buildingEventsPerNPCStorage = dc.buildingEventsPerNPCStorage;
 
-        //trim down missing lists to as small as possible
-        var buildingKeys = new List<BuildingRelationshipKey>(buildingHistoryTracker.largestInt.Keys);
-        foreach(var rel in buildingKeys) //iterate overl keys
-        {
-            int largInt = buildingHistoryTracker.largestInt[rel];
-            List<int> list = buildingHistoryTracker.missingInts[rel];
+            List<BuildingEvent> buildingEventList = SaveSys.LoadBuildingEvents();
 
-            while (list.Remove(largInt - 1)) 
+            foreach(var buildingEvent in buildingEventList)
             {
-                //if one less than the largest int is in it, remove that and set it to be the largest int
-                largInt--;
-            }
-            buildingHistoryTracker.largestInt[rel] = largInt;
-        }
+                BuildingEventKey key = buildingEvent.eventKey;
+                BuildingRelationshipKey relKey = new BuildingRelationshipKey(key.building, key.npc);
 
-        dataController.buildingHistoryTracker = buildingHistoryTracker;
+                buildingEventStorage[relKey][key] = buildingEvent;
+                buildingEventsPerBuildingStorage[key.building].Add(buildingEvent);
+
+                if(key.npc != -1)
+                {
+                    buildingEventsPerNPCStorage[key.npc].Add(buildingEvent);
+                }
+            }
+
+
+            //============LOADING BUILDING HISTORY TRACKER=======================
+            BuildingHistoryTrackerDatabase buildDB = SaveSys.LoadBuildingHistoryTracker();
+            dc.buildingHistoryTracker.SetValues(buildDB.largestInts, buildDB.largestIntKeys, buildDB.missingInts, buildDB.missingIntsKeys);
+            BuildingHistoryTracker buildingHistoryTracker = dc.buildingHistoryTracker;
+
+            //trim down missing lists to as small as possible
+            var buildingKeys = new List<BuildingRelationshipKey>(buildingHistoryTracker.largestInt.Keys);
+            foreach(var rel in buildingKeys) //iterate overl keys
+            {
+                int largInt = buildingHistoryTracker.largestInt[rel];
+                List<int> list = buildingHistoryTracker.missingInts[rel];
+
+                while (list.Remove(largInt - 1)) 
+                {
+                    //if one less than the largest int is in it, remove that and set it to be the largest int
+                    largInt--;
+                }
+                buildingHistoryTracker.largestInt[rel] = largInt;
+            }
+
+            dc.buildingHistoryTracker = buildingHistoryTracker;
+        }
     }
 
     /*
@@ -413,12 +419,9 @@ public class HistoryManager : MonoBehaviour
     */
     public float calculateImportance(float sev, float time, int ID)
     {
-        if(ID == -1)
-        {
-            return -1;
-        }
+        if(ID == -1) return -1;
 
-        float worldTime = dataController.worldManager.gameTime; 
+        float worldTime = dataController.World.gameTime; 
         float timeDiff = worldTime - time;
 
         if(timeDiff <= 0) timeDiff = 1f; //check for if the time difference is zero
@@ -538,58 +541,62 @@ public class HistoryManager : MonoBehaviour
 
     public HistoryCopyWrapper DeepClone()
     {
-        //copy NPC Events
-        Dictionary<RelationshipKey, Dictionary<NPCEventKey, NPCEvent>> npcEventStorage = dataController.NPCEventStorage;
-
-        Dictionary<RelationshipKey, Dictionary<NPCEventKey, NPCEvent>> newNPCEventStorage = new Dictionary<RelationshipKey, Dictionary<NPCEventKey, NPCEvent>>();
-        Dictionary<int, List<NPCEvent>> newEventsPerNPCStorage = new Dictionary<int, List<NPCEvent>>();
-
-        foreach(var kvp in dataController.NPCStorage) newEventsPerNPCStorage[kvp.Key] = new List<NPCEvent>();
-
-        List<RelationshipKey> npcRelKeys = new List<RelationshipKey>(npcEventStorage.Keys);
-        foreach(RelationshipKey relKey in npcRelKeys)
+        if(dataController is DataController dc)
         {
-            newNPCEventStorage[relKey] = new Dictionary<NPCEventKey, NPCEvent>();
-            List<NPCEventKey> eventKeys = new List<NPCEventKey>(npcEventStorage[relKey].Keys);
+            //copy NPC Events
+            Dictionary<RelationshipKey, Dictionary<NPCEventKey, NPCEvent>> npcEventStorage = dataController.NPCEventStorage;
 
-            foreach(NPCEventKey eventKey in eventKeys)
+            Dictionary<RelationshipKey, Dictionary<NPCEventKey, NPCEvent>> newNPCEventStorage = new Dictionary<RelationshipKey, Dictionary<NPCEventKey, NPCEvent>>();
+            Dictionary<int, List<NPCEvent>> newEventsPerNPCStorage = new Dictionary<int, List<NPCEvent>>();
+
+            foreach(IAgent agent in dataController.Agents) newEventsPerNPCStorage[agent.id] = new List<NPCEvent>();
+
+            List<RelationshipKey> npcRelKeys = new List<RelationshipKey>(npcEventStorage.Keys);
+            foreach(RelationshipKey relKey in npcRelKeys)
             {
-                NPCEvent eventCopy = npcEventStorage[relKey][eventKey].DeepClone();
+                newNPCEventStorage[relKey] = new Dictionary<NPCEventKey, NPCEvent>();
+                List<NPCEventKey> eventKeys = new List<NPCEventKey>(npcEventStorage[relKey].Keys);
 
-                newNPCEventStorage[relKey][eventKey] = eventCopy;
-                if(eventKey.npcA != -1) newEventsPerNPCStorage[eventKey.npcA].Add(eventCopy);
-                if(eventKey.npcB != -1) newEventsPerNPCStorage[eventKey.npcB].Add(eventCopy);
+                foreach(NPCEventKey eventKey in eventKeys)
+                {
+                    NPCEvent eventCopy = npcEventStorage[relKey][eventKey].DeepClone();
+
+                    newNPCEventStorage[relKey][eventKey] = eventCopy;
+                    if(eventKey.npcA != -1) newEventsPerNPCStorage[eventKey.npcA].Add(eventCopy);
+                    if(eventKey.npcB != -1) newEventsPerNPCStorage[eventKey.npcB].Add(eventCopy);
+                }
             }
-        }
 
 
-        //copy building events
-        Dictionary<BuildingRelationshipKey, Dictionary<BuildingEventKey, BuildingEvent>> buildingEventStorage = dataController.buildingEventStorage;
+            //copy building events
+            Dictionary<BuildingRelationshipKey, Dictionary<BuildingEventKey, BuildingEvent>> buildingEventStorage = dataController.buildingEventStorage;
 
-        Dictionary<BuildingRelationshipKey, Dictionary<BuildingEventKey, BuildingEvent>> newBuildingEventStorage = new Dictionary<BuildingRelationshipKey, Dictionary<BuildingEventKey, BuildingEvent>>();
-        Dictionary<int, List<BuildingEvent>> newBuildingEventsPerBuilding = new Dictionary<int, List<BuildingEvent>>();
-        Dictionary<int, List<BuildingEvent>> newBuildingEventsPerNPC = new Dictionary<int, List<BuildingEvent>>();
+            Dictionary<BuildingRelationshipKey, Dictionary<BuildingEventKey, BuildingEvent>> newBuildingEventStorage = new Dictionary<BuildingRelationshipKey, Dictionary<BuildingEventKey, BuildingEvent>>();
+            Dictionary<int, List<BuildingEvent>> newBuildingEventsPerBuilding = new Dictionary<int, List<BuildingEvent>>();
+            Dictionary<int, List<BuildingEvent>> newBuildingEventsPerNPC = new Dictionary<int, List<BuildingEvent>>();
 
-        foreach(var kvp in dataController.NPCStorage) newBuildingEventsPerNPC[kvp.Key] = new List<BuildingEvent>();
-        foreach(var kvp in dataController.BuildingStorage) newBuildingEventsPerBuilding[kvp.Key] = new List<BuildingEvent>();
+            foreach(IAgent agent in dataController.Agents) newBuildingEventsPerNPC[agent.id] = new List<BuildingEvent>();
+            foreach(IBuilding building in dataController.Buildings) newBuildingEventsPerBuilding[building.id] = new List<BuildingEvent>();
 
-        List<BuildingRelationshipKey> buildingRelKeys = new List<BuildingRelationshipKey>(buildingEventStorage.Keys);
-        foreach(BuildingRelationshipKey relKey in buildingRelKeys)
-        {
-            newBuildingEventStorage[relKey] = new Dictionary<BuildingEventKey, BuildingEvent>();
-            List<BuildingEventKey> eventKeys = new List<BuildingEventKey>(buildingEventStorage[relKey].Keys);
-
-            foreach(BuildingEventKey eventKey in eventKeys)
+            List<BuildingRelationshipKey> buildingRelKeys = new List<BuildingRelationshipKey>(buildingEventStorage.Keys);
+            foreach(BuildingRelationshipKey relKey in buildingRelKeys)
             {
-                BuildingEvent eventCopy = buildingEventStorage[relKey][eventKey].DeepClone();
+                newBuildingEventStorage[relKey] = new Dictionary<BuildingEventKey, BuildingEvent>();
+                List<BuildingEventKey> eventKeys = new List<BuildingEventKey>(buildingEventStorage[relKey].Keys);
 
-                newBuildingEventStorage[relKey][eventKey] = eventCopy;
-                if(eventKey.building != -1) newBuildingEventsPerBuilding[eventKey.building].Add(eventCopy);
-                if(eventKey.npc != -1) newBuildingEventsPerNPC[eventKey.npc].Add(eventCopy);
+                foreach(BuildingEventKey eventKey in eventKeys)
+                {
+                    BuildingEvent eventCopy = buildingEventStorage[relKey][eventKey].DeepClone();
+
+                    newBuildingEventStorage[relKey][eventKey] = eventCopy;
+                    if(eventKey.building != -1) newBuildingEventsPerBuilding[eventKey.building].Add(eventCopy);
+                    if(eventKey.npc != -1) newBuildingEventsPerNPC[eventKey.npc].Add(eventCopy);
+                }
             }
-        }
 
-        return new HistoryCopyWrapper(newEventsPerNPCStorage, newNPCEventStorage, newBuildingEventStorage, newBuildingEventsPerBuilding, newBuildingEventsPerNPC);
+            return new HistoryCopyWrapper(newEventsPerNPCStorage, newNPCEventStorage, newBuildingEventStorage, newBuildingEventsPerBuilding, newBuildingEventsPerNPC);
+        }
+        return null;
     }
 }
 

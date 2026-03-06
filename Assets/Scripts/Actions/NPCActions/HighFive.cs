@@ -170,7 +170,7 @@ public class HighFive : NPCAction
         if(successInfo.success == true) severity = ActionMaths.calcMultiplier(rel.value, 0f, 100f, 2f, 0.25f) * Mathf.Abs(relMultiplier); //the worse their relationship the more positive the outcome
         else severity = ActionMaths.calcMultiplier(rel.value, 0f, 100f, 0.25f, 2f) * Mathf.Abs(relMultiplier); //the worse the relationship the less negative the outcome
         
-        //dataController.historyManager.AddNPCMemory(name, description, severity, actionTime, performer.id, target.id, wasPosPerf, wasPosRec);
+        HistoryManager.Instance.AddNPCMemory(name, description, severity, actionTime, performer.id, target.id, wasPosPerf, wasPosRec);
     }
 
     //computer the likelihood this action will be a success

@@ -44,50 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3ecdbd44a355f24097e383734e56377, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HistoryManager
---- !u!1 &1882171442410241249
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5331700668227601909}
-  - component: {fileID: 5531087211427429765}
-  m_Layer: 0
-  m_Name: NPCHistoryTracker
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5331700668227601909
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1882171442410241249}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4490811107078527728}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5531087211427429765
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1882171442410241249}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3457baf3d98b7ae469879d8594125ce4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::NPCHistoryTracker
 --- !u!1 &2558399610563983925
 GameObject:
   m_ObjectHideFlags: 0
@@ -132,50 +88,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e364f258233510c40bf4d2a3a0dd7637, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RelationShipManager
---- !u!1 &2609168178035041328
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5407478278898537324}
-  - component: {fileID: 7803514984723571986}
-  m_Layer: 0
-  m_Name: BuildingHistoryTracker
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &5407478278898537324
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2609168178035041328}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4490811107078527728}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7803514984723571986
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2609168178035041328}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 561c38a93eff6f94bb5ef6e271eebe63, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BuildingHistoryTracker
 --- !u!1 &5726686374190010243
 GameObject:
   m_ObjectHideFlags: 0
@@ -310,6 +222,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WorldManager
   gameTime: 0
+  costPerFood: 1
+  chaosModifier: 0
+  costPerBuilding: []
 --- !u!1 &7612815561259940981
 GameObject:
   m_ObjectHideFlags: 0
@@ -391,8 +306,6 @@ Transform:
   - {fileID: 6735240850179013866}
   - {fileID: 5714863016565506099}
   - {fileID: 3680949914226830632}
-  - {fileID: 5331700668227601909}
-  - {fileID: 5407478278898537324}
   - {fileID: 4380990957589788007}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -414,8 +327,6 @@ MonoBehaviour:
   actionManager: {fileID: 5392477699229902187}
   relationshipManager: {fileID: 2582926510199593957}
   historyManager: {fileID: 1987674217791064314}
-  npcHistoryTracker: {fileID: 5531087211427429765}
-  buildingHistoryTracker: {fileID: 7803514984723571986}
   npcContainer: {fileID: 0}
   buildingContainer: {fileID: 0}
   worldManager: {fileID: 1368300311558183883}
@@ -464,4 +375,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TraitManager
   traitFile: {fileID: 4900000, guid: a594d799a14ef1d47b8f0dbea626fa83, type: 3}
-  dataController: {fileID: 0}

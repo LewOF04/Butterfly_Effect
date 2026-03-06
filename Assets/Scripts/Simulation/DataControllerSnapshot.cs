@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 [Serializable]
 public class DataControllerSnapshot : IDataContainer
@@ -20,6 +21,7 @@ public class DataControllerSnapshot : IDataContainer
 
     public Dictionary<int, List<int>> NPCBuildingLinks { get; set; }
     public WorldData worldManager;
+    IWorldData IDataContainer.World { get => worldManager; }
 
     public NPCHistoryTracker npcHistoryTracker { get; set; }
     public BuildingHistoryTracker buildingHistoryTracker { get; set; }
@@ -52,9 +54,10 @@ public class DataControllerSnapshot : IDataContainer
         foreach(var kvp in oldNPCBuildingLinks) NPCBuildingLinks[kvp.Key] = new List<int>(kvp.Value);
 
         worldManager = dataController.worldManager.DeepClone();
-    }
 
-    IWorldData IDataContainer.World { get => worldManager; }
+        npcHistoryTracker = dataController.npcHistoryTracker.DeepClone();
+        buildingHistoryTracker = dataController.buildingHistoryTracker.DeepClone();
+    }
 
     //--------------------Interface Methods--------------------
     //====================Agents====================
@@ -71,6 +74,7 @@ public class DataControllerSnapshot : IDataContainer
             return true;
         }
 
+        Debug.Log("Agent Missing");
         agent = null;
         return false;
     }
@@ -100,6 +104,7 @@ public class DataControllerSnapshot : IDataContainer
             return true;
         }
 
+        Debug.Log("Building Missing");
         building = null;
         return false;
     }

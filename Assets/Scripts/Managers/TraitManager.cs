@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class TraitManager : MonoBehaviour
 {
     public TextAsset traitFile; 
-    public DataController dataController;
+    public IDataContainer dataController;
     
     public void Awake()
     {

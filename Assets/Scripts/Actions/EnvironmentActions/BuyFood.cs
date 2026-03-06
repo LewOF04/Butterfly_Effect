@@ -132,7 +132,7 @@ public class BuyFood : EnvironmentAction
         bool wasPosPerf = successInfo.success;
 
         float severity = 5f; //determine severity
-        //dataController.historyManager.AddNPCMemory(name, description, severity, actionTime, performer.id, -1, wasPosPerf, false); //save memory
+        HistoryManager.Instance.AddNPCMemory(name, description, severity, actionTime, performer.id, -1, wasPosPerf, false); //save memory
     }
 
     //computer the likelihood this action will be a success

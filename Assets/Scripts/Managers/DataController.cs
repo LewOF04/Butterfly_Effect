@@ -76,6 +76,8 @@ public class DataController : MonoBehaviour, IDataContainer
 
         npcHistoryTracker = new NPCHistoryTracker();
         buildingHistoryTracker = new BuildingHistoryTracker();
+
+        DomainContext.DataController = this;
     }
 
     public void SaveToMemory()

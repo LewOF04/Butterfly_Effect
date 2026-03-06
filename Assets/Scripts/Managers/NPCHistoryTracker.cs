@@ -66,7 +66,7 @@ public class NPCHistoryTracker
         }
     }
 
-    public NPCHistoryTracker DeepCopy()
+    public NPCHistoryTracker DeepClone()
     {
         NPCHistoryTracker newTracker = new NPCHistoryTracker();
 

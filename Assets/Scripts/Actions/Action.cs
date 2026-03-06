@@ -8,7 +8,7 @@ public abstract class Action<T> : IAction
     protected Action() { }
     protected Action(char actionType) { }
 
-    protected IDataContainer dataController => DataController.Instance;
+    protected IDataContainer dataController => DomainContext.DataController;
 
     public abstract char actionType {get;}
     public virtual string name => GetType().Name;

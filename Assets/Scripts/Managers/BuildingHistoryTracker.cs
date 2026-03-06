@@ -66,15 +66,15 @@ public class BuildingHistoryTracker
         }
     }
 
-    public BuildingHistoryTracker DeepCopy()
+    public BuildingHistoryTracker DeepClone()
     {
         BuildingHistoryTracker newTracker = new BuildingHistoryTracker();
 
-        List<RelationshipKey> oldLargestKeys = new List<RelationshipKey>(largestInt.Keys);
+        List<BuildingRelationshipKey> oldLargestKeys = new List<BuildingRelationshipKey>(largestInt.Keys);
         
-        Dictionary<RelationshipKey, int> newLargestInt = newTracker.largestInt;
-        Dictionary<RelationshipKey, List<int>> newMissingInts = newTracker.missingInts;
-        foreach(RelationshipKey relKey in oldLargestKeys)
+        Dictionary<BuildingRelationshipKey, int> newLargestInt = newTracker.largestInt;
+        Dictionary<BuildingRelationshipKey, List<int>> newMissingInts = newTracker.missingInts;
+        foreach(BuildingRelationshipKey relKey in oldLargestKeys)
         {
             newLargestInt[relKey] = largestInt[relKey];
             newMissingInts[relKey] = new List<int>(missingInts[relKey]);

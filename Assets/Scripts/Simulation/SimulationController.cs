@@ -5,46 +5,29 @@ using System;
 public class SimulationController : MonoBehaviour
 {
     public static SimulationController Instance;
-    private WorldManager worldManager;
-    private DataController dataController;
-    public BuildingType[] buildingTypes;
+    private IDataContainer dataController => DomainContext.DataController;
 
-    public void Awake()
+    private float startTime;
+    private float currentTime;
+    private float endTime;
+
+    public SimulationPlot initiateSimulationPlot(float simulationTime)
     {
-        dataController = DataController.Instance;
-        worldManager = dataController.worldManager;
+        DataControllerSnapshot dataSnapshot = new DataControllerSnapshot(); //copy game state
+        DomainContext.DataController = dataSnapshot;
+
+        SimulationPlot simPlot = new SimulationPlot(dataSnapshot); //create simulation plot
+
+        startTime = dataSnapshot.World.gameTime;
+        endTime = startTime + simulationTime;
+        simPlot.startTime = startTime;
+        simPlot.endTime = endTime;
+
+        return simPlot;
     }
 
-    public void initiateSimulation(int simulationDays)
+    public SimulationPlot plotSimulation(SimulationPlot simPlot)
     {
-        Dictionary<int, NPC> npcDict = dataController.NPCStorage;
-        Dictionary<int, Building> buildings = dataController.BuildingStorage;
-        Dictionary<RelationshipKey, Relationship> relationships = dataController.RelationshipStorage;
-        Dictionary<int, List<NPCEvent>> npcEvents = dataController.eventsPerNPCStorage;
-        Dictionary<int, List<BuildingEvent>> perBuildingBuildingEvents = dataController.buildingEventsPerBuildingStorage;
-        Dictionary<int, List<BuildingEvent>> perNPCBuildngEvents = dataController.buildingEventsPerNPCStorage;
-
-        float dayTime;
-        for(int i = 0; i < simulationDays; i++)
-        {
-            dayTime = 24.0f;
-            List<NPC> npcs = new List<NPC>(npcDict.Values);
-            foreach(NPC npc in npcs)
-            {
-                collectActions(npc, dayTime);
-            }
-        }
-    }
-
-    public ActionFrontier collectActions(NPC performer, float timeLeft)
-    {
-        ActionFrontier collection = new ActionFrontier(dataController);
-        IAction bestAction;
-        Dictionary<int, List<ActionInfoWrapper>> buildingActions = collection.buildingActions;
-        Dictionary<int, List<ActionInfoWrapper>> npcActions = collection.npcActions;
-        List<ActionInfoWrapper> environmentActions = collection.environmentActions;
-        List<ActionInfoWrapper> selfActions = collection.selfActions;
-
-        return null;
+        
     }
 }
