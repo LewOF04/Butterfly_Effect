@@ -1,22 +1,31 @@
 using System.Collections.Generic;
+using System.Linq;
 
 public class SimulationPlot
 {
+    //overall simulation info
     public float startTime;
     public float endTime;
-    public Dictionary<int, ActionInfoWrapper> activeAction;
-    public DEQueue<ActionInfoWrapper> plottedActions;
-    public Dictionary<int, int> agentInitiative;
+    public DEQueue<SimulationActionWrapper> plottedActions; //final plotted actions
+
+    //agent action information
+    public Dictionary<int, SimulationActionWrapper> agentActiveActions;
+    public List<int> inactiveAgents;
+
+    //building action information
+    public Dictionary<int, List<SimulationActionWrapper>> buildingActiveActions; //actions being performed to each building
+
     public DataControllerSnapshot domain;
     public SimulationPlot(DataControllerSnapshot dc)
     {
         domain = dc;
-        List<int> agentKeys = new List<int>(dc.NPCStorage.Keys);
+        plottedActions = new DEQueue<SimulationActionWrapper>();
+        inactiveAgents = new List<int>();
         
-        foreach(int key in agentKeys)
-        {
-            activeActionQueues[key] = new DEQueue<ActionInfoWrapper>();
-            completeActionQueues[key] = new DEQueue<ActionInfoWrapper>();
-        }
+        List<int> agentKeys = new List<int>(dc.NPCStorage.Keys);
+        foreach(int key in agentKeys) agentActiveActions[key] = null;
+
+        List<int> buildingKeys = new List<int>(dc.BuildingStorage.Keys);
+        foreach(int key in buildingKeys) buildingActiveActions[key] = new List<SimulationActionWrapper>();
     }
 }

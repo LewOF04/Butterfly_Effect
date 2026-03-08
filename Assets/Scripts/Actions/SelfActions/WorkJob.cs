@@ -103,7 +103,6 @@ public class WorkJob : SelfAction
         description += "They spent "+energyMinus.ToString("0.00")+" energy, ";
 
         float timeMinus = timeToComplete * percentMulti;
-        performer.timeLeft -= timeMinus;
         description += timeMinus.ToString("0.00")+" hours ";
 
         float wealthGain = baseEarning * wealthMultiplier;

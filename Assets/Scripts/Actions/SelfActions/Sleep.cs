@@ -114,7 +114,6 @@ public class Sleep : SelfAction
         description += happinessGain.ToString()+" happiness, ";
 
         float timeMinus = timeToComplete * percentMulti;
-        performer.timeLeft -= timeMinus;
         description += "with "+timeMinus.ToString("0.00")+" hours of sleep ";
 
         float conditionGain = baseConditionAdd * sleepMultiplier * Mathf.InverseLerp(0f, 100f, performer.attributes.constitution);

@@ -108,7 +108,6 @@ public class BuyFood : EnvironmentAction
 
         //time changes
         float timeMinus = timeToComplete * percentMulti;
-        performer.timeLeft = Mathf.Max(0f, performer.timeLeft - timeMinus);
         description += timeMinus.ToString("0.00")+" hours";
 
         //wealth changes

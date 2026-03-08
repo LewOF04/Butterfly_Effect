@@ -112,7 +112,6 @@ public class ImproveRationality : SelfAction
 
         //time changes
         float timeMinus = timeToComplete * percentMulti;
-        performer.timeLeft -= timeMinus;
         description += timeMinus.ToString("0.00")+" hours";
 
         bool wasPosPerf;

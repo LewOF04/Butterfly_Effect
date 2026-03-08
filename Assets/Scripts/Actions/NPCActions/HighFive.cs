@@ -150,10 +150,9 @@ public class HighFive : NPCAction
 
         description += "\n";
 
-        performer.stats.energy -= energyToComplete;
+        performer.stats.energy = Mathf.Max(0f, performer.stats.energy - energyToComplete);
         description += "They spent "+energyToComplete.ToString("0.00")+" energy, ";
 
-        performer.timeLeft -= timeToComplete;
         description += timeToComplete.ToString("0.00")+" hours ";
 
         //determine change to relationship

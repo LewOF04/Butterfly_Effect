@@ -118,7 +118,6 @@ public class RepairBuilding: BuildingAction
         description += "They spent "+energyMinus.ToString("0.00")+" energy, ";
 
         float timeMinus = timeToComplete * percentMulti;
-        performer.timeLeft -= timeMinus;
         description += timeMinus.ToString("0.00")+" hours";
 
         float repairGain = baseConditionGain * fixMultiplier;
