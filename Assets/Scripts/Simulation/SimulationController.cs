@@ -19,8 +19,8 @@ public class SimulationController : MonoBehaviour
 
         SimulationPlot simPlot = new SimulationPlot(dataSnapshot); //create simulation plot
 
-        simPlot.startTime = snapshot.World.gameTime;
-        simPlot.endTime = snapshot.World.gameTime + simulationTime;
+        simPlot.startTime = dataSnapshot.worldManager.gameTime;
+        simPlot.endTime = dataSnapshot.worldManager.gameTime + simulationTime;
         simPlot.runTime = simPlot.startTime;
 
         return simPlot;
@@ -93,7 +93,7 @@ public class SimulationController : MonoBehaviour
                     if(simAction.endTime != endTime) continue; //if the two times are different then this action has changed priority position
 
                     /*==========ACTION PERFORMING==========*/
-                    Action thisAction = simAction.info.action;
+                    IAction thisAction = simAction.info.action;
                     thisAction.reloadAction(simAction.info);
                     thisAction.performAction(simAction.percentComplete);
 
@@ -205,8 +205,9 @@ public class SimulationController : MonoBehaviour
                 ActionInfoWrapper actionInfo = actionWrap.info;
                 float perc = actionWrap.percentComplete;
 
-                Action action = actionInfo.action;
+                IAction action = actionInfo.action;
 
+                //perform the action with the percent completion
                 action.reloadAction(actionInfo);
                 action.performAction(perc);
             }
@@ -218,10 +219,10 @@ public class SimulationController : MonoBehaviour
         return simPlot;
     }
 
-    public void runFullPlot(SimulationPlot simPlot)
+    public SimulationPlot runFullPlot(SimulationPlot simPlot)
     {
         float runEndTime = simPlot.endTime;
         
-        SimulationPlot finalPlot = runPlotToTime(simPlot, runEndTime);
+        return runPlotToTime(simPlot, runEndTime);
     }
 }

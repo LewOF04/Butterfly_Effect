@@ -11,7 +11,7 @@ public abstract class Action<T> : IAction
     protected IDataContainer dataController => DomainContext.DataController;
 
     public abstract char actionType {get;}
-    public virtual string name => GetType().Name;
+    public abstract string name {get;}
     public abstract string baseDescription {get;}
 
     //stores for quick reference is talking about the same npc
@@ -19,7 +19,7 @@ public abstract class Action<T> : IAction
     protected int receiver = -1;
     protected float timeToComplete = -1f;
     protected float energyToComplete = -1f;
-    protected bool? known = null;
+    protected bool known = false;
     protected float estUtility = -1f;
     protected float actUtility = -1f;
     protected float estSuccess = -1f;
@@ -118,7 +118,7 @@ public abstract class Action<T> : IAction
         receiver = -1;
         timeToComplete = -1f;
         energyToComplete = -1f;
-        known = null;
+        known = false;
         estUtility = -1f;
         actUtility = -1f;
         estSuccess = -1f;

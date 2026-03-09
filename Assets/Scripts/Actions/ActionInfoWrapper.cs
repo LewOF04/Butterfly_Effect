@@ -11,8 +11,8 @@ public struct ActionInfoWrapper : IEquatable<ActionInfoWrapper>
     public float actUtility;
     public float estSuccess;
     public float actSuccess;
-    public Action action;
-    public ActionInfoWrapper(int currentActor, int receiver, float timeToComplete, float energyToComplete, bool? known, float estUtility, float actUtility, float estSuccess, float actSuccess, IAction action)
+    public IAction action;
+    public ActionInfoWrapper(int currentActor, int receiver, float timeToComplete, float energyToComplete, bool known, float estUtility, float actUtility, float estSuccess, float actSuccess, IAction action)
     {
         this.receiver = receiver;
         this.currentActor = currentActor;

@@ -1,10 +1,12 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 public class ActionFrontier
 {
     public ActionInfoWrapper bestAction;
+    private bool bestActionSet = false;
     public Dictionary<int, List<ActionInfoWrapper>> buildingActions;
     public Dictionary<int, List<ActionInfoWrapper>> npcActions;
     public List<ActionInfoWrapper> environmentActions;
@@ -36,7 +38,8 @@ public class ActionFrontier
         selfActions = new List<ActionInfoWrapper>();
         environmentActions = new List<ActionInfoWrapper>();
 
-        bestAction = null;
+        bestActionSet = false;
+        bestAction = default;
     }
 
     public ActionInfoWrapper getBestAction(IAgent performer)
@@ -48,7 +51,8 @@ public class ActionFrontier
     {
         resetFrontier(dataController);
 
-        ActionInfoWrapper topAction = null;
+        ActionInfoWrapper topAction = default;
+        bool topActionSet = false;
 
         List<int> agentKeys = dataController.Agents.Select(a => a.id).ToList();
 
@@ -63,7 +67,7 @@ public class ActionFrontier
                 ActionInfoWrapper info = agentAction.computeAction(performer, agent);
 
                 //check if this is the new best action
-                if(topAction == null || info.estUtility > topAction.estUtility) topAction = info;
+                if(topActionSet == false || info.estUtility > topAction.estUtility) topAction = info;
             } 
         }
 
@@ -77,7 +81,7 @@ public class ActionFrontier
                 
                 ActionInfoWrapper info = buildAct.computeAction(performer, building);
 
-                if(topAction == null || info.estUtility > topAction.estUtility) topAction = info;
+                if(topActionSet == false || info.estUtility > topAction.estUtility) topAction = info;
             }
         }
 
@@ -85,14 +89,14 @@ public class ActionFrontier
         {
             ActionInfoWrapper info = selfAct.computeAction(performer, default);
 
-            if(topAction == null || info.estUtility > topAction.estUtility) topAction = info;
+            if(topActionSet == false || info.estUtility > topAction.estUtility) topAction = info;
         }
 
         foreach(EnvironmentAction envAct in DataController.Instance.environmentActions)
         {
             ActionInfoWrapper info = envAct.computeAction(performer, default);
 
-            if(topAction == null || info.estUtility > topAction.estUtility) topAction = info;
+            if(topActionSet == false || info.estUtility > topAction.estUtility) topAction = info;
         }
 
         return topAction;
@@ -116,7 +120,7 @@ public class ActionFrontier
                 npcActions[agent.id].Add(info);
 
                 //check if this is the new best action
-                if(bestAction == null || info.estUtility > bestAction.estUtility) bestAction = info;
+                if(bestActionSet == false || info.estUtility > bestAction.estUtility) bestAction = info;
             } 
         }
 
@@ -131,7 +135,7 @@ public class ActionFrontier
                 ActionInfoWrapper info = buildAct.computeAction(performer, building);
                 buildingActions[building.id].Add(info);
 
-                if(bestAction == null || info.estUtility > bestAction.estUtility) bestAction = info;
+                if(bestActionSet == false || info.estUtility > bestAction.estUtility) bestAction = info;
             }
         }
 
@@ -140,7 +144,7 @@ public class ActionFrontier
             ActionInfoWrapper info = selfAct.computeAction(performer, default);
             selfActions.Add(info);
 
-            if(bestAction == null || info.estUtility > bestAction.estUtility) bestAction = info;
+            if(bestActionSet == false || info.estUtility > bestAction.estUtility) bestAction = info;
         }
 
         foreach(EnvironmentAction envAct in DataController.Instance.environmentActions)
@@ -148,7 +152,7 @@ public class ActionFrontier
             ActionInfoWrapper info = envAct.computeAction(performer, default);
             environmentActions.Add(info);
 
-            if(bestAction == null || info.estUtility > bestAction.estUtility) bestAction = info;
+            if(bestActionSet == false || info.estUtility > bestAction.estUtility) bestAction = info;
         }
     }
 }
