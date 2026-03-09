@@ -17,7 +17,7 @@ public class RobNPC : NPCAction
     protected override float baseEnergy => 60f;
     protected override float complexity => 15f;
     protected override float baseUtility => 50f;
-    protected override bool interrupts => true;
+    public override bool interrupts => true;
 
     protected override List<int> utilityPosTraits => new List<int>{2}; 
     protected override List<int> utilityNegTraits => new List<int>{1};

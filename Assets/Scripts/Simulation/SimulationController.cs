@@ -89,7 +89,7 @@ public class SimulationController : MonoBehaviour
 
                 else //we can perform this action
                 {
-                    actionQueue.Dequeue(out SimulationActionWrapper simAction, out float endTime); //get the next action
+                    if(!actionQueue.TryDequeue(out SimulationActionWrapper simAction, out float endTime)) continue; //get the next action
                     if(simAction.endTime != endTime) continue; //if the two times are different then this action has changed priority position
 
                     /*==========ACTION PERFORMING==========*/
@@ -115,7 +115,7 @@ public class SimulationController : MonoBehaviour
                             //interrupt all actions currently being performed to this building
                             foreach(SimulationActionWrapper actWrap in simPlot.buildingActiveActions[recID])
                             {
-                                if(actWrap.info == simAction.info) simPlot.buildingActiveActions.RemoveAt(iteration); //if this is the action we've just performed then remove it
+                                if(actWrap.info == simAction.info) simPlot.buildingActiveActions[recID].RemoveAt(iteration); //if this is the action we've just performed then remove it
                                 else
                                 {
                                     float originalDuration = actWrap.endTime - actWrap.startTime; //how long this action should have taken
@@ -201,7 +201,7 @@ public class SimulationController : MonoBehaviour
             if(peekAct.endTime > plotProgressTime) break; //if the actions end time is later than our final time, then we don't need to perform anymore
             else
             {
-                if(!actionQueue.TryDequeueFront(out SimulationActionWrapper actionWrap)) return;
+                if(!actionQueue.TryDequeueFront(out SimulationActionWrapper actionWrap)) return null;
                 ActionInfoWrapper actionInfo = actionWrap.info;
                 float perc = actionWrap.percentComplete;
 

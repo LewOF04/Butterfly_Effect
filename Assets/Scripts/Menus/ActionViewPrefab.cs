@@ -87,15 +87,15 @@ public class ActionViewPrefab : MonoBehaviour
         IAction act = actionInfo.action;
 
         var relKey = new RelationshipKey(actionInfo.currentActor, actionInfo.receiver);
-        if(act is Action<NPC> npcAct)
+        if(act is Actions<NPC> npcAct)
         {
             npcAct.reloadAction(actionInfo);
             npcAct.performAction(100f);
-        } else if(act is Action<Building> buildAction)
+        } else if(act is Actions<Building> buildAction)
         {
             buildAction.reloadAction(actionInfo);
             buildAction.performAction(100f); 
-        } else if(act is Action<NoTarget> nonAction)
+        } else if(act is Actions<NoTarget> nonAction)
         {
             nonAction.reloadAction(actionInfo);
             nonAction.performAction(100f); 
