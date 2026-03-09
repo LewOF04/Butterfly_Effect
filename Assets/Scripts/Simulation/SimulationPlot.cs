@@ -6,6 +6,10 @@ public class SimulationPlot
     //overall simulation info
     public float startTime;
     public float endTime;
+    
+    //simulation running info
+    public bool runComplete = false;
+    public float runTime;
     public DEQueue<SimulationActionWrapper> plottedActions; //final plotted actions
 
     //agent action information

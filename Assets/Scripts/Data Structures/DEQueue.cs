@@ -34,48 +34,73 @@ public class DEQueue<T>
         Count++;
     }
 
-    public T DequeueFront()
+    public bool TryDequeueFront(out T value)
     {
-        if (Count == 0) throw new InvalidOperationException("Deque is empty.");
+        if (Count == 0)
+        {
+            value = default!;
+            return false;
+        }
 
         var item = firstItem!;
 
         firstItem = item.NextItem;
 
-        if (firstItem != null) firstItem.PreviousItem = null;
-        else lastItem = null;
+        if (firstItem != null)
+            firstItem.PreviousItem = null;
+        else
+            lastItem = null;
 
         Count--;
-        return item.Value;
+        value = item.Value;
+        return true;
     }
 
-    public T DequeueBack()
+    public bool TryDequeueBack(out T value)
     {
-        if (Count == 0) throw new InvalidOperationException("Deque is empty.");
+        if (Count == 0)
+        {
+            value = default!;
+            return false;
+        }
 
         var item = lastItem!;
 
         lastItem = item.PreviousItem;
 
-        if (lastItem != null) lastItem.NextItem = null;
-        else firstItem = null;
+        if (lastItem != null)
+            lastItem.NextItem = null;
+        else
+            firstItem = null;
 
         Count--;
-        return item.Value;
+
+        value = item.Value;
+        return true;
     }
 
-    public T ReadFront()
+    public bool TryPeekFront(out T value)
     {
-        if (Count == 0) return default;
+        if (Count == 0)
+        {
+            value = default!;
+            return false;
+        }
 
-        return firstItem!.Value;
+        value = firstItem!.Value;
+        return true;
     }
 
-    public T ReadBack()
+    public bool TryPeekBack(out T value)
     {
-        if (Count == 0) return default;
+        if (Count == 0)
+        {
+            value = default!;
+            return false;
+        }
 
-        return lastItem!.Value;
+        value = lastItem!.Value;
+        return true;
     }
 }
 

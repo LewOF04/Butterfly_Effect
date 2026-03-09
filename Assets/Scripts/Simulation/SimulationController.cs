@@ -21,6 +21,7 @@ public class SimulationController : MonoBehaviour
 
         simPlot.startTime = snapshot.World.gameTime;
         simPlot.endTime = snapshot.World.gameTime + simulationTime;
+        simPlot.runTime = simPlot.startTime;
 
         return simPlot;
     }
@@ -182,9 +183,45 @@ public class SimulationController : MonoBehaviour
         return simPlot;
     }
 
-    public void runPlot(SimulationPlot simPlot)
+    public SimulationPlot runPlotToTime(SimulationPlot simPlot, float plotProgressTime)
     {
+        if(DomainContext.DataController is DataController dc) Debug.Log("Plot running on DataController instance.");
+        else Debug.Log("Plot not running on DataController instance.");
+
+        if(plotProgressTime <= simPlot.runTime) {
+            simPlot.runComplete = true;
+            return simPlot; //if we've reached the end then return
+        }
+
+        plotProgressTime = Mathf.Min(simPlot.endTime, plotProgressTime); //we run the simulation to the specified time or the plot endTime
+
         DEQueue<SimulationActionWrapper> actionQueue = simPlot.plottedActions;
+        while(actionQueue.TryPeekFront(out SimulationActionWrapper peekAct)) //while there are actions in the queue
+        {
+            if(peekAct.endTime > plotProgressTime) break; //if the actions end time is later than our final time, then we don't need to perform anymore
+            else
+            {
+                if(!actionQueue.TryDequeueFront(out SimulationActionWrapper actionWrap)) return;
+                ActionInfoWrapper actionInfo = actionWrap.info;
+                float perc = actionWrap.percentComplete;
+
+                Action action = actionInfo.action;
+
+                action.reloadAction(actionInfo);
+                action.performAction(perc);
+            }
+        }
+
+        if(!actionQueue.TryPeekFront(out SimulationActionWrapper _)) simPlot.runComplete = true;
+        simPlot.runTime = plotProgressTime;
         
+        return simPlot;
+    }
+
+    public void runFullPlot(SimulationPlot simPlot)
+    {
+        float runEndTime = simPlot.endTime;
+        
+        SimulationPlot finalPlot = runPlotToTime(simPlot, runEndTime);
     }
 }
