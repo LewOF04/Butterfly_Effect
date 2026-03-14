@@ -2,15 +2,21 @@ using UnityEngine;
 using System.Collections.Generic;
 using System;
 
-public class SimulationController : MonoBehaviour
+public static class SimulationController
 {
-    public static SimulationController Instance;
     private IDataContainer dataController => DomainContext.DataController;
 
     private float startTime;
     private float currentTime;
     private float endTime;
     private DataControllerSnapshot domain;
+
+    //Menu progress reporting
+    public event Action<SimulationProgress> OnProgress;
+    private void ReportProgress(float progress, string message)
+    {
+        OnProgress?.Invoke(new SimulationProgress(progress, message));
+    }
 
     public SimulationPlot initiateSimulationPlot(float simulationTime)
     {
@@ -41,20 +47,23 @@ public class SimulationController : MonoBehaviour
         else return 100f;
     }
 
-
-
-    public SimulationPlot plotSimulation(SimulationPlot simPlot)
+    public IEnumerator plotSimulationRoutine(SimulationPlot simPlot)
     {
         domain = simPlot.domain;
         startTime = simPlot.startTime; //simulation start time
         endTime = simPlot.endTime; //simulation end time
         currentTime = startTime; //simulation current time
 
+        ReportProgress(10.5f, "Preparing simulation plot...");
+        
         //creates action frontier AND sets DomainContext.DataController for actions
         ActionFrontier actionFrontier = new ActionFrontier(domain);
         PriorityQueue<SimulationActionWrapper, float> actionQueue = new PriorityQueue<SimulationActionWrapper, float>();
 
         float dayTime = startTime % 24f; //are we progressed into this day at all
+
+        ReportProgress(12f, "Creating initial action plans");
+        yield return null;
 
         //create initial actions
         foreach(int agentID in domain.NPCStorage.Keys)
@@ -78,10 +87,15 @@ public class SimulationController : MonoBehaviour
             actionQueue.Enqueue(thisAction, thisAction.endTime); //store the action in order of its end time
         }
 
-        
+        ReportProgress(5f, "Beginning plot clock...");
+        yield return null;
+
+        float simTotalTime = endTime - currentTime;
         //simulation step
         while(currentTime < endTime)
         {
+            ReportProgress(((endTime - currentTime)/simTotalTime)*88f + 12f, "Performing Actions at time: "+currentTime.ToString("00.00"));
+            yield return null;
             /*++++++++++PERFORM ANY ACTIONS THAT NEED TO OCCUR++++++++++*/
             while(actionQueue.TryPeek(out SimulationActionWrapper _, out float peekTime)) //while there are things in the queue
             {
@@ -157,6 +171,9 @@ public class SimulationController : MonoBehaviour
                 }
             }
 
+            ReportProgress(((endTime - currentTime)/simTotalTime)*88f + 12f, "Plotting Actions at time: "+currentTime.ToString("00.00"));
+            yield return null;
+
             /*++++++++++GET NEW ACTIONS++++++++++*/
             foreach(int agentID in simPlot.inactiveAgents)
             {
@@ -180,17 +197,29 @@ public class SimulationController : MonoBehaviour
             dayTime = currentTime % 24f; //current time of day
         }
 
-        return simPlot;
+        ReportProgress(100f, "Plotting Complete.");
     }
 
-    public SimulationPlot runPlotToTime(SimulationPlot simPlot, float plotProgressTime)
+    public IEnumerator runPlotToTime(SimulationPlot simPlot, float plotProgressTime)
     {
         if(DomainContext.DataController is DataController dc) Debug.Log("Plot running on DataController instance.");
         else Debug.Log("Plot not running on DataController instance.");
 
+        int totalActionNum = simPlot.plottedActions.Count;
+        int currentActionNum = 0;
+
+        float currTime = simPlot.startTime;
+
+        //we either track by time or by actions complete
+        bool wholeSim = false;
+        if(plotProgressTime == simPlot.endTime) wholeSim = true;
+        if(wholeSim) ReportProgress(0f, "Beginning run of complete simulation plot.");
+        else ReportProgress(0f, "Begging run of simulation plot to time "+plotProgressTime.ToString("0.00"));
+        yield return null;
+
         if(plotProgressTime <= simPlot.runTime) {
             simPlot.runComplete = true;
-            return simPlot; //if we've reached the end then return
+            return;
         }
 
         plotProgressTime = Mathf.Min(simPlot.endTime, plotProgressTime); //we run the simulation to the specified time or the plot endTime
@@ -201,11 +230,17 @@ public class SimulationController : MonoBehaviour
             if(peekAct.endTime > plotProgressTime) break; //if the actions end time is later than our final time, then we don't need to perform anymore
             else
             {
-                if(!actionQueue.TryDequeueFront(out SimulationActionWrapper actionWrap)) return null;
+                currentActionNum++;
+                if(!actionQueue.TryDequeueFront(out SimulationActionWrapper actionWrap)) yield break;
                 ActionInfoWrapper actionInfo = actionWrap.info;
                 float perc = actionWrap.percentComplete;
 
                 IAction action = actionInfo.action;
+
+                if(wholeSim) ReportProgress((currentActionNum / totalActionNum)*100f, "Performing action ("+currentActionNum.ToString()+"/"+totalActionNum.ToString()+")");
+                else ReportProgress(((actionWrap.endTime - simPlot.runTime) / (plotProgressTime - simPlot.runTime))*100f, 
+                                    "Performing action at time "+(actionWrap.endTime-simPlot.runTime).ToString("0.00")+"/"+(plotProgressTime - simPlot.runTime).ToString("0.00"));
+                yield return null;
 
                 //perform the action with the percent completion
                 action.reloadAction(actionInfo);
@@ -215,14 +250,13 @@ public class SimulationController : MonoBehaviour
 
         if(!actionQueue.TryPeekFront(out SimulationActionWrapper _)) simPlot.runComplete = true;
         simPlot.runTime = plotProgressTime;
-        
-        return simPlot;
+        ReportProgress(100f, "Simulation running complete.");
     }
 
-    public SimulationPlot runFullPlot(SimulationPlot simPlot)
+    public IEnumerator runFullPlot(SimulationPlot simPlot)
     {
         float runEndTime = simPlot.endTime;
         
-        return runPlotToTime(simPlot, runEndTime);
+        yield return runPlotToTime(simPlot, runEndTime);
     }
 }

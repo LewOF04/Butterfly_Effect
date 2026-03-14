@@ -10,6 +10,9 @@ public class TimeSkipper : MonoBehaviour
     public Transform player; 
     private GameObject loadingScreen;
     private DataController dataController;
+    public SimulationPlot simPlot = null; //produced sim plot
+    private TMP_text loadingInfoText;
+    private Slider loadingSlider;
 
     void Awake()
     {
@@ -18,81 +21,123 @@ public class TimeSkipper : MonoBehaviour
         player = FindFirstObjectByType<PlayerMovement>().gameObject.transform;
         loadingScreen = GameObject.Find("Loading Screen");
         dataController = DataController.Instance;
+
+        loadingSlider = loadingScreen.GetComponentInChildren<Slider>();
+        loadingCanvas = loadingScreen.GetComponent<Canvas>();
+        loadingInfoText = loadingScreen.trasnform.Find("Loading Info Text").text;
     }
 
-    public void skipTime(float time)
+    void OnEnable()
     {
-        StartCoroutine(skipTimeRoutine(time));
+        SimulationController.Instance.OnProgress += HandleSimulationProgress;
     }
 
-    public void reloadWorld()
+    void OnDisable()
     {
-        StartCoroutine(reloadWorldRoutine());
+        if (SimulationController.Instance != null) SimulationController.Instance.OnProgress -= HandleSimulationProgress;
     }
 
-    private IEnumerator skipTimeRoutine(float time)
+    private void HandleSimulationProgress(SimulationProgress progress)
+    {
+        loadingSlider.value = progress.progress;
+        loadingInfoText.text = progress.message;
+    }
+
+    public void plotSim(float time)
+    {
+        StartCoroutine(plotTimeRoutine(time));
+    }
+
+    private IEnumerator plotTimeRoutine(float time)
     {
         Camera camera = FindFirstObjectByType<Camera>();
 
         //setup loading screen
         InputLocker.Lock(); //locks the input 
-        Slider loadingSlider = loadingScreen.GetComponentInChildren<Slider>();
-        Canvas canvas = loadingScreen.GetComponent<Canvas>();
         loadingScreen.transform.position = camera.transform.position;
         loadingScreen.transform.position += new Vector3(0.0f, 0.0f, 0.5f);
-        canvas.enabled = true;
+        loadingCanvas.enabled = true;
+
         loadingSlider.value = 0f;
+        loadingInfoText.text = "Copying world state";
+        yield return null;
 
-        //SIMULATION HERE
-        
-        yield return StartCoroutine(reload()); //wait for reload to complete
-        loadingScreen.transform.position = camera.transform.position;
-        loadingScreen.transform.position += new Vector3(0.0f, 0.0f, 0.5f);
+        SimulationPlot simPlotInst = SimulationController.initiateSimulationPlot(time);
+        loadingSlider.value = 10f;
+        loadingInfoText.text = "Beginning simulation plotting";
+        yield return null;
 
-        yield return new WaitForSeconds(1f); //add a delay so that menu is shown
-        loadingSlider.value = 1f;
+        yield return StartCoroutine(SimulationController.plotSimulationRoutine(simPlotInst));
+
+        loadingSlider.value = 100f;
+        loadingInfoText.text = "Plotting complete";
+        yield return null;
+
+        simPlot = simPlotInst;
+
         yield return new WaitForSeconds(1f);
-        canvas.enabled = false;;
+
+        loadingScreen.transform.position = camera.transform.position;
+
+        loadingCanvas.enabled = false;
         InputLocker.Unlock();
     }
 
-     /*Dictionary<int, NPC> npcs = dataController.NPCStorage;
-        List<int> npcKeys = new List<int>(npcs.Keys);
-        foreach(int npcKey in npcKeys)
+    public void runFullSim()
+    {
+        StartCoroutine(runSimRoutine());
+    }
+
+    private IEnumerator runSimRoutine()
+    {
+        if(simPlot == null) {Debug.Log("There is no sim plot to run"); return;}
+
+        Camera camera = FindFirstObjectByType<Camera>();
+
+        //setup loading screen
+        InputLocker.Lock(); //locks the input 
+        loadingScreen.transform.position = camera.transform.position;
+        loadingScreen.transform.position += new Vector3(0.0f, 0.0f, 0.5f);
+        loadingCanvas.enabled = true;
+
+        loadingSlider.value = 0f;
+        loadInfoText.text = "Beginning simulation running on world state";
+        yield return null;
+
+        yield return StartCoroutine(SimulationController.runFullPlot(simPlot));
+
+        loadingScreen.transform.position = camera.transform.position;
+
+        simPlot = null;
+
+        loadingInfoText.text = "Reloading world";
+        yield return null;
+
+        yield return StartCoroutine(reload(false));
+
+        yield return new WaitForSeconds(1f);
+
+        loadingCanvas.enabled = false;
+        InputLocker.Unlock();
+    }
+
+    public IEnumerator reload(bool isIndependent)
+    {
+        Camera camera = FindFirstObjectByType<Camera>();
+        if(isIndependent) 
         {
-            NPC npc = npcs[npcKey];
-            npc.timeLeft = 24f;
-            npc.stats.energy = 100f;
-        }*/
+            //setup loading screen
+            InputLocker.Lock(); //locks the input 
+            loadingScreen.transform.position = camera.transform.position;
+            loadingScreen.transform.position += new Vector3(0.0f, 0.0f, 0.5f);
+            loadingCanvas.enabled = true;
 
-    private IEnumerator reloadWorldRoutine()
-    {
-        Camera camera = FindFirstObjectByType<Camera>();
+            loadingSlider.value = 0f;
+            loadingInfoText.text = "";
 
-        //setup loading screen
-        InputLocker.Lock(); //locks the input 
-        Slider loadingSlider = loadingScreen.GetComponentInChildren<Slider>();
-        Canvas canvas = loadingScreen.GetComponent<Canvas>();
-        loadingScreen.transform.position = camera.transform.position;
-        loadingScreen.transform.position += new Vector3(0.0f, 0.0f, 0.5f);
-        canvas.enabled = true;
-        loadingSlider.value = 0f;
+            yield return null;
+        }
 
-        //SIMULATION HERE
-        
-        yield return StartCoroutine(reload()); //wait for reload to complete
-        loadingScreen.transform.position = camera.transform.position;
-        loadingScreen.transform.position += new Vector3(0.0f, 0.0f, 0.5f);
-
-        yield return new WaitForSeconds(1f); //add a delay so that menu is shown
-        loadingSlider.value = 1f;
-        yield return new WaitForSeconds(1f);
-        canvas.enabled = false;;
-        InputLocker.Unlock();
-    }
-
-    private IEnumerator reload()
-    {
         var sceneDecoration = GameObject.Find("SceneDecoration"); //get all of the scene decoration
 
         Destroy(sceneDecoration); //remove scene decoration
@@ -105,6 +150,14 @@ public class TimeSkipper : MonoBehaviour
         camMovement.transform.position = startPos;
 
         player.position = new Vector3(0,0,-0.5f);
-        yield break;
+
+        if (isIndependent)
+        {
+            loadingSlider.value = 100f;
+            yield return null;
+            
+            loadingCanvas.enabled = false;
+            InputLocker.Unlock();
+        }
     }
 }

@@ -18,14 +18,19 @@ public class OverviewMenu : MonoBehaviour
     [Header("Reload Confirmation")]
     public GameObject reloadConfirmationObj;
 
-    [Header("Skip Time Confirmation")]
-    public GameObject skipConfirmationObj; 
-    public TextMeshProUGUI skipErrMsgField;
-    public TMP_InputField timeInput;
+    [Header("Plot Simulation")]
+    public GameObject plotSimulationConfirmationObj;
+    public TextMeshProUGUI plotErrMsgField;
+    TMP_InputField plotTimeInput;
+
+    [Header("Run Sim")]
+    public GameObject runConfirmationObj; 
+    public TextMeshProUGUI runErrMsgField;
+    public TMP_InputField runTimeInput;
+    public Button runButton;
 
     [Header("Time Skipper")]
     private TimeSkipper skipperObject;
-
     private DataController dataController;
 
     public void Awake()
@@ -37,7 +42,8 @@ public class OverviewMenu : MonoBehaviour
     {
         InputLocker.Lock(); //locks the input 
         reloadConfirmationObj.gameObject.SetActive(false);
-        skipConfirmationObj.gameObject.SetActive(false);
+        runConfirmationObj.gameObject.SetActive(false);
+        runButton.interactable = false;
         skipperObject = FindFirstObjectByType<TimeSkipper>();
 
         //instantiate the buttons for the npcs
@@ -143,36 +149,68 @@ public class OverviewMenu : MonoBehaviour
     }
     public void reloadYes()
     {
-        skipperObject.reloadWorld();
         exitMenu();
+        StartCoroutine(skipperObject.reload(true));
     }
     public void reloadNo()
     {
         reloadConfirmationObj.gameObject.SetActive(false);
     }
 
-    public void skipTime()
+    public void plotSimulation()
     {
-        skipErrMsgField.text = "";
-        skipConfirmationObj.gameObject.SetActive(true);
+        plotErrMsgField.text = "";
+        plotSimulationConfirmationObj.gameObject.SetActive(true);
     }
-    public void skipTimeYes()
-    {   
-        skipErrMsgField.text = "";
-        if(float.TryParse(timeInput.text, out float inputTime))
+
+    public void plotYes()
+    {
+        if(float.TryParse(runTimeInput.text, out float inputTime))
         {
-            skipperObject.skipTime(inputTime);
-            exitMenu();
+            skipperObject.plotSim(inputTime);
+            runButton.interactable = true;
+            plotSimulationConfirmationObj.gameObject.SetActive(false);
         }
         else
         {
-            skipErrMsgField.text = "Cannot parse input to float, please input a valid float or integer.";
+            plotErrMsgField.text = "Cannot parse input to float, please input a valid float or integer.";
+        }
+    }
+
+    public void plotNo()
+    {
+        plotSimulationConfirmationObj.gameObject.SetActive(false);
+    }
+
+    public void runPlot()
+    {
+        runErrMsgField.text = "";
+        runConfirmationObj.gameObject.SetActive(true);
+    }
+
+    public void runPlotYes()
+    {   
+        runErrMsgField.text = "";
+        if(skipperObject.simPlot == null)
+        {
+            runErrMsgField.text = "There is no simulation plot to run, please create a simulation plot first.";  
+            return;
+        }
+
+        if(float.TryParse(runTimeInput.text, out float inputTime))
+        {
+            exitMenu();
+            skipperObject.runFullSim();
+        }
+        else
+        {
+            runErrMsgField.text = "Cannot parse input to float, please input a valid float or integer.";
         }
     }
          
-    public void skipTimeCancel()
+    public void runPlotNo()
     {
-        skipConfirmationObj.gameObject.SetActive(false);
+        runConfirmationObj.gameObject.SetActive(false);
     }
 }
 

@@ -10,7 +10,7 @@ public class SimulationPlot
     //simulation running info
     public bool runComplete = false;
     public float runTime;
-    public DEQueue<SimulationActionWrapper> plottedActions; //final plotted actions
+    public DEQueue<SimulationActionWrapper> plottedActions; //final plotted actions  
 
     //agent action information
     public Dictionary<int, SimulationActionWrapper> agentActiveActions;
