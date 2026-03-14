@@ -1,24 +1,25 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Collections;
 using System;
 
 public static class SimulationController
 {
-    private IDataContainer dataController => DomainContext.DataController;
+    private static IDataContainer dataController => DomainContext.DataController;
 
-    private float startTime;
-    private float currentTime;
-    private float endTime;
-    private DataControllerSnapshot domain;
+    private static float startTime;
+    private static float currentTime;
+    private static float endTime;
+    private static DataControllerSnapshot domain;
 
     //Menu progress reporting
-    public event Action<SimulationProgress> OnProgress;
-    private void ReportProgress(float progress, string message)
+    public static event Action<SimulationProgress> OnProgress;
+    private static void ReportProgress(float progress, string message)
     {
         OnProgress?.Invoke(new SimulationProgress(progress, message));
     }
 
-    public SimulationPlot initiateSimulationPlot(float simulationTime)
+    public static SimulationPlot initiateSimulationPlot(float simulationTime)
     {
         DataControllerSnapshot dataSnapshot = new DataControllerSnapshot(); //copy game state
         DomainContext.DataController = dataSnapshot;
@@ -32,7 +33,7 @@ public static class SimulationController
         return simPlot;
     }
 
-    public bool isActiveTime(float agentTimeLeft, float dayTime)
+    public static bool isActiveTime(float agentTimeLeft, float dayTime)
     {
         //dayTime = how many hours into the day
         float agentTime = 24f - agentTimeLeft; //time between 0f-24f which is their time left in the day
@@ -41,13 +42,13 @@ public static class SimulationController
         return true;
     }
 
-    public float calcFinishPerc(ActionInfoWrapper action, NPCData agent)
+    public static float calcFinishPerc(ActionInfoWrapper action, NPCData agent)
     {
         if(action.energyToComplete > agent.stats.energy) return agent.stats.energy / action.energyToComplete;
         else return 100f;
     }
 
-    public IEnumerator plotSimulationRoutine(SimulationPlot simPlot)
+    public static IEnumerator plotSimulationRoutine(SimulationPlot simPlot)
     {
         domain = simPlot.domain;
         startTime = simPlot.startTime; //simulation start time
@@ -153,7 +154,7 @@ public static class SimulationController
                             if(actWrap != null) //if this agent is performing an action
                             {
                                 float originalDuration = actWrap.endTime - actWrap.startTime;
-                                float currentDuration = currentTime = actWrap.startTime;
+                                float currentDuration = currentTime - actWrap.startTime;
 
                                 float hundredPercDuration = (100f * originalDuration) / actWrap.percentComplete;
 
@@ -200,7 +201,7 @@ public static class SimulationController
         ReportProgress(100f, "Plotting Complete.");
     }
 
-    public IEnumerator runPlotToTime(SimulationPlot simPlot, float plotProgressTime)
+    public static IEnumerator runPlotToTime(SimulationPlot simPlot, float plotProgressTime)
     {
         if(DomainContext.DataController is DataController dc) Debug.Log("Plot running on DataController instance.");
         else Debug.Log("Plot not running on DataController instance.");
@@ -219,7 +220,7 @@ public static class SimulationController
 
         if(plotProgressTime <= simPlot.runTime) {
             simPlot.runComplete = true;
-            return;
+            yield break;
         }
 
         plotProgressTime = Mathf.Min(simPlot.endTime, plotProgressTime); //we run the simulation to the specified time or the plot endTime
@@ -253,7 +254,7 @@ public static class SimulationController
         ReportProgress(100f, "Simulation running complete.");
     }
 
-    public IEnumerator runFullPlot(SimulationPlot simPlot)
+    public static IEnumerator runFullPlot(SimulationPlot simPlot)
     {
         float runEndTime = simPlot.endTime;
         

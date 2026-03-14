@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 
 public class TimeSkipper : MonoBehaviour
 {
@@ -11,8 +12,9 @@ public class TimeSkipper : MonoBehaviour
     private GameObject loadingScreen;
     private DataController dataController;
     public SimulationPlot simPlot = null; //produced sim plot
-    private TMP_text loadingInfoText;
+    private TextMeshProUGUI loadingInfoText;
     private Slider loadingSlider;
+    private Canvas loadingCanvas;
 
     void Awake()
     {
@@ -24,17 +26,17 @@ public class TimeSkipper : MonoBehaviour
 
         loadingSlider = loadingScreen.GetComponentInChildren<Slider>();
         loadingCanvas = loadingScreen.GetComponent<Canvas>();
-        loadingInfoText = loadingScreen.trasnform.Find("Loading Info Text").text;
+        loadingInfoText = loadingScreen.gameObject.transform.Find("Loading Info Text").GetComponent<TextMeshProUGUI>();
     }
 
     void OnEnable()
     {
-        SimulationController.Instance.OnProgress += HandleSimulationProgress;
+        SimulationController.OnProgress += HandleSimulationProgress;
     }
 
     void OnDisable()
     {
-        if (SimulationController.Instance != null) SimulationController.Instance.OnProgress -= HandleSimulationProgress;
+        SimulationController.OnProgress -= HandleSimulationProgress;
     }
 
     private void HandleSimulationProgress(SimulationProgress progress)
@@ -90,7 +92,7 @@ public class TimeSkipper : MonoBehaviour
 
     private IEnumerator runSimRoutine()
     {
-        if(simPlot == null) {Debug.Log("There is no sim plot to run"); return;}
+        if(simPlot == null) {Debug.Log("There is no sim plot to run"); yield break;}
 
         Camera camera = FindFirstObjectByType<Camera>();
 
@@ -101,7 +103,7 @@ public class TimeSkipper : MonoBehaviour
         loadingCanvas.enabled = true;
 
         loadingSlider.value = 0f;
-        loadInfoText.text = "Beginning simulation running on world state";
+        loadingInfoText.text = "Beginning simulation running on world state";
         yield return null;
 
         yield return StartCoroutine(SimulationController.runFullPlot(simPlot));
@@ -155,7 +157,7 @@ public class TimeSkipper : MonoBehaviour
         {
             loadingSlider.value = 100f;
             yield return null;
-            
+
             loadingCanvas.enabled = false;
             InputLocker.Unlock();
         }

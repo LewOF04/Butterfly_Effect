@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 
 public class SimulationPlot
 {
@@ -27,9 +28,11 @@ public class SimulationPlot
         inactiveAgents = new List<int>();
         
         List<int> agentKeys = new List<int>(dc.NPCStorage.Keys);
+        Dictionary<int, SimulationActionWrapper> agentActiveActions = new Dictionary<int, SimulationActionWrapper>();
         foreach(int key in agentKeys) agentActiveActions[key] = null;
 
         List<int> buildingKeys = new List<int>(dc.BuildingStorage.Keys);
+        Dictionary<int, List<SimulationActionWrapper>> buidingActiveActions = new Dictionary<int, List<SimulationActionWrapper>>();
         foreach(int key in buildingKeys) buildingActiveActions[key] = new List<SimulationActionWrapper>();
     }
 }

@@ -21,7 +21,7 @@ public class OverviewMenu : MonoBehaviour
     [Header("Plot Simulation")]
     public GameObject plotSimulationConfirmationObj;
     public TextMeshProUGUI plotErrMsgField;
-    TMP_InputField plotTimeInput;
+    public TMP_InputField plotTimeInput;
 
     [Header("Run Sim")]
     public GameObject runConfirmationObj; 
@@ -101,7 +101,7 @@ public class OverviewMenu : MonoBehaviour
         int hours = Mathf.FloorToInt(timeInHours / 1);
         float minutes = (timeInHours - hours) * minutesPerHour;
 
-        string daysString = years.ToString();
+        string daysString = days.ToString();
         string monthsString = months.ToString();
         string yearsString = years.ToString();
         if(daysString.Length < 2) daysString = "0"+daysString;
@@ -165,7 +165,7 @@ public class OverviewMenu : MonoBehaviour
 
     public void plotYes()
     {
-        if(float.TryParse(runTimeInput.text, out float inputTime))
+        if(float.TryParse(plotTimeInput.text, out float inputTime))
         {
             skipperObject.plotSim(inputTime);
             runButton.interactable = true;
