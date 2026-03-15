@@ -33,15 +33,6 @@ public static class SimulationController
         return simPlot;
     }
 
-    public static bool isActiveTime(float agentTimeLeft, float dayTime)
-    {
-        //dayTime = how many hours into the day
-        float agentTime = 24f - agentTimeLeft; //time between 0f-24f which is their time left in the day
-        
-        if(agentTime > dayTime) return false;
-        return true;
-    }
-
     public static float calcFinishPerc(ActionInfoWrapper action, NPCData agent)
     {
         if(action.energyToComplete > agent.stats.energy) return agent.stats.energy / action.energyToComplete;
@@ -50,18 +41,19 @@ public static class SimulationController
 
     public static IEnumerator plotSimulationRoutine(SimulationPlot simPlot)
     {
-        domain = simPlot.domain;
+        domain = simPlot.domain; //set the data controller snapshot
         startTime = simPlot.startTime; //simulation start time
         endTime = simPlot.endTime; //simulation end time
         currentTime = startTime; //simulation current time
 
         ReportProgress(10.5f, "Preparing simulation plot...");
+        yield return null;
         
         //creates action frontier AND sets DomainContext.DataController for actions
+
+        //iterates over all agents and produces their potential actions at this point
         ActionFrontier actionFrontier = new ActionFrontier(domain);
         PriorityQueue<SimulationActionWrapper, float> actionQueue = new PriorityQueue<SimulationActionWrapper, float>();
-
-        float dayTime = startTime % 24f; //are we progressed into this day at all
 
         ReportProgress(12f, "Creating initial action plans");
         yield return null;
@@ -69,13 +61,9 @@ public static class SimulationController
         //create initial actions
         foreach(int agentID in domain.NPCStorage.Keys)
         {
-            if(!isActiveTime(domain.NPCStorage[agentID].timeLeft, dayTime)) //if the agents time is later than the current time, skip until their time
-            {
-                simPlot.inactiveAgents.Add(agentID);
-                continue;
-            }
-
             ActionInfoWrapper bestAction = actionFrontier.getBestAction(domain.NPCStorage[agentID]); //get the best action for this agent
+
+            if(bestAction.timeToComplete + startTime > endTime) continue; //if this action couldn't be performed in specified time
             
             float finishPerc = calcFinishPerc(bestAction, domain.NPCStorage[agentID]); //calculate at what percentage this should finish (energy constraints)
             SimulationActionWrapper thisAction = new SimulationActionWrapper(bestAction, 
@@ -88,15 +76,19 @@ public static class SimulationController
             actionQueue.Enqueue(thisAction, thisAction.endTime); //store the action in order of its end time
         }
 
-        ReportProgress(5f, "Beginning plot clock...");
+        ReportProgress(12f, "Beginning plot clock...");
         yield return null;
 
-        float simTotalTime = endTime - currentTime;
+        float simTotalTime = endTime - startTime;
         //simulation step
         while(currentTime < endTime)
         {
-            ReportProgress(((endTime - currentTime)/simTotalTime)*88f + 12f, "Performing Actions at time: "+currentTime.ToString("00.00"));
-            yield return null;
+            if(currentTime % 1f == 0f)
+            {
+                ReportProgress(((currentTime - startTime)/simTotalTime)*88f + 12f, "Performing Actions at time: "+currentTime.ToString("00.00"));
+                yield return null;
+            }
+
             /*++++++++++PERFORM ANY ACTIONS THAT NEED TO OCCUR++++++++++*/
             while(actionQueue.TryPeek(out SimulationActionWrapper _, out float peekTime)) //while there are things in the queue
             {
@@ -107,14 +99,14 @@ public static class SimulationController
                     if(!actionQueue.TryDequeue(out SimulationActionWrapper simAction, out float endTime)) continue; //get the next action
                     if(simAction.endTime != endTime) continue; //if the two times are different then this action has changed priority position
 
+                    domain.worldManager.gameTime = currentTime; //set world time to be current time 
+
                     /*==========ACTION PERFORMING==========*/
                     IAction thisAction = simAction.info.action;
                     thisAction.reloadAction(simAction.info);
                     thisAction.performAction(simAction.percentComplete);
 
                     NPCData agent = domain.NPCStorage[thisAction.currentActor];
-                    agent.timeLeft -= thisAction.timeToComplete * (simAction.percentComplete / 100f); //change agents time
-                    if(agent.timeLeft < 0f) agent.timeLeft = 24f + agent.timeLeft; //move time over to next day
 
                     /*==========INTERRUPTION HANDLING==========*/
                     //if this action being performed will interrupt other actions
@@ -166,20 +158,21 @@ public static class SimulationController
                         }
                     }
 
-                    simPlot.agentActiveActions[thisAction.currentActor] = null;
+                    simPlot.agentActiveActions[thisAction.currentActor] = null; //show that this agent is currently not doing anything
                     simPlot.inactiveAgents.Add(thisAction.currentActor); //add the agent as inactive
                     simPlot.plottedActions.EnqueueBack(simAction); //add this action to the final action plot
                 }
             }
 
-            ReportProgress(((endTime - currentTime)/simTotalTime)*88f + 12f, "Plotting Actions at time: "+currentTime.ToString("00.00"));
-            yield return null;
+            if(currentTime % 1f == 0f)
+            {
+                ReportProgress(((currentTime - startTime)/simTotalTime)*88f + 12f, "Plotting Actions at time: "+currentTime.ToString("00.00"));
+                yield return null;
+            }
 
             /*++++++++++GET NEW ACTIONS++++++++++*/
             foreach(int agentID in simPlot.inactiveAgents)
             {
-                if(!isActiveTime(domain.NPCStorage[agentID].timeLeft, dayTime)) continue;//if the agent's time is later than the current time, skip 
-
                 NPCData agent = domain.NPCStorage[agentID];
                 ActionInfoWrapper bestAction = actionFrontier.getBestAction(agent); //get the best action for this agent
             
@@ -194,11 +187,12 @@ public static class SimulationController
                 actionQueue.Enqueue(thisAction, thisAction.endTime); //store the action in order of its end time
             }
 
-            currentTime += 0.01f;
-            dayTime = currentTime % 24f; //current time of day
+            currentTime += 0.1f;
         }
 
         ReportProgress(100f, "Plotting Complete.");
+
+        Debug.Log("Plotted Action number is "+simPlot.plottedActions.Count.ToString());
     }
 
     public static IEnumerator runPlotToTime(SimulationPlot simPlot, float plotProgressTime)
@@ -218,7 +212,7 @@ public static class SimulationController
         else ReportProgress(0f, "Begging run of simulation plot to time "+plotProgressTime.ToString("0.00"));
         yield return null;
 
-        if(plotProgressTime <= simPlot.runTime) {
+        if((!wholeSim) && plotProgressTime <= simPlot.runTime) {
             simPlot.runComplete = true;
             yield break;
         }
@@ -239,18 +233,20 @@ public static class SimulationController
                 IAction action = actionInfo.action;
 
                 if(wholeSim) ReportProgress((currentActionNum / totalActionNum)*100f, "Performing action ("+currentActionNum.ToString()+"/"+totalActionNum.ToString()+")");
-                else ReportProgress(((actionWrap.endTime - simPlot.runTime) / (plotProgressTime - simPlot.runTime))*100f, 
+                else ReportProgress((actionWrap.endTime - simPlot.runTime / plotProgressTime - simPlot.runTime)*100f, 
                                     "Performing action at time "+(actionWrap.endTime-simPlot.runTime).ToString("0.00")+"/"+(plotProgressTime - simPlot.runTime).ToString("0.00"));
                 yield return null;
 
+                dataController.World.gameTime = actionWrap.endTime;
+                
                 //perform the action with the percent completion
                 action.reloadAction(actionInfo);
                 action.performAction(perc);
             }
         }
 
-        if(!actionQueue.TryPeekFront(out SimulationActionWrapper _)) simPlot.runComplete = true;
-        simPlot.runTime = plotProgressTime;
+        if(!actionQueue.TryPeekFront(out SimulationActionWrapper _)) simPlot.runComplete = true; //if there is nothing left in the simulation plot
+        simPlot.runTime = plotProgressTime; //set the current progress of the plot
         ReportProgress(100f, "Simulation running complete.");
     }
 

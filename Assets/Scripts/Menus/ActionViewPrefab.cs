@@ -74,7 +74,6 @@ public class ActionViewPrefab : MonoBehaviour
         npcMenu.errorTextField.text = "";
         
         if(actionInfo.known == false) {npcMenu.errorTextField.text = "Cannot perform action as it is unknown."; return;}
-        if(actionInfo.timeToComplete > npcMenu.npc.timeLeft) {npcMenu.errorTextField.text = "Cannot perform action as the NPC does not have enough time."; return;}
         if(actionInfo.energyToComplete > npcMenu.npc.stats.energy) {npcMenu.errorTextField.text = "Cannot perform action as the NPC does not have enough energy."; return;}
         
         npcMenu.actionConfirm.gameObject.SetActive(true);

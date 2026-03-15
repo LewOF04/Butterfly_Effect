@@ -51,7 +51,7 @@ public class RobNPC : NPCAction
 
         //energy and time effectors
         effectors.Add(ActionMaths.scarcityMultiplier(performer.stats.energy - energyToComplete, 0f, 100f, 0.1f, 2f)); weights.Add(1.5f);
-        effectors.Add(ActionMaths.scarcityMultiplier(performer.timeLeft - timeToComplete, 0f, 24f, 0.1f, 2f)); weights.Add(1.5f);
+        effectors.Add(ActionMaths.calcMultiplier(timeToComplete, 0f, 24f, 0.1f, 2f)); weights.Add(0.5f);
         effectors.Add(ActionMaths.calcMultiplier(actSuccess, 0f, 100f, 0.25f, 2f)); weights.Add(Mathf.InverseLerp(0f, 100f, performer.attributes.wisdom));
 
         actUtility = ActionMaths.ApplyWeightedMultipliers(baseUtility, effectors, weights);
@@ -111,7 +111,7 @@ public class RobNPC : NPCAction
 
         if(percentComplete != 100f) description += " The robbery attempt concluded "+percentComplete.ToString()+"% of the way through.";
         
-        float actionTime = dataController.World.gameTime + (24f - performer.timeLeft);
+        float actionTime = dataController.World.gameTime;
 
         //perform changes to stats/attributes
         description += "\n";

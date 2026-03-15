@@ -10,5 +10,4 @@ public interface IAgent
     int spriteType { get; set; } //the code of the sprite
     int parentBuilding { get; set; } //the building that the NPC lives in (-1 if non)
     bool hasJob { get; set; }  //whether or not this npc has a job
-    float timeLeft { get; set; } 
 }

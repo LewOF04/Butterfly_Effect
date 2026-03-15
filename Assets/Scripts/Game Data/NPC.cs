@@ -14,7 +14,7 @@ using System.Collections.Generic;
     public int spriteType; //the code of the sprite
     public int parentBuilding; //the building that the NPC lives in (-1 if non)
     public bool hasJob; //whether or not this npc has a job
-    public float timeLeft = 24f; //the amount of time they have left in the day
+    public float relTime = 0f; //the amount of time they have left in the day
 
     int IAgent.id { get => id; set => id = value; }
     string IAgent.npcName { get => npcName; set => npcName = value; }
@@ -24,7 +24,6 @@ using System.Collections.Generic;
     int IAgent.spriteType { get => spriteType; set => spriteType = value; }
     int IAgent.parentBuilding { get => parentBuilding; set => parentBuilding = value; }
     bool IAgent.hasJob { get => hasJob; set => hasJob = value; }
-    float IAgent.timeLeft { get => timeLeft; set => timeLeft = value; }
 
     //extra utility functions for traits list
     public bool ContainsTrait(int id)
@@ -47,7 +46,6 @@ using System.Collections.Generic;
         spriteType = data.spriteType;
         parentBuilding = data.parentBuilding;
         hasJob = data.hasJob;
-        timeLeft = data.timeLeft;
     }
 
     public void Load(int inputID, string inputNpcName, Attributes inputAttributes, Stats inputStats, List<int> inputTraits, int inputSpriteType, int inputParentBuilding, bool inputHasJob)

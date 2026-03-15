@@ -1,0 +1,715 @@
+fileFormatVersion: 2
+guid: 37d1008022dae9b48bcb0f4d544e6a97
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -7328193733653551785
+    second: dark3_0
+  - first:
+      213: 4612825660987637680
+    second: dark3_1
+  - first:
+      213: 6794533591993469810
+    second: dark3_2
+  - first:
+      213: -2322391465693039648
+    second: dark3_3
+  - first:
+      213: -7900476938533651739
+    second: dark3_4
+  - first:
+      213: 8045765166232758728
+    second: dark3_5
+  - first:
+      213: -4658506773299105774
+    second: dark3_6
+  - first:
+      213: 1213514277559936543
+    second: dark3_7
+  - first:
+      213: -2150957758732819845
+    second: dark3_8
+  - first:
+      213: -2910811522979463167
+    second: dark3_9
+  - first:
+      213: -20859014293119362
+    second: dark3_10
+  - first:
+      213: -716082966678624932
+    second: dark3_11
+  - first:
+      213: 3277313398467759055
+    second: dark3_12
+  - first:
+      213: -6877187306317405717
+    second: dark3_13
+  - first:
+      213: -7817084292353721467
+    second: dark3_14
+  - first:
+      213: -3985892276273115101
+    second: dark3_15
+  - first:
+      213: 5828282911744316914
+    second: dark3_16
+  - first:
+      213: 5509499222923010335
+    second: dark3_17
+  - first:
+      213: -1789875874209235570
+    second: dark3_18
+  - first:
+      213: 1805464663343930443
+    second: dark3_19
+  - first:
+      213: -1626833369553215316
+    second: dark3_20
+  - first:
+      213: 7985391991732817654
+    second: dark3_21
+  - first:
+      213: -3920950347485694241
+    second: dark3_22
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: dark3_0
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 369
+        width: 123
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 755265c20a60d4a90800000000000000
+      internalID: -7328193733653551785
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dark3_1
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 373
+        width: 99
+        height: 88
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0bf79f5bf7c040040800000000000000
+      internalID: 4612825660987637680
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dark3_2
+      rect:
+        serializedVersion: 2
+        x: 358
+        y: 382
+        width: 94
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 27bca3d8d480b4e50800000000000000
+      internalID: 6794533591993469810
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dark3_3
+      rect:
+        serializedVersion: 2
+        x: 456
+        y: 383
+        width: 82
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0e3b7f9344535cfd0800000000000000
+      internalID: -2322391465693039648
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dark3_4
+      rect:
+        serializedVersion: 2
+        x: 554
+        y: 387
+        width: 94
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5ea398a351edb5290800000000000000
+      internalID: -7900476938533651739
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dark3_5
+      rect:
+        serializedVersion: 2
+        x: 688
+        y: 380
+        width: 85
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8c9e3875acc48af60800000000000000
+      internalID: 8045765166232758728
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dark3_6
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 258
+        width: 90
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 21071c185c8a95fb0800000000000000
+      internalID: -4658506773299105774
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dark3_7
+      rect:
+        serializedVersion: 2
+        x: 217
+        y: 265
+        width: 86
+        height: 70
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f1623d35ec447d010800000000000000
+      internalID: 1213514277559936543
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dark3_8
+      rect:
+        serializedVersion: 2
+        x: 338
+        y: 256
+        width: 97
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b722cdf80534622e0800000000000000
+      internalID: -2150957758732819845
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dark3_9
+      rect:
+        serializedVersion: 2
+        x: 453
+        y: 250
+        width: 81
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 10002bc8758ba97d0800000000000000
+      internalID: -2910811522979463167
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dark3_10
+      rect:
+        serializedVersion: 2
+        x: 551
+        y: 270
+        width: 91
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e7e91b646d4e5bff0800000000000000
+      internalID: -20859014293119362
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dark3_11
+      rect:
+        serializedVersion: 2
+        x: 660
+        y: 256
+        width: 80
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c55a965f556ff06f0800000000000000
+      internalID: -716082966678624932
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dark3_12
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 135
+        width: 99
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fcb8c450c2b5b7d20800000000000000
+      internalID: 3277313398467759055
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dark3_13
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 146
+        width: 121
+        height: 82
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be12021f4925f80a0800000000000000
+      internalID: -6877187306317405717
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dark3_14
+      rect:
+        serializedVersion: 2
+        x: 348
+        y: 133
+        width: 86
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 58b78f6b043248390800000000000000
+      internalID: -7817084292353721467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dark3_15
+      rect:
+        serializedVersion: 2
+        x: 493
+        y: 132
+        width: 110
+        height: 93
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 32094c7c7144fa8c0800000000000000
+      internalID: -3985892276273115101
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dark3_16
+      rect:
+        serializedVersion: 2
+        x: 648
+        y: 151
+        width: 99
+        height: 76
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f5dffcbd6832e050800000000000000
+      internalID: 5828282911744316914
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dark3_17
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1
+        width: 97
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f11ed984a5ca57c40800000000000000
+      internalID: 5509499222923010335
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dark3_18
+      rect:
+        serializedVersion: 2
+        x: 156
+        y: 14
+        width: 118
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e8d77b520651927e0800000000000000
+      internalID: -1789875874209235570
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dark3_19
+      rect:
+        serializedVersion: 2
+        x: 317
+        y: 5
+        width: 77
+        height: 111
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b4c9229ab8c4e0910800000000000000
+      internalID: 1805464663343930443
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dark3_20
+      rect:
+        serializedVersion: 2
+        x: 441
+        y: 12
+        width: 101
+        height: 95
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ca067037ba35c69e0800000000000000
+      internalID: -1626833369553215316
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dark3_21
+      rect:
+        serializedVersion: 2
+        x: 577
+        y: 0
+        width: 71
+        height: 94
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6fecb7345bfc1de60800000000000000
+      internalID: 7985391991732817654
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: dark3_22
+      rect:
+        serializedVersion: 2
+        x: 704
+        y: 19
+        width: 96
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fd6bb2cde6cf599c0800000000000000
+      internalID: -3920950347485694241
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      dark3_0: -7328193733653551785
+      dark3_1: 4612825660987637680
+      dark3_10: -20859014293119362
+      dark3_11: -716082966678624932
+      dark3_12: 3277313398467759055
+      dark3_13: -6877187306317405717
+      dark3_14: -7817084292353721467
+      dark3_15: -3985892276273115101
+      dark3_16: 5828282911744316914
+      dark3_17: 5509499222923010335
+      dark3_18: -1789875874209235570
+      dark3_19: 1805464663343930443
+      dark3_2: 6794533591993469810
+      dark3_20: -1626833369553215316
+      dark3_21: 7985391991732817654
+      dark3_22: -3920950347485694241
+      dark3_3: -2322391465693039648
+      dark3_4: -7900476938533651739
+      dark3_5: 8045765166232758728
+      dark3_6: -4658506773299105774
+      dark3_7: 1213514277559936543
+      dark3_8: -2150957758732819845
+      dark3_9: -2910811522979463167
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

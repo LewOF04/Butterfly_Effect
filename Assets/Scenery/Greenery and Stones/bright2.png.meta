@@ -1,0 +1,637 @@
+fileFormatVersion: 2
+guid: 3cc2f43ffa2675343b4b95e9b8a06434
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -456505598062492738
+    second: bright2_0
+  - first:
+      213: 4543879487889257803
+    second: bright2_1
+  - first:
+      213: -1485986235619336439
+    second: bright2_2
+  - first:
+      213: -114182222959707219
+    second: bright2_3
+  - first:
+      213: 1952450234392514509
+    second: bright2_4
+  - first:
+      213: -5269961266470181652
+    second: bright2_5
+  - first:
+      213: 2703434576448846929
+    second: bright2_6
+  - first:
+      213: 2251508497824338297
+    second: bright2_7
+  - first:
+      213: 906271454824773067
+    second: bright2_8
+  - first:
+      213: -5224698709478678106
+    second: bright2_9
+  - first:
+      213: 3633068996752816830
+    second: bright2_10
+  - first:
+      213: -7538338843326623218
+    second: bright2_11
+  - first:
+      213: 3373706761799570447
+    second: bright2_12
+  - first:
+      213: -892580062881108747
+    second: bright2_13
+  - first:
+      213: -7172446107042911718
+    second: bright2_14
+  - first:
+      213: -2581258748780381887
+    second: bright2_15
+  - first:
+      213: -6898582893686146674
+    second: bright2_16
+  - first:
+      213: 8615403307960581139
+    second: bright2_17
+  - first:
+      213: 7044409880728195332
+    second: bright2_18
+  - first:
+      213: 9004375156807690997
+    second: bright2_19
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: bright2_0
+      rect:
+        serializedVersion: 2
+        x: 62
+        y: 353
+        width: 93
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eb30285c39a2aa9f0800000000000000
+      internalID: -456505598062492738
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bright2_1
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 339
+        width: 74
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b45b2d9d15a1f0f30800000000000000
+      internalID: 4543879487889257803
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bright2_2
+      rect:
+        serializedVersion: 2
+        x: 346
+        y: 358
+        width: 82
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 90f1acc4467b06be0800000000000000
+      internalID: -1485986235619336439
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bright2_3
+      rect:
+        serializedVersion: 2
+        x: 492
+        y: 353
+        width: 80
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dab72d88fd75a6ef0800000000000000
+      internalID: -114182222959707219
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bright2_4
+      rect:
+        serializedVersion: 2
+        x: 633
+        y: 355
+        width: 95
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dcf0896c42f781b10800000000000000
+      internalID: 1952450234392514509
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bright2_5
+      rect:
+        serializedVersion: 2
+        x: 113
+        y: 270
+        width: 75
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ce42afb46265dd6b0800000000000000
+      internalID: -5269961266470181652
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bright2_6
+      rect:
+        serializedVersion: 2
+        x: 233
+        y: 262
+        width: 67
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 15cfdb28c67848520800000000000000
+      internalID: 2703434576448846929
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bright2_7
+      rect:
+        serializedVersion: 2
+        x: 353
+        y: 269
+        width: 79
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 971d79dbc07fe3f10800000000000000
+      internalID: 2251508497824338297
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bright2_8
+      rect:
+        serializedVersion: 2
+        x: 475
+        y: 270
+        width: 77
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bc538e62619b39c00800000000000000
+      internalID: 906271454824773067
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bright2_9
+      rect:
+        serializedVersion: 2
+        x: 588
+        y: 261
+        width: 91
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6a1e41394342e77b0800000000000000
+      internalID: -5224698709478678106
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bright2_10
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 155
+        width: 94
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ebabfe3f0014b6230800000000000000
+      internalID: 3633068996752816830
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bright2_11
+      rect:
+        serializedVersion: 2
+        x: 202
+        y: 165
+        width: 86
+        height: 71
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e02dcf603c0726790800000000000000
+      internalID: -7538338843326623218
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bright2_12
+      rect:
+        serializedVersion: 2
+        x: 341
+        y: 154
+        width: 104
+        height: 94
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f049569dc60d1de20800000000000000
+      internalID: 3373706761799570447
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bright2_13
+      rect:
+        serializedVersion: 2
+        x: 490
+        y: 152
+        width: 82
+        height: 76
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5fc2062792bec93f0800000000000000
+      internalID: -892580062881108747
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bright2_14
+      rect:
+        serializedVersion: 2
+        x: 633
+        y: 166
+        width: 99
+        height: 67
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a1ae213544a567c90800000000000000
+      internalID: -7172446107042911718
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bright2_15
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 55
+        width: 106
+        height: 85
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 149739518d68d2cd0800000000000000
+      internalID: -2581258748780381887
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bright2_16
+      rect:
+        serializedVersion: 2
+        x: 171
+        y: 54
+        width: 100
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e893040986f4340a0800000000000000
+      internalID: -6898582893686146674
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bright2_17
+      rect:
+        serializedVersion: 2
+        x: 335
+        y: 50
+        width: 94
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 31c37b789af009770800000000000000
+      internalID: 8615403307960581139
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bright2_18
+      rect:
+        serializedVersion: 2
+        x: 489
+        y: 36
+        width: 113
+        height: 109
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4015e01b675c2c160800000000000000
+      internalID: 7044409880728195332
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bright2_19
+      rect:
+        serializedVersion: 2
+        x: 642
+        y: 38
+        width: 140
+        height: 112
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5faefd57f77f5fc70800000000000000
+      internalID: 9004375156807690997
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      bright2_0: -456505598062492738
+      bright2_1: 4543879487889257803
+      bright2_10: 3633068996752816830
+      bright2_11: -7538338843326623218
+      bright2_12: 3373706761799570447
+      bright2_13: -892580062881108747
+      bright2_14: -7172446107042911718
+      bright2_15: -2581258748780381887
+      bright2_16: -6898582893686146674
+      bright2_17: 8615403307960581139
+      bright2_18: 7044409880728195332
+      bright2_19: 9004375156807690997
+      bright2_2: -1485986235619336439
+      bright2_3: -114182222959707219
+      bright2_4: 1952450234392514509
+      bright2_5: -5269961266470181652
+      bright2_6: 2703434576448846929
+      bright2_7: 2251508497824338297
+      bright2_8: 906271454824773067
+      bright2_9: -5224698709478678106
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

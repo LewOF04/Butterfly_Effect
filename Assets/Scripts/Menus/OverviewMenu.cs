@@ -26,7 +26,6 @@ public class OverviewMenu : MonoBehaviour
     [Header("Run Sim")]
     public GameObject runConfirmationObj; 
     public TextMeshProUGUI runErrMsgField;
-    public TMP_InputField runTimeInput;
     public Button runButton;
 
     [Header("Time Skipper")]
@@ -43,8 +42,10 @@ public class OverviewMenu : MonoBehaviour
         InputLocker.Lock(); //locks the input 
         reloadConfirmationObj.gameObject.SetActive(false);
         runConfirmationObj.gameObject.SetActive(false);
-        runButton.interactable = false;
         skipperObject = FindFirstObjectByType<TimeSkipper>();
+
+        if(skipperObject.simPlot == null) runButton.interactable = false;
+        else runButton.interactable = true;
 
         //instantiate the buttons for the npcs
         Dictionary<int, NPC> npcs = dataController.NPCStorage;
@@ -159,8 +160,8 @@ public class OverviewMenu : MonoBehaviour
 
     public void plotSimulation()
     {
-        plotErrMsgField.text = "";
         plotSimulationConfirmationObj.gameObject.SetActive(true);
+        plotErrMsgField.text = "";
     }
 
     public void plotYes()
@@ -170,6 +171,7 @@ public class OverviewMenu : MonoBehaviour
             skipperObject.plotSim(inputTime);
             runButton.interactable = true;
             plotSimulationConfirmationObj.gameObject.SetActive(false);
+            this.gameObject.transform.position -= new Vector3(0f,0f,5f);
         }
         else
         {
@@ -193,18 +195,13 @@ public class OverviewMenu : MonoBehaviour
         runErrMsgField.text = "";
         if(skipperObject.simPlot == null)
         {
-            runErrMsgField.text = "There is no simulation plot to run, please create a simulation plot first.";  
-            return;
-        }
-
-        if(float.TryParse(runTimeInput.text, out float inputTime))
-        {
-            exitMenu();
-            skipperObject.runFullSim();
+            runErrMsgField.text = "There is no simulation plot to run, please create a simulation plot first.";
         }
         else
         {
-            runErrMsgField.text = "Cannot parse input to float, please input a valid float or integer.";
+            exitMenu();
+            skipperObject.runFullSim();
+            this.gameObject.transform.position -= new Vector3(0f,0f,5f);
         }
     }
          

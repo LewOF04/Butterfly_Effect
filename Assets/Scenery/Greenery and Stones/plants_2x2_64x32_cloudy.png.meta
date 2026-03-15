@@ -1,0 +1,4355 @@
+fileFormatVersion: 2
+guid: b96c1b28e5f44424ab87d0602c533717
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 7330887000006893423
+    second: plants_2x2_64x32_cloudy_0
+  - first:
+      213: 3544956892452987566
+    second: plants_2x2_64x32_cloudy_1
+  - first:
+      213: 1786795916276572362
+    second: plants_2x2_64x32_cloudy_2
+  - first:
+      213: 1974051897680389889
+    second: plants_2x2_64x32_cloudy_3
+  - first:
+      213: -4505731576553357589
+    second: plants_2x2_64x32_cloudy_4
+  - first:
+      213: 1043205780993543649
+    second: plants_2x2_64x32_cloudy_5
+  - first:
+      213: -9219984985673743801
+    second: plants_2x2_64x32_cloudy_6
+  - first:
+      213: 6489232542194047521
+    second: plants_2x2_64x32_cloudy_7
+  - first:
+      213: 1741216778246480859
+    second: plants_2x2_64x32_cloudy_8
+  - first:
+      213: -8878557507202153508
+    second: plants_2x2_64x32_cloudy_9
+  - first:
+      213: -4224038206098826913
+    second: plants_2x2_64x32_cloudy_10
+  - first:
+      213: -2431328236243112959
+    second: plants_2x2_64x32_cloudy_11
+  - first:
+      213: 906505956053674698
+    second: plants_2x2_64x32_cloudy_12
+  - first:
+      213: 7623022565487077767
+    second: plants_2x2_64x32_cloudy_13
+  - first:
+      213: 8020688514423110891
+    second: plants_2x2_64x32_cloudy_14
+  - first:
+      213: 1653993470528028839
+    second: plants_2x2_64x32_cloudy_15
+  - first:
+      213: -8035548702399403446
+    second: plants_2x2_64x32_cloudy_16
+  - first:
+      213: 1461651053478499645
+    second: plants_2x2_64x32_cloudy_17
+  - first:
+      213: 6809715627140420611
+    second: plants_2x2_64x32_cloudy_18
+  - first:
+      213: -3472220955416047321
+    second: plants_2x2_64x32_cloudy_19
+  - first:
+      213: 7559264893305056315
+    second: plants_2x2_64x32_cloudy_20
+  - first:
+      213: 1114061089420016351
+    second: plants_2x2_64x32_cloudy_21
+  - first:
+      213: -7916434555769424091
+    second: plants_2x2_64x32_cloudy_22
+  - first:
+      213: -1695417804064242964
+    second: plants_2x2_64x32_cloudy_23
+  - first:
+      213: -119841013939537337
+    second: plants_2x2_64x32_cloudy_24
+  - first:
+      213: 2398667009681383617
+    second: plants_2x2_64x32_cloudy_25
+  - first:
+      213: 5082394702326501389
+    second: plants_2x2_64x32_cloudy_26
+  - first:
+      213: -4868018205963901295
+    second: plants_2x2_64x32_cloudy_27
+  - first:
+      213: -483381520780986709
+    second: plants_2x2_64x32_cloudy_28
+  - first:
+      213: -4986305682145073742
+    second: plants_2x2_64x32_cloudy_29
+  - first:
+      213: 8901895502743360250
+    second: plants_2x2_64x32_cloudy_30
+  - first:
+      213: -1092571593540014118
+    second: plants_2x2_64x32_cloudy_31
+  - first:
+      213: 604239873426998870
+    second: plants_2x2_64x32_cloudy_32
+  - first:
+      213: -5209382439115962783
+    second: plants_2x2_64x32_cloudy_33
+  - first:
+      213: 398649677593648207
+    second: plants_2x2_64x32_cloudy_34
+  - first:
+      213: -8205767096370950844
+    second: plants_2x2_64x32_cloudy_35
+  - first:
+      213: 7529520992378180352
+    second: plants_2x2_64x32_cloudy_36
+  - first:
+      213: 5446975201096002762
+    second: plants_2x2_64x32_cloudy_37
+  - first:
+      213: 960284622242609299
+    second: plants_2x2_64x32_cloudy_38
+  - first:
+      213: 4120154419210370611
+    second: plants_2x2_64x32_cloudy_39
+  - first:
+      213: -8162385206994032483
+    second: plants_2x2_64x32_cloudy_40
+  - first:
+      213: 5800042654519987522
+    second: plants_2x2_64x32_cloudy_41
+  - first:
+      213: 3410008485858917875
+    second: plants_2x2_64x32_cloudy_42
+  - first:
+      213: -5948542171186347084
+    second: plants_2x2_64x32_cloudy_43
+  - first:
+      213: 7730980998088286032
+    second: plants_2x2_64x32_cloudy_44
+  - first:
+      213: 718091949760821905
+    second: plants_2x2_64x32_cloudy_45
+  - first:
+      213: -6591964216645346803
+    second: plants_2x2_64x32_cloudy_46
+  - first:
+      213: 9123838392061951118
+    second: plants_2x2_64x32_cloudy_47
+  - first:
+      213: -7398135469775009195
+    second: plants_2x2_64x32_cloudy_48
+  - first:
+      213: -1936980619828007407
+    second: plants_2x2_64x32_cloudy_49
+  - first:
+      213: -4842339955619025469
+    second: plants_2x2_64x32_cloudy_50
+  - first:
+      213: -108905374285152457
+    second: plants_2x2_64x32_cloudy_51
+  - first:
+      213: -5502277766832806557
+    second: plants_2x2_64x32_cloudy_52
+  - first:
+      213: -8100147915001629450
+    second: plants_2x2_64x32_cloudy_53
+  - first:
+      213: 7872547536406636292
+    second: plants_2x2_64x32_cloudy_54
+  - first:
+      213: 7622811762674705684
+    second: plants_2x2_64x32_cloudy_55
+  - first:
+      213: -6745037622175469196
+    second: plants_2x2_64x32_cloudy_56
+  - first:
+      213: 6684827379264798661
+    second: plants_2x2_64x32_cloudy_57
+  - first:
+      213: -3223185340848158247
+    second: plants_2x2_64x32_cloudy_58
+  - first:
+      213: 3004725673161627218
+    second: plants_2x2_64x32_cloudy_59
+  - first:
+      213: -3497467556949815296
+    second: plants_2x2_64x32_cloudy_60
+  - first:
+      213: -9164085217368779201
+    second: plants_2x2_64x32_cloudy_61
+  - first:
+      213: -7981254598782603419
+    second: plants_2x2_64x32_cloudy_62
+  - first:
+      213: 6742977751107980672
+    second: plants_2x2_64x32_cloudy_63
+  - first:
+      213: 5149166291899594125
+    second: plants_2x2_64x32_cloudy_64
+  - first:
+      213: -9037713167296033697
+    second: plants_2x2_64x32_cloudy_65
+  - first:
+      213: -3357855334531212431
+    second: plants_2x2_64x32_cloudy_66
+  - first:
+      213: 2645028890803879281
+    second: plants_2x2_64x32_cloudy_67
+  - first:
+      213: 2198118533176731920
+    second: plants_2x2_64x32_cloudy_68
+  - first:
+      213: -1071213958329940298
+    second: plants_2x2_64x32_cloudy_69
+  - first:
+      213: 1245785694934190470
+    second: plants_2x2_64x32_cloudy_70
+  - first:
+      213: -6197196726605166245
+    second: plants_2x2_64x32_cloudy_71
+  - first:
+      213: 5112274080234065104
+    second: plants_2x2_64x32_cloudy_72
+  - first:
+      213: 1709205234170552086
+    second: plants_2x2_64x32_cloudy_73
+  - first:
+      213: 7613718668045673428
+    second: plants_2x2_64x32_cloudy_74
+  - first:
+      213: 1739349641395179777
+    second: plants_2x2_64x32_cloudy_75
+  - first:
+      213: 8666328601401255482
+    second: plants_2x2_64x32_cloudy_76
+  - first:
+      213: 3100791852491118410
+    second: plants_2x2_64x32_cloudy_77
+  - first:
+      213: 268813647536702346
+    second: plants_2x2_64x32_cloudy_78
+  - first:
+      213: -3091271536929681294
+    second: plants_2x2_64x32_cloudy_79
+  - first:
+      213: -8432851421573160252
+    second: plants_2x2_64x32_cloudy_80
+  - first:
+      213: -8152091259341451945
+    second: plants_2x2_64x32_cloudy_81
+  - first:
+      213: -4175494589209648569
+    second: plants_2x2_64x32_cloudy_82
+  - first:
+      213: 6392565704736989668
+    second: plants_2x2_64x32_cloudy_83
+  - first:
+      213: 8235504598741469148
+    second: plants_2x2_64x32_cloudy_84
+  - first:
+      213: -177441122334293455
+    second: plants_2x2_64x32_cloudy_85
+  - first:
+      213: -416587729069079142
+    second: plants_2x2_64x32_cloudy_86
+  - first:
+      213: 3512377479573478654
+    second: plants_2x2_64x32_cloudy_87
+  - first:
+      213: -728711483878041479
+    second: plants_2x2_64x32_cloudy_88
+  - first:
+      213: -5689784074106680407
+    second: plants_2x2_64x32_cloudy_89
+  - first:
+      213: -3268795577858785157
+    second: plants_2x2_64x32_cloudy_90
+  - first:
+      213: -8925511211753375212
+    second: plants_2x2_64x32_cloudy_91
+  - first:
+      213: -3930156066413612504
+    second: plants_2x2_64x32_cloudy_92
+  - first:
+      213: 3703494022466296776
+    second: plants_2x2_64x32_cloudy_93
+  - first:
+      213: -3728456062595003005
+    second: plants_2x2_64x32_cloudy_94
+  - first:
+      213: -819465136821383336
+    second: plants_2x2_64x32_cloudy_95
+  - first:
+      213: 5402123041059389361
+    second: plants_2x2_64x32_cloudy_96
+  - first:
+      213: -2251626018057461327
+    second: plants_2x2_64x32_cloudy_97
+  - first:
+      213: 5424364035999185544
+    second: plants_2x2_64x32_cloudy_98
+  - first:
+      213: -7739579678034949182
+    second: plants_2x2_64x32_cloudy_99
+  - first:
+      213: 7196932690653734773
+    second: plants_2x2_64x32_cloudy_100
+  - first:
+      213: 1476944430791092898
+    second: plants_2x2_64x32_cloudy_101
+  - first:
+      213: 3138498209305570273
+    second: plants_2x2_64x32_cloudy_102
+  - first:
+      213: -5374145043404601114
+    second: plants_2x2_64x32_cloudy_103
+  - first:
+      213: -8898465302212064969
+    second: plants_2x2_64x32_cloudy_104
+  - first:
+      213: 2474783031637830676
+    second: plants_2x2_64x32_cloudy_105
+  - first:
+      213: 4098528528371896937
+    second: plants_2x2_64x32_cloudy_106
+  - first:
+      213: 3237951985887082198
+    second: plants_2x2_64x32_cloudy_107
+  - first:
+      213: 1162505534034233272
+    second: plants_2x2_64x32_cloudy_108
+  - first:
+      213: -1193457432891886259
+    second: plants_2x2_64x32_cloudy_109
+  - first:
+      213: -4718280300118703210
+    second: plants_2x2_64x32_cloudy_110
+  - first:
+      213: 5683911099350537936
+    second: plants_2x2_64x32_cloudy_111
+  - first:
+      213: -2972222914692348593
+    second: plants_2x2_64x32_cloudy_112
+  - first:
+      213: -932038737484491558
+    second: plants_2x2_64x32_cloudy_113
+  - first:
+      213: 3313109780697855365
+    second: plants_2x2_64x32_cloudy_114
+  - first:
+      213: 4779545149232968075
+    second: plants_2x2_64x32_cloudy_115
+  - first:
+      213: -4998729490934024712
+    second: plants_2x2_64x32_cloudy_116
+  - first:
+      213: -5753945096623164308
+    second: plants_2x2_64x32_cloudy_117
+  - first:
+      213: -2154238059697954647
+    second: plants_2x2_64x32_cloudy_118
+  - first:
+      213: -4590612741387058810
+    second: plants_2x2_64x32_cloudy_119
+  - first:
+      213: -4733622229883043743
+    second: plants_2x2_64x32_cloudy_120
+  - first:
+      213: -6016999296490200934
+    second: plants_2x2_64x32_cloudy_121
+  - first:
+      213: -4773503182083752997
+    second: plants_2x2_64x32_cloudy_122
+  - first:
+      213: 7102731398744676272
+    second: plants_2x2_64x32_cloudy_123
+  - first:
+      213: -6096476801475976793
+    second: plants_2x2_64x32_cloudy_124
+  - first:
+      213: -8972707481467513578
+    second: plants_2x2_64x32_cloudy_125
+  - first:
+      213: -6021081333186635820
+    second: plants_2x2_64x32_cloudy_126
+  - first:
+      213: -7396918617064482054
+    second: plants_2x2_64x32_cloudy_127
+  - first:
+      213: 6323811598412796135
+    second: plants_2x2_64x32_cloudy_128
+  - first:
+      213: 232392339082404623
+    second: plants_2x2_64x32_cloudy_129
+  - first:
+      213: 4444840499119746919
+    second: plants_2x2_64x32_cloudy_130
+  - first:
+      213: 6135578765788430571
+    second: plants_2x2_64x32_cloudy_131
+  - first:
+      213: 6358768928856434259
+    second: plants_2x2_64x32_cloudy_132
+  - first:
+      213: -8461032848097885224
+    second: plants_2x2_64x32_cloudy_133
+  - first:
+      213: 2558523454641087285
+    second: plants_2x2_64x32_cloudy_134
+  - first:
+      213: -4914065180571327866
+    second: plants_2x2_64x32_cloudy_135
+  - first:
+      213: 8708067642685857690
+    second: plants_2x2_64x32_cloudy_136
+  - first:
+      213: 5863271962181188439
+    second: plants_2x2_64x32_cloudy_137
+  - first:
+      213: 2476610533389371080
+    second: plants_2x2_64x32_cloudy_138
+  - first:
+      213: 6156965579447797223
+    second: plants_2x2_64x32_cloudy_139
+  - first:
+      213: -68742173127197074
+    second: plants_2x2_64x32_cloudy_140
+  - first:
+      213: 5652529944751182247
+    second: plants_2x2_64x32_cloudy_141
+  - first:
+      213: -8391105528407144613
+    second: plants_2x2_64x32_cloudy_142
+  - first:
+      213: 3431094907100361852
+    second: plants_2x2_64x32_cloudy_143
+  - first:
+      213: 5690350343003032172
+    second: plants_2x2_64x32_cloudy_144
+  - first:
+      213: -4975856532059298031
+    second: plants_2x2_64x32_cloudy_145
+  - first:
+      213: -7204281736445849465
+    second: plants_2x2_64x32_cloudy_146
+  - first:
+      213: 8136827567117674719
+    second: plants_2x2_64x32_cloudy_147
+  - first:
+      213: -422451688247643729
+    second: plants_2x2_64x32_cloudy_148
+  - first:
+      213: 6770492044653100505
+    second: plants_2x2_64x32_cloudy_149
+  - first:
+      213: -6202135836822569467
+    second: plants_2x2_64x32_cloudy_150
+  - first:
+      213: -826689182501787219
+    second: plants_2x2_64x32_cloudy_151
+  - first:
+      213: -1374225266695120258
+    second: plants_2x2_64x32_cloudy_152
+  - first:
+      213: 698685397135537913
+    second: plants_2x2_64x32_cloudy_153
+  - first:
+      213: 8932518536843866878
+    second: plants_2x2_64x32_cloudy_154
+  - first:
+      213: -9136495301801877984
+    second: plants_2x2_64x32_cloudy_155
+  - first:
+      213: -6603548144140482284
+    second: plants_2x2_64x32_cloudy_156
+  - first:
+      213: 4622366965669986999
+    second: plants_2x2_64x32_cloudy_157
+  - first:
+      213: -4978088109750503074
+    second: plants_2x2_64x32_cloudy_158
+  - first:
+      213: -2884590247925559742
+    second: plants_2x2_64x32_cloudy_159
+  - first:
+      213: 5534523466442295440
+    second: plants_2x2_64x32_cloudy_160
+  - first:
+      213: 7220056469281134791
+    second: plants_2x2_64x32_cloudy_161
+  - first:
+      213: -770626332574648050
+    second: plants_2x2_64x32_cloudy_162
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_0
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 1420
+        width: 85
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f6f90f3c2ea8cb560800000000000000
+      internalID: 7330887000006893423
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_1
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 1419
+        width: 88
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ea2abbef287323130800000000000000
+      internalID: 3544956892452987566
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_2
+      rect:
+        serializedVersion: 2
+        x: 277
+        y: 1427
+        width: 83
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ac0a8c34b69fbc810800000000000000
+      internalID: 1786795916276572362
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_3
+      rect:
+        serializedVersion: 2
+        x: 412
+        y: 1424
+        width: 76
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 107ec61fdbd356b10800000000000000
+      internalID: 1974051897680389889
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_4
+      rect:
+        serializedVersion: 2
+        x: 541
+        y: 1427
+        width: 90
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: beeb646e00d6871c0800000000000000
+      internalID: -4505731576553357589
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_5
+      rect:
+        serializedVersion: 2
+        x: 668
+        y: 1425
+        width: 68
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1ed01c371263a7e00800000000000000
+      internalID: 1043205780993543649
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_6
+      rect:
+        serializedVersion: 2
+        x: 797
+        y: 1424
+        width: 77
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7424b7e41880c0080800000000000000
+      internalID: -9219984985673743801
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_7
+      rect:
+        serializedVersion: 2
+        x: 923
+        y: 1433
+        width: 65
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 12a916e9d926e0a50800000000000000
+      internalID: 6489232542194047521
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_8
+      rect:
+        serializedVersion: 2
+        x: 1055
+        y: 1420
+        width: 63
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bd3e4583f6b0a2810800000000000000
+      internalID: 1741216778246480859
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_9
+      rect:
+        serializedVersion: 2
+        x: 1157
+        y: 1424
+        width: 118
+        height: 90
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd38651ecf609c480800000000000000
+      internalID: -8878557507202153508
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_10
+      rect:
+        serializedVersion: 2
+        x: 1344
+        y: 1437
+        width: 36
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f591dc7a1a33165c0800000000000000
+      internalID: -4224038206098826913
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_11
+      rect:
+        serializedVersion: 2
+        x: 1428
+        y: 1430
+        width: 34
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 10c2a52d9df224ed0800000000000000
+      internalID: -2431328236243112959
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_12
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 1306
+        width: 41
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: acaea593d5e849c00800000000000000
+      internalID: 906505956053674698
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_13
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 1304
+        width: 40
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 789e4a282aa6ac960800000000000000
+      internalID: 7623022565487077767
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_14
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 1296
+        width: 57
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: becbe3c55b53f4f60800000000000000
+      internalID: 8020688514423110891
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_15
+      rect:
+        serializedVersion: 2
+        x: 423
+        y: 1296
+        width: 58
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7a083a75c4a24f610800000000000000
+      internalID: 1653993470528028839
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_16
+      rect:
+        serializedVersion: 2
+        x: 529
+        y: 1295
+        width: 87
+        height: 79
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a4ae122870ffb7090800000000000000
+      internalID: -8035548702399403446
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_17
+      rect:
+        serializedVersion: 2
+        x: 649
+        y: 1289
+        width: 83
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d35592493e3d84410800000000000000
+      internalID: 1461651053478499645
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_18
+      rect:
+        serializedVersion: 2
+        x: 795
+        y: 1297
+        width: 66
+        height: 76
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 30491219848f08e50800000000000000
+      internalID: 6809715627140420611
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_19
+      rect:
+        serializedVersion: 2
+        x: 929
+        y: 1299
+        width: 70
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 72152ca007130dfc0800000000000000
+      internalID: -3472220955416047321
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_20
+      rect:
+        serializedVersion: 2
+        x: 1051
+        y: 1310
+        width: 48
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b3c6788ae57e7e860800000000000000
+      internalID: 7559264893305056315
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_21
+      rect:
+        serializedVersion: 2
+        x: 1210
+        y: 1307
+        width: 52
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fdaf6f488a0f57f00800000000000000
+      internalID: 1114061089420016351
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_22
+      rect:
+        serializedVersion: 2
+        x: 1318
+        y: 1286
+        width: 62
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5277cbfe6bc232290800000000000000
+      internalID: -7916434555769424091
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_23
+      rect:
+        serializedVersion: 2
+        x: 1456
+        y: 1300
+        width: 67
+        height: 67
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ce2c0ea6d7aa878e0800000000000000
+      internalID: -1695417804064242964
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_24
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 1157
+        width: 53
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 74a7c969b3d365ef0800000000000000
+      internalID: -119841013939537337
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_25
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 1153
+        width: 53
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c0e186cfe6c94120800000000000000
+      internalID: 2398667009681383617
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_26
+      rect:
+        serializedVersion: 2
+        x: 293
+        y: 1166
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d009f78dd0b488640800000000000000
+      internalID: 5082394702326501389
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_27
+      rect:
+        serializedVersion: 2
+        x: 331
+        y: 1164
+        width: 13
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1962369cb33517cb0800000000000000
+      internalID: -4868018205963901295
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_28
+      rect:
+        serializedVersion: 2
+        x: 424
+        y: 1164
+        width: 13
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba67cd2611faa49f0800000000000000
+      internalID: -483381520780986709
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_29
+      rect:
+        serializedVersion: 2
+        x: 464
+        y: 1165
+        width: 12
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2b52b3296651dcab0800000000000000
+      internalID: -4986305682145073742
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_30
+      rect:
+        serializedVersion: 2
+        x: 549
+        y: 1165
+        width: 12
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af25aa4abc2e98b70800000000000000
+      internalID: 8901895502743360250
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_31
+      rect:
+        serializedVersion: 2
+        x: 720
+        y: 1165
+        width: 12
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: adf6d53ace766d0f0800000000000000
+      internalID: -1092571593540014118
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_32
+      rect:
+        serializedVersion: 2
+        x: 817
+        y: 1158
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6564eb6a6f0b26800800000000000000
+      internalID: 604239873426998870
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_33
+      rect:
+        serializedVersion: 2
+        x: 819
+        y: 1154
+        width: 22
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 166c559a54e84b7b0800000000000000
+      internalID: -5209382439115962783
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_34
+      rect:
+        serializedVersion: 2
+        x: 938
+        y: 1162
+        width: 16
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f4c1bc605c9488500800000000000000
+      internalID: 398649677593648207
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_35
+      rect:
+        serializedVersion: 2
+        x: 958
+        y: 1162
+        width: 29
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 44d88374d424f1e80800000000000000
+      internalID: -8205767096370950844
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_36
+      rect:
+        serializedVersion: 2
+        x: 1077
+        y: 1159
+        width: 39
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0035c8f037b3e7860800000000000000
+      internalID: 7529520992378180352
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_37
+      rect:
+        serializedVersion: 2
+        x: 1205
+        y: 1163
+        width: 28
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: acc60b9061b879b40800000000000000
+      internalID: 5446975201096002762
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_38
+      rect:
+        serializedVersion: 2
+        x: 1320
+        y: 1157
+        width: 54
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3987a00b6cd935d00800000000000000
+      internalID: 960284622242609299
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_39
+      rect:
+        serializedVersion: 2
+        x: 1450
+        y: 1156
+        width: 44
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 33e3ac06d9abd2930800000000000000
+      internalID: 4120154419210370611
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_40
+      rect:
+        serializedVersion: 2
+        x: 444
+        y: 1035
+        width: 25
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d98a73186e169be80800000000000000
+      internalID: -8162385206994032483
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_41
+      rect:
+        serializedVersion: 2
+        x: 534
+        y: 1031
+        width: 21
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 24d07c87014ed7050800000000000000
+      internalID: 5800042654519987522
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_42
+      rect:
+        serializedVersion: 2
+        x: 708
+        y: 1046
+        width: 19
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3fd30b0a6a8c25f20800000000000000
+      internalID: 3410008485858917875
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_43
+      rect:
+        serializedVersion: 2
+        x: 719
+        y: 1058
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b3c10b7968827da0800000000000000
+      internalID: -5948542171186347084
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_44
+      rect:
+        serializedVersion: 2
+        x: 725
+        y: 1043
+        width: 17
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 05fd85cd146f94b60800000000000000
+      internalID: 7730980998088286032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_45
+      rect:
+        serializedVersion: 2
+        x: 943
+        y: 1030
+        width: 23
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 19abf8dd2dc27f900800000000000000
+      internalID: 718091949760821905
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_46
+      rect:
+        serializedVersion: 2
+        x: 1076
+        y: 1035
+        width: 20
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d0a94ce7873a484a0800000000000000
+      internalID: -6591964216645346803
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_47
+      rect:
+        serializedVersion: 2
+        x: 1095
+        y: 1040
+        width: 12
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e8c7cea6da26e9e70800000000000000
+      internalID: 9123838392061951118
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_48
+      rect:
+        serializedVersion: 2
+        x: 1192
+        y: 1038
+        width: 33
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 55ac7dbbcfa845990800000000000000
+      internalID: -7398135469775009195
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_49
+      rect:
+        serializedVersion: 2
+        x: 1323
+        y: 1029
+        width: 41
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 11ee55a83667e15e0800000000000000
+      internalID: -1936980619828007407
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_50
+      rect:
+        serializedVersion: 2
+        x: 1450
+        y: 1032
+        width: 45
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3cda5a7577d8cccb0800000000000000
+      internalID: -4842339955619025469
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_51
+      rect:
+        serializedVersion: 2
+        x: 177
+        y: 1038
+        width: 16
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 73f3a9b93271d7ef0800000000000000
+      internalID: -108905374285152457
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_52
+      rect:
+        serializedVersion: 2
+        x: 307
+        y: 1030
+        width: 22
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 365a66cf58bf3a3b0800000000000000
+      internalID: -5502277766832806557
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_53
+      rect:
+        serializedVersion: 2
+        x: 553
+        y: 1047
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6f4f432436e769f80800000000000000
+      internalID: -8100147915001629450
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_54
+      rect:
+        serializedVersion: 2
+        x: 553
+        y: 1027
+        width: 19
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 407e4e81648e04d60800000000000000
+      internalID: 7872547536406636292
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_55
+      rect:
+        serializedVersion: 2
+        x: 829
+        y: 1025
+        width: 34
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 41525e729eaa9c960800000000000000
+      internalID: 7622811762674705684
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_56
+      rect:
+        serializedVersion: 2
+        x: 965
+        y: 1042
+        width: 14
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 471f595f400d462a0800000000000000
+      internalID: -6745037622175469196
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_57
+      rect:
+        serializedVersion: 2
+        x: 1069
+        y: 1042
+        width: 8
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5cf32ed651745cc50800000000000000
+      internalID: 6684827379264798661
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_58
+      rect:
+        serializedVersion: 2
+        x: 62
+        y: 1033
+        width: 17
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d9cf797202f443d0800000000000000
+      internalID: -3223185340848158247
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_59
+      rect:
+        serializedVersion: 2
+        x: 188
+        y: 934
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2569b4c741ee2b920800000000000000
+      internalID: 3004725673161627218
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_60
+      rect:
+        serializedVersion: 2
+        x: 700
+        y: 913
+        width: 17
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0009d8e89cf767fc0800000000000000
+      internalID: -3497467556949815296
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_61
+      rect:
+        serializedVersion: 2
+        x: 934
+        y: 915
+        width: 18
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f3653575c01a2d080800000000000000
+      internalID: -9164085217368779201
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_62
+      rect:
+        serializedVersion: 2
+        x: 1065
+        y: 918
+        width: 17
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 56f2c999a33ec3190800000000000000
+      internalID: -7981254598782603419
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_63
+      rect:
+        serializedVersion: 2
+        x: 1326
+        y: 909
+        width: 19
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 08d472fe98ed39d50800000000000000
+      internalID: 6742977751107980672
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_64
+      rect:
+        serializedVersion: 2
+        x: 1463
+        y: 905
+        width: 17
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d8537160673857740800000000000000
+      internalID: 5149166291899594125
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_65
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 900
+        width: 40
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f5c037912c7939280800000000000000
+      internalID: -9037713167296033697
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_66
+      rect:
+        serializedVersion: 2
+        x: 174
+        y: 911
+        width: 23
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 17bdd1a2d508661d0800000000000000
+      internalID: -3357855334531212431
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_67
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 910
+        width: 20
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 17db20123c705b420800000000000000
+      internalID: 2645028890803879281
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_68
+      rect:
+        serializedVersion: 2
+        x: 307
+        y: 903
+        width: 29
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 019a338e829418e10800000000000000
+      internalID: 2198118533176731920
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_69
+      rect:
+        serializedVersion: 2
+        x: 430
+        y: 905
+        width: 33
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6b6cd4794984221f0800000000000000
+      internalID: -1071213958329940298
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_70
+      rect:
+        serializedVersion: 2
+        x: 563
+        y: 907
+        width: 17
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 689c0d43d7be94110800000000000000
+      internalID: 1245785694934190470
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_71
+      rect:
+        serializedVersion: 2
+        x: 793
+        y: 903
+        width: 16
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b594c7b49622ff9a0800000000000000
+      internalID: -6197196726605166245
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_72
+      rect:
+        serializedVersion: 2
+        x: 812
+        y: 901
+        width: 18
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0dcc9c2a03272f640800000000000000
+      internalID: 5112274080234065104
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_73
+      rect:
+        serializedVersion: 2
+        x: 1222
+        y: 901
+        width: 17
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 61f59feca1158b710800000000000000
+      internalID: 1709205234170552086
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_74
+      rect:
+        serializedVersion: 2
+        x: 1347
+        y: 911
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4d36f941acc59a960800000000000000
+      internalID: 7613718668045673428
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_75
+      rect:
+        serializedVersion: 2
+        x: 1452
+        y: 908
+        width: 9
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 101109b8849632810800000000000000
+      internalID: 1739349641395179777
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_76
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 779
+        width: 19
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a36645162fbf44870800000000000000
+      internalID: 8666328601401255482
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_77
+      rect:
+        serializedVersion: 2
+        x: 65
+        y: 782
+        width: 16
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a47982ad2c9380b20800000000000000
+      internalID: 3100791852491118410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_78
+      rect:
+        serializedVersion: 2
+        x: 185
+        y: 777
+        width: 21
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a83c33496940bb300800000000000000
+      internalID: 268813647536702346
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_79
+      rect:
+        serializedVersion: 2
+        x: 316
+        y: 784
+        width: 15
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 270d7095ae89915d0800000000000000
+      internalID: -3091271536929681294
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_80
+      rect:
+        serializedVersion: 2
+        x: 433
+        y: 783
+        width: 18
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4c2eb7daf4e78fa80800000000000000
+      internalID: -8432851421573160252
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_81
+      rect:
+        serializedVersion: 2
+        x: 563
+        y: 774
+        width: 22
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 75dc266f034fdde80800000000000000
+      internalID: -8152091259341451945
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_82
+      rect:
+        serializedVersion: 2
+        x: 680
+        y: 780
+        width: 28
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 742e7983bc9ad06c0800000000000000
+      internalID: -4175494589209648569
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_83
+      rect:
+        serializedVersion: 2
+        x: 790
+        y: 774
+        width: 22
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4e16132a3a4f6b850800000000000000
+      internalID: 6392565704736989668
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_84
+      rect:
+        serializedVersion: 2
+        x: 807
+        y: 788
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd7c41a8cc36a4270800000000000000
+      internalID: 8235504598741469148
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_85
+      rect:
+        serializedVersion: 2
+        x: 809
+        y: 771
+        width: 21
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 132c7b64d3a998df0800000000000000
+      internalID: -177441122334293455
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_86
+      rect:
+        serializedVersion: 2
+        x: 933
+        y: 787
+        width: 32
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a950d07eaabf73af0800000000000000
+      internalID: -416587729069079142
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_87
+      rect:
+        serializedVersion: 2
+        x: 1064
+        y: 782
+        width: 33
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: efc1f0355b87eb030800000000000000
+      internalID: 3512377479573478654
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_88
+      rect:
+        serializedVersion: 2
+        x: 1213
+        y: 779
+        width: 39
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 97893bb24c813e5f0800000000000000
+      internalID: -728711483878041479
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_89
+      rect:
+        serializedVersion: 2
+        x: 1323
+        y: 773
+        width: 41
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9ab4236c783d901b0800000000000000
+      internalID: -5689784074106680407
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_90
+      rect:
+        serializedVersion: 2
+        x: 1454
+        y: 772
+        width: 40
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b700c52adb7e2a2d0800000000000000
+      internalID: -3268795577858785157
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_91
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 645
+        width: 26
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 41a7ca0a7d6322480800000000000000
+      internalID: -8925511211753375212
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_92
+      rect:
+        serializedVersion: 2
+        x: 174
+        y: 653
+        width: 41
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 822f19561e74579c0800000000000000
+      internalID: -3930156066413612504
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_93
+      rect:
+        serializedVersion: 2
+        x: 188
+        y: 678
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8cbd2e40134756330800000000000000
+      internalID: 3703494022466296776
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_94
+      rect:
+        serializedVersion: 2
+        x: 307
+        y: 647
+        width: 29
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 38d8f5c17fcd14cc0800000000000000
+      internalID: -3728456062595003005
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_95
+      rect:
+        serializedVersion: 2
+        x: 431
+        y: 648
+        width: 34
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 85fc1fdbccca0a4f0800000000000000
+      internalID: -819465136821383336
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_96
+      rect:
+        serializedVersion: 2
+        x: 677
+        y: 661
+        width: 21
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1bf3c4fb84238fa40800000000000000
+      internalID: 5402123041059389361
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_97
+      rect:
+        serializedVersion: 2
+        x: 840
+        y: 664
+        width: 13
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1b168a2f01e90c0e0800000000000000
+      internalID: -2251626018057461327
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_98
+      rect:
+        serializedVersion: 2
+        x: 854
+        y: 660
+        width: 16
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 88ab22ae956374b40800000000000000
+      internalID: 5424364035999185544
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_99
+      rect:
+        serializedVersion: 2
+        x: 948
+        y: 664
+        width: 16
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2cb05e3f94d779490800000000000000
+      internalID: -7739579678034949182
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_100
+      rect:
+        serializedVersion: 2
+        x: 1059
+        y: 651
+        width: 18
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 577efc2b624a0e360800000000000000
+      internalID: 7196932690653734773
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_101
+      rect:
+        serializedVersion: 2
+        x: 1213
+        y: 657
+        width: 17
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2aa6b4672292f7410800000000000000
+      internalID: 1476944430791092898
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_102
+      rect:
+        serializedVersion: 2
+        x: 1343
+        y: 652
+        width: 16
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1ebabdd2e7f2e8b20800000000000000
+      internalID: 3138498209305570273
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_103
+      rect:
+        serializedVersion: 2
+        x: 1477
+        y: 656
+        width: 16
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6e841747e833b65b0800000000000000
+      internalID: -5374145043404601114
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_104
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 654
+        width: 8
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 739c28724fc428480800000000000000
+      internalID: -8898465302212064969
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_105
+      rect:
+        serializedVersion: 2
+        x: 570
+        y: 650
+        width: 11
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 41cefe82e02385220800000000000000
+      internalID: 2474783031637830676
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_106
+      rect:
+        serializedVersion: 2
+        x: 1456
+        y: 656
+        width: 13
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 962596b4bf5e0e830800000000000000
+      internalID: 4098528528371896937
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_107
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 524
+        width: 16
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6d6f19efc248fec20800000000000000
+      internalID: 3237951985887082198
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_108
+      rect:
+        serializedVersion: 2
+        x: 181
+        y: 528
+        width: 16
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8b7498dbf9c022010800000000000000
+      internalID: 1162505534034233272
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_109
+      rect:
+        serializedVersion: 2
+        x: 296
+        y: 524
+        width: 28
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d45fde9b9ccff6fe0800000000000000
+      internalID: -1193457432891886259
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_110
+      rect:
+        serializedVersion: 2
+        x: 549
+        y: 531
+        width: 32
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 69383b8c01d458eb0800000000000000
+      internalID: -4718280300118703210
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_111
+      rect:
+        serializedVersion: 2
+        x: 708
+        y: 534
+        width: 20
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d650bbb70f41ee40800000000000000
+      internalID: 5683911099350537936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_112
+      rect:
+        serializedVersion: 2
+        x: 725
+        y: 531
+        width: 20
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f458c70b10b80c6d0800000000000000
+      internalID: -2972222914692348593
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_113
+      rect:
+        serializedVersion: 2
+        x: 829
+        y: 523
+        width: 39
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad45557d4bbb013f0800000000000000
+      internalID: -932038737484491558
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_114
+      rect:
+        serializedVersion: 2
+        x: 936
+        y: 526
+        width: 33
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5853e5cbac78afd20800000000000000
+      internalID: 3313109780697855365
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_115
+      rect:
+        serializedVersion: 2
+        x: 1070
+        y: 516
+        width: 39
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b81f8f77dfa545240800000000000000
+      internalID: 4779545149232968075
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_116
+      rect:
+        serializedVersion: 2
+        x: 1195
+        y: 517
+        width: 41
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8f5bb9c2302f0aab0800000000000000
+      internalID: -4998729490934024712
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_117
+      rect:
+        serializedVersion: 2
+        x: 1326
+        y: 525
+        width: 41
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c64fcaa9b61e520b0800000000000000
+      internalID: -5753945096623164308
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_118
+      rect:
+        serializedVersion: 2
+        x: 1340
+        y: 550
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9a0a31af5eb9a12e0800000000000000
+      internalID: -2154238059697954647
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_119
+      rect:
+        serializedVersion: 2
+        x: 1450
+        y: 516
+        width: 40
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6810e38a80eda40c0800000000000000
+      internalID: -4590612741387058810
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_120
+      rect:
+        serializedVersion: 2
+        x: 67
+        y: 524
+        width: 14
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 160cde669abce4eb0800000000000000
+      internalID: -4733622229883043743
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_121
+      rect:
+        serializedVersion: 2
+        x: 435
+        y: 518
+        width: 23
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a902deee4035f7ca0800000000000000
+      internalID: -6016999296490200934
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_122
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 392
+        width: 34
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bdb73b1a52c11cdb0800000000000000
+      internalID: -4773503182083752997
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_123
+      rect:
+        serializedVersion: 2
+        x: 179
+        y: 391
+        width: 29
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0b790354398f19260800000000000000
+      internalID: 7102731398744676272
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_124
+      rect:
+        serializedVersion: 2
+        x: 263
+        y: 392
+        width: 118
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7a16d9a46a6f46ba0800000000000000
+      internalID: -6096476801475976793
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_125
+      rect:
+        serializedVersion: 2
+        x: 390
+        y: 401
+        width: 120
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 61593a5c51a8a7380800000000000000
+      internalID: -8972707481467513578
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_126
+      rect:
+        serializedVersion: 2
+        x: 527
+        y: 395
+        width: 100
+        height: 63
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4d7dca3bd62d07ca0800000000000000
+      internalID: -6021081333186635820
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_127
+      rect:
+        serializedVersion: 2
+        x: 656
+        y: 386
+        width: 83
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: afad56555bdd85990800000000000000
+      internalID: -7396918617064482054
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_128
+      rect:
+        serializedVersion: 2
+        x: 793
+        y: 384
+        width: 71
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7e0d3edc421b2c750800000000000000
+      internalID: 6323811598412796135
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_129
+      rect:
+        serializedVersion: 2
+        x: 913
+        y: 392
+        width: 71
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f036783e99f993300800000000000000
+      internalID: 232392339082404623
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_130
+      rect:
+        serializedVersion: 2
+        x: 1040
+        y: 393
+        width: 53
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 76f6d4952ee3fad30800000000000000
+      internalID: 4444840499119746919
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_131
+      rect:
+        serializedVersion: 2
+        x: 1208
+        y: 393
+        width: 57
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be0cf3a3164f52550800000000000000
+      internalID: 6135578765788430571
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_132
+      rect:
+        serializedVersion: 2
+        x: 1343
+        y: 416
+        width: 48
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 356674d86a2ee3850800000000000000
+      internalID: 6358768928856434259
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_133
+      rect:
+        serializedVersion: 2
+        x: 1424
+        y: 413
+        width: 58
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8d3c630047f549a80800000000000000
+      internalID: -8461032848097885224
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_134
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 272
+        width: 52
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 533236fb683b18320800000000000000
+      internalID: 2558523454641087285
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_135
+      rect:
+        serializedVersion: 2
+        x: 171
+        y: 272
+        width: 56
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6822eec01cbbdcbb0800000000000000
+      internalID: -4914065180571327866
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_136
+      rect:
+        serializedVersion: 2
+        x: 308
+        y: 284
+        width: 47
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a9f1d5a326549d870800000000000000
+      internalID: 8708067642685857690
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_137
+      rect:
+        serializedVersion: 2
+        x: 408
+        y: 282
+        width: 58
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 75b315fd8c68e5150800000000000000
+      internalID: 5863271962181188439
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_138
+      rect:
+        serializedVersion: 2
+        x: 558
+        y: 274
+        width: 35
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8c60aa19820be5220800000000000000
+      internalID: 2476610533389371080
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_139
+      rect:
+        serializedVersion: 2
+        x: 689
+        y: 262
+        width: 30
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7e50b41d29fe17550800000000000000
+      internalID: 6156965579447797223
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_140
+      rect:
+        serializedVersion: 2
+        x: 830
+        y: 271
+        width: 35
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e6e3aa59b57cb0ff0800000000000000
+      internalID: -68742173127197074
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_141
+      rect:
+        serializedVersion: 2
+        x: 929
+        y: 269
+        width: 66
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7a1172f4902d17e40800000000000000
+      internalID: 5652529944751182247
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_142
+      rect:
+        serializedVersion: 2
+        x: 1088
+        y: 259
+        width: 33
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b57c97adafdcc8b80800000000000000
+      internalID: -8391105528407144613
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_143
+      rect:
+        serializedVersion: 2
+        x: 1203
+        y: 262
+        width: 21
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c747e58a3a2bd9f20800000000000000
+      internalID: 3431094907100361852
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_144
+      rect:
+        serializedVersion: 2
+        x: 1325
+        y: 262
+        width: 38
+        height: 72
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c6ac73afc7f28fe40800000000000000
+      internalID: 5690350343003032172
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_145
+      rect:
+        serializedVersion: 2
+        x: 1476
+        y: 265
+        width: 37
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1176c49e8d432fab0800000000000000
+      internalID: -4975856532059298031
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_146
+      rect:
+        serializedVersion: 2
+        x: 937
+        y: 132
+        width: 62
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7809f4d3eef350c90800000000000000
+      internalID: -7204281736445849465
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_147
+      rect:
+        serializedVersion: 2
+        x: 1045
+        y: 138
+        width: 63
+        height: 92
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fd8a7a0cf81dbe070800000000000000
+      internalID: 8136827567117674719
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_148
+      rect:
+        serializedVersion: 2
+        x: 1063
+        y: 222
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa13c338d66232af0800000000000000
+      internalID: -422451688247643729
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_149
+      rect:
+        serializedVersion: 2
+        x: 1202
+        y: 134
+        width: 66
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9ddf72c94ae95fd50800000000000000
+      internalID: 6770492044653100505
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_150
+      rect:
+        serializedVersion: 2
+        x: 1312
+        y: 135
+        width: 56
+        height: 100
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 50e787511569de9a0800000000000000
+      internalID: -6202135836822569467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_151
+      rect:
+        serializedVersion: 2
+        x: 1414
+        y: 142
+        width: 75
+        height: 109
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: da9a25981920784f0800000000000000
+      internalID: -826689182501787219
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_152
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 134
+        width: 56
+        height: 86
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e7a5541a665cdece0800000000000000
+      internalID: -1374225266695120258
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_153
+      rect:
+        serializedVersion: 2
+        x: 179
+        y: 133
+        width: 32
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9f6340abaaa32b900800000000000000
+      internalID: 698685397135537913
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_154
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 128
+        width: 21
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef2bb22684ea6fb70800000000000000
+      internalID: 8932518536843866878
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_155
+      rect:
+        serializedVersion: 2
+        x: 433
+        y: 146
+        width: 29
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 02ed2142ee5a43180800000000000000
+      internalID: -9136495301801877984
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_156
+      rect:
+        serializedVersion: 2
+        x: 553
+        y: 139
+        width: 14
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 419015333fb7b54a0800000000000000
+      internalID: -6603548144140482284
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_157
+      rect:
+        serializedVersion: 2
+        x: 703
+        y: 136
+        width: 24
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7b28242d342f52040800000000000000
+      internalID: 4622366965669986999
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_158
+      rect:
+        serializedVersion: 2
+        x: 815
+        y: 150
+        width: 19
+        height: 69
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e59b9bd3d374aeab0800000000000000
+      internalID: -4978088109750503074
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_159
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 7
+        width: 57
+        height: 83
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 24e47d5e370e7f7d0800000000000000
+      internalID: -2884590247925559742
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_160
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 11
+        width: 37
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0984b5205c39ecc40800000000000000
+      internalID: 5534523466442295440
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_161
+      rect:
+        serializedVersion: 2
+        x: 281
+        y: 7
+        width: 52
+        height: 87
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7c853c5fa1bc23460800000000000000
+      internalID: 7220056469281134791
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: plants_2x2_64x32_cloudy_162
+      rect:
+        serializedVersion: 2
+        x: 441
+        y: 20
+        width: 24
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e097358fe6f2e45f0800000000000000
+      internalID: -770626332574648050
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      plants_2x2_64x32_cloudy_0: 7330887000006893423
+      plants_2x2_64x32_cloudy_1: 3544956892452987566
+      plants_2x2_64x32_cloudy_10: -4224038206098826913
+      plants_2x2_64x32_cloudy_100: 7196932690653734773
+      plants_2x2_64x32_cloudy_101: 1476944430791092898
+      plants_2x2_64x32_cloudy_102: 3138498209305570273
+      plants_2x2_64x32_cloudy_103: -5374145043404601114
+      plants_2x2_64x32_cloudy_104: -8898465302212064969
+      plants_2x2_64x32_cloudy_105: 2474783031637830676
+      plants_2x2_64x32_cloudy_106: 4098528528371896937
+      plants_2x2_64x32_cloudy_107: 3237951985887082198
+      plants_2x2_64x32_cloudy_108: 1162505534034233272
+      plants_2x2_64x32_cloudy_109: -1193457432891886259
+      plants_2x2_64x32_cloudy_11: -2431328236243112959
+      plants_2x2_64x32_cloudy_110: -4718280300118703210
+      plants_2x2_64x32_cloudy_111: 5683911099350537936
+      plants_2x2_64x32_cloudy_112: -2972222914692348593
+      plants_2x2_64x32_cloudy_113: -932038737484491558
+      plants_2x2_64x32_cloudy_114: 3313109780697855365
+      plants_2x2_64x32_cloudy_115: 4779545149232968075
+      plants_2x2_64x32_cloudy_116: -4998729490934024712
+      plants_2x2_64x32_cloudy_117: -5753945096623164308
+      plants_2x2_64x32_cloudy_118: -2154238059697954647
+      plants_2x2_64x32_cloudy_119: -4590612741387058810
+      plants_2x2_64x32_cloudy_12: 906505956053674698
+      plants_2x2_64x32_cloudy_120: -4733622229883043743
+      plants_2x2_64x32_cloudy_121: -6016999296490200934
+      plants_2x2_64x32_cloudy_122: -4773503182083752997
+      plants_2x2_64x32_cloudy_123: 7102731398744676272
+      plants_2x2_64x32_cloudy_124: -6096476801475976793
+      plants_2x2_64x32_cloudy_125: -8972707481467513578
+      plants_2x2_64x32_cloudy_126: -6021081333186635820
+      plants_2x2_64x32_cloudy_127: -7396918617064482054
+      plants_2x2_64x32_cloudy_128: 6323811598412796135
+      plants_2x2_64x32_cloudy_129: 232392339082404623
+      plants_2x2_64x32_cloudy_13: 7623022565487077767
+      plants_2x2_64x32_cloudy_130: 4444840499119746919
+      plants_2x2_64x32_cloudy_131: 6135578765788430571
+      plants_2x2_64x32_cloudy_132: 6358768928856434259
+      plants_2x2_64x32_cloudy_133: -8461032848097885224
+      plants_2x2_64x32_cloudy_134: 2558523454641087285
+      plants_2x2_64x32_cloudy_135: -4914065180571327866
+      plants_2x2_64x32_cloudy_136: 8708067642685857690
+      plants_2x2_64x32_cloudy_137: 5863271962181188439
+      plants_2x2_64x32_cloudy_138: 2476610533389371080
+      plants_2x2_64x32_cloudy_139: 6156965579447797223
+      plants_2x2_64x32_cloudy_14: 8020688514423110891
+      plants_2x2_64x32_cloudy_140: -68742173127197074
+      plants_2x2_64x32_cloudy_141: 5652529944751182247
+      plants_2x2_64x32_cloudy_142: -8391105528407144613
+      plants_2x2_64x32_cloudy_143: 3431094907100361852
+      plants_2x2_64x32_cloudy_144: 5690350343003032172
+      plants_2x2_64x32_cloudy_145: -4975856532059298031
+      plants_2x2_64x32_cloudy_146: -7204281736445849465
+      plants_2x2_64x32_cloudy_147: 8136827567117674719
+      plants_2x2_64x32_cloudy_148: -422451688247643729
+      plants_2x2_64x32_cloudy_149: 6770492044653100505
+      plants_2x2_64x32_cloudy_15: 1653993470528028839
+      plants_2x2_64x32_cloudy_150: -6202135836822569467
+      plants_2x2_64x32_cloudy_151: -826689182501787219
+      plants_2x2_64x32_cloudy_152: -1374225266695120258
+      plants_2x2_64x32_cloudy_153: 698685397135537913
+      plants_2x2_64x32_cloudy_154: 8932518536843866878
+      plants_2x2_64x32_cloudy_155: -9136495301801877984
+      plants_2x2_64x32_cloudy_156: -6603548144140482284
+      plants_2x2_64x32_cloudy_157: 4622366965669986999
+      plants_2x2_64x32_cloudy_158: -4978088109750503074
+      plants_2x2_64x32_cloudy_159: -2884590247925559742
+      plants_2x2_64x32_cloudy_16: -8035548702399403446
+      plants_2x2_64x32_cloudy_160: 5534523466442295440
+      plants_2x2_64x32_cloudy_161: 7220056469281134791
+      plants_2x2_64x32_cloudy_162: -770626332574648050
+      plants_2x2_64x32_cloudy_17: 1461651053478499645
+      plants_2x2_64x32_cloudy_18: 6809715627140420611
+      plants_2x2_64x32_cloudy_19: -3472220955416047321
+      plants_2x2_64x32_cloudy_2: 1786795916276572362
+      plants_2x2_64x32_cloudy_20: 7559264893305056315
+      plants_2x2_64x32_cloudy_21: 1114061089420016351
+      plants_2x2_64x32_cloudy_22: -7916434555769424091
+      plants_2x2_64x32_cloudy_23: -1695417804064242964
+      plants_2x2_64x32_cloudy_24: -119841013939537337
+      plants_2x2_64x32_cloudy_25: 2398667009681383617
+      plants_2x2_64x32_cloudy_26: 5082394702326501389
+      plants_2x2_64x32_cloudy_27: -4868018205963901295
+      plants_2x2_64x32_cloudy_28: -483381520780986709
+      plants_2x2_64x32_cloudy_29: -4986305682145073742
+      plants_2x2_64x32_cloudy_3: 1974051897680389889
+      plants_2x2_64x32_cloudy_30: 8901895502743360250
+      plants_2x2_64x32_cloudy_31: -1092571593540014118
+      plants_2x2_64x32_cloudy_32: 604239873426998870
+      plants_2x2_64x32_cloudy_33: -5209382439115962783
+      plants_2x2_64x32_cloudy_34: 398649677593648207
+      plants_2x2_64x32_cloudy_35: -8205767096370950844
+      plants_2x2_64x32_cloudy_36: 7529520992378180352
+      plants_2x2_64x32_cloudy_37: 5446975201096002762
+      plants_2x2_64x32_cloudy_38: 960284622242609299
+      plants_2x2_64x32_cloudy_39: 4120154419210370611
+      plants_2x2_64x32_cloudy_4: -4505731576553357589
+      plants_2x2_64x32_cloudy_40: -8162385206994032483
+      plants_2x2_64x32_cloudy_41: 5800042654519987522
+      plants_2x2_64x32_cloudy_42: 3410008485858917875
+      plants_2x2_64x32_cloudy_43: -5948542171186347084
+      plants_2x2_64x32_cloudy_44: 7730980998088286032
+      plants_2x2_64x32_cloudy_45: 718091949760821905
+      plants_2x2_64x32_cloudy_46: -6591964216645346803
+      plants_2x2_64x32_cloudy_47: 9123838392061951118
+      plants_2x2_64x32_cloudy_48: -7398135469775009195
+      plants_2x2_64x32_cloudy_49: -1936980619828007407
+      plants_2x2_64x32_cloudy_5: 1043205780993543649
+      plants_2x2_64x32_cloudy_50: -4842339955619025469
+      plants_2x2_64x32_cloudy_51: -108905374285152457
+      plants_2x2_64x32_cloudy_52: -5502277766832806557
+      plants_2x2_64x32_cloudy_53: -8100147915001629450
+      plants_2x2_64x32_cloudy_54: 7872547536406636292
+      plants_2x2_64x32_cloudy_55: 7622811762674705684
+      plants_2x2_64x32_cloudy_56: -6745037622175469196
+      plants_2x2_64x32_cloudy_57: 6684827379264798661
+      plants_2x2_64x32_cloudy_58: -3223185340848158247
+      plants_2x2_64x32_cloudy_59: 3004725673161627218
+      plants_2x2_64x32_cloudy_6: -9219984985673743801
+      plants_2x2_64x32_cloudy_60: -3497467556949815296
+      plants_2x2_64x32_cloudy_61: -9164085217368779201
+      plants_2x2_64x32_cloudy_62: -7981254598782603419
+      plants_2x2_64x32_cloudy_63: 6742977751107980672
+      plants_2x2_64x32_cloudy_64: 5149166291899594125
+      plants_2x2_64x32_cloudy_65: -9037713167296033697
+      plants_2x2_64x32_cloudy_66: -3357855334531212431
+      plants_2x2_64x32_cloudy_67: 2645028890803879281
+      plants_2x2_64x32_cloudy_68: 2198118533176731920
+      plants_2x2_64x32_cloudy_69: -1071213958329940298
+      plants_2x2_64x32_cloudy_7: 6489232542194047521
+      plants_2x2_64x32_cloudy_70: 1245785694934190470
+      plants_2x2_64x32_cloudy_71: -6197196726605166245
+      plants_2x2_64x32_cloudy_72: 5112274080234065104
+      plants_2x2_64x32_cloudy_73: 1709205234170552086
+      plants_2x2_64x32_cloudy_74: 7613718668045673428
+      plants_2x2_64x32_cloudy_75: 1739349641395179777
+      plants_2x2_64x32_cloudy_76: 8666328601401255482
+      plants_2x2_64x32_cloudy_77: 3100791852491118410
+      plants_2x2_64x32_cloudy_78: 268813647536702346
+      plants_2x2_64x32_cloudy_79: -3091271536929681294
+      plants_2x2_64x32_cloudy_8: 1741216778246480859
+      plants_2x2_64x32_cloudy_80: -8432851421573160252
+      plants_2x2_64x32_cloudy_81: -8152091259341451945
+      plants_2x2_64x32_cloudy_82: -4175494589209648569
+      plants_2x2_64x32_cloudy_83: 6392565704736989668
+      plants_2x2_64x32_cloudy_84: 8235504598741469148
+      plants_2x2_64x32_cloudy_85: -177441122334293455
+      plants_2x2_64x32_cloudy_86: -416587729069079142
+      plants_2x2_64x32_cloudy_87: 3512377479573478654
+      plants_2x2_64x32_cloudy_88: -728711483878041479
+      plants_2x2_64x32_cloudy_89: -5689784074106680407
+      plants_2x2_64x32_cloudy_9: -8878557507202153508
+      plants_2x2_64x32_cloudy_90: -3268795577858785157
+      plants_2x2_64x32_cloudy_91: -8925511211753375212
+      plants_2x2_64x32_cloudy_92: -3930156066413612504
+      plants_2x2_64x32_cloudy_93: 3703494022466296776
+      plants_2x2_64x32_cloudy_94: -3728456062595003005
+      plants_2x2_64x32_cloudy_95: -819465136821383336
+      plants_2x2_64x32_cloudy_96: 5402123041059389361
+      plants_2x2_64x32_cloudy_97: -2251626018057461327
+      plants_2x2_64x32_cloudy_98: 5424364035999185544
+      plants_2x2_64x32_cloudy_99: -7739579678034949182
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

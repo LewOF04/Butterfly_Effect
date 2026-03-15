@@ -24,4 +24,4 @@ MonoBehaviour:
   scale: {x: 0.35, y: 0.35, z: 0.35}
   leftPrefab: {fileID: 29285234760755276, guid: 4f7a667d8bbc17c4a8eda6bdcc4da22f, type: 3}
   rightPrefab: {fileID: 7630428467754726264, guid: 18be131aa67f9e947a3afad3a20ab97b, type: 3}
-  defaultTransform: {x: -3.04, y: 1.15, z: 0}
+  defaultTransform: {x: -3.04, y: 1.15, z: -0.49}

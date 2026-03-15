@@ -106,6 +106,7 @@ public class TimeSkipper : MonoBehaviour
         loadingInfoText.text = "Beginning simulation running on world state";
         yield return null;
 
+        DomainContext.DataController = DataController.Instance; //update to the actual game instance
         yield return StartCoroutine(SimulationController.runFullPlot(simPlot));
 
         loadingScreen.transform.position = camera.transform.position;

@@ -46,7 +46,7 @@ public class EatFood : SelfAction
 
         //==================Energy, Time and Success Effectors==================
         effectors.Add(ActionMaths.scarcityMultiplier(performer.stats.energy - energyToComplete, 0f, 100f, 0.1f, 2f)); weights.Add(1.5f);
-        effectors.Add(ActionMaths.scarcityMultiplier(performer.timeLeft - timeToComplete, 0f, 24f, 0.1f, 2f)); weights.Add(1.5f);
+        effectors.Add(ActionMaths.calcMultiplier(timeToComplete, 0f, 24f, 0.1f, 2f)); weights.Add(0.5f);
         effectors.Add(ActionMaths.scarcityMultiplier(performer.stats.food - baseConsumption, 0f, 100f, 0.1f, 2f)); weights.Add(0.8f);
         effectors.Add(ActionMaths.calcMultiplier(actSuccess, 0f, 100f, 0.25f, 2f)); weights.Add(Mathf.InverseLerp(0f, 100f, performer.attributes.wisdom));
 
@@ -109,7 +109,7 @@ public class EatFood : SelfAction
 
         if(percentComplete != 100f) description += " Their meal finished after "+(percentMulti*100).ToString("0.00")+"% of the way through.";
         
-        float actionTime = dataController.World.gameTime + (24f - performer.timeLeft);
+        float actionTime = dataController.World.gameTime;
 
         //perform changes to stats/attributes
         description += "\n";

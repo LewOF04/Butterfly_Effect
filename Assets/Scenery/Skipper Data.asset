@@ -22,7 +22,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 02721a971a092bb4fa75540f1105b09f, type: 3}
   - {fileID: 21300000, guid: 02721a971a092bb4fa75540f1105b09f, type: 3}
   scale: {x: 0.06, y: 0.06, z: 0.06}
-  defaultTransform: {x: -1.79, y: -1.17, z: 0}
+  defaultTransform: {x: -1.79, y: -1.17, z: -0.49}
   colliderShape:
   - {x: 9.639881, y: 4.3501124}
   - {x: 9.500327, y: 4.6098633}

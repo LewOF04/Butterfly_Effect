@@ -1,0 +1,1131 @@
+fileFormatVersion: 2
+guid: 96d2d0c6e34bf1244a93135c357d3065
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 1334251525250843080
+    second: bamboo_4x4_128x64_shaded_0
+  - first:
+      213: 7349720384328450514
+    second: bamboo_4x4_128x64_shaded_1
+  - first:
+      213: 1498320490862649335
+    second: bamboo_4x4_128x64_shaded_2
+  - first:
+      213: -8751371534929666578
+    second: bamboo_4x4_128x64_shaded_3
+  - first:
+      213: 6804979232884733363
+    second: bamboo_4x4_128x64_shaded_4
+  - first:
+      213: -3260891698775283832
+    second: bamboo_4x4_128x64_shaded_5
+  - first:
+      213: -7247732984055533391
+    second: bamboo_4x4_128x64_shaded_6
+  - first:
+      213: -5002207280946605642
+    second: bamboo_4x4_128x64_shaded_7
+  - first:
+      213: -6380314400608710913
+    second: bamboo_4x4_128x64_shaded_8
+  - first:
+      213: -7948190663225637088
+    second: bamboo_4x4_128x64_shaded_9
+  - first:
+      213: 7076971340021544620
+    second: bamboo_4x4_128x64_shaded_10
+  - first:
+      213: -57367437746352283
+    second: bamboo_4x4_128x64_shaded_11
+  - first:
+      213: 6774699196617151502
+    second: bamboo_4x4_128x64_shaded_12
+  - first:
+      213: -4629884140282456707
+    second: bamboo_4x4_128x64_shaded_13
+  - first:
+      213: -5483767256486998203
+    second: bamboo_4x4_128x64_shaded_14
+  - first:
+      213: 1167032270082624142
+    second: bamboo_4x4_128x64_shaded_15
+  - first:
+      213: 627290889092123618
+    second: bamboo_4x4_128x64_shaded_16
+  - first:
+      213: -2965108379954766943
+    second: bamboo_4x4_128x64_shaded_17
+  - first:
+      213: 5644660592172603840
+    second: bamboo_4x4_128x64_shaded_18
+  - first:
+      213: -5166980759774959227
+    second: bamboo_4x4_128x64_shaded_19
+  - first:
+      213: -109802160861464414
+    second: bamboo_4x4_128x64_shaded_20
+  - first:
+      213: 8249082237343412797
+    second: bamboo_4x4_128x64_shaded_21
+  - first:
+      213: 3828169806785402160
+    second: bamboo_4x4_128x64_shaded_22
+  - first:
+      213: -2448080930796144576
+    second: bamboo_4x4_128x64_shaded_23
+  - first:
+      213: 1539844207441454654
+    second: bamboo_4x4_128x64_shaded_24
+  - first:
+      213: 3364354673519320627
+    second: bamboo_4x4_128x64_shaded_25
+  - first:
+      213: 283480011052266804
+    second: bamboo_4x4_128x64_shaded_26
+  - first:
+      213: 3042134858188174533
+    second: bamboo_4x4_128x64_shaded_27
+  - first:
+      213: 282875599824331551
+    second: bamboo_4x4_128x64_shaded_28
+  - first:
+      213: 6674296026010067463
+    second: bamboo_4x4_128x64_shaded_29
+  - first:
+      213: 141469260796217952
+    second: bamboo_4x4_128x64_shaded_30
+  - first:
+      213: 4153256710583527492
+    second: bamboo_4x4_128x64_shaded_31
+  - first:
+      213: -6609143606654669704
+    second: bamboo_4x4_128x64_shaded_32
+  - first:
+      213: 2720270394831495594
+    second: bamboo_4x4_128x64_shaded_33
+  - first:
+      213: -2493906408395992271
+    second: bamboo_4x4_128x64_shaded_34
+  - first:
+      213: -4413608548399752491
+    second: bamboo_4x4_128x64_shaded_35
+  - first:
+      213: -663387852113790450
+    second: bamboo_4x4_128x64_shaded_36
+  - first:
+      213: 7374599305709076938
+    second: bamboo_4x4_128x64_shaded_37
+  - first:
+      213: -3702015676376655168
+    second: bamboo_4x4_128x64_shaded_38
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: bamboo_4x4_128x64_shaded_0
+      rect:
+        serializedVersion: 2
+        x: 201
+        y: 2347
+        width: 13
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8c1899b61b6348210800000000000000
+      internalID: 1334251525250843080
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bamboo_4x4_128x64_shaded_1
+      rect:
+        serializedVersion: 2
+        x: 832
+        y: 2347
+        width: 10
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d14852cfb37ff560800000000000000
+      internalID: 7349720384328450514
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bamboo_4x4_128x64_shaded_2
+      rect:
+        serializedVersion: 2
+        x: 180
+        y: 2068
+        width: 190
+        height: 274
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7ff9e894c8a1bc410800000000000000
+      internalID: 1498320490862649335
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bamboo_4x4_128x64_shaded_3
+      rect:
+        serializedVersion: 2
+        x: 687
+        y: 2063
+        width: 204
+        height: 283
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eed5d0ba4f1ec8680800000000000000
+      internalID: -8751371534929666578
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bamboo_4x4_128x64_shaded_4
+      rect:
+        serializedVersion: 2
+        x: 1264
+        y: 2073
+        width: 177
+        height: 234
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3b53108de84207e50800000000000000
+      internalID: 6804979232884733363
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bamboo_4x4_128x64_shaded_5
+      rect:
+        serializedVersion: 2
+        x: 1390
+        y: 2306
+        width: 11
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 887aa73e64cfeb2d0800000000000000
+      internalID: -3260891698775283832
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bamboo_4x4_128x64_shaded_6
+      rect:
+        serializedVersion: 2
+        x: 1844
+        y: 2301
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1b0fc7a4041ea6b90800000000000000
+      internalID: -7247732984055533391
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bamboo_4x4_128x64_shaded_7
+      rect:
+        serializedVersion: 2
+        x: 1736
+        y: 2083
+        width: 141
+        height: 216
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6b11e461bf6949ab0800000000000000
+      internalID: -5002207280946605642
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bamboo_4x4_128x64_shaded_8
+      rect:
+        serializedVersion: 2
+        x: 1877
+        y: 2181
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ffe88646bd19477a0800000000000000
+      internalID: -6380314400608710913
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bamboo_4x4_128x64_shaded_9
+      rect:
+        serializedVersion: 2
+        x: 1869
+        y: 2165
+        width: 14
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0270c5ff3ba52b190800000000000000
+      internalID: -7948190663225637088
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bamboo_4x4_128x64_shaded_10
+      rect:
+        serializedVersion: 2
+        x: 774
+        y: 1799
+        width: 9
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ca6ba9730f3763260800000000000000
+      internalID: 7076971340021544620
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bamboo_4x4_128x64_shaded_11
+      rect:
+        serializedVersion: 2
+        x: 232
+        y: 1762
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 56f447b8e90343ff0800000000000000
+      internalID: -57367437746352283
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bamboo_4x4_128x64_shaded_12
+      rect:
+        serializedVersion: 2
+        x: 707
+        y: 1564
+        width: 128
+        height: 234
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e045d728601940e50800000000000000
+      internalID: 6774699196617151502
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bamboo_4x4_128x64_shaded_13
+      rect:
+        serializedVersion: 2
+        x: 1848
+        y: 1754
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d75df3397e85fbfb0800000000000000
+      internalID: -4629884140282456707
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bamboo_4x4_128x64_shaded_14
+      rect:
+        serializedVersion: 2
+        x: 182
+        y: 1535
+        width: 138
+        height: 220
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 54f8c260cbeb5e3b0800000000000000
+      internalID: -5483767256486998203
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bamboo_4x4_128x64_shaded_15
+      rect:
+        serializedVersion: 2
+        x: 1223
+        y: 1551
+        width: 104
+        height: 188
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e8a41bb9aa1223010800000000000000
+      internalID: 1167032270082624142
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bamboo_4x4_128x64_shaded_16
+      rect:
+        serializedVersion: 2
+        x: 1224
+        y: 1739
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2ebcc277db594b800800000000000000
+      internalID: 627290889092123618
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bamboo_4x4_128x64_shaded_17
+      rect:
+        serializedVersion: 2
+        x: 1756
+        y: 1567
+        width: 135
+        height: 183
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1ab134463a1d9d6d0800000000000000
+      internalID: -2965108379954766943
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bamboo_4x4_128x64_shaded_18
+      rect:
+        serializedVersion: 2
+        x: 1220
+        y: 1705
+        width: 14
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0c91812e6ecd55e40800000000000000
+      internalID: 5644660592172603840
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bamboo_4x4_128x64_shaded_19
+      rect:
+        serializedVersion: 2
+        x: 777
+        y: 1324
+        width: 10
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 589e554ff523b48b0800000000000000
+      internalID: -5166980759774959227
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bamboo_4x4_128x64_shaded_20
+      rect:
+        serializedVersion: 2
+        x: 686
+        y: 1032
+        width: 148
+        height: 291
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a838463487e97ef0800000000000000
+      internalID: -109802160861464414
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bamboo_4x4_128x64_shaded_21
+      rect:
+        serializedVersion: 2
+        x: 1756
+        y: 1268
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d32b6dfd690aa7270800000000000000
+      internalID: 8249082237343412797
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bamboo_4x4_128x64_shaded_22
+      rect:
+        serializedVersion: 2
+        x: 1244
+        y: 1242
+        width: 9
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 035d1512824602530800000000000000
+      internalID: 3828169806785402160
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bamboo_4x4_128x64_shaded_23
+      rect:
+        serializedVersion: 2
+        x: 1717
+        y: 1066
+        width: 159
+        height: 200
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 048fc7a2d5ba60ed0800000000000000
+      internalID: -2448080930796144576
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bamboo_4x4_128x64_shaded_24
+      rect:
+        serializedVersion: 2
+        x: 1240
+        y: 1205
+        width: 14
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e36adf1f520ae5510800000000000000
+      internalID: 1539844207441454654
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bamboo_4x4_128x64_shaded_25
+      rect:
+        serializedVersion: 2
+        x: 1243
+        y: 1033
+        width: 160
+        height: 206
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 33e5b8d10c690be20800000000000000
+      internalID: 3364354673519320627
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bamboo_4x4_128x64_shaded_26
+      rect:
+        serializedVersion: 2
+        x: 228
+        y: 1063
+        width: 89
+        height: 114
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 435b1bf619f1fe300800000000000000
+      internalID: 283480011052266804
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bamboo_4x4_128x64_shaded_27
+      rect:
+        serializedVersion: 2
+        x: 251
+        y: 1165
+        width: 14
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c4b32d1985d73a20800000000000000
+      internalID: 3042134858188174533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bamboo_4x4_128x64_shaded_28
+      rect:
+        serializedVersion: 2
+        x: 1221
+        y: 578
+        width: 109
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f13a72bfbd9fce300800000000000000
+      internalID: 282875599824331551
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bamboo_4x4_128x64_shaded_29
+      rect:
+        serializedVersion: 2
+        x: 1235
+        y: 847
+        width: 11
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 702a12cafdcdf9c50800000000000000
+      internalID: 6674296026010067463
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bamboo_4x4_128x64_shaded_30
+      rect:
+        serializedVersion: 2
+        x: 735
+        y: 813
+        width: 12
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 06a456c0b8996f100800000000000000
+      internalID: 141469260796217952
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bamboo_4x4_128x64_shaded_31
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 740
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 448a65f29f453a930800000000000000
+      internalID: 4153256710583527492
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bamboo_4x4_128x64_shaded_32
+      rect:
+        serializedVersion: 2
+        x: 678
+        y: 535
+        width: 123
+        height: 270
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 87cedcf08ea9744a0800000000000000
+      internalID: -6609143606654669704
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bamboo_4x4_128x64_shaded_33
+      rect:
+        serializedVersion: 2
+        x: 223
+        y: 539
+        width: 92
+        height: 200
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa161f0f28750c520800000000000000
+      internalID: 2720270394831495594
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bamboo_4x4_128x64_shaded_34
+      rect:
+        serializedVersion: 2
+        x: 1324
+        y: 605
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1339c78b55dd36dd0800000000000000
+      internalID: -2493906408395992271
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bamboo_4x4_128x64_shaded_35
+      rect:
+        serializedVersion: 2
+        x: 1326
+        y: 610
+        width: 11
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5da5107d866bfb2c0800000000000000
+      internalID: -4413608548399752491
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bamboo_4x4_128x64_shaded_36
+      rect:
+        serializedVersion: 2
+        x: 1742
+        y: 546
+        width: 67
+        height: 141
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e0ab276634c2bc6f0800000000000000
+      internalID: -663387852113790450
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bamboo_4x4_128x64_shaded_37
+      rect:
+        serializedVersion: 2
+        x: 265
+        y: 241
+        width: 11
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ac1c1a90ff6d75660800000000000000
+      internalID: 7374599305709076938
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: bamboo_4x4_128x64_shaded_38
+      rect:
+        serializedVersion: 2
+        x: 218
+        y: 34
+        width: 107
+        height: 206
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0ca54a04b5ccf9cc0800000000000000
+      internalID: -3702015676376655168
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      bamboo_4x4_128x64_shaded_0: 1334251525250843080
+      bamboo_4x4_128x64_shaded_1: 7349720384328450514
+      bamboo_4x4_128x64_shaded_10: 7076971340021544620
+      bamboo_4x4_128x64_shaded_11: -57367437746352283
+      bamboo_4x4_128x64_shaded_12: 6774699196617151502
+      bamboo_4x4_128x64_shaded_13: -4629884140282456707
+      bamboo_4x4_128x64_shaded_14: -5483767256486998203
+      bamboo_4x4_128x64_shaded_15: 1167032270082624142
+      bamboo_4x4_128x64_shaded_16: 627290889092123618
+      bamboo_4x4_128x64_shaded_17: -2965108379954766943
+      bamboo_4x4_128x64_shaded_18: 5644660592172603840
+      bamboo_4x4_128x64_shaded_19: -5166980759774959227
+      bamboo_4x4_128x64_shaded_2: 1498320490862649335
+      bamboo_4x4_128x64_shaded_20: -109802160861464414
+      bamboo_4x4_128x64_shaded_21: 8249082237343412797
+      bamboo_4x4_128x64_shaded_22: 3828169806785402160
+      bamboo_4x4_128x64_shaded_23: -2448080930796144576
+      bamboo_4x4_128x64_shaded_24: 1539844207441454654
+      bamboo_4x4_128x64_shaded_25: 3364354673519320627
+      bamboo_4x4_128x64_shaded_26: 283480011052266804
+      bamboo_4x4_128x64_shaded_27: 3042134858188174533
+      bamboo_4x4_128x64_shaded_28: 282875599824331551
+      bamboo_4x4_128x64_shaded_29: 6674296026010067463
+      bamboo_4x4_128x64_shaded_3: -8751371534929666578
+      bamboo_4x4_128x64_shaded_30: 141469260796217952
+      bamboo_4x4_128x64_shaded_31: 4153256710583527492
+      bamboo_4x4_128x64_shaded_32: -6609143606654669704
+      bamboo_4x4_128x64_shaded_33: 2720270394831495594
+      bamboo_4x4_128x64_shaded_34: -2493906408395992271
+      bamboo_4x4_128x64_shaded_35: -4413608548399752491
+      bamboo_4x4_128x64_shaded_36: -663387852113790450
+      bamboo_4x4_128x64_shaded_37: 7374599305709076938
+      bamboo_4x4_128x64_shaded_38: -3702015676376655168
+      bamboo_4x4_128x64_shaded_4: 6804979232884733363
+      bamboo_4x4_128x64_shaded_5: -3260891698775283832
+      bamboo_4x4_128x64_shaded_6: -7247732984055533391
+      bamboo_4x4_128x64_shaded_7: -5002207280946605642
+      bamboo_4x4_128x64_shaded_8: -6380314400608710913
+      bamboo_4x4_128x64_shaded_9: -7948190663225637088
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -12,7 +12,6 @@ public class NPCData : IAgent
     public int spriteType; //the code of the sprite
     public int parentBuilding;
     public bool hasJob;
-    public float timeLeft;
 
     int IAgent.id { get => id; set => id = value; }
     string IAgent.npcName { get => npcName; set => npcName = value; }
@@ -22,7 +21,6 @@ public class NPCData : IAgent
     int IAgent.spriteType { get => spriteType; set => spriteType = value; }
     int IAgent.parentBuilding { get => parentBuilding; set => parentBuilding = value; }
     bool IAgent.hasJob { get => hasJob; set => hasJob = value; }
-    float IAgent.timeLeft { get => timeLeft; set => timeLeft = value; }
 
     public NPCData() { }
 
@@ -36,7 +34,6 @@ public class NPCData : IAgent
         spriteType = npc.spriteType;
         parentBuilding = npc.parentBuilding;
         hasJob = npc.hasJob;
-        timeLeft = npc.timeLeft;
     }
 }
 
