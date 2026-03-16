@@ -171,12 +171,12 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 73
-        y: 7
-        width: 43
-        height: 20
+        y: 9
+        width: 40
+        height: 18
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 3, y: 5, z: 8, w: 0}
+      border: {x: 5, y: 5, z: 8, w: 0}
       customData: 
       outline:
       - - {x: 8.5, y: -3}
@@ -188,11 +188,6 @@ TextureImporter:
         - {x: -16.5, y: 1}
         - {x: -10.5, y: -4}
         - {x: 5.5, y: -4}
-      - - {x: 21.5, y: -7}
-        - {x: 19.5, y: -6}
-        - {x: 17.5, y: -8}
-        - {x: 18.5, y: -10}
-        - {x: 21.5, y: -10}
       physicsShape: []
       tessellationDetail: 0
       bones: []

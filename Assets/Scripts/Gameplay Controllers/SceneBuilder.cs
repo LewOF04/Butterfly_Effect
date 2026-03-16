@@ -27,6 +27,8 @@ public class SceneBuilder : MonoBehaviour
     public GameObject shrubPrefab;
     public TreeLine rearTrees;
     public TreeLine frontTrees;
+    public CloudLine clouds1;
+    public CloudLine clouds2;
 
     [Header("Data References")]
     public List<BuildingType> houseData = new List<BuildingType>();
@@ -45,7 +47,7 @@ public class SceneBuilder : MonoBehaviour
         BuildScene();
     }
 
-    private void setColour(float minVal, float maxVal, float val, SpriteRenderer sprite)
+    private void setSkyColour(float minVal, float maxVal, float val, SpriteRenderer sprite)
     {
         val = Mathf.Clamp(val, minVal, maxVal);
         val = Mathf.InverseLerp(Mathf.Min(minVal, maxVal), Mathf.Max(minVal, maxVal), val);
@@ -54,9 +56,9 @@ public class SceneBuilder : MonoBehaviour
         Color cloudyGrey = new Color(0.7725f, 0.8274f, 0.8784f);
         Color gloomyBrown = new Color(0.4588f, 0.3686f, 0.2431f);
 
-        Color colour = val < 0.5f
-        ? Color.Lerp(gloomyBrown, cloudyGrey, val * 2f)
-        : Color.Lerp(cloudyGrey, summerBlue, (val - 0.5f) * 2f);
+        Color colour = val < 0.4f
+        ? Color.Lerp(gloomyBrown, cloudyGrey, Mathf.InverseLerp(0f, 0.4f, val))
+        : Color.Lerp(cloudyGrey, summerBlue, Mathf.InverseLerp(0.4f, 1f, val));
 
         sprite.color = colour;
     }
@@ -180,6 +182,7 @@ public class SceneBuilder : MonoBehaviour
                     (cond1 <= 75f) ? 5 :
                     (cond1 <= 87.5f) ? 6 : 7;
                 npcSprite = currNPCData.possibleSprites[npcSpriteNum];
+                totalCond += npc.stats.condition * 0.75f;
 
                 //set the sprite of the npc
                 var sr1 = npc.GetComponent<SpriteRenderer>();
@@ -201,12 +204,12 @@ public class SceneBuilder : MonoBehaviour
 
         //calculate the required quality of the outer walls
         int averageSpriteLevel = (int)Math.Round((double)totalSpriteQuality / buildings.Count);
-        float averageCond = totalCond / buildings.Count;
+        float averageCond = totalCond / (buildings.Count + (npcs.Count*0.75f));
         var wallSprite = wallData.possibleSprites[averageSpriteLevel];
         var skipperSprite = timeSkipperData.possibleSprites[averageSpriteLevel];
 
         //=====SKY BOX======
-        setColour(0f, 100f, averageCond, skyBackdrop); //set colour of sky
+        setSkyColour(0f, 100f, averageCond, skyBackdrop); //set colour of sky
         float dayTime = dataController.worldManager.gameTime % 24f; //day time between 0-24
         float brightness = Mathf.Clamp01(Mathf.Sin((dayTime - 6f) * Mathf.PI / 12f)); //calc sky brightness based on time of day
         Color c = skyBackdrop.color;
@@ -249,6 +252,10 @@ public class SceneBuilder : MonoBehaviour
         rearTrees.setTrees(averageCond);
         frontTrees.setTrees(averageCond);
 
+        //set cloud colours for parallax clouds
+        clouds1.setClouds(averageCond, dayTime);
+        clouds2.setClouds(averageCond, dayTime);
+
         //apply sprite to the time skipper post
         var skipperSR = timeSkipper.GetComponent<SpriteRenderer>();
         skipperSR.sprite = skipperSprite;
@@ -284,13 +291,9 @@ public class SceneBuilder : MonoBehaviour
         float buildingMin = buildingBounds.min.x + 0.5f;
         float buildingMax = buildingBounds.max.x - 0.5f;
 
-        // left side of building
-        if (buildingMin > floorMin)
-            ranges.Add(new XRange(floorMin, Mathf.Min(buildingMin, floorMax)));
+        if (buildingMin > floorMin) ranges.Add(new XRange(floorMin, Mathf.Min(buildingMin, floorMax)));
 
-        // right side of building
-        if (buildingMax < floorMax)
-            ranges.Add(new XRange(Mathf.Max(buildingMax, floorMin), floorMax));
+        if (buildingMax < floorMax) ranges.Add(new XRange(Mathf.Max(buildingMax, floorMin), floorMax));
 
         return ranges;
     }
@@ -298,8 +301,8 @@ public class SceneBuilder : MonoBehaviour
     private Sprite PickShrub(float condition)
     {
         condition = Mathf.Clamp(condition, 0f, 100f);
-        float cond01 = condition / 100f;
 
+        float cond01 = condition / 100f;
         float darkShrubWeight   = Mathf.Lerp(1.75f, 2.75f, cond01);
         float lightShrubWeight  = Mathf.Lerp(0.8f, 3.5f, cond01);
         float darkStoneWeight   = Mathf.Lerp(3.0f, 0.8f, cond01);
@@ -309,8 +312,6 @@ public class SceneBuilder : MonoBehaviour
         float total = darkShrubWeight + lightShrubWeight + darkStoneWeight + mediumStoneWeight + lightStoneWeight;
 
         float roll = UnityEngine.Random.Range(0f, total);
-
-        Sprite returnSprite;
 
         if ((roll -= darkShrubWeight) < 0f)  return darkShrubs[UnityEngine.Random.Range(0, darkShrubs.Length)];
         if ((roll -= lightShrubWeight) < 0f) return lightShrubs[UnityEngine.Random.Range(0, lightShrubs.Length)];

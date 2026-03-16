@@ -109,15 +109,29 @@ TextureImporter:
       name: Clouds (1)_0
       rect:
         serializedVersion: 2
-        x: 32
-        y: 426
-        width: 370
-        height: 94
+        x: 26
+        y: 423
+        width: 378
+        height: 98
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
-      outline: []
+      outline:
+      - - {x: -117, y: -43}
+        - {x: -105, y: -40}
+        - {x: 31, y: -47}
+        - {x: 86, y: -47}
+        - {x: 188, y: -34}
+        - {x: 188, y: -13}
+        - {x: 100, y: 29}
+        - {x: 73, y: 40}
+        - {x: 4, y: 49}
+        - {x: -74, y: 49}
+        - {x: -184, y: -17}
+        - {x: -184, y: -42}
+        - {x: -172, y: -47}
+        - {x: -139, y: -47}
       physicsShape: []
       tessellationDetail: 0
       bones: []
