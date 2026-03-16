@@ -22,7 +22,11 @@ public class SceneBuilder : MonoBehaviour
     public Sprite[] darkShrubs;
     public Sprite[] badTrees;
     public Sprite[] goodTrees;
+
+    [Header("Scenery")]
     public GameObject shrubPrefab;
+    public TreeLine rearTrees;
+    public TreeLine frontTrees;
 
     [Header("Data References")]
     public List<BuildingType> houseData = new List<BuildingType>();
@@ -69,7 +73,8 @@ public class SceneBuilder : MonoBehaviour
         List<Bounds> buildingBounds = new List<Bounds>();
         List<Bounds> floorBounds = new List<Bounds>();
 
-        int totalQuality = 0; //the overall quality of the settlement based upon the total quality of all of the buildings
+        float totalCond = 0; //the overall quality of the settlement based upon the total quality of all of the buildings
+        int totalSpriteQuality = 0;
 
         offset = new Vector3(9.36f, 0.0f, 0.0f);
         floorPosition = new Vector3(1.21f, -2.13f, 0.5f);
@@ -101,6 +106,7 @@ public class SceneBuilder : MonoBehaviour
             //set the sprite of the building
             Sprite buildingsSprite;
             float cond = building.condition;
+            totalCond += cond;
             int spriteNum =
                 (cond <= 12.5f) ? 0 :
                 (cond <= 25f)   ? 1 :
@@ -111,7 +117,7 @@ public class SceneBuilder : MonoBehaviour
                 (cond <= 87.5f) ? 6 : 7;
 
             buildingsSprite = currHouseData.possibleSprites[spriteNum];
-            totalQuality += spriteNum;
+            totalSpriteQuality += spriteNum;
 
             //set the sprite of the building
             var sr = building.GetComponent<SpriteRenderer>();
@@ -194,12 +200,13 @@ public class SceneBuilder : MonoBehaviour
         rightWall.transform.SetParent(sceneDecoration.transform);
 
         //calculate the required quality of the outer walls
-        int averageQuality = (int)Math.Round((double)totalQuality / buildings.Count);
-        var wallSprite = wallData.possibleSprites[averageQuality];
-        var skipperSprite = timeSkipperData.possibleSprites[averageQuality];
+        int averageSpriteLevel = (int)Math.Round((double)totalSpriteQuality / buildings.Count);
+        float averageCond = totalCond / buildings.Count;
+        var wallSprite = wallData.possibleSprites[averageSpriteLevel];
+        var skipperSprite = timeSkipperData.possibleSprites[averageSpriteLevel];
 
         //=====SKY BOX======
-        setColour(0f, 100f, averageQuality, skyBackdrop); //set colour of sky
+        setColour(0f, 100f, averageCond, skyBackdrop); //set colour of sky
         float dayTime = dataController.worldManager.gameTime % 24f; //day time between 0-24
         float brightness = Mathf.Clamp01(Mathf.Sin((dayTime - 6f) * Mathf.PI / 12f)); //calc sky brightness based on time of day
         Color c = skyBackdrop.color;
@@ -220,7 +227,7 @@ public class SceneBuilder : MonoBehaviour
 
                 while(min < max)
                 {
-                    Sprite thisSprite = PickShrub(averageQuality);
+                    Sprite thisSprite = PickShrub(averageCond);
                     Debug.Log("Sprite size = "+thisSprite.bounds.size.ToString());
                     float zPos = UnityEngine.Random.Range(-0.4f, -0.01f);
                     GameObject shrubInst = Instantiate(shrubPrefab, new Vector3(min, -1.6f, zPos), Quaternion.identity);
@@ -237,6 +244,10 @@ public class SceneBuilder : MonoBehaviour
                 }
             }
         }
+
+        //set sprite types for background trees
+        rearTrees.setTrees(averageCond);
+        frontTrees.setTrees(averageCond);
 
         //apply sprite to the time skipper post
         var skipperSR = timeSkipper.GetComponent<SpriteRenderer>();
