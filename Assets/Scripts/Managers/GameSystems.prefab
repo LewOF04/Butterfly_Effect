@@ -176,6 +176,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bdbb511601c7674c9cc7e7be7d90059, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BuildingManager
+  buildingTypeNames: {fileID: 4900000, guid: 3dc96a94ca746ca499126e5166ace004, type: 3}
+  buildingNames: {fileID: 4900000, guid: c3461ce620b742045abe02c143e4ca05, type: 3}
   buildingPrefab: {fileID: 7305655118164059182, guid: b599baa5d2828284c8a96c1ab4426e24, type: 3}
 --- !u!1 &7192061844035178918
 GameObject:
@@ -270,6 +272,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPCManager
   npcPrefab: {fileID: -242075621941404267, guid: d050232c96babe643b0fbf05b3d31920, type: 3}
+  maleFirstNames: {fileID: 4900000, guid: 14edf6c49f9157041918bcfdb4c72bb7, type: 3}
+  femaleFirstNames: {fileID: 4900000, guid: 7e54d8f49edb4064699e5ee59cbbf620, type: 3}
+  neutralFirstNames: {fileID: 4900000, guid: 081073f3fcdd94244878d6f6a6006ac7, type: 3}
+  surnames: {fileID: 4900000, guid: 4abc1e14019f67b438f17a17f9dc7a63, type: 3}
 --- !u!1 &7742010175312080408
 GameObject:
   m_ObjectHideFlags: 0

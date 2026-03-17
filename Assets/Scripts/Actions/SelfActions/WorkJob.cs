@@ -72,7 +72,7 @@ public class WorkJob : SelfAction
         if(!dataController.TryGetAgent(currentActor, out var performer)) return;
         
         float percentMulti = percentComplete/100;
-        string description = performer.npcName + " spent " + (percentMulti*timeToComplete).ToString("0.00") + " hours at work.";
+        string description = performer.fullName + " spent " + (percentMulti*timeToComplete).ToString("0.00") + " hours at work.";
         ActionResult successInfo = ActionMaths.calcActionSuccess(actSuccess, percentComplete);
 
         float wealthMultiplier;

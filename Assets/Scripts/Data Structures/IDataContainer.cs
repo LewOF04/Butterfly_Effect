@@ -2,8 +2,6 @@ using System.Collections.Generic;
 
 public interface IDataContainer
 {
-    //Dictionary<int, IAgent> NPCStorage { get; set; }
-    //Dictionary<int, IBuilding> BuildingStorage { get; set; }
     Dictionary<int, TraitData> TraitStorage { get; set; }
     Dictionary<string, IAction> ActionStorage { get; set; }
 

@@ -5,6 +5,12 @@ using System;
 public class NPCManager : MonoBehaviour
 {
     public NPC npcPrefab;
+
+    [Header("Name Assets")]
+    public TextAsset maleFirstNames;
+    public TextAsset femaleFirstNames;
+    public TextAsset neutralFirstNames;
+    public TextAsset surnames;
     private DataController dataController;
 
     const int MIN_NPCS = 1;
@@ -60,7 +66,6 @@ public class NPCManager : MonoBehaviour
     private NPC generateNPC(int inputID, int maxTrait, System.Random rng)
     {
         int id = inputID;
-        string npcName = ""; //TODO: create a way to give NPCs unique names
         Attributes attributes = new Attributes(); //the attributes of the character
         Stats stats = new Stats(); //the stats of the character
         List<int> traits = new List<int>(); 
@@ -104,7 +109,9 @@ public class NPCManager : MonoBehaviour
         inst.transform.SetParent(dataController.npcContainer, false);
         var npc = inst.GetComponent<NPC>(); //gets the monoBehaviour script linked to the instantiation
 
-        npc.Load(id, npcName, attributes, stats, traits, spriteType, parentBuilding, hasJob); //loads the npc with data
+        npc.Load(id, "", "", attributes, stats, traits, spriteType, parentBuilding, hasJob); //loads the npc with data
+        generateAgentName(npc);
+        npc.fullName = npc.firstName + " " + npc.surname;
 
         return npc;
     }
@@ -150,5 +157,59 @@ public class NPCManager : MonoBehaviour
         }
 
         return outputDict;
+    }
+
+    //generates a first and last name for the agent
+    private void generateAgentName(IAgent agent)
+    {
+        int seed = HashCode.Combine(
+            agent.id,
+            Mathf.RoundToInt(agent.stats.condition * 100f),
+            Mathf.RoundToInt(agent.attributes.morality * 100f)
+        );
+        
+        Debug.Log("Cond: "+agent.stats.condition.ToString() + " Morality: "+agent.attributes.morality.ToString());
+        Debug.Log("NPC ID: "+agent.id.ToString() + " " + "Seed: "+seed.ToString());
+        System.Random rng = new System.Random(seed); //weight based on agent info
+
+        //randomly determine which name file we want to pull from
+        TextAsset nameFile = (object) rng.Next(0, 3) switch
+        {
+            0 => maleFirstNames,
+            1 => femaleFirstNames,
+            _ => neutralFirstNames,
+        };
+        List<string> names = new List<string>(nameFile.text.Split('\n'));
+        agent.firstName = GetRandomString(names, agent, rng);
+
+        List<string> surnameList = new List<string>(surnames.text.Split("\n"));
+        //check whether this agent has a building they live in
+        if (DomainContext.DataController.TryGetBuilding(agent.parentBuilding, out IBuilding building))
+        {
+            if(building.familyName == "") //if there is no family name (no-one living there yet)
+            {
+                //get random surname
+                agent.surname = GetRandomString(surnameList, agent, rng);
+                building.familyName = agent.surname;
+            }
+            else
+            {
+                //if there is a family in this building, 80% chance they're part of that family
+                int num = rng.Next(0, 101);
+                if(num > 80) agent.surname = GetRandomString(surnameList, agent, rng);
+                else agent.surname = building.familyName;
+            }
+        }
+        else
+        {
+            //if no building, random surname
+            agent.surname = GetRandomString(surnameList, agent, rng);   
+        }
+    }
+
+    private string GetRandomString(List<string> strings, IAgent agent, System.Random rng)
+    {
+        int index = rng.Next(0, strings.Count);
+        return strings[index].Trim();
     }
 } 

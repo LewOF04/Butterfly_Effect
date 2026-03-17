@@ -121,7 +121,7 @@ public class NPCMenu : MonoBehaviour
         spriteImageLoc.sprite = npc.GetComponent<SpriteRenderer>().sprite;
         spriteImageLoc.preserveAspect = true;
 
-        menuTitle.text = "(NPC) Name: "+npc.npcName+" ID: "+npc.id.ToString();
+        menuTitle.text = "(NPC) Name: "+npc.firstName+" "+npc.surname+" ID: "+npc.id.ToString();
 
         attributeSliders[0].value = attrs.morality;
         attributeSliders[1].value = attrs.intelligence;
@@ -474,14 +474,14 @@ public class NPCMenu : MonoBehaviour
             objScript.nameField.text = "Name: "+building.buildingName;
             objScript.idField.text = "ID: "+building.id.ToString();
         }
-        if(receiver is NPC thisNpc) {
-            actions = possibleActions.npcActions[thisNpc.id];
-            Sprite theSprite = thisNpc.gameObject.GetComponent<SpriteRenderer>().sprite;
+        if(receiver is NPC thisNPC) {
+            actions = possibleActions.npcActions[thisNPC.id];
+            Sprite theSprite = thisNPC.gameObject.GetComponent<SpriteRenderer>().sprite;
             ReceiverInfo objScript = recGameObj.GetComponent<ReceiverInfo>();
             objScript.spriteImageLoc.sprite = theSprite;
             objScript.spriteImageLoc.preserveAspect = true;
-            objScript.nameField.text = "Name: "+thisNpc.npcName;
-            objScript.idField.text = "ID: "+thisNpc.id.ToString();
+            objScript.nameField.text = "Name: "+thisNPC.firstName+" "+thisNPC.surname;
+            objScript.idField.text = "ID: "+thisNPC.id.ToString();
         }
 
         //iterate over all actions and display them

@@ -231,7 +231,6 @@ public class SceneBuilder : MonoBehaviour
                 while(min < max)
                 {
                     Sprite thisSprite = PickShrub(averageCond);
-                    Debug.Log("Sprite size = "+thisSprite.bounds.size.ToString());
                     float zPos = UnityEngine.Random.Range(-0.4f, -0.01f);
                     GameObject shrubInst = Instantiate(shrubPrefab, new Vector3(min, -1.6f, zPos), Quaternion.identity);
                     shrubInst.transform.SetParent(sceneDecoration.transform);

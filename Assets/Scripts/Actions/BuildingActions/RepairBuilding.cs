@@ -85,7 +85,7 @@ public class RepairBuilding: BuildingAction
         if(!dataController.TryGetBuilding(receiver, out var target)) return;
 
         float percentMulti = percentComplete / 100;
-        string description = performer.npcName + " spent " + (percentMulti*timeToComplete).ToString("0.00") + " hours fixing the "+target.buildingName+" building.";
+        string description = performer.fullName + " spent " + (percentMulti*timeToComplete).ToString("0.00") + " hours fixing the "+target.buildingName+" building.";
         ActionResult successInfo = ActionMaths.calcActionSuccess(actSuccess, percentComplete);
 
         //add description and result levels based on success

@@ -9,12 +9,14 @@ public class BuildingData : IBuilding
     [Range(1,5)] public int buildingType; //the type of building [0,1,2,3,4]
     [Range(0, 100)] public float condition; //the condition of the building from 0-100
     public List<int> inhabitants = new List<int>(); //string of inhabitant NPCs
+    public string familyName = "";
 
     int IBuilding.id { get => id; set => id = value; }
     string IBuilding.buildingName { get => buildingName; set => buildingName = value; }
     int IBuilding.buildingType { get => buildingType; set => buildingType = value; }
     float IBuilding.condition { get => condition; set => condition = value; }
     List<int> IBuilding.inhabitants { get => inhabitants; set => inhabitants = value; }
+    string IBuilding.familyName { get => familyName; set => familyName = value; }
 
     public BuildingData() { }
 

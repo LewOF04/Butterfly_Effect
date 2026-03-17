@@ -78,7 +78,7 @@ public class EatFood : SelfAction
         if(!dataController.TryGetAgent(currentActor, out var performer)) return;
 
         float percentMulti = percentComplete / 100;
-        string description = performer.npcName + " spent " + (percentMulti*timeToComplete).ToString("0.00") + " eating food.";
+        string description = performer.fullName + " spent " + (percentMulti*timeToComplete).ToString("0.00") + " eating food.";
 
         //the amount of food that needs to be consumed is relative to the condition
         float foodConsumed = baseConsumption * Mathf.Lerp(0.75f, 1.5f, Mathf.InverseLerp(0f, 100f, performer.stats.condition));

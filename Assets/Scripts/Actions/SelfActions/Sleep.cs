@@ -79,7 +79,7 @@ public class Sleep : SelfAction
         if(!dataController.TryGetAgent(currentActor, out var performer)) return;
         
         float percentMulti = percentComplete/100;
-        string description = performer.npcName + " spent " + (timeToComplete*percentMulti).ToString("0.00") + " hours sleeping.";
+        string description = performer.fullName + " spent " + (timeToComplete*percentMulti).ToString("0.00") + " hours sleeping.";
         ActionResult successInfo = ActionMaths.calcActionSuccess(actSuccess, percentComplete);
 
         float sleepMultiplier;

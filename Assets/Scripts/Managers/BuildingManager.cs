@@ -6,7 +6,10 @@ public class BuildingManager : MonoBehaviour
 {
     const int MAX_HOUSES = 10;
     const int MIN_HOUSES = 1;
-    //TODO: this number is entirely arbitrary
+
+    [Header("Text Files")]
+    public TextAsset buildingTypeNames;
+    public TextAsset buildingNames;
     public Building buildingPrefab;
     private DataController dataController; 
 
@@ -59,7 +62,6 @@ public class BuildingManager : MonoBehaviour
 
     private Building generateBuilding(int id, System.Random rng)
     {
-        string buildingName = ""; //TODO: a way to generate house names
         int buildingType = rng.Next(1, 6);
         float condition = rng.Next(0, 101);
 
@@ -67,7 +69,8 @@ public class BuildingManager : MonoBehaviour
         inst.transform.SetParent(dataController.buildingContainer, false);
         var building = inst.GetComponent<Building>(); //gets the monoBehaviour script linked to the instantiation
 
-        building.Load(id, buildingName, buildingType, condition); //loads the building with data
+        building.Load(id, "", buildingType, condition); //loads the building with data
+        generateBuildingName(building);
 
         return building;
     }
@@ -113,5 +116,24 @@ public class BuildingManager : MonoBehaviour
         }
 
         return outputDict;
+    }
+
+    private void generateBuildingName(IBuilding building)
+    {
+        int seed = HashCode.Combine(
+            building.id,
+            Mathf.RoundToInt(building.condition * 100f)
+        );
+        System.Random rng = new System.Random(seed); //weight based on building info
+        List<string> typeNames = new List<string>(buildingTypeNames.text.Split('\n'));
+        List<string> names = new List<string>(buildingNames.text.Split('\n'));
+
+        building.buildingName = GetRandomString(names, rng) + " " + GetRandomString(typeNames, rng);
+    }
+
+    private string GetRandomString(List<string> strings, System.Random rng)
+    {
+        int index = rng.Next(0, strings.Count);
+        return strings[index].Trim();
     }
 }

@@ -78,7 +78,7 @@ public class ImproveCharisma : SelfAction
         if(!dataController.TryGetAgent(currentActor, out var performer)) return;
 
         float percentMulti = percentComplete / 100;
-        string description = performer.npcName + " spent " + (percentMulti*timeToComplete).ToString("0.00") + " hours improving their charisma.";
+        string description = performer.fullName + " spent " + (percentMulti*timeToComplete).ToString("0.00") + " hours improving their charisma.";
         ActionResult successInfo = ActionMaths.calcActionSuccess(actSuccess, percentComplete);
 
         //add description and result levels based on success

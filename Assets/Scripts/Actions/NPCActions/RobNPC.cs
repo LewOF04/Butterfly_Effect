@@ -88,7 +88,7 @@ public class RobNPC : NPCAction
         if(!dataController.TryGetAgent(receiver, out var target)) return;
 
         float percentMulti = percentComplete / 100;
-        string description = performer.npcName + " spent " + (percentMulti*timeToComplete).ToString("0.00") + " hours robbing "+target.npcName+".";
+        string description = performer.fullName + " spent " + (percentMulti*timeToComplete).ToString("0.00") + " hours robbing "+target.fullName+".";
         ActionResult successInfo = ActionMaths.calcActionSuccess(actSuccess, percentComplete);
 
         //add description and result levels based on success
@@ -96,9 +96,9 @@ public class RobNPC : NPCAction
         if(successInfo.success == true) {
             description += "They successfully robbed them ";
             
-            if(successInfo.quality < 0.25f) {description += "but "+target.npcName+" saw them coming and defended themselves well."; robMultiplier = 0.33f;}
+            if(successInfo.quality < 0.25f) {description += "but "+target.fullName+" saw them coming and defended themselves well."; robMultiplier = 0.33f;}
             else if(successInfo.quality < 0.5f) {description += "but they weren't able to grab everything they wanted."; robMultiplier = 0.66f;}
-            else if(successInfo.quality < 0.75f) {description += "and they took everything they could find from "+target.npcName+"."; robMultiplier = 1f;}
+            else if(successInfo.quality < 0.75f) {description += "and they took everything they could find from "+target.fullName+"."; robMultiplier = 1f;}
             else {description += "and they even found cash hidden in the victims shoes."; robMultiplier = 1.33f;}
         }
         else {

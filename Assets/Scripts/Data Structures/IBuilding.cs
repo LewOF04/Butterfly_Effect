@@ -7,4 +7,5 @@ public interface IBuilding
     int buildingType { get; set; }
     float condition { get; set; }
     List<int> inhabitants { get; set; }
+    string familyName { get; set; }
 }

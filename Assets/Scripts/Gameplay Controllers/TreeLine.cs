@@ -8,9 +8,7 @@ public class TreeLine : MonoBehaviour
 
     public void setTrees(float avgCondition)
     {
-        Debug.Log("Average Condition = "+avgCondition.ToString("0.00"));
         int level = Mathf.RoundToInt(Mathf.Lerp(0, treeLevels.Length - 1, avgCondition/100));
-        Debug.Log("Tree level = "+level.ToString());
 
         foreach(Transform child in SideA.transform)
         {

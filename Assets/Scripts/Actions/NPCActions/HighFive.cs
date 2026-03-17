@@ -82,7 +82,7 @@ public class HighFive : NPCAction
         if(!dataController.TryGetAgent(currentActor, out var performer)) return;
         if(!dataController.TryGetAgent(receiver, out var target)) return;
 
-        string description = performer.npcName + " spent " + timeToComplete.ToString("0.00") + " giving "+target.npcName+" a high five.";
+        string description = performer.fullName + " spent " + timeToComplete.ToString("0.00") + " giving "+target.fullName+" a high five.";
         ActionResult successInfo = ActionMaths.calcActionSuccess(actSuccess, 100f);
 
         bool wasPosRec;
@@ -133,13 +133,13 @@ public class HighFive : NPCAction
                 wasPosRec = false;
             }
             else if(successInfo.quality < 0.75f) {
-                description += target.npcName+" looked at "+performer.npcName+" with disgust when they attempted it."; 
+                description += target.fullName+" looked at "+performer.fullName+" with disgust when they attempted it."; 
                 relMultiplier = -1f;
                 wasPosPerf = false;
                 wasPosRec = true;
             }
             else {
-                description += "they were too scared to attempt it with "+target.npcName; 
+                description += "they were too scared to attempt it with "+target.fullName; 
                 relMultiplier = -1.33f;
                 wasPosPerf = false;
                 wasPosRec = true;
@@ -159,7 +159,7 @@ public class HighFive : NPCAction
         Relationship rel = dataController.RelationshipStorage[new RelationshipKey(performer.id, target.id)];
         float relGain = 5f * relMultiplier;
         rel.value = Mathf.Min(100f, rel.value + relGain);
-        description += "and altered their relationship with "+target.npcName+" by ";
+        description += "and altered their relationship with "+target.fullName+" by ";
         if(relGain >= 0) description += "+";
         else description += "-";
         description += relGain.ToString("0.00")+".";

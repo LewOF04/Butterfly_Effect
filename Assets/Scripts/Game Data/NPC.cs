@@ -7,7 +7,9 @@ using System.Collections.Generic;
  public class NPC : MonoBehaviour, IAgent
 {
     public int id; //unique ID identifier for the NPC
-    public string npcName; //name of the NPC
+    public string firstName; //name of the NPC
+    public string surname;
+    public string fullName;
     public Attributes attributes; //the attributes of the character
     public Stats stats; //the stats of the character
     public List<int> traits; //list of ids of the traits that this NPC has
@@ -17,7 +19,9 @@ using System.Collections.Generic;
     public float relTime = 0f; //the amount of time they have left in the day
 
     int IAgent.id { get => id; set => id = value; }
-    string IAgent.npcName { get => npcName; set => npcName = value; }
+    string IAgent.firstName { get => firstName; set => firstName = value; }
+    string IAgent.surname { get => surname; set => surname = value; }
+    string IAgent.fullName { get => fullName; set => fullName = value; }
     Attributes IAgent.attributes { get => attributes; set => attributes = value; }
     Stats IAgent.stats { get => stats; set => stats = value; }
     List<int> IAgent.traits { get => traits; set => traits = value; }
@@ -39,7 +43,9 @@ using System.Collections.Generic;
     public void Load(NPCData data)
     {
         id = data.id;
-        npcName = data.npcName;
+        surname = data.surname;
+        firstName = data.firstName;
+        fullName = firstName + " " + surname;
         attributes = data.attributes;
         stats = data.stats;
         traits = data.traits; //converts into list from array
@@ -48,10 +54,12 @@ using System.Collections.Generic;
         hasJob = data.hasJob;
     }
 
-    public void Load(int inputID, string inputNpcName, Attributes inputAttributes, Stats inputStats, List<int> inputTraits, int inputSpriteType, int inputParentBuilding, bool inputHasJob)
+    public void Load(int inputID, string inputFirstName, string inputSurname, Attributes inputAttributes, Stats inputStats, List<int> inputTraits, int inputSpriteType, int inputParentBuilding, bool inputHasJob)
     {
         id = inputID;
-        npcName = inputNpcName;
+        firstName = inputFirstName;
+        surname = inputSurname;
+        fullName = firstName + " " + surname;
         attributes = inputAttributes;
         stats = inputStats;
         traits = inputTraits;

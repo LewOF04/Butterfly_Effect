@@ -77,7 +77,7 @@ public class ImproveIntelligence : SelfAction
         if(!dataController.TryGetAgent(currentActor, out var performer)) return;
 
         float percentMulti = percentComplete / 100;
-        string description = performer.npcName + " spent " + (percentMulti*timeToComplete).ToString("0.00") + " hours improving their intelligence.";
+        string description = performer.fullName + " spent " + (percentMulti*timeToComplete).ToString("0.00") + " hours improving their intelligence.";
         ActionResult successInfo = ActionMaths.calcActionSuccess(actSuccess, percentComplete);
 
         //add description and result levels based on success

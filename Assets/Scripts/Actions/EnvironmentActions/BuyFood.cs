@@ -74,7 +74,7 @@ public class BuyFood : EnvironmentAction
         float baseCost = dataController.World.costPerFood * baseFoodIncrease;
 
         float percentMulti = percentComplete / 100;
-        string description = performer.npcName + " spent " + (percentMulti*timeToComplete).ToString("0.00") + " hours shopping for food.";
+        string description = performer.fullName + " spent " + (percentMulti*timeToComplete).ToString("0.00") + " hours shopping for food.";
         ActionResult successInfo = ActionMaths.calcActionSuccess(actSuccess, percentComplete);
 
         //add description and result levels based on success

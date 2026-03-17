@@ -15,7 +15,7 @@ public class RelationshipPanel : MonoBehaviour
 
     public void displayData()
     {
-        npcNameField.text = secondaryNPC.npcName;
+        npcNameField.text = secondaryNPC.fullName;
         idInfoField.text = "ID: "+secondaryNPC.id.ToString();
 
         Sprite npcSprite = secondaryNPC.GetComponent<SpriteRenderer>().sprite;
