@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 952606870392435971}
   - component: {fileID: 3070983328365616558}
   - component: {fileID: -1214427189904913643}
+  - component: {fileID: 4029814003703261566}
   m_Layer: 0
   m_Name: npcPrefab
   m_TagString: Untagged
@@ -48,7 +49,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::NPC
   id: 0
-  npcName: 
+  firstName: 
+  surname: 
+  fullName: 
   attributes:
     morality: 0
     intelligence: 0
@@ -71,6 +74,8 @@ MonoBehaviour:
   traits: 
   spriteType: 0
   parentBuilding: 0
+  hasJob: 0
+  relTime: 0
 --- !u!212 &952606870392435971
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -193,3 +198,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2df51a1cdf7a0424c94f30ed4227a815, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ObjectSelector
+--- !u!114 &4029814003703261566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8993901430755498270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4adba3e54fa9f74c80347f0a41887d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AgentMovement
+  self: {fileID: -242075621941404267}
+  standingSprite: {fileID: 0}
+  walkingSprites: []
+  spriteRenderer: {fileID: 952606870392435971}
+  leftLimit: 0
+  rightLimit: 0
+  characterTransform: {fileID: 8744661942720618082}
+  canMove: 0
+  minIdleTime: 0.5
+  maxIdleTime: 3
+  moveChance: 0.7
+  animationRate: 0.18

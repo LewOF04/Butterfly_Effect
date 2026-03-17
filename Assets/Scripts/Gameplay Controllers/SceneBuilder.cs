@@ -181,12 +181,21 @@ public class SceneBuilder : MonoBehaviour
                     (cond1 <= 62.5f) ? 4 :
                     (cond1 <= 75f) ? 5 :
                     (cond1 <= 87.5f) ? 6 : 7;
-                npcSprite = currNPCData.possibleSprites[npcSpriteNum];
+                Sprite[] sprites = currNPCData.getSprites()[npcSpriteNum];
+                npcSprite = sprites[0];
+
                 totalCond += npc.stats.condition * 0.75f;
 
                 //set the sprite of the npc
-                var sr1 = npc.GetComponent<SpriteRenderer>();
+                SpriteRenderer sr1 = npc.GetComponent<SpriteRenderer>();
                 sr1.sprite = npcSprite;
+
+                AgentMovement moveInfo = npc.GetComponent<AgentMovement>();
+                moveInfo.standingSprite = sprites[0];
+                moveInfo.walkingSprites = new Sprite[]{sprites[1], sprites[2], sprites[3]};
+                moveInfo.leftLimit = buildingLeftEdge;
+                moveInfo.rightLimit = buildingRightEdge; 
+                moveInfo.setCanMove(true);
 
                 //set the scale of npc
                 npc.gameObject.transform.localScale = currNPCData.scale;

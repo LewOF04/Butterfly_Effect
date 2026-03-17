@@ -13,16 +13,45 @@ MonoBehaviour:
   m_Name: npc3
   m_EditorClassIdentifier: Assembly-CSharp::NPCType
   id: 3
-  race: Circle
-  hairColour: None
-  possibleSprites:
-  - {fileID: -2413806693520163455, guid: a7826c33726789041b3b130ede629377, type: 3}
-  - {fileID: -2413806693520163455, guid: a7826c33726789041b3b130ede629377, type: 3}
-  - {fileID: -2413806693520163455, guid: a7826c33726789041b3b130ede629377, type: 3}
-  - {fileID: -2413806693520163455, guid: a7826c33726789041b3b130ede629377, type: 3}
-  - {fileID: -2413806693520163455, guid: a7826c33726789041b3b130ede629377, type: 3}
-  - {fileID: -2413806693520163455, guid: a7826c33726789041b3b130ede629377, type: 3}
-  - {fileID: -2413806693520163455, guid: a7826c33726789041b3b130ede629377, type: 3}
-  - {fileID: -2413806693520163455, guid: a7826c33726789041b3b130ede629377, type: 3}
-  startingPosition: {x: 0, y: -1.5, z: -0.5}
-  scale: {x: 0.8, y: 0.8, z: 0.8}
+  level0Sprites:
+  - {fileID: -1718263776, guid: 6b0939f7e0a18ff4b96257b5267858fe, type: 3}
+  - {fileID: 950913812, guid: 6b0939f7e0a18ff4b96257b5267858fe, type: 3}
+  - {fileID: -1316170341, guid: 6b0939f7e0a18ff4b96257b5267858fe, type: 3}
+  - {fileID: 1606753363, guid: 6b0939f7e0a18ff4b96257b5267858fe, type: 3}
+  level1Sprites:
+  - {fileID: -1718263776, guid: 6b0939f7e0a18ff4b96257b5267858fe, type: 3}
+  - {fileID: 950913812, guid: 6b0939f7e0a18ff4b96257b5267858fe, type: 3}
+  - {fileID: -1316170341, guid: 6b0939f7e0a18ff4b96257b5267858fe, type: 3}
+  - {fileID: 1606753363, guid: 6b0939f7e0a18ff4b96257b5267858fe, type: 3}
+  level2Sprites:
+  - {fileID: -1718263776, guid: 6b0939f7e0a18ff4b96257b5267858fe, type: 3}
+  - {fileID: 950913812, guid: 6b0939f7e0a18ff4b96257b5267858fe, type: 3}
+  - {fileID: -1316170341, guid: 6b0939f7e0a18ff4b96257b5267858fe, type: 3}
+  - {fileID: 1606753363, guid: 6b0939f7e0a18ff4b96257b5267858fe, type: 3}
+  level3Sprites:
+  - {fileID: -1718263776, guid: 6b0939f7e0a18ff4b96257b5267858fe, type: 3}
+  - {fileID: 950913812, guid: 6b0939f7e0a18ff4b96257b5267858fe, type: 3}
+  - {fileID: -1316170341, guid: 6b0939f7e0a18ff4b96257b5267858fe, type: 3}
+  - {fileID: 1606753363, guid: 6b0939f7e0a18ff4b96257b5267858fe, type: 3}
+  level4Sprites:
+  - {fileID: -1718263776, guid: 6b0939f7e0a18ff4b96257b5267858fe, type: 3}
+  - {fileID: 950913812, guid: 6b0939f7e0a18ff4b96257b5267858fe, type: 3}
+  - {fileID: -1316170341, guid: 6b0939f7e0a18ff4b96257b5267858fe, type: 3}
+  - {fileID: 1606753363, guid: 6b0939f7e0a18ff4b96257b5267858fe, type: 3}
+  level5Sprites:
+  - {fileID: -1718263776, guid: 6b0939f7e0a18ff4b96257b5267858fe, type: 3}
+  - {fileID: 950913812, guid: 6b0939f7e0a18ff4b96257b5267858fe, type: 3}
+  - {fileID: -1316170341, guid: 6b0939f7e0a18ff4b96257b5267858fe, type: 3}
+  - {fileID: 1606753363, guid: 6b0939f7e0a18ff4b96257b5267858fe, type: 3}
+  level6Sprites:
+  - {fileID: -1718263776, guid: 6b0939f7e0a18ff4b96257b5267858fe, type: 3}
+  - {fileID: 950913812, guid: 6b0939f7e0a18ff4b96257b5267858fe, type: 3}
+  - {fileID: -1316170341, guid: 6b0939f7e0a18ff4b96257b5267858fe, type: 3}
+  - {fileID: 1606753363, guid: 6b0939f7e0a18ff4b96257b5267858fe, type: 3}
+  level7Sprites:
+  - {fileID: -1718263776, guid: 6b0939f7e0a18ff4b96257b5267858fe, type: 3}
+  - {fileID: 950913812, guid: 6b0939f7e0a18ff4b96257b5267858fe, type: 3}
+  - {fileID: -1316170341, guid: 6b0939f7e0a18ff4b96257b5267858fe, type: 3}
+  - {fileID: 1606753363, guid: 6b0939f7e0a18ff4b96257b5267858fe, type: 3}
+  startingPosition: {x: 0, y: -1.5, z: -0.4}
+  scale: {x: 1, y: 1, z: 1}

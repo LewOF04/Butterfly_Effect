@@ -69,7 +69,7 @@ public class NPCManager : MonoBehaviour
         Attributes attributes = new Attributes(); //the attributes of the character
         Stats stats = new Stats(); //the stats of the character
         List<int> traits = new List<int>(); 
-        int spriteType = rng.Next(1, 5); //TODO: idk how many different sprite types there will be
+        int spriteType = rng.Next(1, 5);
         int parentBuilding = -1; //not yet defined
         bool hasJob = rng.Next(2) == 0;
 
