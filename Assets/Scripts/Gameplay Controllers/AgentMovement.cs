@@ -76,7 +76,7 @@ public class AgentMovement : MonoBehaviour
             }
 
             //get the position which the agent is going to move to
-            float targetX = Random.Range(leftLimit, rightLimit);
+            float targetX = Random.Range(leftLimit - 1f, rightLimit + 1f);
             yield return StartCoroutine(moveToX(targetX));
         }
 
@@ -87,8 +87,6 @@ public class AgentMovement : MonoBehaviour
     //move the agent to the designated x position
     private IEnumerator moveToX(float targetX)
     {
-        targetX = Mathf.Clamp(targetX, leftLimit, rightLimit); //make sure it's within the limit
-
         //while we can move and the position is not at the target yet
         while (canMove && Mathf.Abs(characterTransform.position.x - targetX) > 0.02f)
         {

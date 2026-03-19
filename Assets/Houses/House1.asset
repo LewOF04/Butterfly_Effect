@@ -28,7 +28,7 @@ MonoBehaviour:
   - {fileID: 4498729502696186937, guid: 9f2a14d7729be0a4981714a74cad5514, type: 3}
   - {fileID: -3482062948776847638, guid: 384b72263709a5c42b861211cf45a907, type: 3}
   scale: {x: 0.23, y: 0.23, z: 0.23}
-  defaultPosition: {x: 1.25, y: -0.906, z: 0}
+  defaultPosition: {x: 1.1288, y: -0.73387, z: 0}
   colliderShape:
   - {x: 3.8, y: -2.96}
   - {x: 3.81, y: -2.35}

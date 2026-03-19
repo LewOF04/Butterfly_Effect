@@ -167,9 +167,7 @@ public class NPCManager : MonoBehaviour
             Mathf.RoundToInt(agent.stats.condition * 100f),
             Mathf.RoundToInt(agent.attributes.morality * 100f)
         );
-        
-        Debug.Log("Cond: "+agent.stats.condition.ToString() + " Morality: "+agent.attributes.morality.ToString());
-        Debug.Log("NPC ID: "+agent.id.ToString() + " " + "Seed: "+seed.ToString());
+    
         System.Random rng = new System.Random(seed); //weight based on agent info
 
         //randomly determine which name file we want to pull from
