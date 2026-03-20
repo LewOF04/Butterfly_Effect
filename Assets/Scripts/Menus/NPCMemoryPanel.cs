@@ -59,7 +59,6 @@ public class NPCMemoryPanel : MonoBehaviour
             wasPosText.gameObject.SetActive(true);
 
             //populate receiver field
-            Debug.Log("Receiver Num = "+thisEvent.receiver.ToString());
             
             receiver = dataController.NPCStorage[thisEvent.receiver];
             receiverNameField.text = "Name: "+receiver.fullName;

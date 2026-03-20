@@ -67,7 +67,11 @@ public class ActionFrontier
                 ActionInfoWrapper info = agentAction.computeAction(performer, agent);
 
                 //check if this is the new best action
-                if(topActionSet == false || info.estUtility > topAction.estUtility) topAction = info;
+                if(topActionSet == false || info.estUtility > topAction.estUtility) 
+                {
+                    topAction = info;
+                    topActionSet = true;
+                }
             } 
         }
 
@@ -81,7 +85,11 @@ public class ActionFrontier
                 
                 ActionInfoWrapper info = buildAct.computeAction(performer, building);
 
-                if(topActionSet == false || info.estUtility > topAction.estUtility) topAction = info;
+                if(topActionSet == false || info.estUtility > topAction.estUtility) 
+                {
+                    topAction = info;
+                    topActionSet = true;
+                }
             }
         }
 
@@ -89,14 +97,22 @@ public class ActionFrontier
         {
             ActionInfoWrapper info = selfAct.computeAction(performer, default);
 
-            if(topActionSet == false || info.estUtility > topAction.estUtility) topAction = info;
+            if(topActionSet == false || info.estUtility > topAction.estUtility) 
+            {
+                topAction = info;
+                topActionSet = true;
+            }
         }
 
         foreach(EnvironmentAction envAct in DataController.Instance.environmentActions)
         {
             ActionInfoWrapper info = envAct.computeAction(performer, default);
 
-            if(topActionSet == false || info.estUtility > topAction.estUtility) topAction = info;
+            if(topActionSet == false || info.estUtility > topAction.estUtility) 
+            {
+                topAction = info;
+                topActionSet = true;
+            }
         }
 
         return topAction;
@@ -120,7 +136,11 @@ public class ActionFrontier
                 npcActions[agent.id].Add(info);
 
                 //check if this is the new best action
-                if(bestActionSet == false || info.estUtility > bestAction.estUtility) bestAction = info;
+                if(bestActionSet == false || info.estUtility > bestAction.estUtility)
+                {
+                    bestActionSet = true;
+                    bestAction = info;
+                } 
             } 
         }
 
@@ -135,7 +155,11 @@ public class ActionFrontier
                 ActionInfoWrapper info = buildAct.computeAction(performer, building);
                 buildingActions[building.id].Add(info);
 
-                if(bestActionSet == false || info.estUtility > bestAction.estUtility) bestAction = info;
+                if(bestActionSet == false || info.estUtility > bestAction.estUtility)
+                {
+                    bestActionSet = true;
+                    bestAction = info;
+                } 
             }
         }
 
@@ -144,7 +168,11 @@ public class ActionFrontier
             ActionInfoWrapper info = selfAct.computeAction(performer, default);
             selfActions.Add(info);
 
-            if(bestActionSet == false || info.estUtility > bestAction.estUtility) bestAction = info;
+            if(bestActionSet == false || info.estUtility > bestAction.estUtility)
+            {
+                bestActionSet = true;
+                bestAction = info;
+            } 
         }
 
         foreach(EnvironmentAction envAct in DataController.Instance.environmentActions)
@@ -152,7 +180,11 @@ public class ActionFrontier
             ActionInfoWrapper info = envAct.computeAction(performer, default);
             environmentActions.Add(info);
 
-            if(bestActionSet == false || info.estUtility > bestAction.estUtility) bestAction = info;
+            if(bestActionSet == false || info.estUtility > bestAction.estUtility)
+            {
+                bestActionSet = true;
+                bestAction = info;
+            } 
         }
     }
 }

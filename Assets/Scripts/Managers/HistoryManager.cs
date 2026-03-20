@@ -25,7 +25,6 @@ public class HistoryManager : MonoBehaviour
     {
         if(dataController is DataController dc)
         {
-            Debug.Log("Generate History Framework");
             //NPC History
             NPCHistoryTracker npcHistoryTracker = dc.npcHistoryTracker;
             Dictionary<RelationshipKey, Dictionary<NPCEventKey, NPCEvent>> NPCEventStorage = new Dictionary<RelationshipKey, Dictionary<NPCEventKey, NPCEvent>>();
@@ -204,19 +203,21 @@ public class HistoryManager : MonoBehaviour
     */
     private void RemoveMemoryFromNPC(NPCEvent theEvent, int npcID)
     {
+        Debug.Log("Removing event from NPC: "+npcID.ToString()+"\nThe Event, NPC A:"+theEvent.eventKey.npcA.ToString()+" NPC B:"+theEvent.eventKey.npcB.ToString());
+        Debug.Log("Perf:"+theEvent.performer.ToString()+" Rec:"+theEvent.receiver.ToString());
         Dictionary<RelationshipKey, Dictionary<NPCEventKey, NPCEvent>> npcEvents = dataController.NPCEventStorage;
         Dictionary<int, List<NPCEvent>> perNPCEvents = dataController.eventsPerNPCStorage;
 
         List<NPCEvent> thisNPCEvents = perNPCEvents[npcID];
-        int index = 0;
-        foreach(NPCEvent anEvent in thisNPCEvents)
+        for(int i = 0; i < thisNPCEvents.Count; i++)
         {
+            NPCEvent anEvent = thisNPCEvents[i];
             if(anEvent == theEvent)
             {
-                thisNPCEvents.RemoveAt(index); //remove memory from this npc's memory
+                thisNPCEvents.RemoveAt(i); //remove memory from this npc's memory
 
                 //remove memory entirely if there is no other npc remembering it
-                if(theEvent.eventKey.npcB == -1)
+                if(theEvent.receiver == -1)
                 {
                     RelationshipKey relKey = new RelationshipKey(npcID, -1);
 
@@ -227,8 +228,10 @@ public class HistoryManager : MonoBehaviour
                 else
                 {
                     int secondNPC;
-                    if(theEvent.eventKey.npcA == npcID) secondNPC = theEvent.eventKey.npcB;
-                    else secondNPC = theEvent.eventKey.npcA;
+                    if(theEvent.performer == npcID) secondNPC = theEvent.receiver;
+                    else secondNPC = theEvent.performer;
+
+                    Debug.Log("Second NPC: "+secondNPC.ToString());
 
                     bool shouldRemove = !perNPCEvents[secondNPC].Contains(theEvent); //check whether it is present in the other npc
                     
@@ -242,7 +245,6 @@ public class HistoryManager : MonoBehaviour
                 }
                 break;
             }
-            index++;
         }
     }
 
@@ -253,7 +255,7 @@ public class HistoryManager : MonoBehaviour
     private void RemoveMemoryFromBuilding(BuildingEvent theEvent, bool isBuilding)
     {
         int id;
-        if(isBuilding) id = theEvent.eventKey.building;
+        if(isBuilding)id = theEvent.eventKey.building;   
         else id = theEvent.eventKey.npc;
         if(id == -1) return;
 
@@ -272,12 +274,12 @@ public class HistoryManager : MonoBehaviour
         } 
 
         List<BuildingEvent> thisEvents = perEvents[id];
-        int index = 0;
-        foreach(BuildingEvent anEvent in thisEvents)
+        for(int i = 0; i < thisEvents.Count; i++)
         {
+            BuildingEvent anEvent = thisEvents[i];
             if(anEvent == theEvent)
             {
-                thisEvents.RemoveAt(index); //remove memory from the memory
+                thisEvents.RemoveAt(i); //remove memory from the memory
 
                 if (isBuilding)
                 {   
@@ -310,7 +312,7 @@ public class HistoryManager : MonoBehaviour
                     int npcID = theEvent.eventKey.npc;
                     int buildingID = theEvent.eventKey.building;
 
-                    bool shouldRemove = !perOther[npcID].Contains(theEvent); //check whether it is present in the other npc
+                    bool shouldRemove = !perOther[buildingID].Contains(theEvent); //check whether it is present in the other npc
                         
                     if(shouldRemove){
                         BuildingRelationshipKey relKey = new BuildingRelationshipKey(buildingID, id);
@@ -321,7 +323,6 @@ public class HistoryManager : MonoBehaviour
                     }
                 }
             }
-            index++;
         }
     }
 
@@ -339,7 +340,6 @@ public class HistoryManager : MonoBehaviour
     */
     public void AddNPCMemory(string actionName, string description, float severity, float timeOfAction, int performer, int receiver, bool wasPosPerf, bool wasPosRec)
     {
-
         RelationshipKey relKey = new RelationshipKey(performer, receiver);
 
         NPCHistoryTracker tracker = dataController.npcHistoryTracker;
@@ -450,7 +450,7 @@ public class HistoryManager : MonoBehaviour
 
                 if(!keepNPCMemory(currEvent.performerImportance, currEvent.performer)) RemoveMemoryFromNPC(currEvent, currEvent.performer);
                 
-                if(!keepNPCMemory(currEvent.receiverImportance, currEvent.receiver)) RemoveMemoryFromNPC(currEvent, currEvent.receiver);
+                if(currEvent.receiver != -1) if(!keepNPCMemory(currEvent.receiverImportance, currEvent.receiver)) RemoveMemoryFromNPC(currEvent, currEvent.receiver);
             }
         }
 
@@ -470,7 +470,7 @@ public class HistoryManager : MonoBehaviour
                 currEvent.npcImportance = calculateImportance(currEvent.severity, currEvent.timeOfAction, currEvent.eventKey.npc);
 
                 if(!keepBuildingMemory(currEvent.buildingImportance, currEvent.eventKey.building, true)) RemoveMemoryFromBuilding(currEvent, true);
-                if(!keepBuildingMemory(currEvent.npcImportance, currEvent.eventKey.npc, true)) RemoveMemoryFromBuilding(currEvent, false);
+                if(!keepBuildingMemory(currEvent.npcImportance, currEvent.eventKey.npc, false)) RemoveMemoryFromBuilding(currEvent, false);
             }
         }
     }

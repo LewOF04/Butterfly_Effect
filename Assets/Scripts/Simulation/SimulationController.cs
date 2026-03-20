@@ -37,7 +37,7 @@ public static class SimulationController
 
     public static float calcFinishPerc(ActionInfoWrapper action, NPCData agent)
     {
-        if(action.energyToComplete > agent.stats.energy) return agent.stats.energy / action.energyToComplete;
+        if(action.energyToComplete > agent.stats.energy) return (agent.stats.energy / action.energyToComplete)*100f;
         else return 100f;
     }
 
@@ -66,6 +66,8 @@ public static class SimulationController
         Debug.Log("Simulation plot routine before initial actions.");
 
         //yield return new WaitForSeconds(0.1f);
+
+        HistoryManager.Instance.deleteUnimportantEvents(); //re-evaluate memory importance and remove events that would no longer be remembered by the agent
         //create initial actions
         foreach(int agentID in domain.NPCStorage.Keys)
         {
@@ -97,9 +99,9 @@ public static class SimulationController
         while(currentTime <= endTime)
         {
             Debug.Log("Start of while loop.\n Current Time: "+currentTime.ToString("0.00")+"\nEnd Time: "+endTime.ToString("0.00"));
-            if(currentTime % 1f == 0f)
+            if(Mathf.Abs(currentTime % 1f) < 0.001f)
             {
-                ReportProgress(((currentTime - startTime)/simTotalTime)*88f + 12f, "Performing Actions at time: "+currentTime.ToString("00.00"));
+                ReportProgress(((currentTime - startTime)/simTotalTime)*88f + 12f, "Performing Actions at time: "+currentTime.ToString());
                 yield return null;
             }
             //yield return new WaitForSeconds(0.1f);
@@ -184,14 +186,14 @@ public static class SimulationController
                     }
 
                     simPlot.agentActiveActions[thisAction.currentActor] = null; //show that this agent is currently not doing anything
-                    simPlot.inactiveAgents.Add(thisAction.currentActor); //add the agent as inactive
+                    if (!simPlot.inactiveAgents.Contains(thisAction.currentActor)) simPlot.inactiveAgents.Add(thisAction.currentActor); //add the agent as inactive
                     simPlot.plottedActions.EnqueueBack(simAction); //add this action to the final action plot
                 }
             }
 
-            if(currentTime % 1f == 0f)
+            if(Mathf.Abs(currentTime % 1f) < 0.001f)
             {
-                ReportProgress(((currentTime - startTime)/simTotalTime)*88f + 12f, "Plotting Actions at time: "+currentTime.ToString("00.00"));
+                ReportProgress(((currentTime - startTime)/simTotalTime)*88f + 12f, "Plotting Actions at time: "+currentTime.ToString("0.00"));
                 yield return null;
             }
 
@@ -199,6 +201,7 @@ public static class SimulationController
             /*++++++++++GET NEW ACTIONS++++++++++*/
             for(int i = simPlot.inactiveAgents.Count - 1; i >= 0; i--)
             {
+                HistoryManager.Instance.deleteUnimportantEvents(); //re-evaluate memory importance and remove events that would no longer be remembered by the agent
                 int agentID = simPlot.inactiveAgents[i];
                 Debug.Log("Getting new action for "+agentID.ToString());
                 NPCData agent = domain.NPCStorage[agentID];
@@ -217,6 +220,9 @@ public static class SimulationController
             }
 
             currentTime += 0.1f;
+            currentTime = Mathf.Round(currentTime * 10f) / 10f; //round to 1dp
+            Debug.Log("Current time: "+currentTime.ToString());
+            yield return new WaitForSeconds(0.001f);
         }
 
         ReportProgress(100f, "Plotting Complete.");
@@ -261,10 +267,13 @@ public static class SimulationController
 
                 IAction action = actionInfo.action;
 
-                if(wholeSim) ReportProgress((currentActionNum / totalActionNum)*100f, "Performing action ("+currentActionNum.ToString()+"/"+totalActionNum.ToString()+")");
-                else ReportProgress((actionWrap.endTime - simPlot.runTime / plotProgressTime - simPlot.runTime)*100f, 
-                                    "Performing action at time "+(actionWrap.endTime-simPlot.runTime).ToString("0.00")+"/"+(plotProgressTime - simPlot.runTime).ToString("0.00"));
-                yield return null;
+                if(currentActionNum % 10 == 0 || currentActionNum == totalActionNum)
+                {
+                    if(wholeSim) ReportProgress((currentActionNum / totalActionNum)*100f, "Performing action ("+currentActionNum.ToString()+"/"+totalActionNum.ToString()+")");
+                    else ReportProgress((actionWrap.endTime - simPlot.runTime / plotProgressTime - simPlot.runTime)*100f, 
+                                        "Performing action at time "+(actionWrap.endTime-simPlot.runTime).ToString("0.00")+"/"+(plotProgressTime - simPlot.runTime).ToString("0.00"));
+                    yield return null; 
+                }
 
                 dataController.World.gameTime = actionWrap.endTime;
 

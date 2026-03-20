@@ -35,4 +35,27 @@ public class SimulationPlot
         buildingActiveActions = new Dictionary<int, List<SimulationActionWrapper>>();
         foreach(int key in buildingKeys) buildingActiveActions[key] = new List<SimulationActionWrapper>();
     }
+
+    public List<SimulationActionWrapper> extractPlottedActions()
+    {
+        if(plottedActions == null) return null;
+
+        List<SimulationActionWrapper> actions = new List<SimulationActionWrapper>();
+        List<SimulationActionWrapper> temp = new List<SimulationActionWrapper>();
+
+        //read through plotted actions list
+        while (plottedActions.TryDequeueFront(out SimulationActionWrapper simAct))
+        {
+            actions.Add(simAct);
+            temp.Add(simAct);
+        }
+
+        //save back to plottedActions
+        foreach (SimulationActionWrapper act in temp)
+        {
+            plottedActions.EnqueueBack(act);
+        }
+
+        return actions;
+    }
 }
