@@ -104,7 +104,10 @@ public static class ActionMaths
         float chance = Mathf.Clamp(successChance, 0f, 100f);
         float complete = Mathf.Clamp(percentComplete, 0f, 100f) / 100f;
 
-        float roll = Random.Range(0f, 100f);
+        int seed = (successChance.GetHashCode() + percentComplete.GetHashCode()).GetHashCode();
+        var rng = new System.Random(seed);
+
+        float roll = (float)(rng.NextDouble() * 100f);
 
         float completionMult = Mathf.Lerp(0.5f, 1.5f, complete);
         float weightedChance = Mathf.Clamp(chance * completionMult, 0f, 100f);

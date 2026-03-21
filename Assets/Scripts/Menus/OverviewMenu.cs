@@ -28,6 +28,20 @@ public class OverviewMenu : MonoBehaviour
     public TextMeshProUGUI runErrMsgField;
     public Button runButton;
 
+    [Header("View Plot")]
+    public GameObject sidePanelButtons;
+    public GameObject sidePanelInfo;
+    public Button backButton;
+    public Button viewButton;
+    public GameObject buildingPanel;
+    public GameObject agentPanel;
+    public GameObject plotViewPanel;
+    public GameObject agentsViewContainer;
+    public GameObject timelineViewContainer;
+    public TimelineAgentView timelineAgentPrefab;
+    public TimelineView timelineViewPrefab;
+    private Dictionary<int, TimelineView> plotViewTimelines;
+
     [Header("Time Skipper")]
     private TimeSkipper skipperObject;
     private DataController dataController;
@@ -43,9 +57,23 @@ public class OverviewMenu : MonoBehaviour
         reloadConfirmationObj.gameObject.SetActive(false);
         runConfirmationObj.gameObject.SetActive(false);
         skipperObject = FindFirstObjectByType<TimeSkipper>();
+        backButton.gameObject.SetActive(false);
+        sidePanelButtons.SetActive(true);
+        sidePanelInfo.SetActive(true);
+        plotViewPanel.SetActive(false);
+        agentPanel.SetActive(true);
+        buildingPanel.SetActive(true);
 
-        if(skipperObject.simPlot == null) runButton.interactable = false;
-        else runButton.interactable = true;
+        if(skipperObject.simPlot == null)
+        {
+            runButton.interactable = false;
+            viewButton.interactable = false;
+        } 
+        else 
+        {
+            runButton.interactable = true;
+            viewButton.interactable = true;
+        }
 
         //instantiate the buttons for the npcs
         Dictionary<int, NPC> npcs = dataController.NPCStorage;
@@ -124,14 +152,10 @@ public class OverviewMenu : MonoBehaviour
     */
     public void removeButtons()
     {
-        foreach (Transform child in npcViewer.transform)
-        {
-            Destroy(child.gameObject);
-        }
-        foreach (Transform child in buildingViewer.transform) 
-        {
-            Destroy(child.gameObject);
-        }
+        foreach (Transform child in npcViewer.transform) Destroy(child.gameObject);
+        foreach (Transform child in buildingViewer.transform) Destroy(child.gameObject);
+        foreach(Transform child in agentsViewContainer.transform) Destroy(child.gameObject);
+        foreach(Transform child in timelineViewContainer.transform) Destroy(child.gameObject);
     }
 
     public void exitMenu()
@@ -182,6 +206,70 @@ public class OverviewMenu : MonoBehaviour
     public void plotNo()
     {
         plotSimulationConfirmationObj.gameObject.SetActive(false);
+    }
+
+    public void viewPlot()
+    {
+        SimulationPlot simPlot = skipperObject.simPlot;
+        sidePanelButtons.gameObject.SetActive(false);
+        sidePanelInfo.gameObject.SetActive(false);
+        backButton.gameObject.SetActive(true);
+
+        plotViewPanel.SetActive(true);
+        agentPanel.SetActive(false);
+        buildingPanel.SetActive(false);
+
+        //remove existing instantiated prefabs
+        foreach(Transform child in agentsViewContainer.transform) Destroy(child.gameObject);
+        foreach(Transform child in timelineViewContainer.transform) Destroy(child.gameObject);
+
+        plotViewTimelines = new Dictionary<int, TimelineView>();
+
+        List<SimulationActionWrapper> plottedActions = skipperObject.simPlot.extractPlottedActions(); //get a list of the actions that have been plotted
+        
+        //setup outline for all npcs
+        foreach(NPC npc in dataController.NPCStorage.Values)
+        {
+            TimelineAgentView timelineAgentView = Instantiate(timelineAgentPrefab, agentsViewContainer.transform);
+            timelineAgentView.displayData(npc);
+
+            TimelineView timelineView = Instantiate(timelineViewPrefab, timelineViewContainer.transform);
+
+            plotViewTimelines[npc.id] = timelineView;
+        }
+
+        //add all plotted actions to the layout
+        foreach(SimulationActionWrapper simWrap in plottedActions)
+        {
+            ActionInfoWrapper info  = simWrap.info;
+            int performerID = info.currentActor;
+
+            TimelineView thisTimeline;
+            try{thisTimeline = plotViewTimelines[performerID];} //select correct timeline, unless this performer is new
+            catch
+            {
+                thisTimeline = Instantiate(timelineViewPrefab, timelineViewContainer.transform);
+                plotViewTimelines[performerID] = thisTimeline;
+
+                TimelineAgentView timelineAgentView = Instantiate(timelineAgentPrefab, agentsViewContainer.transform);
+                timelineAgentView.displayData(performerID);
+            }
+
+            thisTimeline.addItem(simWrap);
+        }
+    }
+
+    public void backToMain()
+    {
+        foreach(Transform child in agentsViewContainer.transform) Destroy(child.gameObject);
+        foreach(Transform child in timelineViewContainer.transform) Destroy(child.gameObject);
+        sidePanelButtons.gameObject.SetActive(true);
+        sidePanelInfo.gameObject.SetActive(true);
+        backButton.gameObject.SetActive(false);
+
+        plotViewPanel.SetActive(false);
+        agentPanel.SetActive(true);
+        buildingPanel.SetActive(true);
     }
 
     public void runPlot()

@@ -13,5 +13,5 @@ public class SimulationActionWrapper
         percentComplete = percInput;
     }
 
-    public SimulationActionWrapper(){}
+    public SimulationActionWrapper(){} 
 }
