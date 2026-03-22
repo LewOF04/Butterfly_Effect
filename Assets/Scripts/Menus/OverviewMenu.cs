@@ -40,6 +40,8 @@ public class OverviewMenu : MonoBehaviour
     public GameObject timelineViewContainer;
     public TimelineAgentView timelineAgentPrefab;
     public TimelineView timelineViewPrefab;
+    public ActionOverview actionOverview;
+
     private Dictionary<int, TimelineView> plotViewTimelines;
 
     [Header("Time Skipper")]
@@ -63,6 +65,7 @@ public class OverviewMenu : MonoBehaviour
         plotViewPanel.SetActive(false);
         agentPanel.SetActive(true);
         buildingPanel.SetActive(true);
+        actionOverview.gameObject.SetActive(false);
 
         if(skipperObject.simPlot == null)
         {
@@ -139,7 +142,7 @@ public class OverviewMenu : MonoBehaviour
         dateInfo.text = daysString +"/"+monthsString+"/"+yearsString;
 
         string hoursString = hours.ToString();
-        string minutesString = minutes.ToString();
+        string minutesString = Mathf.RoundToInt(minutes).ToString();
         if(hoursString.Length < 2) hoursString = "0"+hoursString;
         if(minutesString.Length < 2) minutesString = "0"+minutesString;
         timeInfo.text = hoursString+":"+minutesString;
@@ -270,6 +273,7 @@ public class OverviewMenu : MonoBehaviour
         plotViewPanel.SetActive(false);
         agentPanel.SetActive(true);
         buildingPanel.SetActive(true);
+        actionOverview.gameObject.SetActive(false);
     }
 
     public void runPlot()
