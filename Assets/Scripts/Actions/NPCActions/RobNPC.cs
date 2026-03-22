@@ -118,7 +118,7 @@ public class RobNPC : NPCAction
 
         //energy changes
         float energyMinus = energyToComplete * percentMulti;
-        performer.stats.energy -= energyMinus;
+        performer.stats.energy = Mathf.Max(0f, performer.stats.energy - energyMinus);
         description += "They spent "+energyMinus.ToString("0.00")+" energy, ";
 
         //time changes
@@ -128,7 +128,7 @@ public class RobNPC : NPCAction
         //wealth changes
         float wealthTake = Mathf.Max(0f, robMultiplier) * (baseTakePerc/100f) * target.stats.wealth; 
         performer.stats.wealth += wealthTake;
-        target.stats.wealth -= wealthTake;
+        target.stats.wealth = Mathf.Max(0f, target.stats.wealth - wealthTake);
         description += " and took "+wealthTake.ToString("0.00")+" wealth from the target.";
 
         //health changes

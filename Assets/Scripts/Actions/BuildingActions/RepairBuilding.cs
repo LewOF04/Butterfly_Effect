@@ -64,7 +64,7 @@ public class RepairBuilding: BuildingAction
         estUtility = ActionMaths.addTraitWeights(performer, estUtility, utilityNegTraits, false); 
 
         if(target.id != performer.parentBuilding){ 
-            estUtility -= estUtility * 0.3f; //utility of someone else's house is lower
+            estUtility = Mathf.Max(0f, estUtility - estUtility * 0.3f); //utility of someone else's house is lower
             //if it is not their house, weight the benefit by how much they like the inhabitants
             foreach(int npcID in target.inhabitants)
             {
@@ -114,7 +114,7 @@ public class RepairBuilding: BuildingAction
         description += "\n";
 
         float energyMinus = energyToComplete * percentMulti;
-        performer.stats.energy -= energyMinus;
+        performer.stats.energy = Mathf.Max(0f, performer.stats.energy - energyMinus);
         description += "They spent "+energyMinus.ToString("0.00")+" energy, ";
 
         float timeMinus = timeToComplete * percentMulti;
@@ -219,7 +219,7 @@ public class RepairBuilding: BuildingAction
 
         float weightedBase = ActionMaths.ApplyWeightedMultipliers(baseTime, multipliers, weights);
 
-        if(performer.traits.Contains(8)) weightedBase -= weightedBase * 0.4f;
+        if(performer.traits.Contains(8)) weightedBase = Mathf.Max(0f, weightedBase - weightedBase * 0.4f);
 
         timeToComplete = ActionMaths.addChaos(weightedBase, dataController.World.chaosModifier);
         return timeToComplete;
@@ -235,7 +235,7 @@ public class RepairBuilding: BuildingAction
 
         float weightedBase = ActionMaths.ApplyWeightedMultipliers(baseEnergy, multipliers, weights);
 
-        if(performer.traits.Contains(8)) weightedBase -= weightedBase * 0.2f;
+        if(performer.traits.Contains(8)) weightedBase = Mathf.Max(0f, weightedBase - weightedBase * 0.2f);
 
         energyToComplete = ActionMaths.addChaos(weightedBase, dataController.World.chaosModifier);
         return energyToComplete;
@@ -259,7 +259,7 @@ public class RepairBuilding: BuildingAction
     protected override bool isKnown(IAgent performer)
     {
         float thisComplexity = complexity;
-        if(performer.traits.Contains(8)) thisComplexity -= thisComplexity * 0.3f;
+        if(performer.traits.Contains(8)) thisComplexity = Mathf.Max(0f, thisComplexity - thisComplexity * 0.3f);
 
         //either the action is known because they're smart enough
         if (complexity <= performer.attributes.intelligence) return true;

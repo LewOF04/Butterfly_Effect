@@ -106,7 +106,7 @@ public class ImproveFortitude : SelfAction
 
         //energy changes
         float energyMinus = energyToComplete * percentMulti;
-        performer.stats.energy -= energyMinus;
+        performer.stats.energy = Mathf.Max(0f, performer.stats.energy - energyMinus);
         description += "They spent "+energyMinus.ToString("0.00")+" energy, ";
 
         //time changes
