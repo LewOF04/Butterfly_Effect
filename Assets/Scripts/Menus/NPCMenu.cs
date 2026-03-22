@@ -190,7 +190,6 @@ public class NPCMenu : MonoBehaviour
         {
             NPCMemoryPanel memPanel = Instantiate(npcMemoryPrefab, memoryInfoContainer.transform); 
             
-            memPanel.performer = npc;
             memPanel.thisEvent = thisEvent;
 
             memPanel.displayData();

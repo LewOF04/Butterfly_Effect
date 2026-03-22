@@ -31,6 +31,7 @@ public class NPCMemoryPanel : MonoBehaviour
 
     public void displayData()
     {
+        performer = dataController.NPCStorage[thisEvent.performer];
         actionNameField.text = "Event: "+thisEvent.actionName;
         descriptionField.text = thisEvent.description;
         performerIDField.text = "ID: "+performer.id.ToString();
