@@ -193,8 +193,27 @@ public static class SimulationController
 
             if(Mathf.Abs(currentTime % 1f) < 0.001f)
             {
+                //update loading screen
                 ReportProgress(((currentTime - startTime)/simTotalTime)*88f + 12f, "Plotting Actions at time: "+currentTime.ToString("0.00"));
                 yield return null;
+
+                //run passive changes to agents and buildings (run once an hour)
+                List<int> agentKeys = new List<int>(domain.NPCStorage.Keys);
+                foreach(int agentKey in agentKeys)
+                {
+                    NPCData agent = domain.NPCStorage[agentKey];
+                    AgentUpdateInfo updateInfo = SystemAction.calcAgentUpdate(agent.id, currentTime);
+                    simPlot.plottedActions.EnqueueBack(updateInfo);
+                    updateInfo.performUpdate();
+                }
+                List<int> buildingKeys = new List<int>(domain.BuildingStorage.Keys);
+                foreach(int buildingKey in buildingKeys)
+                {
+                    BuildingData building = domain.BuildingStorage[buildingKey];
+                    BuildingUpdateInfo updateInfo = SystemAction.calcBuildingUpdate(building.id, currentTime);
+                    simPlot.plottedActions.EnqueueBack(updateInfo);
+                    updateInfo.performUpdate();
+                }
             }
 
             Debug.Log("Before getting new actions.\n Inactive agents = "+string.Join(", ", simPlot.inactiveAgents));
@@ -254,36 +273,44 @@ public static class SimulationController
 
         plotProgressTime = Mathf.Min(simPlot.endTime, plotProgressTime); //we run the simulation to the specified time or the plot endTime
 
-        DEQueue<SimulationActionWrapper> actionQueue = simPlot.plottedActions;
-        while(actionQueue.TryPeekFront(out SimulationActionWrapper peekAct)) //while there are actions in the queue
+        DEQueue<ISimEvent> actionQueue = simPlot.plottedActions;
+        while(actionQueue.TryPeekFront(out ISimEvent peekAct)) //while there are actions in the queue
         {
-            if(peekAct.endTime > plotProgressTime) break; //if the actions end time is later than our final time, then we don't need to perform anymore
+            if(peekAct.eventTime > plotProgressTime) break; //if the actions end time is later than our final time, then we don't need to perform anymore
             else
             {
                 currentActionNum++;
-                if(!actionQueue.TryDequeueFront(out SimulationActionWrapper actionWrap)) yield break;
-                ActionInfoWrapper actionInfo = actionWrap.info;
-                float perc = actionWrap.percentComplete;
+                if(!actionQueue.TryDequeueFront(out ISimEvent simEvent)) yield break;
 
-                IAction action = actionInfo.action;
-
-                if(currentActionNum % 10 == 0 || currentActionNum == totalActionNum)
+                if(simEvent is SimulationActionWrapper actionWrap)
                 {
-                    if(wholeSim) ReportProgress((currentActionNum / totalActionNum)*100f, "Performing action ("+currentActionNum.ToString()+"/"+totalActionNum.ToString()+")");
-                    else ReportProgress((actionWrap.endTime - simPlot.runTime / plotProgressTime - simPlot.runTime)*100f, 
-                                        "Performing action at time "+(actionWrap.endTime-simPlot.runTime).ToString("0.00")+"/"+(plotProgressTime - simPlot.runTime).ToString("0.00"));
-                    yield return null; 
+                    ActionInfoWrapper actionInfo = actionWrap.info;
+                    float perc = actionWrap.percentComplete;
+
+                    IAction action = actionInfo.action;
+
+                    if(currentActionNum % 10 == 0 || currentActionNum == totalActionNum)
+                    {
+                        if(wholeSim) ReportProgress((currentActionNum / totalActionNum)*100f, "Performing action ("+currentActionNum.ToString()+"/"+totalActionNum.ToString()+")");
+                        else ReportProgress((actionWrap.endTime - simPlot.runTime / plotProgressTime - simPlot.runTime)*100f, 
+                                            "Performing action at time "+(actionWrap.endTime-simPlot.runTime).ToString("0.00")+"/"+(plotProgressTime - simPlot.runTime).ToString("0.00"));
+                        yield return null; 
+                    }
+
+                    dataController.World.gameTime = actionWrap.endTime;
+
+                    //perform the action with the percent completion
+                    action.reloadAction(actionInfo);
+                    action.performAction(perc);  
                 }
-
-                dataController.World.gameTime = actionWrap.endTime;
-
-                //perform the action with the percent completion
-                action.reloadAction(actionInfo);
-                action.performAction(perc);
+                if(simEvent is IUpdateInfo updateInfo)
+                {
+                    updateInfo.performUpdate();
+                }
             }
         }
 
-        if(!actionQueue.TryPeekFront(out SimulationActionWrapper _)) simPlot.runComplete = true; //if there is nothing left in the simulation plot
+        if(!actionQueue.TryPeekFront(out ISimEvent _)) simPlot.runComplete = true; //if there is nothing left in the simulation plot
         simPlot.runTime = plotProgressTime; //set the current progress of the plot
         ReportProgress(100f, "Simulation running complete.");
     }

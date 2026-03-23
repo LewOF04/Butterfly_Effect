@@ -345,6 +345,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TimelineView
   itemContainer: {fileID: 5575681044147131320}
   itemPrefab: {fileID: 6902747677563357187, guid: b9952db81c770364fa6cf4fc984ea15e, type: 3}
+  updateItemPrefab: {fileID: 6112261563197016730, guid: 5ad9e7345e9a0dc479a13d76da5e7f0d, type: 3}
 --- !u!114 &8453516673374089671
 MonoBehaviour:
   m_ObjectHideFlags: 0

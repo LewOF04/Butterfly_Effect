@@ -1,5 +1,6 @@
-public class SimulationActionWrapper
+public class SimulationActionWrapper : ISimEvent
 {
+    public float eventTime => endTime;
     public ActionInfoWrapper info;
     public float startTime;
     public float endTime;

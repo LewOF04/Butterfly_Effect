@@ -41,6 +41,7 @@ public class OverviewMenu : MonoBehaviour
     public TimelineAgentView timelineAgentPrefab;
     public TimelineView timelineViewPrefab;
     public ActionOverview actionOverview;
+    public UpdateOverview updateOverview;
 
     private Dictionary<int, TimelineView> plotViewTimelines;
 
@@ -221,6 +222,8 @@ public class OverviewMenu : MonoBehaviour
         plotViewPanel.SetActive(true);
         agentPanel.SetActive(false);
         buildingPanel.SetActive(false);
+        actionOverview.gameObject.SetActive(false);
+        updateOverview.gameObject.SetActive(false);
 
         //remove existing instantiated prefabs
         foreach(Transform child in agentsViewContainer.transform) Destroy(child.gameObject);
@@ -228,7 +231,7 @@ public class OverviewMenu : MonoBehaviour
 
         plotViewTimelines = new Dictionary<int, TimelineView>();
 
-        List<SimulationActionWrapper> plottedActions = skipperObject.simPlot.extractPlottedActions(); //get a list of the actions that have been plotted
+        List<ISimEvent> plottedActions = skipperObject.simPlot.extractPlottedActions(); //get a list of the actions that have been plotted
         
         //setup outline for all npcs
         foreach(NPC npc in dataController.NPCStorage.Values)
@@ -242,23 +245,40 @@ public class OverviewMenu : MonoBehaviour
         }
 
         //add all plotted actions to the layout
-        foreach(SimulationActionWrapper simWrap in plottedActions)
+        foreach(ISimEvent simEvent in plottedActions)
         {
-            ActionInfoWrapper info  = simWrap.info;
-            int performerID = info.currentActor;
-
             TimelineView thisTimeline;
-            try{thisTimeline = plotViewTimelines[performerID];} //select correct timeline, unless this performer is new
-            catch
+            if(simEvent is SimulationActionWrapper simWrap)
             {
-                thisTimeline = Instantiate(timelineViewPrefab, timelineViewContainer.transform);
-                plotViewTimelines[performerID] = thisTimeline;
+                ActionInfoWrapper info  = simWrap.info;
+                int performerID = info.currentActor;
 
-                TimelineAgentView timelineAgentView = Instantiate(timelineAgentPrefab, agentsViewContainer.transform);
-                timelineAgentView.displayData(performerID);
+                try{thisTimeline = plotViewTimelines[performerID];} //select correct timeline, unless this performer is new
+                catch
+                {
+                    thisTimeline = Instantiate(timelineViewPrefab, timelineViewContainer.transform);
+                    plotViewTimelines[performerID] = thisTimeline;
+
+                    TimelineAgentView timelineAgentView = Instantiate(timelineAgentPrefab, agentsViewContainer.transform);
+                    timelineAgentView.displayData(performerID);
+                }
             }
+            else if(simEvent is AgentUpdateInfo updateInfo)
+            {
+                int performerID = updateInfo.receiver;
+                try{thisTimeline = plotViewTimelines[performerID];}
+                catch
+                {
+                    thisTimeline = Instantiate(timelineViewPrefab, timelineViewContainer.transform);
+                    plotViewTimelines[performerID] = thisTimeline;
 
-            thisTimeline.addItem(simWrap);
+                    TimelineAgentView timelineAgentView = Instantiate(timelineAgentPrefab, agentsViewContainer.transform);
+                    timelineAgentView.displayData(performerID);
+                }
+            }
+            else continue;
+
+            thisTimeline.addItem(simEvent);
         }
     }
 
@@ -274,6 +294,7 @@ public class OverviewMenu : MonoBehaviour
         agentPanel.SetActive(true);
         buildingPanel.SetActive(true);
         actionOverview.gameObject.SetActive(false);
+        updateOverview.gameObject.SetActive(false);
     }
 
     public void runPlot()

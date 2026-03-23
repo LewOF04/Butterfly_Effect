@@ -3,12 +3,12 @@ using System.Collections.Generic;
 
 public static class SystemAction
 {
-    public static AgentUpdateInfo calcAgentUpdate(int receiver)
+    public static AgentUpdateInfo calcAgentUpdate(int receiver, float time)
     {
         IDataContainer dataController = DomainContext.DataController;
         if(!dataController.TryGetAgent(receiver, out var agent)) return null;
 
-        string description = "Over this hour the following passive effects have occurred:\n";
+        string description = "At the game time "+time.ToString("0.00")+" the following passive effects have occurred:\n";
 
         /*==================Condition change==================*/
         /*Effected by Nutrition, Condition and constitution*/
@@ -361,27 +361,27 @@ public static class SystemAction
         strengthChange += strNutriChange;
 
         return new AgentUpdateInfo(description, conditionChange, nutritionChange, happinessChange, energyChange, intelligenceChange, rationalityChange, 
-                                   fortitudeChange, charismaChange, perceptionChange, constitutionChange, wisdomChange, strengthChange, receiver);
+                                   fortitudeChange, charismaChange, perceptionChange, constitutionChange, wisdomChange, strengthChange, receiver, time);
     }
 
     public static void performAgentUpdate(AgentUpdateInfo updateInfo)
     {
         if(!DomainContext.DataController.TryGetAgent(updateInfo.receiver, out var agent)) return;
-        agent.stats.condition = Mathf.Clamp(0f, 100f, agent.stats.condition + updateInfo.conditionChange);
-        agent.stats.nutrition = Mathf.Clamp(0f, 100f, agent.stats.nutrition + updateInfo.nutritionChange);
-        agent.stats.happiness = Mathf.Clamp(0f, 100f, agent.stats.happiness + updateInfo.happinessChange);
-        agent.stats.energy = Mathf.Clamp(0f, 100f, agent.stats.energy + updateInfo.energyChange);
-        agent.attributes.intelligence = Mathf.Clamp(0f, 100f, agent.attributes.intelligence = updateInfo.intelligenceChange);
-        agent.attributes.rationality = Mathf.Clamp(0f, 100f, agent.attributes.rationality = updateInfo.rationalityChange);
-        agent.attributes.fortitude = Mathf.Clamp(0f, 100f, agent.attributes.fortitude = updateInfo.fortitudeChange);
-        agent.attributes.charisma = Mathf.Clamp(0f, 100f, agent.attributes.charisma = updateInfo.charismaChange);
-        agent.attributes.perception = Mathf.Clamp(0f, 100f, agent.attributes.perception = updateInfo.perceptionChange);
-        agent.attributes.constitution = Mathf.Clamp(0f, 100f, agent.attributes.constitution = updateInfo.constitutionChange);
-        agent.attributes.wisdom = Mathf.Clamp(0f, 100f, agent.attributes.wisdom = updateInfo.wisdomChange);
-        agent.attributes.strength = Mathf.Clamp(0f, 100f, agent.attributes.strength = updateInfo.strengthChange);
+        agent.stats.condition = Mathf.Clamp(agent.stats.condition + updateInfo.conditionChange, 0f, 100f);
+        agent.stats.nutrition = Mathf.Clamp(agent.stats.nutrition + updateInfo.nutritionChange, 0f, 100f);
+        agent.stats.happiness = Mathf.Clamp(agent.stats.happiness + updateInfo.happinessChange, 0f, 100f);
+        agent.stats.energy = Mathf.Clamp(agent.stats.energy + updateInfo.energyChange, 0f, 100f);
+        agent.attributes.intelligence = Mathf.Clamp(agent.attributes.intelligence + updateInfo.intelligenceChange, 0f, 100f);
+        agent.attributes.rationality = Mathf.Clamp(agent.attributes.rationality + updateInfo.rationalityChange, 0f, 100f);
+        agent.attributes.fortitude = Mathf.Clamp(agent.attributes.fortitude + updateInfo.fortitudeChange, 0f, 100f);
+        agent.attributes.charisma = Mathf.Clamp(agent.attributes.charisma + updateInfo.charismaChange, 0f, 100f);
+        agent.attributes.perception = Mathf.Clamp(agent.attributes.perception + updateInfo.perceptionChange, 0f, 100f);
+        agent.attributes.constitution = Mathf.Clamp(agent.attributes.constitution + updateInfo.constitutionChange, 0f, 100f);
+        agent.attributes.wisdom = Mathf.Clamp(agent.attributes.wisdom + updateInfo.wisdomChange, 0f, 100f);
+        agent.attributes.strength = Mathf.Clamp(agent.attributes.strength + updateInfo.strengthChange, 0f, 100f);
     }
     
-    public static BuildingUpdateInfo calcBuildingUpdate(int receiver)
+    public static BuildingUpdateInfo calcBuildingUpdate(int receiver, float time)
     {
         if(!DomainContext.DataController.TryGetBuilding(receiver, out var building)) return null;
         float conditionChange = 0f;
@@ -392,35 +392,39 @@ public static class SystemAction
         else multi = Mathf.InverseLerp(condThresh, 100f, building.condition) * condSwing;
         
         conditionChange += multi * condSwing;
-        return new BuildingUpdateInfo(conditionChange, receiver);
+        return new BuildingUpdateInfo(conditionChange, receiver, time);
     }
     public static void performBuildingUpdate(BuildingUpdateInfo updateInfo)
     {
         if(!DomainContext.DataController.TryGetBuilding(updateInfo.receiver, out var building)) return;
-        building.condition = Mathf.Clamp(0f, 100f, building.condition + updateInfo.conditionChange);
+        building.condition = Mathf.Clamp(building.condition + updateInfo.conditionChange, 0f, 100f);
     }
 }
 
-public interface UpdateInfo
+public interface IUpdateInfo : ISimEvent
 {
     int receiver {get; set;}
+    float eventTime {get; set;}
     void performUpdate();
 }
 
-public class BuildingUpdateInfo : UpdateInfo
+public class BuildingUpdateInfo : IUpdateInfo
 {
     public int receiver {get; set;}
+    public float eventTime {get; set;}
     public float conditionChange;
-    public BuildingUpdateInfo(float iConditionChange, int iReceiver)
+    public BuildingUpdateInfo(float iConditionChange, int iReceiver, float iTime)
     {
+        eventTime = iTime;
         receiver = iReceiver;
         conditionChange = iConditionChange;
     }
     public void performUpdate() => SystemAction.performBuildingUpdate(this);
 }
-public class AgentUpdateInfo : UpdateInfo
+public class AgentUpdateInfo : IUpdateInfo
 {
     public int receiver {get; set;}
+    public float eventTime {get; set;}
     public string description;
     public float conditionChange;
     public float nutritionChange;
@@ -438,8 +442,9 @@ public class AgentUpdateInfo : UpdateInfo
     public AgentUpdateInfo(string iDescription, float iConditionChange, float iNutritionChange, float iHappinessChange, 
                            float iEnergyChange, float iIntelligenceChange, float iRationalityChange, float iFortitudeChange,
                            float iCharismaChange, float iPerceptionChange, float iConstitutionChange, float iWisdomChange,
-                           float iStrengthChange, int iReceiver)
+                           float iStrengthChange, int iReceiver, float iTime)
     {
+        eventTime = iTime;
         description = iDescription;
         conditionChange = iConditionChange;
         nutritionChange = iNutritionChange;

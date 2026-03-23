@@ -33,6 +33,9 @@ public class TimelineItem : MonoBehaviour
     {
         OverviewMenu overviewMenu = FindFirstObjectByType<OverviewMenu>();
 
+        UpdateOverview updateOverview = overviewMenu.updateOverview;
+        updateOverview.gameObject.SetActive(false);
+
         ActionOverview actionOverview = overviewMenu.actionOverview;
         actionOverview.gameObject.SetActive(true);
         actionOverview.actionInfo = simWrap.info;
