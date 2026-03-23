@@ -144,7 +144,7 @@ public abstract class EnvironmentAction : Actions<NoTarget>
 
 public interface IAction
 {
-    char actionType {get;} //action type ("N" = NPC, "B" = Building, "E" = Environment, "S" = Self)
+    char actionType {get;} //action type ("N" = NPC, "B" = Building, "E" = Environment, "S" = Self, "Y" = System)
     string name {get;}
     string baseDescription {get;}
 
