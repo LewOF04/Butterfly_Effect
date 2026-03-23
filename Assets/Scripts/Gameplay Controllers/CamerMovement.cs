@@ -6,6 +6,7 @@ public class CamerMovement : MonoBehaviour
     public Transform playerTransform;
     public Transform leftWallPos;
     public Transform rightWallPos;
+    public Transform speechBoxPos;
     public GameObject backDrop;
     public Vector3 wallStartingPosition;
 
@@ -29,5 +30,6 @@ public class CamerMovement : MonoBehaviour
             transform.position = new Vector3(playerTransform.position.x, startingPosition.y, startingPosition.z);
             backDrop.transform.position = new Vector3(playerTransform.position.x + wallStartingPosition.x, wallStartingPosition.y, wallStartingPosition.z);
         }
+        speechBoxPos.position = new Vector3(transform.position.x, speechBoxPos.position.y, speechBoxPos.position.z);
     }
 }

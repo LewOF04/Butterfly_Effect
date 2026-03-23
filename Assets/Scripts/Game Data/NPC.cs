@@ -16,7 +16,6 @@ using System.Collections.Generic;
     public int spriteType; //the code of the sprite
     public int parentBuilding; //the building that the NPC lives in (-1 if non)
     public bool hasJob; //whether or not this npc has a job
-    public float relTime = 0f; //the amount of time they have left in the day
 
     int IAgent.id { get => id; set => id = value; }
     string IAgent.firstName { get => firstName; set => firstName = value; }
