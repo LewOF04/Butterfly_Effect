@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 4053311366615462112}
   - component: {fileID: 1829470550002191748}
   - component: {fileID: 4301732509073311731}
-  - component: {fileID: 2708015841508744576}
   m_Layer: 0
   m_Name: Speech Bubble
   m_TagString: Untagged
@@ -141,7 +140,7 @@ PolygonCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -291,19 +290,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2df51a1cdf7a0424c94f30ed4227a815, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ObjectSelector
---- !u!114 &2708015841508744576
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6091261851826817560}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f8e419887e352454080a9c49be63d807, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SpeechBubbleController
-  speechBubble: {fileID: 2176241171678797142}
 --- !u!1 &8993901430755498270
 GameObject:
   m_ObjectHideFlags: 0
@@ -318,6 +304,7 @@ GameObject:
   - component: {fileID: 3070983328365616558}
   - component: {fileID: -1214427189904913643}
   - component: {fileID: 4029814003703261566}
+  - component: {fileID: 4909263901872645619}
   m_Layer: 0
   m_Name: npcPrefab
   m_TagString: Untagged
@@ -526,3 +513,18 @@ MonoBehaviour:
   maxIdleTime: 3
   moveChance: 0.7
   animationRate: 0.18
+--- !u!114 &4909263901872645619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8993901430755498270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8e419887e352454080a9c49be63d807, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpeechBubbleController
+  speechBubble: {fileID: 2176241171678797142}
+  minDuration: 2
+  maxDuration: 6

@@ -66,5 +66,6 @@ public class ObjectSelector : MonoBehaviour
 
         speechWindow.setSpeech(speech);
         speechWindow.agentNameField.text = "Agent: "+speechBubble.parentNPC.fullName;
+        InputLocker.Lock();
     }
 }

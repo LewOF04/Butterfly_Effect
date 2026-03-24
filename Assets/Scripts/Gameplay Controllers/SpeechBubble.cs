@@ -64,6 +64,7 @@ public class SpeechBubble : MonoBehaviour
         string speech = "";
         DataController dc = DataController.Instance;
         List<Relationship> relationships = dc.RelationshipPerNPCStorage[parent.id];
+        if(relationships.Count == 0) return "There's nobody else in this world for me to have a relationship with...";
         int choice = Random.Range(0, relationships.Count);
         Relationship rel = relationships[choice];
 
@@ -79,6 +80,7 @@ public class SpeechBubble : MonoBehaviour
         if(eventType == 0)
         {
             List<BuildingEvent> buildingEvents = dc.buildingEventsPerNPCStorage[parent.id];
+            if(buildingEvents.Count == 0) return "I don't have any memories about buildings...";
             int choice = Random.Range(0, buildingEvents.Count);
             BuildingEvent theEvent = buildingEvents[choice];
             //TODO
@@ -86,6 +88,7 @@ public class SpeechBubble : MonoBehaviour
         else
         {
             List<NPCEvent> npcEvents = dc.eventsPerNPCStorage[parent.id];
+            if(npcEvents.Count == 0) return "I don't have any memories about other people...";
             int choice = Random.Range(0, npcEvents.Count);
             NPCEvent theEvent = npcEvents[choice];
             //TODO
@@ -97,6 +100,7 @@ public class SpeechBubble : MonoBehaviour
         string speech;
         DataController dc = DataController.Instance;
         List<int> traits = parent.traits;
+        if(traits.Count == 0) return "I don't have any interesting traits, I'm quite boring it seems.";
         int choice = Random.Range(0, traits.Count);
         int traitChoice = traits[choice];
 

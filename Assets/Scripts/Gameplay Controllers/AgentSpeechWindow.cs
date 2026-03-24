@@ -58,5 +58,6 @@ public class AgentSpeechWindow : MonoBehaviour
         speechField.text = "";
         agentNameField.text = "";
         GetComponent<Canvas>().enabled = false;
+        InputLocker.Unlock();
     }
 }
