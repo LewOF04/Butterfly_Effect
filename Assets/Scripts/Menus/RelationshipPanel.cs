@@ -15,10 +15,11 @@ public class RelationshipPanel : MonoBehaviour
 
     public void displayData()
     {
+        if(!secondaryNPC.isAlive) Destroy(gameObject);
         npcNameField.text = secondaryNPC.fullName;
         idInfoField.text = "ID: "+secondaryNPC.id.ToString();
 
-        Sprite npcSprite = secondaryNPC.GetComponent<SpriteRenderer>().sprite;
+        Sprite npcSprite = secondaryNPC.GetComponent<AgentSpriteHandler>().getBaseSprite();
         spriteImageLoc.sprite = npcSprite;
         spriteImageLoc.preserveAspect = true;
 

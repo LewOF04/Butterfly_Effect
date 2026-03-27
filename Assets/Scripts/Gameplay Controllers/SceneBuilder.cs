@@ -32,7 +32,6 @@ public class SceneBuilder : MonoBehaviour
 
     [Header("Data References")]
     public List<BuildingType> houseData = new List<BuildingType>();
-    public List<NPCType> npcData = new List<NPCType>();
     public WallType wallData;
     public SkipperData timeSkipperData;
 
@@ -71,6 +70,7 @@ public class SceneBuilder : MonoBehaviour
         var traits = dataController.TraitStorage;
         var NPCBuildingLinks = dataController.NPCBuildingLinks;
         var sceneDecoration = new GameObject("SceneDecoration"); //game object to store scene decoration instantiated at run time
+        List<int> deadAgents = new List<int>(npcs.Keys);
 
         List<Bounds> buildingBounds = new List<Bounds>();
         List<Bounds> floorBounds = new List<Bounds>();
@@ -142,7 +142,6 @@ public class SceneBuilder : MonoBehaviour
             collider.SetPath(0, currHouseData.colliderShape);
 
             //iterate over all npcs of the building and spawn them
-            NPCType currNPCData;
             float buildingLeftEdge = buildingBound.min.x;
             float buildingRightEdge = buildingBound.max.x;
             int iter = 0;
@@ -150,10 +149,10 @@ public class SceneBuilder : MonoBehaviour
             foreach (int npcID in building.inhabitants)
             {
                 NPC npc = npcs[npcID];
-                currNPCData = npcData[npc.spriteType - 1]; 
+                deadAgents.Remove(npcID);
+                AgentSpriteHandler spriteHandler = npc.gameObject.GetComponent<AgentSpriteHandler>();
 
                 float xPos;
-
                 if (inhabitantNum == 1) //if there is only 1 inhabitant, place in the middle
                 {
                     xPos = (buildingLeftEdge + buildingRightEdge) * 0.5f;
@@ -164,41 +163,14 @@ public class SceneBuilder : MonoBehaviour
                     xPos = Mathf.Lerp(buildingLeftEdge, buildingRightEdge, val);
                 }
 
-                Vector3 npcPosition = currNPCData.startingPosition;
+                Vector3 npcPosition = spriteHandler.type.startingPosition;
                 npcPosition.x = xPos;
-
+                
                 //set the location to spawn the npc
                 npc.gameObject.transform.position = npcPosition;
 
-                //get the condition and sprite of the npc
-                Sprite npcSprite;
-                float cond1 = npc.stats.condition;
-                int npcSpriteNum =
-                    (cond1 <= 12.5f) ? 0 :
-                    (cond1 <= 25f) ? 1 :
-                    (cond1 <= 37.5f) ? 2 :
-                    (cond1 <= 50f) ? 3 :
-                    (cond1 <= 62.5f) ? 4 :
-                    (cond1 <= 75f) ? 5 :
-                    (cond1 <= 87.5f) ? 6 : 7;
-                Sprite[] sprites = currNPCData.getSprites()[npcSpriteNum];
-                npcSprite = sprites[0];
-
                 totalCond += npc.stats.condition * 0.75f;
-
-                //set the sprite of the npc
-                SpriteRenderer sr1 = npc.GetComponent<SpriteRenderer>();
-                sr1.sprite = npcSprite;
-
-                AgentMovement moveInfo = npc.GetComponent<AgentMovement>();
-                moveInfo.standingSprite = sprites[0];
-                moveInfo.walkingSprites = new Sprite[]{sprites[1], sprites[2], sprites[3]};
-                moveInfo.leftLimit = buildingLeftEdge;
-                moveInfo.rightLimit = buildingRightEdge; 
-                moveInfo.setCanMove(true);
-
-                //set the scale of npc
-                npc.gameObject.transform.localScale = currNPCData.scale;
+                spriteHandler.showAlive(buildingLeftEdge, buildingRightEdge);
 
                 iter++;
             }
@@ -207,6 +179,43 @@ public class SceneBuilder : MonoBehaviour
             floorPosition += offset;
             iteration++;
         }
+
+        if(deadAgents.Count > 0)
+        {
+            //Spawn graveyard area flooring
+            iteration++;
+            GameObject floor = Instantiate(floorPrefab, floorPosition, Quaternion.Euler(68.064f, 0.0f, 0.0f));
+            floor.transform.SetParent(sceneDecoration.transform);
+            Bounds floorBound = floor.gameObject.GetComponent<SpriteRenderer>().bounds;
+            floorBounds.Add(floorBound);
+            float range = floorBound.max.x + floorBound.min.x;
+            int deadIter = 0;
+            foreach(int agentID in deadAgents)
+            {
+                NPC agent = npcs[agentID];
+                AgentSpriteHandler spriteHandler = agent.gameObject.GetComponent<AgentSpriteHandler>();
+                spriteHandler.showDead();
+                
+                float xPos;
+                if (deadAgents.Count == 1) //if there is only 1 grave
+                {
+                    xPos = range * 0.5f;
+                }
+                else
+                {
+                    float val = (float) deadIter / (deadAgents.Count - 1);
+                    xPos = Mathf.Lerp(floorBound.min.x, floorBound.max.x, val);
+                }
+                deadIter++;
+
+                Vector3 agentPos = spriteHandler.type.startingPosition;
+                agentPos.x = xPos;
+                
+                //set the location to spawn the npc
+                agent.gameObject.transform.position = agentPos;
+            }
+        }
+        
         wallPosition += (iteration * offset) + new Vector3(-0.96f, 0, 0);
         GameObject rightWall = Instantiate(wallData.rightPrefab, wallPosition, Quaternion.identity);
         rightWall.transform.SetParent(sceneDecoration.transform);
@@ -287,6 +296,7 @@ public class SceneBuilder : MonoBehaviour
         CamerMovement camera = Camera.main.GetComponent<CamerMovement>();
         camera.leftWallPos = leftWall.transform;
         camera.rightWallPos = rightWall.transform;
+        camera.updateLimits();
     } 
     
 

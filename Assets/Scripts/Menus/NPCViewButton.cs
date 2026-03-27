@@ -11,7 +11,7 @@ public class NPCViewButton : MonoBehaviour
 
     public void displayData()
     {
-        spriteImageLoc.sprite = npc.gameObject.GetComponent<SpriteRenderer>().sprite;
+        spriteImageLoc.sprite = npc.gameObject.GetComponent<AgentSpriteHandler>().getBaseSprite();
         spriteImageLoc.preserveAspect = true;
         npcTitle.text = "ID: "+npc.id;
     }

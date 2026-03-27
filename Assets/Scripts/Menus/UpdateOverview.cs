@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class UpdateOverview : MonoBehaviour
 {
-    public AgentUpdateInfo updateInfo;
+    public IUpdateInfo updateInfo;
     public TextMeshProUGUI textField;
     public void displayData()
     {

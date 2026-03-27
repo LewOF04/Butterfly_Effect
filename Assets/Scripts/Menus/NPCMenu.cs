@@ -10,6 +10,7 @@ public class NPCMenu : MonoBehaviour
     public TextMeshProUGUI menuTitle;
     public Button backToMainButton;
     public Button saveButton;
+    public Button actionButton;
     
     [Header("Main Page")]
     public List<Slider> attributeSliders = new List<Slider>();
@@ -110,18 +111,27 @@ public class NPCMenu : MonoBehaviour
         //determine whether to show parent building
         if(npc.parentBuilding < 0)
         {
-            buildingButton.enabled = false;
+            buildingButton.interactable = false;
         }
         else
         {
-            buildingButton.enabled = true;
+            buildingButton.interactable = true;
         }
 
         //set npc values into main page
-        spriteImageLoc.sprite = npc.GetComponent<SpriteRenderer>().sprite;
+        spriteImageLoc.sprite = npc.GetComponent<AgentSpriteHandler>().getBaseSprite();
         spriteImageLoc.preserveAspect = true;
 
         menuTitle.text = "(NPC) Name: "+npc.firstName+" "+npc.surname+" ID: "+npc.id.ToString();
+
+        foreach(Slider attrSlider in attributeSliders)
+        {
+            attrSlider.interactable = npc.isAlive;
+        }
+        foreach(Slider statSlider in statSliders)
+        {
+            statSlider.interactable = npc.isAlive;
+        }
 
         attributeSliders[0].value = attrs.morality;
         attributeSliders[1].value = attrs.intelligence;
@@ -162,6 +172,7 @@ public class NPCMenu : MonoBehaviour
             else relInsts.secondaryNPC = dataController.NPCStorage[relationship.key.npcA];
 
             relInsts.displayData();
+            relInsts.slider.interactable = npc.isAlive;
         }
 
         populateMemories();
@@ -173,11 +184,17 @@ public class NPCMenu : MonoBehaviour
         mainCanvas.enabled = true;
         backToMainButton.gameObject.SetActive(false);
         saveButton.gameObject.SetActive(true);
+        saveButton.gameObject.GetComponent<Button>().interactable = npc.isAlive;
         actionConfirm.gameObject.SetActive(false);
 
+        actionButton.interactable = npc.isAlive;
+
         //calculate all actions available to npc
-        possibleActions = new ActionFrontier(dataController);
-        possibleActions.produceFrontier(npc);
+        if (npc.isAlive)
+        {
+            possibleActions = new ActionFrontier(dataController);
+            possibleActions.produceFrontier(npc);
+        }
     }
 
     /*

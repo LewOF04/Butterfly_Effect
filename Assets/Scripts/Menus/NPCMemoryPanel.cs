@@ -37,7 +37,7 @@ public class NPCMemoryPanel : MonoBehaviour
         performerIDField.text = "ID: "+performer.id.ToString();
         performerNameField.text = "Name: "+performer.fullName;
         perfImpField.text = "Importance: "+thisEvent.performerImportance;
-        performerSpriteImageLoc.sprite = performer.GetComponent<SpriteRenderer>().sprite;
+        performerSpriteImageLoc.sprite = performer.GetComponent<AgentSpriteHandler>().getBaseSprite();
         if(thisEvent.wasPositivePerf) wasPosPerfField.color = Color.green;
         else wasPosPerfField.color = Color.red;
 
@@ -64,7 +64,7 @@ public class NPCMemoryPanel : MonoBehaviour
             receiver = dataController.NPCStorage[thisEvent.receiver];
             receiverNameField.text = "Name: "+receiver.fullName;
             receiverIDField.text = "ID: "+receiver.id.ToString();
-            receiverSpriteImageLoc.sprite = receiver.GetComponent<SpriteRenderer>().sprite;
+            receiverSpriteImageLoc.sprite = receiver.GetComponent<AgentSpriteHandler>().getBaseSprite();
             recImpField.text = "Importance: "+thisEvent.receiverImportance;
             receiverText.text = "Receiver";
             if(thisEvent.wasPositiveRec) wasPosRecField.color = Color.green;

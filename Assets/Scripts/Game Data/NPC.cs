@@ -16,6 +16,7 @@ using System.Collections.Generic;
     public int spriteType; //the code of the sprite
     public int parentBuilding; //the building that the NPC lives in (-1 if non)
     public bool hasJob; //whether or not this npc has a job
+    public bool isAlive; //whether this agent is alive or not
 
     int IAgent.id { get => id; set => id = value; }
     string IAgent.firstName { get => firstName; set => firstName = value; }
@@ -27,6 +28,7 @@ using System.Collections.Generic;
     int IAgent.spriteType { get => spriteType; set => spriteType = value; }
     int IAgent.parentBuilding { get => parentBuilding; set => parentBuilding = value; }
     bool IAgent.hasJob { get => hasJob; set => hasJob = value; }
+    bool IAgent.isAlive { get => isAlive; set => isAlive = value; }
 
     //extra utility functions for traits list
     public bool ContainsTrait(int id)
@@ -51,9 +53,10 @@ using System.Collections.Generic;
         spriteType = data.spriteType;
         parentBuilding = data.parentBuilding;
         hasJob = data.hasJob;
+        isAlive = data.isAlive;
     }
 
-    public void Load(int inputID, string inputFirstName, string inputSurname, Attributes inputAttributes, Stats inputStats, List<int> inputTraits, int inputSpriteType, int inputParentBuilding, bool inputHasJob)
+    public void Load(int inputID, string inputFirstName, string inputSurname, Attributes inputAttributes, Stats inputStats, List<int> inputTraits, int inputSpriteType, int inputParentBuilding, bool inputHasJob, bool inputIsAlive)
     {
         id = inputID;
         firstName = inputFirstName;
@@ -65,5 +68,6 @@ using System.Collections.Generic;
         spriteType = inputSpriteType;
         parentBuilding = inputParentBuilding; 
         hasJob = inputHasJob;
+        isAlive = inputIsAlive;
     }
 }

@@ -12,11 +12,11 @@ public class ObjectSelector : MonoBehaviour
 
         if (TryGetComponent<Building>(out Building building)) openBuildingMenu(building);
         
-        else if (TryGetComponent<NPC>(out NPC npc)) openNPCMenu(npc);
-        
         else if (TryGetComponent<TimeSkipper>(out TimeSkipper _)) openOverviewMenu();
 
         else if (TryGetComponent<SpeechBubble>(out SpeechBubble bubble)) openSpeech(bubble);
+        
+        else if (transform.parent.TryGetComponent<NPC>(out NPC npc)) openNPCMenu(npc);
     }
     private void openOverviewMenu()
     {

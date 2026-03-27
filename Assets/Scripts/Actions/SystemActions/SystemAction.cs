@@ -399,12 +399,66 @@ public static class SystemAction
         if(!DomainContext.DataController.TryGetBuilding(updateInfo.receiver, out var building)) return;
         building.condition = Mathf.Clamp(building.condition + updateInfo.conditionChange, 0f, 100f);
     }
+
+    public static AgentDeathInfo calcAgentDeath(int receiver, float time)
+    {
+        Debug.Log("CALCULATING DEATH");
+        IDataContainer dataController = DomainContext.DataController;
+        
+        Dictionary<int, float> happinessChanges = new Dictionary<int, float>();
+        
+        if(!dataController.TryGetAgent(receiver, out var agent)) return null;
+        string description = agent.fullName + " died at "+time.ToString("0.00")+" for those that like him it will cause sadness, for others maybe not so much.";
+
+        List<Relationship> relationships = dataController.RelationshipPerNPCStorage[receiver];
+        foreach(Relationship rel in relationships)
+        {
+            int otherAgent;
+            if(rel.key.npcA == receiver) otherAgent = rel.key.npcB;
+            else otherAgent = rel.key.npcA;
+
+            float change;
+            if(rel.value < 60f && rel.value > 40f) change = Mathf.Lerp(-5f, 5f, Mathf.InverseLerp(60f, 40f, rel.value));
+            if(rel.value < 40f) change = Mathf.Lerp(5f, 20f, Mathf.InverseLerp(40f, 0f, rel.value));
+            else change = Mathf.Lerp(-20f, -5f, Mathf.InverseLerp(100f, 60f, rel.value));
+
+            happinessChanges[otherAgent] = change;
+        }
+
+        return new AgentDeathInfo(receiver, time, description, happinessChanges);
+    }
+    public static void performAgentDeath(AgentDeathInfo updateInfo)
+    {
+        Debug.Log("PERFORMING DEATH");
+        IDataContainer dataController = DomainContext.DataController;
+        if(dataController is DataController dinst) Debug.Log("Performing agent death on: instance");
+        else Debug.Log("Performing agent death on: snapshot");
+        if(!dataController.TryGetAgent(updateInfo.receiver, out var agent)) return;
+
+        agent.isAlive = false;
+
+        if(!dataController.TryGetBuilding(agent.parentBuilding, out var building)) return;
+        building.inhabitants.Remove(agent.id);
+
+        agent.parentBuilding = -1;
+
+        foreach(var kvp in updateInfo.happinessChanges)
+        {
+            int id = kvp.Key;
+            float change = kvp.Value;
+            
+            if(!dataController.TryGetAgent(id, out var otherAgent)) return;
+
+            otherAgent.stats.happiness = Mathf.Clamp(otherAgent.stats.happiness + change, 0f, 100f);
+        }
+    }
 }
 
 public interface IUpdateInfo : ISimEvent
 {
     int receiver {get; set;}
     float eventTime {get; set;}
+    public string description {get;}
     void performUpdate();
 }
 
@@ -413,6 +467,7 @@ public class BuildingUpdateInfo : IUpdateInfo
     public int receiver {get; set;}
     public float eventTime {get; set;}
     public float conditionChange;
+    public string description {get => "";}
     public BuildingUpdateInfo(float iConditionChange, int iReceiver, float iTime)
     {
         eventTime = iTime;
@@ -425,7 +480,7 @@ public class AgentUpdateInfo : IUpdateInfo
 {
     public int receiver {get; set;}
     public float eventTime {get; set;}
-    public string description;
+    public string description {get;}
     public float conditionChange;
     public float nutritionChange;
     public float happinessChange;
@@ -462,4 +517,19 @@ public class AgentUpdateInfo : IUpdateInfo
     }
 
     public void performUpdate() => SystemAction.performAgentUpdate(this);
+}
+public class AgentDeathInfo : IUpdateInfo
+{
+    public int receiver {get; set;}
+    public float eventTime {get; set;}
+    public string description {get;}
+    public Dictionary<int, float> happinessChanges;
+    public AgentDeathInfo(int rec, float time, string desc, Dictionary<int, float> happChanges)
+    {
+        receiver = rec;
+        eventTime = time;
+        description = desc;
+        happinessChanges = happChanges;
+    }
+    public void performUpdate() => SystemAction.performAgentDeath(this);
 }

@@ -1,0 +1,1265 @@
+fileFormatVersion: 2
+guid: 16e8577885ef2414da6863160c63638e
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 1235586166610966660
+    second: Improved Base Characters_0
+  - first:
+      213: 1238425759477069795
+    second: Improved Base Characters_1
+  - first:
+      213: -5173724397675928087
+    second: Improved Base Characters_2
+  - first:
+      213: 7818168439352040084
+    second: Improved Base Characters_3
+  - first:
+      213: 2592169561385107061
+    second: Improved Base Characters_4
+  - first:
+      213: 3470628598630572415
+    second: Improved Base Characters_5
+  - first:
+      213: 734247712483890832
+    second: Improved Base Characters_6
+  - first:
+      213: 5833615069151878521
+    second: Improved Base Characters_7
+  - first:
+      213: 6873994815028520248
+    second: Improved Base Characters_8
+  - first:
+      213: -4400762513169130111
+    second: Improved Base Characters_9
+  - first:
+      213: -543657184581665018
+    second: Improved Base Characters_10
+  - first:
+      213: -4832814454462658646
+    second: Improved Base Characters_11
+  - first:
+      213: -3020406471658652810
+    second: Improved Base Characters_12
+  - first:
+      213: 1836493145834149009
+    second: Improved Base Characters_13
+  - first:
+      213: -7868401056666319619
+    second: Improved Base Characters_14
+  - first:
+      213: 2048457669824971946
+    second: Improved Base Characters_15
+  - first:
+      213: -5006525423944681048
+    second: Improved Base Characters_16
+  - first:
+      213: -2578861652485114644
+    second: Improved Base Characters_17
+  - first:
+      213: -4201243566425891446
+    second: Improved Base Characters_18
+  - first:
+      213: 5897158770216296266
+    second: Improved Base Characters_19
+  - first:
+      213: -8540115938345801982
+    second: Improved Base Characters_20
+  - first:
+      213: 3189091459848388285
+    second: Improved Base Characters_21
+  - first:
+      213: 1675510815642745546
+    second: Improved Base Characters_22
+  - first:
+      213: 1848858617619462090
+    second: Improved Base Characters_23
+  - first:
+      213: -3320268172946033267
+    second: Improved Base Characters_24
+  - first:
+      213: 1193489558898377936
+    second: Improved Base Characters_25
+  - first:
+      213: -3438629067164045958
+    second: Improved Base Characters_26
+  - first:
+      213: 1386412259545139312
+    second: Improved Base Characters_27
+  - first:
+      213: 5888503490276411150
+    second: Improved Base Characters_28
+  - first:
+      213: 8529901946817845573
+    second: Improved Base Characters_29
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 300
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Improved Base Characters_0
+      rect:
+        serializedVersion: 2
+        x: 383
+        y: 5635
+        width: 276
+        height: 346
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 488bb36721fa52110800000000000000
+      internalID: 1235586166610966660
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Improved Base Characters_1
+      rect:
+        serializedVersion: 2
+        x: 390
+        y: 5299
+        width: 275
+        height: 337
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3e7f252baa5cf2110800000000000000
+      internalID: 1238425759477069795
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Improved Base Characters_2
+      rect:
+        serializedVersion: 2
+        x: 391
+        y: 4953
+        width: 279
+        height: 340
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9e521c6621d3338b0800000000000000
+      internalID: -5173724397675928087
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Improved Base Characters_3
+      rect:
+        serializedVersion: 2
+        x: 383
+        y: 4617
+        width: 286
+        height: 334
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 49a9fbde5c6bf7c60800000000000000
+      internalID: 7818168439352040084
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Improved Base Characters_4
+      rect:
+        serializedVersion: 2
+        x: 379
+        y: 4268
+        width: 291
+        height: 343
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 57e70ff6b7c39f320800000000000000
+      internalID: 2592169561385107061
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Improved Base Characters_5
+      rect:
+        serializedVersion: 2
+        x: 375
+        y: 3932
+        width: 289
+        height: 333
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f71efa082562a2030800000000000000
+      internalID: 3470628598630572415
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Improved Base Characters_6
+      rect:
+        serializedVersion: 2
+        x: 2825
+        y: 3931
+        width: 171
+        height: 336
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 096debf7762903a00800000000000000
+      internalID: 734247712483890832
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Improved Base Characters_7
+      rect:
+        serializedVersion: 2
+        x: 3168
+        y: 3932
+        width: 170
+        height: 340
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 97dd9216ff925f050800000000000000
+      internalID: 5833615069151878521
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Improved Base Characters_8
+      rect:
+        serializedVersion: 2
+        x: 3509
+        y: 3930
+        width: 171
+        height: 339
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 835e6a14dd5556f50800000000000000
+      internalID: 6873994815028520248
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Improved Base Characters_9
+      rect:
+        serializedVersion: 2
+        x: 3497
+        y: 4269
+        width: 180
+        height: 342
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 18dd2bd7fc95de2c0800000000000000
+      internalID: -4400762513169130111
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Improved Base Characters_10
+      rect:
+        serializedVersion: 2
+        x: 3158
+        y: 4275
+        width: 180
+        height: 343
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 60fbb69cbaa8478f0800000000000000
+      internalID: -543657184581665018
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Improved Base Characters_12
+      rect:
+        serializedVersion: 2
+        x: 3787
+        y: 5203
+        width: 10
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 67bbe7b115c5516d0800000000000000
+      internalID: -3020406471658652810
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Improved Base Characters_13
+      rect:
+        serializedVersion: 2
+        x: 3719
+        y: 5171
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 19452e539c88c7910800000000000000
+      internalID: 1836493145834149009
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Improved Base Characters_14
+      rect:
+        serializedVersion: 2
+        x: 327
+        y: 3195
+        width: 30
+        height: 362
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: df488137de2ddc290800000000000000
+      internalID: -7868401056666319619
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Improved Base Characters_15
+      rect:
+        serializedVersion: 2
+        x: 3811
+        y: 2463
+        width: 218
+        height: 226
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa48753c5659d6c10800000000000000
+      internalID: 2048457669824971946
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Improved Base Characters_16
+      rect:
+        serializedVersion: 2
+        x: 3811
+        y: 2143
+        width: 238
+        height: 246
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8a9b0d217af358ab0800000000000000
+      internalID: -5006525423944681048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Improved Base Characters_17
+      rect:
+        serializedVersion: 2
+        x: 3811
+        y: 1827
+        width: 234
+        height: 238
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ce47fbe8dfa063cd0800000000000000
+      internalID: -2578861652485114644
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Improved Base Characters_18
+      rect:
+        serializedVersion: 2
+        x: 3491
+        y: 1503
+        width: 290
+        height: 230
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a8d1a484c3f22b5c0800000000000000
+      internalID: -4201243566425891446
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Improved Base Characters_19
+      rect:
+        serializedVersion: 2
+        x: 3811
+        y: 1507
+        width: 234
+        height: 226
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a4f52d238aae6d150800000000000000
+      internalID: 5897158770216296266
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Improved Base Characters_20
+      rect:
+        serializedVersion: 2
+        x: 3875
+        y: 1139
+        width: 154
+        height: 170
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2072f323dc96b7980800000000000000
+      internalID: -8540115938345801982
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Improved Base Characters_21
+      rect:
+        serializedVersion: 2
+        x: 3875
+        y: 927
+        width: 174
+        height: 170
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dbebe7449cde14c20800000000000000
+      internalID: 3189091459848388285
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Improved Base Characters_22
+      rect:
+        serializedVersion: 2
+        x: 3983
+        y: 1087
+        width: 10
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: acaf5b7a53c904710800000000000000
+      internalID: 1675510815642745546
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Improved Base Characters_23
+      rect:
+        serializedVersion: 2
+        x: 3875
+        y: 715
+        width: 166
+        height: 170
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ac7b027fd1778a910800000000000000
+      internalID: 1848858617619462090
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Improved Base Characters_24
+      rect:
+        serializedVersion: 2
+        x: 3875
+        y: 503
+        width: 162
+        height: 158
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d85348030b90ce1d0800000000000000
+      internalID: -3320268172946033267
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Improved Base Characters_25
+      rect:
+        serializedVersion: 2
+        x: 3879
+        y: 291
+        width: 170
+        height: 174
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d486413e60209010800000000000000
+      internalID: 1193489558898377936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Improved Base Characters_26
+      rect:
+        serializedVersion: 2
+        x: 3875
+        y: 75
+        width: 170
+        height: 170
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a7daa5105198740d0800000000000000
+      internalID: -3438629067164045958
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Improved Base Characters_27
+      rect:
+        serializedVersion: 2
+        x: 4027
+        y: 159
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0784f62ca968d3310800000000000000
+      internalID: 1386412259545139312
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Improved Base Characters_28
+      rect:
+        serializedVersion: 2
+        x: 3959
+        y: 0
+        width: 14
+        height: 33
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e07c29cc9ba28b150800000000000000
+      internalID: 5888503490276411150
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Improved Base Characters_29
+      rect:
+        serializedVersion: 2
+        x: 4019
+        y: 3
+        width: 18
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5499df490ac406670800000000000000
+      internalID: 8529901946817845573
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Improved Base Characters_30
+      rect:
+        serializedVersion: 2
+        x: 2822
+        y: 4271
+        width: 181
+        height: 339
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1930e28ca0f118144b112886442bdb08
+      internalID: 21294999
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Improved Base Characters_31
+      rect:
+        serializedVersion: 2
+        x: 2815
+        y: 4614
+        width: 197
+        height: 344
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1259b502f8d540545a51e9a0fa616e4f
+      internalID: 133714236
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Improved Base Characters_32
+      rect:
+        serializedVersion: 2
+        x: 3156
+        y: 4619
+        width: 184
+        height: 337
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 13523e98072156640a1449224357bd6b
+      internalID: 357314497
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Improved Base Characters_33
+      rect:
+        serializedVersion: 2
+        x: 3494
+        y: 4610
+        width: 188
+        height: 344
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 195ff1a5d0d3e154d988b269745587e4
+      internalID: -1062402194
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Improved Base Characters_34
+      rect:
+        serializedVersion: 2
+        x: 3503
+        y: 4955
+        width: 190
+        height: 338
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a002a36e40b1ed341893d6233c82999b
+      internalID: -1448373184
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Improved Base Characters_35
+      rect:
+        serializedVersion: 2
+        x: 3165
+        y: 4957
+        width: 182
+        height: 337
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 002f9f4439a93114a92a550f5b1f21b6
+      internalID: 1642674108
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Improved Base Characters_36
+      rect:
+        serializedVersion: 2
+        x: 2819
+        y: 4957
+        width: 185
+        height: 338
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 885c912286e22b248aec6e1460e31d98
+      internalID: 420472078
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Improved Base Characters_37
+      rect:
+        serializedVersion: 2
+        x: 2764
+        y: 5294
+        width: 223
+        height: 342
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 14ca9c985c09ca64b841c03864a9b5c4
+      internalID: 129151553
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Improved Base Characters_38
+      rect:
+        serializedVersion: 2
+        x: 3104
+        y: 5296
+        width: 222
+        height: 342
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 60c1fe8bd23d374489f48f8f74475c30
+      internalID: -1212961708
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Improved Base Characters_39
+      rect:
+        serializedVersion: 2
+        x: 3440
+        y: 5290
+        width: 229
+        height: 342
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6d8e59a55ae9efa44bb78fbe24f13909
+      internalID: 103113293
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Improved Base Characters_40
+      rect:
+        serializedVersion: 2
+        x: 3142
+        y: 5640
+        width: 190
+        height: 333
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f6b7bdd6d381441498a52cf0c975a66b
+      internalID: -1341276705
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Improved Base Characters_41
+      rect:
+        serializedVersion: 2
+        x: 2808
+        y: 5638
+        width: 183
+        height: 336
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a2d78705501267b42a1ee69bb2e9c4b1
+      internalID: 1920826542
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Improved Base Characters_42
+      rect:
+        serializedVersion: 2
+        x: 3496
+        y: 5630
+        width: 176
+        height: 342
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e477c2fb8235e644b9aea041171674f5
+      internalID: -1662021176
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Improved Base Characters_11
+      rect:
+        serializedVersion: 2
+        x: 386
+        y: 3244
+        width: 283
+        height: 347
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d5ac976c57dedc64ebdf1246c4c31e5f
+      internalID: -4832814454462658646
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Improved Base Characters_43
+      rect:
+        serializedVersion: 2
+        x: 2789
+        y: 3241
+        width: 240
+        height: 349
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 26f4ce9124194e3478ff9f1d1c0b181f
+      internalID: -1530814446
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Improved Base Characters_44
+      rect:
+        serializedVersion: 2
+        x: 3135
+        y: 3248
+        width: 222
+        height: 340
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1473137dccad9074daad72d25eb060b3
+      internalID: -220351931
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Improved Base Characters_45
+      rect:
+        serializedVersion: 2
+        x: 3486
+        y: 3246
+        width: 225
+        height: 342
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7ce52af36b198ba4ca92a271dbf90f11
+      internalID: 1522338332
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: d72aeb0a7994f0842bcb271af189cc7d
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Improved Base Characters_0: 1235586166610966660
+      Improved Base Characters_1: 1238425759477069795
+      Improved Base Characters_10: -543657184581665018
+      Improved Base Characters_11: -4832814454462658646
+      Improved Base Characters_12: -3020406471658652810
+      Improved Base Characters_13: 1836493145834149009
+      Improved Base Characters_14: -7868401056666319619
+      Improved Base Characters_15: 2048457669824971946
+      Improved Base Characters_16: -5006525423944681048
+      Improved Base Characters_17: -2578861652485114644
+      Improved Base Characters_18: -4201243566425891446
+      Improved Base Characters_19: 5897158770216296266
+      Improved Base Characters_2: -5173724397675928087
+      Improved Base Characters_20: -8540115938345801982
+      Improved Base Characters_21: 3189091459848388285
+      Improved Base Characters_22: 1675510815642745546
+      Improved Base Characters_23: 1848858617619462090
+      Improved Base Characters_24: -3320268172946033267
+      Improved Base Characters_25: 1193489558898377936
+      Improved Base Characters_26: -3438629067164045958
+      Improved Base Characters_27: 1386412259545139312
+      Improved Base Characters_28: 5888503490276411150
+      Improved Base Characters_29: 8529901946817845573
+      Improved Base Characters_3: 7818168439352040084
+      Improved Base Characters_30: 21294999
+      Improved Base Characters_31: 133714236
+      Improved Base Characters_32: 357314497
+      Improved Base Characters_33: -1062402194
+      Improved Base Characters_34: -1448373184
+      Improved Base Characters_35: 1642674108
+      Improved Base Characters_36: 420472078
+      Improved Base Characters_37: 129151553
+      Improved Base Characters_38: -1212961708
+      Improved Base Characters_39: 103113293
+      Improved Base Characters_4: 2592169561385107061
+      Improved Base Characters_40: -1341276705
+      Improved Base Characters_41: 1920826542
+      Improved Base Characters_42: -1662021176
+      Improved Base Characters_43: -1530814446
+      Improved Base Characters_44: -220351931
+      Improved Base Characters_45: 1522338332
+      Improved Base Characters_5: 3470628598630572415
+      Improved Base Characters_6: 734247712483890832
+      Improved Base Characters_7: 5833615069151878521
+      Improved Base Characters_8: 6873994815028520248
+      Improved Base Characters_9: -4400762513169130111
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -9,9 +9,9 @@ public class TimelineAgentView : MonoBehaviour
     public TextMeshProUGUI idField;
 
     public void displayData(NPC agent)
-    {
+    { 
         spriteView.gameObject.SetActive(true);
-        spriteView.sprite = agent.gameObject.GetComponent<SpriteRenderer>().sprite;
+        spriteView.sprite = agent.gameObject.GetComponent<AgentSpriteHandler>().getBaseSprite();
         nameField.text = "Name: "+agent.fullName;
         idField.text = "ID: "+agent.id;
     }

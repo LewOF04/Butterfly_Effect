@@ -14,7 +14,7 @@ public class TimelineView : MonoBehaviour
             TimelineItem newItem = Instantiate(itemPrefab, itemContainer.transform);
             newItem.displayData(simWrap);
         }
-        if(simEvent is AgentUpdateInfo updateInfo)
+        if(simEvent is IUpdateInfo updateInfo)
         {
             TimelineUpdateItem newItem = Instantiate(updateItemPrefab, itemContainer.transform);
             newItem.displayData(updateInfo);

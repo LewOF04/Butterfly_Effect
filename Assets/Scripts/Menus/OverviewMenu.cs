@@ -263,7 +263,7 @@ public class OverviewMenu : MonoBehaviour
                     timelineAgentView.displayData(performerID);
                 }
             }
-            else if(simEvent is AgentUpdateInfo updateInfo)
+            else if(simEvent is IUpdateInfo updateInfo && simEvent is not BuildingUpdateInfo buildInfo)
             {
                 int performerID = updateInfo.receiver;
                 try{thisTimeline = plotViewTimelines[performerID];}

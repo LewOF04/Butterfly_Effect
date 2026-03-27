@@ -10265,6 +10265,7 @@ MonoBehaviour:
   menuTitle: {fileID: 475064189}
   backToMainButton: {fileID: 1100335171}
   saveButton: {fileID: 770788808}
+  actionButton: {fileID: 247400124}
   attributeSliders:
   - {fileID: 1559191797}
   - {fileID: 346864294}
@@ -40715,12 +40716,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 73471f272c9099a408f02c6141d37e55, type: 2}
   - {fileID: 11400000, guid: 716309134eac00f4988029ee6aee8ab4, type: 2}
   - {fileID: 11400000, guid: 15b97f59ef7b2c24da23b2740b47a6eb, type: 2}
-  npcData:
-  - {fileID: 11400000, guid: 8a5fc402d37e0924ea7f6150e1276273, type: 2}
-  - {fileID: 11400000, guid: 0d3b218c1993706409b59f7ccae45090, type: 2}
-  - {fileID: 11400000, guid: 7b70c61e41383d847bdc7e2d6f2eeb51, type: 2}
-  - {fileID: 11400000, guid: bbd1864e64633c84791125db281b2de3, type: 2}
-  - {fileID: 11400000, guid: 32d7c62793a597e4ba15f7c432509f53, type: 2}
   wallData: {fileID: 11400000, guid: 6ca51a7fdf984d04aa7a76f454f43ec7, type: 2}
   timeSkipperData: {fileID: 11400000, guid: aa5f535c7fce3574fac2236aed2a255b, type: 2}
 --- !u!4 &1495880204
@@ -58807,7 +58802,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3886063591411808498, guid: f72651c3b1d4dfe4f84c6f5702c3dba5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.5
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 3886063591411808498, guid: f72651c3b1d4dfe4f84c6f5702c3dba5, type: 3}
       propertyPath: m_LocalRotation.w
@@ -58895,7 +58890,7 @@ Transform:
   m_GameObject: {fileID: 2309957380909595135}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.5}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

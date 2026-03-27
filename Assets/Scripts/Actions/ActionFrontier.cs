@@ -62,7 +62,7 @@ public class ActionFrontier
            foreach(int agentKey in agentKeys)
             {
                 if(!dataController.TryGetAgent(agentKey, out var agent)) continue;
-                if(agent.id == performer.id) continue;
+                if(agent.id == performer.id || !agent.isAlive) continue;
 
                 ActionInfoWrapper info = agentAction.computeAction(performer, agent);
 
@@ -130,7 +130,7 @@ public class ActionFrontier
            foreach(int agentKey in agentKeys)
             {
                 if(!dataController.TryGetAgent(agentKey, out var agent)) continue;
-                if(agent.id == performer.id) continue;
+                if(agent.id == performer.id || !agent.isAlive) continue;
 
                 ActionInfoWrapper info = agentAction.computeAction(performer, agent);
                 npcActions[agent.id].Add(info);

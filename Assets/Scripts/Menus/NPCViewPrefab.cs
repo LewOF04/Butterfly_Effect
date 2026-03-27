@@ -20,7 +20,7 @@ public class NPCViewPrefab : MonoBehaviour
             relationshipText.gameObject.SetActive(true);
             nameField.text = "Name: "+npc.fullName; 
             idField.text = "ID: "+npc.id.ToString();
-            spriteImageLoc.sprite = npc.GetComponent<SpriteRenderer>().sprite;
+            spriteImageLoc.sprite = npc.GetComponent<AgentSpriteHandler>().getBaseSprite();
             spriteImageLoc.preserveAspect = true;
             relationshipColour.gameObject.SetActive(true); 
 

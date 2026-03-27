@@ -17,7 +17,6 @@ public class SpeechBubbleController : MonoBehaviour
     private void Update()
     {
         timer += Time.deltaTime;
-        Debug.Log("timer: "+timer.ToString("0.00")+", current duration = "+currentDuration.ToString("0.00"));
 
         if (timer >= currentDuration)
         {
@@ -30,10 +29,8 @@ public class SpeechBubbleController : MonoBehaviour
         timer = 0f;
 
         currentDuration = Random.Range(minDuration, maxDuration);
-        Debug.Log("Current Duration: "+currentDuration.ToString("0.00"));
 
         bool show = Random.value > 0.5f;
-        Debug.Log("Show: "+show.ToString());
         speechBubble.gameObject.SetActive(show);
     }
 }

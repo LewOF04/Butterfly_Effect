@@ -34,11 +34,14 @@ public class AgentMovement : MonoBehaviour
 
     private void OnDisable()
     {
+        canMove = false;
+        characterTransform.localScale = new Vector3(1f,1f,1f);
         if (movementLoop != null)
         {
             StopCoroutine(movementLoop);
             movementLoop = null;
         }
+        
     }
 
     public void setCanMove(bool value)

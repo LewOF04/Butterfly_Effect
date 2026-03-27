@@ -15,7 +15,7 @@ public class ViewButton : MonoBehaviour
     {
         if(source is NPC npc)
         {
-            spriteImageLoc.sprite = npc.gameObject.GetComponent<SpriteRenderer>().sprite;
+            spriteImageLoc.sprite = npc.gameObject.GetComponent<AgentSpriteHandler>().getBaseSprite();
             spriteImageLoc.preserveAspect = true;
             IDTitle.text = "ID: "+npc.id;
             nameTitle.text = "Name: "+npc.fullName;

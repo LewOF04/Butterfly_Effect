@@ -62,7 +62,7 @@ public class BuildingMemoryPanel : MonoBehaviour
             npc = dataController.NPCStorage[thisEvent.eventKey.npc];
             npcNameField.text = "Name: "+npc.fullName;
             npcIDField.text = "ID: "+npc.id.ToString();
-            npcSpriteImageLoc.sprite = npc.GetComponent<SpriteRenderer>().sprite;
+            npcSpriteImageLoc.sprite = npc.GetComponent<AgentSpriteHandler>().getBaseSprite();
             npcSpriteImageLoc.preserveAspect = true;
 
             npcImpField.text = "Importance: " + thisEvent.npcImportance;

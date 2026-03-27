@@ -152,7 +152,7 @@ public class TimeSkipper : MonoBehaviour
 
         camMovement.transform.position = startPos;
 
-        player.position = new Vector3(0,0,-0.5f);
+        player.position = new Vector3(0,0,-1f);
 
         if (isIndependent)
         {

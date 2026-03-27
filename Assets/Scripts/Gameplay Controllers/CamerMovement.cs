@@ -32,4 +32,9 @@ public class CamerMovement : MonoBehaviour
         }
         speechBoxPos.position = new Vector3(transform.position.x, speechBoxPos.position.y, speechBoxPos.position.z);
     }
+
+    public void updateLimits()
+    {
+        rightLimit = rightWallPos.position - new Vector3(3.125f, 0f, 0f);
+    }
 }

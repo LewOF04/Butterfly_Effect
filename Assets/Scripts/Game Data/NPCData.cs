@@ -14,6 +14,7 @@ public class NPCData : IAgent
     public int spriteType; //the code of the sprite
     public int parentBuilding;
     public bool hasJob;
+    public bool isAlive;
 
     int IAgent.id { get => id; set => id = value; }
     string IAgent.firstName { get => firstName; set => firstName = value; }
@@ -25,6 +26,7 @@ public class NPCData : IAgent
     int IAgent.spriteType { get => spriteType; set => spriteType = value; }
     int IAgent.parentBuilding { get => parentBuilding; set => parentBuilding = value; }
     bool IAgent.hasJob { get => hasJob; set => hasJob = value; }
+    bool IAgent.isAlive { get => isAlive; set => isAlive = value; }
 
     public NPCData() { }
 
@@ -40,6 +42,7 @@ public class NPCData : IAgent
         spriteType = npc.spriteType;
         parentBuilding = npc.parentBuilding;
         hasJob = npc.hasJob;
+        isAlive = npc.isAlive;
     }
 }
 

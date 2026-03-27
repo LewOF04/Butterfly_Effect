@@ -30,16 +30,16 @@ public class NPCManager : MonoBehaviour
 
     public void LoadNPCs()
     {
-        var npcs = SaveSys.LoadAllNPCs(); //gets the list of stored NPCs
+        List<NPCData> npcs = SaveSys.LoadAllNPCs(); //gets the list of stored NPCs
 
         Dictionary<int, NPC> NPCStorage = new Dictionary<int, NPC>(); //dictionary storing each NPC currently within the game 
 
-        foreach (var npcData in npcs)
+        foreach(NPCData npcData in npcs)
         {
             var inst = Instantiate(npcPrefab); //instantiates the NPC
-            inst.transform.SetParent(dataController.npcContainer, false);
-            var npc = inst.GetComponent<NPC>(); //gets the monoBehaviour script linked to the instantiation
 
+            inst.transform.SetParent(dataController.npcContainer, false);
+            NPC npc = inst.GetComponent<NPC>(); //gets the monoBehaviour script linked to the instantiation
             npc.Load(npcData); //loads the npc with data
 
             NPCStorage.Add(npc.id, npc); //adds the instantiated NPC to the storage
@@ -72,6 +72,7 @@ public class NPCManager : MonoBehaviour
         int spriteType = rng.Next(1, 5);
         int parentBuilding = -1; //not yet defined
         bool hasJob = rng.Next(2) == 0;
+        bool isAlive = true;
 
         attributes.morality = rng.Next(0, 101);
         attributes.intelligence = rng.Next(0, 101);
@@ -109,7 +110,7 @@ public class NPCManager : MonoBehaviour
         inst.transform.SetParent(dataController.npcContainer, false);
         var npc = inst.GetComponent<NPC>(); //gets the monoBehaviour script linked to the instantiation
 
-        npc.Load(id, "", "", attributes, stats, traits, spriteType, parentBuilding, hasJob); //loads the npc with data
+        npc.Load(id, "", "", attributes, stats, traits, spriteType, parentBuilding, hasJob, isAlive); //loads the npc with data
         generateAgentName(npc);
         npc.fullName = npc.firstName + " " + npc.surname;
 

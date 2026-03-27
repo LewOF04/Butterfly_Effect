@@ -49,9 +49,9 @@ MonoBehaviour:
   - {fileID: -1316170341, guid: 6b0939f7e0a18ff4b96257b5267858fe, type: 3}
   - {fileID: 1606753363, guid: 6b0939f7e0a18ff4b96257b5267858fe, type: 3}
   level7Sprites:
-  - {fileID: -1718263776, guid: 6b0939f7e0a18ff4b96257b5267858fe, type: 3}
-  - {fileID: 950913812, guid: 6b0939f7e0a18ff4b96257b5267858fe, type: 3}
-  - {fileID: -1316170341, guid: 6b0939f7e0a18ff4b96257b5267858fe, type: 3}
-  - {fileID: 1606753363, guid: 6b0939f7e0a18ff4b96257b5267858fe, type: 3}
+  - {fileID: -4832814454462658646, guid: 16e8577885ef2414da6863160c63638e, type: 3}
+  - {fileID: -1530814446, guid: 16e8577885ef2414da6863160c63638e, type: 3}
+  - {fileID: -220351931, guid: 16e8577885ef2414da6863160c63638e, type: 3}
+  - {fileID: 1522338332, guid: 16e8577885ef2414da6863160c63638e, type: 3}
   startingPosition: {x: 0, y: -1.5, z: -0.4}
-  scale: {x: 1, y: 1, z: 1}
+  scale: {x: 0.68, y: 0.68, z: 0.68}
