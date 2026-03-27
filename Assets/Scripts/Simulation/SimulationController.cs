@@ -41,29 +41,8 @@ public static class SimulationController
         else return 100f;
     }
 
-    public static IEnumerator plotSimulationRoutine(SimulationPlot simPlot)
+    private static void plotInitialActions(ActionFrontier actionFrontier, PriorityQueue<SimulationActionWrapper, float> actionQueue, SimulationPlot simPlot)
     {
-        Debug.Log("Entered simulation plot routine");
-        domain = simPlot.domain; //set the data controller snapshot
-        startTime = simPlot.startTime; //simulation start time
-        endTime = simPlot.endTime; //simulation end time
-        currentTime = startTime; //simulation current time
-
-        ReportProgress(10.5f, "Preparing simulation plot...");
-        yield return null;
-        
-        //creates action frontier AND sets DomainContext.DataController for actions
-
-        //iterates over all agents and produces their potential actions at this point
-        ActionFrontier actionFrontier = new ActionFrontier(domain);
-        PriorityQueue<SimulationActionWrapper, float> actionQueue = new PriorityQueue<SimulationActionWrapper, float>();
-
-        ReportProgress(12f, "Creating initial action plans");
-        yield return null;
-
-        Debug.Log("Simulation plot routine before initial actions.");
-
-        HistoryManager.Instance.deleteUnimportantEvents(); //re-evaluate memory importance and remove events that would no longer be remembered by the agent
         //create initial actions
         foreach(int agentID in domain.NPCStorage.Keys)
         {
@@ -88,6 +67,216 @@ public static class SimulationController
             actionQueue.Enqueue(thisAction, thisAction.endTime); //store the action in order of its end time
             Debug.Log("Enqueued action for agent: "+agentID+"\nactionQueue Count: "+actionQueue.Count.ToString());
         }
+    }
+
+    private static void checkAgentDeaths(SimulationPlot simPlot)
+    {
+        //check on agent death
+        List<int> deathKeys = new List<int>(domain.NPCStorage.Keys);
+        foreach(int deathID in deathKeys)
+        {
+            NPCData agent = domain.NPCStorage[deathID];
+            if(!agent.isAlive) continue;
+
+            if(agent.stats.condition <= 0)
+            {
+                AgentDeathInfo deathInfo = SystemAction.calcAgentDeath(agent.id, currentTime); 
+                simPlot.plottedActions.EnqueueBack(deathInfo); 
+                deathInfo.performUpdate(); 
+
+
+            }
+        }
+    }
+
+    private static void performQueuedActions(PriorityQueue<SimulationActionWrapper, float> actionQueue, SimulationPlot simPlot)
+    {
+        /*++++++++++PERFORM ANY ACTIONS THAT NEED TO OCCUR++++++++++*/
+        while(actionQueue.TryPeek(out SimulationActionWrapper _, out float peekTime)) //while there are things in the queue
+        {
+            Debug.Log("Peek time: "+peekTime.ToString()+"> "+currentTime.ToString());
+            if(peekTime > currentTime) return; //if this action won't finish yet, then we've reached the end of actions that we need to perform
+            else //we can perform this action
+            {
+                Debug.Log("After peek time");
+                if(!actionQueue.TryDequeue(out SimulationActionWrapper simAction, out float actionEndTime)) continue; //get the next action
+                Debug.Log("Performing Action "+simAction.info.action.name);
+                if(simAction.endTime != actionEndTime) continue; //if the two times are different then this action has changed priority position
+
+                domain.worldManager.gameTime = currentTime; //set world time to be current time 
+
+                /*==========ACTION PERFORMING==========*/
+                IAction thisAction = simAction.info.action;
+                NPCData agent = domain.NPCStorage[thisAction.currentActor];
+                if(!agent.isAlive) continue;
+                thisAction.reloadAction(simAction.info);
+                thisAction.performAction(simAction.percentComplete);
+
+                Debug.Log("Action performed");
+
+                /*==========INTERRUPTION HANDLING==========*/
+                //if this action being performed will interrupt other actions
+                if (thisAction.interrupts)
+                {
+                    handleInterruption(thisAction, simPlot, actionQueue, simAction);
+                }
+
+                simPlot.agentActiveActions[thisAction.currentActor] = null; //show that this agent is currently not doing anything
+                if (!simPlot.inactiveAgents.Contains(thisAction.currentActor)) simPlot.inactiveAgents.Add(thisAction.currentActor); //add the agent as inactive
+                simPlot.plottedActions.EnqueueBack(simAction); //add this action to the final action plot
+            }
+        }
+    }
+
+    private static void handleInterruption(IAction thisAction, SimulationPlot simPlot, PriorityQueue<SimulationActionWrapper, float> actionQueue, SimulationActionWrapper simAction)
+    {
+        Debug.Log("Is interrupting");
+        int recID = thisAction.receiver; //who is the action receiver
+
+        //if this is an action being performed to a building
+        if(thisAction is BuildingAction buildAct)
+        {
+            int iteration = 0;
+
+            //interrupt all actions currently being performed to this building
+            foreach(SimulationActionWrapper actWrap in simPlot.buildingActiveActions[recID])
+            {
+                if(actWrap.info == simAction.info) simPlot.buildingActiveActions[recID].RemoveAt(iteration); //if this is the action we've just performed then remove it
+                else
+                {
+                    float originalDuration = actWrap.endTime - actWrap.startTime; //how long this action should have taken
+                    float currentDuration = currentTime - actWrap.startTime; //how long this action will now take
+
+                    float hundredPercDuration = (100f * originalDuration) / actWrap.percentComplete; //how long it would take if 100% completion
+
+                    actWrap.percentComplete = (currentDuration / hundredPercDuration) * 100f; //what percent completion it will now take
+                    actWrap.endTime = currentTime; //the time this action has now ended
+
+                    actionQueue.Enqueue(actWrap, currentTime); //re-enqueue this action 
+                }
+                iteration++;
+            }
+        }
+
+        //if this is an action being performed to an agent
+        if(thisAction is NPCAction agentAct)
+        {
+            SimulationActionWrapper actWrap = simPlot.agentActiveActions[recID]; //get the current action of the interrupted agent
+            if(actWrap != null) //if this agent is performing an action
+            {
+                float originalDuration = actWrap.endTime - actWrap.startTime;
+                float currentDuration = currentTime - actWrap.startTime;
+
+                float hundredPercDuration = (100f * originalDuration) / actWrap.percentComplete;
+
+                actWrap.percentComplete = (currentDuration / hundredPercDuration) * 100f;
+                actWrap.endTime = currentTime;
+
+                actionQueue.Enqueue(actWrap, currentTime); 
+            }
+        }
+    }
+
+    private static void performHourlyUpdates(SimulationPlot simPlot)
+    {
+        //run passive changes to agents and buildings (run once an hour)
+        List<int> agentKeys = new List<int>(domain.NPCStorage.Keys);
+        foreach(int agentKey in agentKeys)
+        {
+            NPCData agent = domain.NPCStorage[agentKey];
+            if(!agent.isAlive) continue;
+            AgentUpdateInfo updateInfo = SystemAction.calcAgentUpdate(agent.id, currentTime);
+            simPlot.plottedActions.EnqueueBack(updateInfo);
+            updateInfo.performUpdate(); 
+        }
+        List<int> buildingKeys = new List<int>(domain.BuildingStorage.Keys);
+        foreach(int buildingKey in buildingKeys)
+        {
+            BuildingData building = domain.BuildingStorage[buildingKey];
+            BuildingUpdateInfo updateInfo = SystemAction.calcBuildingUpdate(building.id, currentTime);
+            simPlot.plottedActions.EnqueueBack(updateInfo);
+            updateInfo.performUpdate();
+        }
+    }
+
+    private static void getNewActions(SimulationPlot simPlot, PriorityQueue<SimulationActionWrapper, float> actionQueue, ActionFrontier actionFrontier)
+    {
+        /*++++++++++GET NEW ACTIONS++++++++++*/
+        for(int i = simPlot.inactiveAgents.Count - 1; i >= 0; i--)
+        {
+            HistoryManager.Instance.deleteUnimportantEvents(); //re-evaluate memory importance and remove events that would no longer be remembered by the agent
+            int agentID = simPlot.inactiveAgents[i];
+            Debug.Log("Getting new action for "+agentID.ToString());
+            NPCData agent = domain.NPCStorage[agentID];
+            if(!agent.isAlive) {Debug.Log("Dead: "+agentID.ToString()); simPlot.inactiveAgents.RemoveAt(i); continue;}
+            ActionInfoWrapper bestAction = actionFrontier.getBestAction(agent); //get the best action for this agent
+        
+            float finishPerc = calcFinishPerc(bestAction, agent); //calculate at what percentage this should finish (energy constraints)
+            SimulationActionWrapper thisAction = new SimulationActionWrapper(bestAction, 
+                                                                            currentTime, //when the action starts
+                                                                            currentTime + (bestAction.timeToComplete * (finishPerc/100)), //when the action should finish
+                                                                            finishPerc //the percentage of the action that'll be completed
+                                                                            ); //store as sim action
+
+            simPlot.agentActiveActions[agentID] = thisAction; //set this agents current action
+            simPlot.inactiveAgents.RemoveAt(i);
+            actionQueue.Enqueue(thisAction, thisAction.endTime); //store the action in order of its end time
+        }
+    }
+
+    private static void completeActionsLeft(PriorityQueue<SimulationActionWrapper, float> actionQueue, SimulationPlot simPlot)
+    {
+        while(actionQueue.TryDequeue(out SimulationActionWrapper simAction, out float actionEndTime))
+        {
+            if(simAction.endTime != actionEndTime) continue; //time has changed which means this is no longer a valid action (has been overwritten)
+
+            IAction thisAction = simAction.info.action;
+            NPCData agent = domain.NPCStorage[thisAction.currentActor];
+            if(!agent.isAlive) continue;
+
+            float originalDuration = simAction.endTime - simAction.startTime; //how long this action should have taken
+
+            // -0.1 as that time is 0.1 over end of simulation time
+            float currentDuration = (currentTime - 0.1f) - simAction.startTime; //how long this action will now take
+
+            float hundredPercDuration = (100f * originalDuration) / simAction.percentComplete; //how long it would take if 100% completion
+
+            simAction.percentComplete = (currentDuration / hundredPercDuration) * 100f; //what percent completion it will now take
+            simAction.endTime = currentTime; //the time this action has now ended
+
+            thisAction.reloadAction(simAction.info);
+            thisAction.performAction(simAction.percentComplete);
+
+            simPlot.agentActiveActions[thisAction.currentActor] = null;
+            if (!simPlot.inactiveAgents.Contains(thisAction.currentActor)) simPlot.inactiveAgents.Add(thisAction.currentActor); //add the agent as inactive
+            simPlot.plottedActions.EnqueueBack(simAction); //add this action to the final action plot
+        }    
+    }
+
+    public static IEnumerator plotSimulationRoutine(SimulationPlot simPlot)
+    {
+        Debug.Log("Entered simulation plot routine");
+        domain = simPlot.domain; //set the data controller snapshot
+        startTime = simPlot.startTime; //simulation start time
+        endTime = simPlot.endTime; //simulation end time
+        currentTime = startTime; //simulation current time
+
+        ReportProgress(10.5f, "Preparing simulation plot...");
+        yield return null;
+
+        //iterates over all agents and produces their potential actions at this point
+        ActionFrontier actionFrontier = new ActionFrontier(domain);
+        PriorityQueue<SimulationActionWrapper, float> actionQueue = new PriorityQueue<SimulationActionWrapper, float>();
+
+        ReportProgress(12f, "Creating initial action plans");
+        yield return null;
+
+        Debug.Log("Simulation plot routine before initial actions.");
+
+        HistoryManager.Instance.deleteUnimportantEvents(); //re-evaluate memory importance and remove events that would no longer be remembered by the agent
+
+        //plot the intial actions for each agent
+        plotInitialActions(actionFrontier, actionQueue, simPlot);
 
         ReportProgress(12f, "Beginning plot clock...");
         yield return null;
@@ -103,159 +292,32 @@ public static class SimulationController
                 yield return null;
             }
 
-            //check on agent death
-            List<int> deathKeys = new List<int>(domain.NPCStorage.Keys);
-            foreach(int deathID in deathKeys)
-            {
-                Debug.Log("Checking death "+deathID.ToString());
-                NPCData agent = domain.NPCStorage[deathID];
-                Debug.Log("Agent is alive: "+agent.isAlive.ToString());
-                if(!agent.isAlive) {Debug.Log("Skipping calc agent death "+agent.isAlive.ToString()); continue;}
-
-                if(agent.stats.condition <= 0)
-                {
-                    AgentDeathInfo deathInfo = SystemAction.calcAgentDeath(agent.id, currentTime); Debug.Log("SIM: Calc death action");
-                    simPlot.plottedActions.EnqueueBack(deathInfo); Debug.Log("SIM: Death add to plotted actions");
-                    deathInfo.performUpdate(); Debug.Log("SIM: Perform death");
-                }
-            }
+            checkAgentDeaths(simPlot);
 
             Debug.Log("Before peek action queue size: "+actionQueue.Count.ToString());
             Debug.Log("Truth check "+actionQueue.TryPeek(out SimulationActionWrapper _, out float _));
-            /*++++++++++PERFORM ANY ACTIONS THAT NEED TO OCCUR++++++++++*/
-            while(actionQueue.TryPeek(out SimulationActionWrapper _, out float peekTime)) //while there are things in the queue
-            {
-                Debug.Log("Peek time: "+peekTime.ToString()+"> "+currentTime.ToString());
-                if(peekTime > currentTime) break; //if this action won't finish yet, then we've reached the end of actions that we need to perform
-                else //we can perform this action
-                {
-                    Debug.Log("After peek time");
-                    if(!actionQueue.TryDequeue(out SimulationActionWrapper simAction, out float endTime)) {Debug.Log("NOT DEQUEUED"); continue;} //get the next action
-                    Debug.Log("Performing Action "+simAction.info.action.name);
-                    if(simAction.endTime != endTime) continue; //if the two times are different then this action has changed priority position
+            performQueuedActions(actionQueue, simPlot);
 
-                    domain.worldManager.gameTime = currentTime; //set world time to be current time 
-
-                    /*==========ACTION PERFORMING==========*/
-                    IAction thisAction = simAction.info.action;
-                    NPCData agent = domain.NPCStorage[thisAction.currentActor];
-                    if(!agent.isAlive) {Debug.Log("Agent "+agent.id.ToString()+" is dead so continue"); continue;}
-                    thisAction.reloadAction(simAction.info);
-                    thisAction.performAction(simAction.percentComplete);
-
-                    Debug.Log("Action performed");
-
-                    /*==========INTERRUPTION HANDLING==========*/
-                    //if this action being performed will interrupt other actions
-                    if (thisAction.interrupts)
-                    {
-                        Debug.Log("Is interrupting");
-                        int recID = thisAction.receiver; //who is the action receiver
-
-                        //if this is an action being performed to a building
-                        if(thisAction is BuildingAction buildAct)
-                        {
-                            int iteration = 0;
-
-                            //interrupt all actions currently being performed to this building
-                            foreach(SimulationActionWrapper actWrap in simPlot.buildingActiveActions[recID])
-                            {
-                                if(actWrap.info == simAction.info) simPlot.buildingActiveActions[recID].RemoveAt(iteration); //if this is the action we've just performed then remove it
-                                else
-                                {
-                                    float originalDuration = actWrap.endTime - actWrap.startTime; //how long this action should have taken
-                                    float currentDuration = currentTime - actWrap.startTime; //how long this action will now take
-
-                                    float hundredPercDuration = (100f * originalDuration) / actWrap.percentComplete; //how long it would take if 100% completion
-
-                                    actWrap.percentComplete = (currentDuration / hundredPercDuration) * 100f; //what percent completion it will now take
-                                    actWrap.endTime = currentTime; //the time this action has now ended
-
-                                    actionQueue.Enqueue(actWrap, currentTime); //re-enqueue this action 
-                                }
-                                iteration++;
-                            }
-                        }
-
-                        //if this is an action being performed to an agent
-                        if(thisAction is NPCAction agentAct)
-                        {
-                            SimulationActionWrapper actWrap = simPlot.agentActiveActions[recID]; //get the current action of the interrupted agent
-                            if(actWrap != null) //if this agent is performing an action
-                            {
-                                float originalDuration = actWrap.endTime - actWrap.startTime;
-                                float currentDuration = currentTime - actWrap.startTime;
-
-                                float hundredPercDuration = (100f * originalDuration) / actWrap.percentComplete;
-
-                                actWrap.percentComplete = (currentDuration / hundredPercDuration) * 100f;
-                                actWrap.endTime = currentTime;
-
-                                actionQueue.Enqueue(actWrap, currentTime); 
-                            }
-                        }
-                    }
-
-                    simPlot.agentActiveActions[thisAction.currentActor] = null; //show that this agent is currently not doing anything
-                    if (!simPlot.inactiveAgents.Contains(thisAction.currentActor)) simPlot.inactiveAgents.Add(thisAction.currentActor); //add the agent as inactive
-                    simPlot.plottedActions.EnqueueBack(simAction); //add this action to the final action plot
-                }
-            }
-
+            //update loading screen once an hour and perform hourly updates
             if(Mathf.Abs(currentTime % 1f) < 0.001f)
             {
                 //update loading screen
                 ReportProgress(((currentTime - startTime)/simTotalTime)*88f + 12f, "Plotting Actions at time: "+currentTime.ToString("0.00"));
                 yield return null;
 
-                //run passive changes to agents and buildings (run once an hour)
-                List<int> agentKeys = new List<int>(domain.NPCStorage.Keys);
-                foreach(int agentKey in agentKeys)
-                {
-                    NPCData agent = domain.NPCStorage[agentKey];
-                    if(!agent.isAlive) continue;
-                    AgentUpdateInfo updateInfo = SystemAction.calcAgentUpdate(agent.id, currentTime); Debug.Log("SIM: Calc agent update");
-                    simPlot.plottedActions.EnqueueBack(updateInfo); Debug.Log("SIM: Enqueue agent update.");
-                    updateInfo.performUpdate(); Debug.Log("SIM: perforum agent update");
-                }
-                List<int> buildingKeys = new List<int>(domain.BuildingStorage.Keys);
-                foreach(int buildingKey in buildingKeys)
-                {
-                    BuildingData building = domain.BuildingStorage[buildingKey];
-                    BuildingUpdateInfo updateInfo = SystemAction.calcBuildingUpdate(building.id, currentTime);
-                    simPlot.plottedActions.EnqueueBack(updateInfo);
-                    updateInfo.performUpdate();
-                }
+                performHourlyUpdates(simPlot);
             }
 
             Debug.Log("Before getting new actions.\n Inactive agents = "+string.Join(", ", simPlot.inactiveAgents));
-            /*++++++++++GET NEW ACTIONS++++++++++*/
-            for(int i = simPlot.inactiveAgents.Count - 1; i >= 0; i--)
-            {
-                HistoryManager.Instance.deleteUnimportantEvents(); //re-evaluate memory importance and remove events that would no longer be remembered by the agent
-                int agentID = simPlot.inactiveAgents[i];
-                Debug.Log("Getting new action for "+agentID.ToString());
-                NPCData agent = domain.NPCStorage[agentID];
-                if(!agent.isAlive) {Debug.Log("Dead: "+agentID.ToString()); simPlot.inactiveAgents.RemoveAt(i); continue;}
-                ActionInfoWrapper bestAction = actionFrontier.getBestAction(agent); //get the best action for this agent
-            
-                float finishPerc = calcFinishPerc(bestAction, agent); //calculate at what percentage this should finish (energy constraints)
-                SimulationActionWrapper thisAction = new SimulationActionWrapper(bestAction, 
-                                                                                currentTime, //when the action starts
-                                                                                currentTime + (bestAction.timeToComplete * (finishPerc/100)), //when the action should finish
-                                                                                finishPerc //the percentage of the action that'll be completed
-                                                                                ); //store as sim action
-
-                simPlot.agentActiveActions[agentID] = thisAction; //set this agents current action
-                simPlot.inactiveAgents.RemoveAt(i);
-                actionQueue.Enqueue(thisAction, thisAction.endTime); //store the action in order of its end time
-            }
+            getNewActions(simPlot, actionQueue, actionFrontier); //get new actions for any inactive agents
 
             currentTime += 0.1f;
             currentTime = Mathf.Round(currentTime * 10f) / 10f; //round to 1dp
             Debug.Log("Current time: "+currentTime.ToString());
             yield return new WaitForSeconds(0.0000000001f);
         }
+
+        completeActionsLeft(actionQueue, simPlot);
 
         ReportProgress(100f, "Plotting Complete.");
 
