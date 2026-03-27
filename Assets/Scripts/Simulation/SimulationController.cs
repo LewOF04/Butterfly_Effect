@@ -235,9 +235,7 @@ public static class SimulationController
             if(!agent.isAlive) continue;
 
             float originalDuration = simAction.endTime - simAction.startTime; //how long this action should have taken
-
-            // -0.1 as that time is 0.1 over end of simulation time
-            float currentDuration = (currentTime - 0.1f) - simAction.startTime; //how long this action will now take
+            float currentDuration = currentTime - simAction.startTime; //how long this action will now take
 
             float hundredPercDuration = (100f * originalDuration) / simAction.percentComplete; //how long it would take if 100% completion
 
@@ -316,6 +314,10 @@ public static class SimulationController
             Debug.Log("Current time: "+currentTime.ToString());
             yield return new WaitForSeconds(0.0000000001f);
         }
+
+        //update world and current time for end of simulation
+        currentTime = endTime;
+        domain.worldManager.gameTime = currentTime;
 
         completeActionsLeft(actionQueue, simPlot);
 
