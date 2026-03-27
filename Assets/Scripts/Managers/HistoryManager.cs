@@ -524,6 +524,9 @@ public class HistoryManager : MonoBehaviour
         float total = 0;
         int num = 0;
         List<NPCEvent> npcMemory = dataController.eventsPerNPCStorage[npcID];
+        if(!dataController.TryGetAgent(npcID, out var agent)) return false;
+        
+        if(!agent.isAlive) return true; //don't delete memories from dead NPCs
 
         foreach(NPCEvent anEvent in npcMemory)
         {

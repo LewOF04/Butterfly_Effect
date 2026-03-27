@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
 using System;
+using System.Linq;
 
 public static class SimulationController
 {
@@ -69,22 +70,42 @@ public static class SimulationController
         }
     }
 
-    private static void checkAgentDeaths(SimulationPlot simPlot)
+    private static void checkAgentDeaths(PriorityQueue<SimulationActionWrapper, float> actionQueue, SimulationPlot simPlot)
     {
         //check on agent death
         List<int> deathKeys = new List<int>(domain.NPCStorage.Keys);
         foreach(int deathID in deathKeys)
         {
             NPCData agent = domain.NPCStorage[deathID];
-            if(!agent.isAlive) continue;
+            if(!agent.isAlive) continue; //if the agent is already dead, then ignore
 
-            if(agent.stats.condition <= 0)
+            if(agent.stats.condition <= 0) //if they should be dead
             {
+                //get all agentIDs from agent active actions that is not null
+                List<int> agentIDs = simPlot.agentActiveActions.Where(kvp => kvp.Value != null).Select(kvp => kvp.Key).ToList();
+
+                //finish any actions which involve the dead agent
+                foreach(int id in agentIDs)
+                {
+                    SimulationActionWrapper simAction = simPlot.agentActiveActions[id];
+                    if(simAction.info.receiver == agent.id || simAction.info.currentActor == agent.id) //if the performer or receiver is the dead agent
+                    {
+                        float originalDuration = simAction.endTime - simAction.startTime; //how long this action should have taken
+                        float currentDuration = currentTime - simAction.startTime; //how long this action will now take
+
+                        float hundredPercDuration = (100f * originalDuration) / simAction.percentComplete; //how long it would take if 100% completion
+
+                        simAction.percentComplete = (currentDuration / hundredPercDuration) * 100f; //what percent completion it will now take
+                        simAction.endTime = currentTime; //the time this action has now ended
+
+                        actionQueue.Enqueue(simAction, currentTime);
+                    }
+                }
+
+                //calculate death impact
                 AgentDeathInfo deathInfo = SystemAction.calcAgentDeath(agent.id, currentTime); 
                 simPlot.plottedActions.EnqueueBack(deathInfo); 
                 deathInfo.performUpdate(); 
-
-
             }
         }
     }
@@ -108,7 +129,7 @@ public static class SimulationController
                 /*==========ACTION PERFORMING==========*/
                 IAction thisAction = simAction.info.action;
                 NPCData agent = domain.NPCStorage[thisAction.currentActor];
-                if(!agent.isAlive) continue;
+                
                 thisAction.reloadAction(simAction.info);
                 thisAction.performAction(simAction.percentComplete);
 
@@ -232,7 +253,6 @@ public static class SimulationController
 
             IAction thisAction = simAction.info.action;
             NPCData agent = domain.NPCStorage[thisAction.currentActor];
-            if(!agent.isAlive) continue;
 
             float originalDuration = simAction.endTime - simAction.startTime; //how long this action should have taken
             float currentDuration = currentTime - simAction.startTime; //how long this action will now take
@@ -290,7 +310,7 @@ public static class SimulationController
                 yield return null;
             }
 
-            checkAgentDeaths(simPlot);
+            checkAgentDeaths(actionQueue, simPlot);
 
             Debug.Log("Before peek action queue size: "+actionQueue.Count.ToString());
             Debug.Log("Truth check "+actionQueue.TryPeek(out SimulationActionWrapper _, out float _));
