@@ -101,29 +101,32 @@ public static class ActionMaths
 
     public static ActionResult calcActionSuccess(float successChance, float percentComplete)
     {
-        float chance = Mathf.Clamp(successChance, 0f, 100f);
-        float complete = Mathf.Clamp(percentComplete, 0f, 100f) / 100f;
+        float chance = Mathf.Clamp(successChance, 0f, 100f) / 100f; //translate success chance to fraction
+        float complete = Mathf.Clamp(percentComplete, 0f, 100f) / 100f; //translate success chance to fraction
 
+        //create random generator
         int seed = (successChance.GetHashCode() + percentComplete.GetHashCode()).GetHashCode();
-        var rng = new System.Random(seed);
+        System.Random rng = new System.Random(seed);
 
-        float roll = (float)(rng.NextDouble() * 100f);
+        float completionFactor = Mathf.Lerp(0.5f, 1f, complete); //define how much we want the proportion of completion to factor the chance
 
-        float completionMult = Mathf.Lerp(0.5f, 1.5f, complete);
-        float weightedChance = Mathf.Clamp(chance * completionMult, 0f, 100f);
+        float weightedChance = chance * completionFactor; //weight the success chance contributor by the completion factor
+        float roll = (float) rng.NextDouble(); //roll a random value
 
         ActionResult result;
-        result.success = roll <= weightedChance;
+        result.success = roll <= weightedChance; //determine roll success
 
-        float rollQuality = result.success
-        ? Mathf.InverseLerp(weightedChance, 0f, roll)     //0 at barely success, 1 at great success
-        : Mathf.InverseLerp(weightedChance, 100f, roll);  //0 at barely fail, 1 at awful fail
+        float rollQuality = result.success //the quality of the success is a factor of the overall chance and the roll
+            ? Mathf.InverseLerp(weightedChance, 0f, roll)
+            : Mathf.InverseLerp(weightedChance, 1f, roll);
 
         float completionQuality = result.success
-            ? complete          
-            : (1f - complete);   
+            ? complete
+            : (1f - complete);
 
-        result.quality = Mathf.Clamp01(rollQuality * 0.7f + completionQuality * 0.3f);
+        float baseQuality = rollQuality * 0.3f + completionQuality * 0.7f;
+        float contrast = 1.5f; 
+        result.quality = Mathf.Clamp01(Mathf.Pow(baseQuality, contrast));
 
         return result;
     }

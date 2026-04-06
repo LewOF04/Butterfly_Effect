@@ -14,40 +14,40 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NPCType
   id: 5
   level0Sprites:
-  - {fileID: -386800973350866774, guid: 6b0939f7e0a18ff4b96257b5267858fe, type: 3}
-  - {fileID: -195694052, guid: 6b0939f7e0a18ff4b96257b5267858fe, type: 3}
-  - {fileID: -1471497743, guid: 6b0939f7e0a18ff4b96257b5267858fe, type: 3}
-  - {fileID: -542843879, guid: 6b0939f7e0a18ff4b96257b5267858fe, type: 3}
+  - {fileID: -126453090, guid: ded1fea39475f2445863e6f742d19820, type: 3}
+  - {fileID: -40529166, guid: ded1fea39475f2445863e6f742d19820, type: 3}
+  - {fileID: -1454468189, guid: ded1fea39475f2445863e6f742d19820, type: 3}
+  - {fileID: -2110791710, guid: ded1fea39475f2445863e6f742d19820, type: 3}
   level1Sprites:
-  - {fileID: -386800973350866774, guid: 6b0939f7e0a18ff4b96257b5267858fe, type: 3}
-  - {fileID: -195694052, guid: 6b0939f7e0a18ff4b96257b5267858fe, type: 3}
-  - {fileID: -1471497743, guid: 6b0939f7e0a18ff4b96257b5267858fe, type: 3}
-  - {fileID: -542843879, guid: 6b0939f7e0a18ff4b96257b5267858fe, type: 3}
+  - {fileID: -126453090, guid: be477f3adb070be489788446da92c7a4, type: 3}
+  - {fileID: -40529166, guid: be477f3adb070be489788446da92c7a4, type: 3}
+  - {fileID: -1454468189, guid: be477f3adb070be489788446da92c7a4, type: 3}
+  - {fileID: -2110791710, guid: be477f3adb070be489788446da92c7a4, type: 3}
   level2Sprites:
-  - {fileID: -386800973350866774, guid: 6b0939f7e0a18ff4b96257b5267858fe, type: 3}
-  - {fileID: -195694052, guid: 6b0939f7e0a18ff4b96257b5267858fe, type: 3}
-  - {fileID: -1471497743, guid: 6b0939f7e0a18ff4b96257b5267858fe, type: 3}
-  - {fileID: -542843879, guid: 6b0939f7e0a18ff4b96257b5267858fe, type: 3}
+  - {fileID: -126453090, guid: f31899167a0b36f4599e5b9fb4472f7e, type: 3}
+  - {fileID: -40529166, guid: f31899167a0b36f4599e5b9fb4472f7e, type: 3}
+  - {fileID: -1454468189, guid: f31899167a0b36f4599e5b9fb4472f7e, type: 3}
+  - {fileID: -2110791710, guid: f31899167a0b36f4599e5b9fb4472f7e, type: 3}
   level3Sprites:
-  - {fileID: -386800973350866774, guid: 6b0939f7e0a18ff4b96257b5267858fe, type: 3}
-  - {fileID: -195694052, guid: 6b0939f7e0a18ff4b96257b5267858fe, type: 3}
-  - {fileID: -1471497743, guid: 6b0939f7e0a18ff4b96257b5267858fe, type: 3}
-  - {fileID: -542843879, guid: 6b0939f7e0a18ff4b96257b5267858fe, type: 3}
+  - {fileID: -126453090, guid: 56b25bad76d4ebf4b92b2ea3e648cc5a, type: 3}
+  - {fileID: -40529166, guid: 56b25bad76d4ebf4b92b2ea3e648cc5a, type: 3}
+  - {fileID: -1454468189, guid: 56b25bad76d4ebf4b92b2ea3e648cc5a, type: 3}
+  - {fileID: -2110791710, guid: 56b25bad76d4ebf4b92b2ea3e648cc5a, type: 3}
   level4Sprites:
-  - {fileID: -386800973350866774, guid: 6b0939f7e0a18ff4b96257b5267858fe, type: 3}
-  - {fileID: -195694052, guid: 6b0939f7e0a18ff4b96257b5267858fe, type: 3}
-  - {fileID: -1471497743, guid: 6b0939f7e0a18ff4b96257b5267858fe, type: 3}
-  - {fileID: -542843879, guid: 6b0939f7e0a18ff4b96257b5267858fe, type: 3}
+  - {fileID: -126453090, guid: 34601f3986fd6db4a848e6a189048fa3, type: 3}
+  - {fileID: -40529166, guid: 34601f3986fd6db4a848e6a189048fa3, type: 3}
+  - {fileID: -1454468189, guid: 34601f3986fd6db4a848e6a189048fa3, type: 3}
+  - {fileID: -2110791710, guid: 34601f3986fd6db4a848e6a189048fa3, type: 3}
   level5Sprites:
-  - {fileID: -386800973350866774, guid: 6b0939f7e0a18ff4b96257b5267858fe, type: 3}
-  - {fileID: -195694052, guid: 6b0939f7e0a18ff4b96257b5267858fe, type: 3}
-  - {fileID: -1471497743, guid: 6b0939f7e0a18ff4b96257b5267858fe, type: 3}
-  - {fileID: -542843879, guid: 6b0939f7e0a18ff4b96257b5267858fe, type: 3}
+  - {fileID: -126453090, guid: c4b2dc80e1118954391ba7fa63850600, type: 3}
+  - {fileID: -40529166, guid: c4b2dc80e1118954391ba7fa63850600, type: 3}
+  - {fileID: -1454468189, guid: c4b2dc80e1118954391ba7fa63850600, type: 3}
+  - {fileID: -2110791710, guid: c4b2dc80e1118954391ba7fa63850600, type: 3}
   level6Sprites:
-  - {fileID: -386800973350866774, guid: 6b0939f7e0a18ff4b96257b5267858fe, type: 3}
-  - {fileID: -195694052, guid: 6b0939f7e0a18ff4b96257b5267858fe, type: 3}
-  - {fileID: -1471497743, guid: 6b0939f7e0a18ff4b96257b5267858fe, type: 3}
-  - {fileID: -542843879, guid: 6b0939f7e0a18ff4b96257b5267858fe, type: 3}
+  - {fileID: -126453090, guid: 29d305a48d292054d8da39715e60660b, type: 3}
+  - {fileID: -40529166, guid: 29d305a48d292054d8da39715e60660b, type: 3}
+  - {fileID: -1454468189, guid: 29d305a48d292054d8da39715e60660b, type: 3}
+  - {fileID: -2110791710, guid: 29d305a48d292054d8da39715e60660b, type: 3}
   level7Sprites:
   - {fileID: 7818168439352040084, guid: 16e8577885ef2414da6863160c63638e, type: 3}
   - {fileID: 133714236, guid: 16e8577885ef2414da6863160c63638e, type: 3}

@@ -1,0 +1,804 @@
+fileFormatVersion: 2
+guid: 56b25bad76d4ebf4b92b2ea3e648cc5a
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -8949094921304458031
+    second: Base Characters_0
+  - first:
+      213: 9203361379988606337
+    second: Base Characters_1
+  - first:
+      213: 3122559731076419075
+    second: Base Characters_2
+  - first:
+      213: -4194838808252867604
+    second: Base Characters_3
+  - first:
+      213: -3852208857441357057
+    second: Base Characters_4
+  - first:
+      213: 7982972016399956366
+    second: Base Characters_5
+  - first:
+      213: -6973860655628761303
+    second: Base Characters_6
+  - first:
+      213: -156103820309880224
+    second: Base Characters_7
+  - first:
+      213: -6331631465414751696
+    second: Base Characters_8
+  - first:
+      213: 7180203659828802853
+    second: Base Characters_9
+  - first:
+      213: -7666997631185622337
+    second: Base Characters_10
+  - first:
+      213: -386800973350866774
+    second: Base Characters_11
+  - first:
+      213: -3347440826355211012
+    second: Base Characters_12
+  - first:
+      213: 3346198876085729169
+    second: Base Characters_13
+  - first:
+      213: -1382402144430459722
+    second: Base Characters_14
+  - first:
+      213: 5390805754550089889
+    second: Base Characters_15
+  - first:
+      213: -1840832211561007307
+    second: Base Characters_16
+  - first:
+      213: 7213939446675066124
+    second: Base Characters_17
+  - first:
+      213: -6704303922341727885
+    second: Base Characters_18
+  - first:
+      213: -1895975861637316397
+    second: Base Characters_19
+  - first:
+      213: -2863571088529686093
+    second: Base Characters_20
+  - first:
+      213: 538638828019147591
+    second: Base Characters_21
+  - first:
+      213: -5828010603733335900
+    second: Base Characters_22
+  - first:
+      213: -6270024631580682254
+    second: Base Characters_23
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 300
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Base Characters_23
+      rect:
+        serializedVersion: 2
+        x: 1002
+        y: 39
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f71fad41d56cf8a0800000000000000
+      internalID: -6270024631580682254
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Characters Lvl 6_0
+      rect:
+        serializedVersion: 2
+        x: 374
+        y: 3250
+        width: 305
+        height: 343
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 33b1da59db38f734da0fafc47172cd69
+      internalID: 74649684
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Characters Lvl 6_1
+      rect:
+        serializedVersion: 2
+        x: 2787
+        y: 3242
+        width: 241
+        height: 348
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: edcaf44ee98c17c4392dce8cfa2d8d1e
+      internalID: 1414397760
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Characters Lvl 6_2
+      rect:
+        serializedVersion: 2
+        x: 3131
+        y: 3248
+        width: 228
+        height: 340
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd0972de9ff8a9547a4013b93159b645
+      internalID: -99446938
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Characters Lvl 6_3
+      rect:
+        serializedVersion: 2
+        x: 3480
+        y: 3248
+        width: 228
+        height: 340
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8dab479e9cebb0349aba8eb6245f1691
+      internalID: -1738268410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Characters Lvl 6_4
+      rect:
+        serializedVersion: 2
+        x: 3495
+        y: 3928
+        width: 206
+        height: 342
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 96de46fdeda01534189de9f96ca71658
+      internalID: 1809346032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Characters Lvl 6_5
+      rect:
+        serializedVersion: 2
+        x: 3150
+        y: 3930
+        width: 200
+        height: 336
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e5dc71da05ce686478540a1b4d0eb986
+      internalID: -59675375
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Characters Lvl 6_6
+      rect:
+        serializedVersion: 2
+        x: 2815
+        y: 3929
+        width: 203
+        height: 343
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b10932f4c59edc641a364a4d2c29a71a
+      internalID: 1465087244
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Characters Lvl 6_7
+      rect:
+        serializedVersion: 2
+        x: 2787
+        y: 4272
+        width: 235
+        height: 340
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f3397f66ce0adf24c9943ad8aea2b761
+      internalID: -1984294423
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Characters Lvl 6_8
+      rect:
+        serializedVersion: 2
+        x: 3144
+        y: 4270
+        width: 206
+        height: 344
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc9e14e52c6bb244792af6e1fc95acc9
+      internalID: -1583426798
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Characters Lvl 6_9
+      rect:
+        serializedVersion: 2
+        x: 3490
+        y: 4269
+        width: 194
+        height: 341
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9abb951c9b5bf69479fecc37a458db2f
+      internalID: -63088923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Characters Lvl 6_10
+      rect:
+        serializedVersion: 2
+        x: 2790
+        y: 4611
+        width: 225
+        height: 343
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 251a05ab86ac2cb4bb8bf7a4f07c9774
+      internalID: -2110791710
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Characters Lvl 6_11
+      rect:
+        serializedVersion: 2
+        x: 3136
+        y: 4611
+        width: 207
+        height: 344
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 95b75ccb2f028fd44bda5fc009ed63e0
+      internalID: -1454468189
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Characters Lvl 6_12
+      rect:
+        serializedVersion: 2
+        x: 3484
+        y: 4612
+        width: 201
+        height: 344
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5af8c0ac45a83194d95a4532ec77c6ba
+      internalID: -40529166
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Characters Lvl 6_13
+      rect:
+        serializedVersion: 2
+        x: 3102
+        y: 5294
+        width: 227
+        height: 345
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3fff6e08a53431247b1d12c86b0cbfbf
+      internalID: -1594948304
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Characters Lvl 6_14
+      rect:
+        serializedVersion: 2
+        x: 3440
+        y: 5289
+        width: 232
+        height: 345
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ac7caba83d200c945addf4444bfc3876
+      internalID: -322859348
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Characters Lvl 6_15
+      rect:
+        serializedVersion: 2
+        x: 2754
+        y: 5290
+        width: 234
+        height: 342
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 347fd18029a544b4bbd0f7648770e09d
+      internalID: -1169347014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Characters Lvl 6_16
+      rect:
+        serializedVersion: 2
+        x: 2787
+        y: 5634
+        width: 206
+        height: 336
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d76282dc397c01d408e9140b3d6a49f5
+      internalID: -2107007863
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Characters Lvl 6_17
+      rect:
+        serializedVersion: 2
+        x: 3143
+        y: 5635
+        width: 189
+        height: 340
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c6fb41da33edfbd4da2c137beca29a68
+      internalID: -1146426984
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Characters Lvl 6_18
+      rect:
+        serializedVersion: 2
+        x: 3491
+        y: 5635
+        width: 182
+        height: 340
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f71de04c28593544852001e622eac87
+      internalID: 1250826884
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Characters Lvl 6_19
+      rect:
+        serializedVersion: 2
+        x: 381
+        y: 5637
+        width: 285
+        height: 338
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35cfff0a6d410184a8a18babf32609cc
+      internalID: -2067331068
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Characters Lvl 6_20
+      rect:
+        serializedVersion: 2
+        x: 375
+        y: 5295
+        width: 296
+        height: 340
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3303f2bf096761f46ac813221371723c
+      internalID: -470278808
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Characters Lvl 6_21
+      rect:
+        serializedVersion: 2
+        x: 386
+        y: 4613
+        width: 285
+        height: 341
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0635a7daccbeaf944bc60e9367040816
+      internalID: -126453090
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Characters Lvl 6_22
+      rect:
+        serializedVersion: 2
+        x: 376
+        y: 4266
+        width: 304
+        height: 346
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 01e3ed17178a41547bc1084c12ec57fc
+      internalID: 1549498739
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Characters Lvl 6_23
+      rect:
+        serializedVersion: 2
+        x: 372
+        y: 3929
+        width: 301
+        height: 337
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af11d6d22c2992347b392df23f23a7a8
+      internalID: -1179407320
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: b31e0fbf83c820049b2219973d549842
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Base Characters_0: -8949094921304458031
+      Base Characters_1: 9203361379988606337
+      Base Characters_10: -7666997631185622337
+      Base Characters_11: -386800973350866774
+      Base Characters_12: -3347440826355211012
+      Base Characters_13: 3346198876085729169
+      Base Characters_14: -1382402144430459722
+      Base Characters_15: 5390805754550089889
+      Base Characters_16: -1840832211561007307
+      Base Characters_17: 7213939446675066124
+      Base Characters_18: -6704303922341727885
+      Base Characters_19: -1895975861637316397
+      Base Characters_2: 3122559731076419075
+      Base Characters_20: -2863571088529686093
+      Base Characters_21: 538638828019147591
+      Base Characters_22: -5828010603733335900
+      Base Characters_23: -6270024631580682254
+      Base Characters_24: -977786866
+      Base Characters_25: -195694052
+      Base Characters_26: -1471497743
+      Base Characters_27: -542843879
+      Base Characters_28: 950913812
+      Base Characters_29: -1316170341
+      Base Characters_3: -4194838808252867604
+      Base Characters_30: 1606753363
+      Base Characters_31: -1718263776
+      Base Characters_32: -466003497
+      Base Characters_33: 1974227438
+      Base Characters_34: 1746997326
+      Base Characters_35: 806353860
+      Base Characters_36: -1845907552
+      Base Characters_37: -1024626721
+      Base Characters_38: 452294531
+      Base Characters_39: 2018681618
+      Base Characters_4: -3852208857441357057
+      Base Characters_5: 7982972016399956366
+      Base Characters_6: -6973860655628761303
+      Base Characters_7: -156103820309880224
+      Base Characters_8: -6331631465414751696
+      Base Characters_9: 7180203659828802853
+      Characters Lvl 6_0: 74649684
+      Characters Lvl 6_1: 1414397760
+      Characters Lvl 6_10: -2110791710
+      Characters Lvl 6_11: -1454468189
+      Characters Lvl 6_12: -40529166
+      Characters Lvl 6_13: -1594948304
+      Characters Lvl 6_14: -322859348
+      Characters Lvl 6_15: -1169347014
+      Characters Lvl 6_16: -2107007863
+      Characters Lvl 6_17: -1146426984
+      Characters Lvl 6_18: 1250826884
+      Characters Lvl 6_19: -2067331068
+      Characters Lvl 6_2: -99446938
+      Characters Lvl 6_20: -470278808
+      Characters Lvl 6_21: -126453090
+      Characters Lvl 6_22: 1549498739
+      Characters Lvl 6_23: -1179407320
+      Characters Lvl 6_24: -1818486808
+      Characters Lvl 6_3: -1738268410
+      Characters Lvl 6_4: 1809346032
+      Characters Lvl 6_5: -59675375
+      Characters Lvl 6_6: 1465087244
+      Characters Lvl 6_7: -1984294423
+      Characters Lvl 6_8: -1583426798
+      Characters Lvl 6_9: -63088923
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -4,8 +4,8 @@ using System;
 
 public class BuildingManager : MonoBehaviour
 {
-    const int MAX_HOUSES = 10;
-    const int MIN_HOUSES = 1;
+    int MAX_HOUSES => GameConstants.MAX_BUILDINGS;
+    int MIN_HOUSES => GameConstants.MIN_BUILDINGS;
 
     [Header("Text Files")]
     public TextAsset buildingTypeNames;

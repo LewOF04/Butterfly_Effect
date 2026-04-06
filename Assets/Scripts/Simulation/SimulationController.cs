@@ -222,10 +222,10 @@ public static class SimulationController
 
     private static void getNewActions(SimulationPlot simPlot, PriorityQueue<SimulationActionWrapper, float> actionQueue, ActionFrontier actionFrontier)
     {
+        HistoryManager.Instance.deleteUnimportantEvents(); //re-evaluate memory importance and remove events that would no longer be remembered by the agent
         /*++++++++++GET NEW ACTIONS++++++++++*/
         for(int i = simPlot.inactiveAgents.Count - 1; i >= 0; i--)
         {
-            HistoryManager.Instance.deleteUnimportantEvents(); //re-evaluate memory importance and remove events that would no longer be remembered by the agent
             int agentID = simPlot.inactiveAgents[i];
             Debug.Log("Getting new action for "+agentID.ToString());
             NPCData agent = domain.NPCStorage[agentID];

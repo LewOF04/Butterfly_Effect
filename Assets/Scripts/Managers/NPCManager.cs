@@ -13,9 +13,8 @@ public class NPCManager : MonoBehaviour
     public TextAsset surnames;
     private DataController dataController;
 
-    const int MIN_NPCS = 1;
-    const int MAX_NPCS = 10;
-    //TODO: these numbers are entirely arbitrary
+    int MIN_NPCS => GameConstants.MIN_AGENTS;
+    int MAX_NPCS => GameConstants.MAX_AGENTS;
 
     private void Awake()
     {

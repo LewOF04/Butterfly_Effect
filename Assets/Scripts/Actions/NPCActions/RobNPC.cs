@@ -146,7 +146,7 @@ public class RobNPC : NPCAction
         }
         else
         {
-            description += " No damage was taken by any involved.";
+            description += " No damage was taken by any involved."; 
         }
 
         //relationship changes

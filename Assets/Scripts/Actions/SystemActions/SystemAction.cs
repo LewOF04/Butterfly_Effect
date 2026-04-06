@@ -389,7 +389,7 @@ public static class SystemAction
         const float condSwing = 0.5f;
         float multi;
         if(building.condition < condThresh) multi = -Mathf.InverseLerp(0f, condThresh, building.condition);
-        else multi = Mathf.InverseLerp(condThresh, 100f, building.condition) * condSwing;
+        else multi = -Mathf.InverseLerp(condThresh, 100f, building.condition) * 0.2f;
         
         conditionChange += multi * condSwing;
         return new BuildingUpdateInfo(conditionChange, receiver, time);
