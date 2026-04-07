@@ -47,7 +47,7 @@ public class ImproveCharisma : SelfAction
 
         //==================Energy, Time and Success Effectors==================
         effectors.Add(ActionMaths.scarcityMultiplier(performer.stats.energy - energyToComplete, 0f, 100f, 0.1f, 2f)); weights.Add(1.5f);
-        effectors.Add(ActionMaths.calcMultiplier(timeToComplete, 0f, 24f, 0.1f, 2f)); weights.Add(0.5f);
+        effectors.Add(ActionMaths.calcMultiplier(timeToComplete, 0f, 24f, 2f, 0.25f)); weights.Add(0.5f);
         effectors.Add(ActionMaths.calcMultiplier(actSuccess, 0f, 100f, 0.25f, 2f)); weights.Add(Mathf.InverseLerp(0f, 100f, performer.attributes.wisdom));
 
         //==================Relative Benefit Weightings==================
