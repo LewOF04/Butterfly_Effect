@@ -133,6 +133,19 @@ public static class SimulationController
                 thisAction.reloadAction(simAction.info);
                 thisAction.performAction(simAction.percentComplete);
 
+                if(thisAction is HaveChild)
+                {
+                    foreach(IAgent newAgent in dataController.Agents)
+                    {
+                        try{SimulationActionWrapper testWrap = simPlot.agentActiveActions[newAgent.id];}
+                        catch
+                        {
+                            simPlot.agentActiveActions[newAgent.id] = null;
+                            if(!simPlot.inactiveAgents.Contains(newAgent.id)) simPlot.inactiveAgents.Add(newAgent.id);
+                        }
+                    }
+                }
+
                 Debug.Log("Action performed");
 
                 /*==========INTERRUPTION HANDLING==========*/

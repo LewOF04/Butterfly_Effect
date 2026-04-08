@@ -6,15 +6,15 @@ using NoTarget = System.ValueTuple;
 [Preserve]
 public class HaveChild : NPCAction
 {
-    private const float baseCost = 30f;
+    private const float baseCost = 50f;
     public HaveChild() : base('N'){}
 
     public override char actionType => 'N';
     public override string name => "Have Child";
     public override string baseDescription => "The agent will have a child with another agent.";
 
-    protected override float baseTime => 3f;
-    protected override float baseEnergy => 50f;
+    protected override float baseTime => 4f;
+    protected override float baseEnergy => 65f;
     protected override float complexity => 15f;
     protected override float baseUtility => 50f;
 
@@ -28,9 +28,9 @@ public class HaveChild : NPCAction
     {
         if(actUtility != -1) return actUtility;
 
-        if(timeToComplete == -1) getTimeToComplete(performer, default);
-        if(energyToComplete == -1) getEnergyToComplete(performer, default);
-        if(actSuccess == -1) computeSuccess(performer, default);
+        if(timeToComplete == -1) getTimeToComplete(performer, target);
+        if(energyToComplete == -1) getEnergyToComplete(performer, target);
+        if(actSuccess == -1) computeSuccess(performer, target);
 
         List<float> effectors = new List<float>();
         List<float> weights = new List<float>();
@@ -59,6 +59,7 @@ public class HaveChild : NPCAction
         effectors.Add(ActionMaths.scarcityMultiplier(performer.stats.energy - energyToComplete, 0f, 100f, 0.1f, 2f)); weights.Add(1.5f);
         effectors.Add(ActionMaths.scarcityMultiplier(timeToComplete, 0f, 24f, 2f, 0.25f)); weights.Add(0.5f);
         effectors.Add(ActionMaths.calcMultiplier(actSuccess, 0f, 100f, 0.25f, 2f)); weights.Add(Mathf.InverseLerp(0f, 100f, performer.attributes.wisdom));
+        effectors.Add(ActionMaths.calcMultiplier(baseCost, 0f, 100f, 2f, 0.1f)); weights.Add(0.9f);
         
         actUtility = ActionMaths.ApplyWeightedMultipliers(baseUtility, effectors, weights);
         return actUtility;
@@ -83,9 +84,9 @@ public class HaveChild : NPCAction
         //weight based on number of people living in the house
         if(dataController.TryGetBuilding(performer.parentBuilding, out var building))
         {
-            effectors.Add(ActionMaths.calcMultiplier((float) building.inhabitants.Count, 0f, 20f, 4f, 0.25f)); weights.Add(0.8f);
+            effectors.Add(ActionMaths.calcMultiplier((float) building.inhabitants.Count, 0f, 7f, 2f, 0.25f)); weights.Add(0.8f);
         }
-        else effectors.Add(0.1f); weights.Add(0.9f);
+        else {effectors.Add(0.1f); weights.Add(0.9f);}
 
         baseEst = ActionMaths.ApplyWeightedMultipliers(baseEst, effectors, weights);
 
@@ -160,8 +161,9 @@ public class HaveChild : NPCAction
 
         //relationship changes
         Relationship thisRel = dataController.RelationshipStorage[new RelationshipKey(performer.id, target.id)];
-        thisRel.value = Mathf.Min(100f, thisRel.value + 30f);
-        description += " The relationship between the two improved by 30.";
+        float relGain = 30f * multiplier;
+        thisRel.value = Mathf.Clamp(thisRel.value + relGain, 0f, 100f);
+        description += " The relationship between the two changed by "+relGain.ToString("0.00")+".";
 
         //determine positivity
         bool wasPosPerf = false;

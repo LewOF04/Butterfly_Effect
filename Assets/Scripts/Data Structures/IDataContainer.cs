@@ -5,7 +5,7 @@ public interface IDataContainer
     Dictionary<int, TraitData> TraitStorage { get; set; }
     Dictionary<string, IAction> ActionStorage { get; set; }
 
-    Dictionary<RelationshipKey, Relationship> RelationshipStorage { get; set; }
+    Dictionary<RelationshipKey, Relationship> RelationshipStorage { get; set; } 
     Dictionary<int, List<Relationship>> RelationshipPerNPCStorage { get; set; }
 
     Dictionary<int, List<NPCEvent>> eventsPerNPCStorage { get; set; }

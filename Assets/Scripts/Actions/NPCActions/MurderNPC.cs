@@ -12,10 +12,10 @@ public class MurderNPC : NPCAction
     public override string name => "Murder Person";
     public override string baseDescription => "Sometimes the most extreme action is necessary.";
 
-    protected override float baseTime => 3f;
-    protected override float baseEnergy => 60f;
+    protected override float baseTime => 4.5f;
+    protected override float baseEnergy => 70f;
     protected override float complexity => 5f;
-    protected override float baseUtility => 40f;
+    protected override float baseUtility => 60f;
     public override bool interrupts => true;
 
     protected override List<int> utilityPosTraits => new List<int>{2}; 
@@ -163,6 +163,7 @@ public class MurderNPC : NPCAction
             int otherID;
             if(tRel.key.npcA == target.id) otherID = tRel.key.npcB;
             else otherID = tRel.key.npcA;
+            if(otherID == -1 || otherID == performer.id) continue;
 
             Relationship perfRel = dataController.RelationshipStorage[new RelationshipKey(performer.id, otherID)];
             if(tRel.value > 50)

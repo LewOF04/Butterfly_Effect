@@ -17,7 +17,7 @@ public class EatFood : SelfAction
     protected override float baseTime => 0.5f;
     protected override float baseEnergy => 3f;
     protected override float complexity => 0f;
-    protected override float baseUtility => 50f;
+    protected override float baseUtility => 60f;
 
     protected override List<int> utilityPosTraits => new List<int>{9}; 
     protected override List<int> utilityNegTraits => new List<int>{};

@@ -111,26 +111,78 @@ public class NPCManager : MonoBehaviour
 
         npc.Load(id, "", "", attributes, stats, traits, spriteType, parentBuilding, hasJob, isAlive); //loads the npc with data
         generateAgentName(npc);
-        npc.fullName = npc.firstName + " " + npc.surname;
 
         return npc;
     }
 
     public void generateSingleNPC(IAgent parent)
     {
+        IDataContainer dc = DomainContext.DataController;
         System.Random rng = new System.Random(parent.id);
 
-        int id = DomainContext.DataController.AgentCount; //the new id is the next key     
-        NPC agent = generateNPC(id, dataController.TraitStorage.Count, rng);
+        int id = dc.AgentCount;
+        NPC agent = generateNPC(id, dc.TraitStorage.Count, rng);
         generateAgentName(agent);
         agent.surname = parent.surname;
         agent.parentBuilding = parent.parentBuilding;
-        
-        if(DomainContext.DataController is DataControllerSnapshot _)
+        if(dc.TryGetBuilding(agent.parentBuilding, out var parentBuilding)) parentBuilding.inhabitants.Add(agent.id);
+
+        if (dc is DataControllerSnapshot)
         {
-            DomainContext.DataController.TryAddAgent(new NPCData(agent));
+            dc.TryAddAgent(new NPCData(agent));
         }
-        else DomainContext.DataController.TryAddAgent(agent);
+        else
+        {
+            dc.TryAddAgent(agent);
+        }
+
+        //add relationships between new agent and all existing agents
+        dc.RelationshipPerNPCStorage[agent.id] = new List<Relationship>();
+        foreach (IAgent otherAgent in dc.Agents)
+        {
+            if (otherAgent.id == agent.id) continue;
+
+            RelationshipKey newRelKey = new RelationshipKey(otherAgent.id, agent.id);
+            Relationship newRel = new Relationship(newRelKey, rng.Next(0, 101));
+
+            if (otherAgent.id == parent.id) newRel.value = 100f;
+
+            dc.RelationshipStorage[newRelKey] = newRel;
+
+            dc.RelationshipPerNPCStorage[otherAgent.id].Add(newRel);
+            dc.RelationshipPerNPCStorage[agent.id].Add(newRel);
+        }
+
+        //add agent to NPC History stores
+        dc.eventsPerNPCStorage[agent.id] = new List<NPCEvent>();
+        //self npc history
+        RelationshipKey selfRel = new RelationshipKey(agent.id, -1);
+        dc.npcHistoryTracker.largestInt[selfRel] = 0;
+        dc.npcHistoryTracker.missingInts[selfRel] = new List<int>();
+        dc.NPCEventStorage[selfRel] = new Dictionary<NPCEventKey, NPCEvent>();
+
+        //other npc history
+        foreach (IAgent otherAgent in dc.Agents)
+        {
+            if (otherAgent.id == agent.id) continue;
+
+            RelationshipKey relKey = new RelationshipKey(otherAgent.id, agent.id);
+            dc.npcHistoryTracker.largestInt[relKey] = 0;
+            dc.npcHistoryTracker.missingInts[relKey] = new List<int>();
+            dc.NPCEventStorage[relKey] = new Dictionary<NPCEventKey, NPCEvent>();
+        }
+        
+        //building history
+        dc.buildingEventsPerNPCStorage[agent.id] = new List<BuildingEvent>();
+
+        foreach (IBuilding building in dc.Buildings)
+        {
+            BuildingRelationshipKey buildingRel = new BuildingRelationshipKey(building.id, agent.id);
+
+            dc.buildingHistoryTracker.largestInt[buildingRel] = 0;
+            dc.buildingHistoryTracker.missingInts[buildingRel] = new List<int>();
+            dc.buildingEventStorage[buildingRel] = new Dictionary<BuildingEventKey, BuildingEvent>();
+        }
     }
 
     public Dictionary<int, NPCData> DeepClone()

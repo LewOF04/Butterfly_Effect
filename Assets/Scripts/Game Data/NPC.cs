@@ -7,9 +7,9 @@ using System.Collections.Generic;
  public class NPC : MonoBehaviour, IAgent
 {
     public int id; //unique ID identifier for the NPC
-    public string firstName; //name of the NPC
-    public string surname;
-    public string fullName;
+    public string firstName = ""; //name of the NPC
+    public string surname = "";
+    public string fullName => firstName+" "+surname;
     public Attributes attributes; //the attributes of the character
     public Stats stats; //the stats of the character
     public List<int> traits; //list of ids of the traits that this NPC has
@@ -21,7 +21,7 @@ using System.Collections.Generic;
     int IAgent.id { get => id; set => id = value; }
     string IAgent.firstName { get => firstName; set => firstName = value; }
     string IAgent.surname { get => surname; set => surname = value; }
-    string IAgent.fullName { get => fullName; set => fullName = value; }
+    string IAgent.fullName { get => fullName; }
     Attributes IAgent.attributes { get => attributes; set => attributes = value; }
     Stats IAgent.stats { get => stats; set => stats = value; }
     List<int> IAgent.traits { get => traits; set => traits = value; }
@@ -46,7 +46,6 @@ using System.Collections.Generic;
         id = data.id;
         surname = data.surname;
         firstName = data.firstName;
-        fullName = firstName + " " + surname;
         attributes = data.attributes;
         stats = data.stats;
         traits = data.traits; //converts into list from array
@@ -61,7 +60,6 @@ using System.Collections.Generic;
         id = inputID;
         firstName = inputFirstName;
         surname = inputSurname;
-        fullName = firstName + " " + surname;
         attributes = inputAttributes;
         stats = inputStats;
         traits = inputTraits;

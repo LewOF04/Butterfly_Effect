@@ -70,27 +70,28 @@ public abstract class Actions<T> : IAction
         return false;
     } 
 
-    public ActionInfoWrapper computeAction(IAgent performer, T receiver)
+    public ActionInfoWrapper computeAction(IAgent performer, T inputReceiver)
     {
         resetAction();
         currentActor = performer.id;
 
-        this.receiver = receiver switch
+        receiver = inputReceiver switch
         {
-            IAgent npc         => npc.id,
+            IAgent agent     => agent.id,
             IBuilding build  => build.id,
-            _               => -1
+            _                => -1
         };
 
-        energyToComplete = getEnergyToComplete(performer, receiver);
-        timeToComplete = getTimeToComplete(performer, receiver);
+        energyToComplete = getEnergyToComplete(performer, inputReceiver);
+        timeToComplete = getTimeToComplete(performer, inputReceiver);
         known = isKnown(performer);
-        actUtility = computeUtility(performer, receiver);
-        estUtility = estimateUtility(performer, receiver);
-        actSuccess = computeSuccess(performer, receiver);
-        estSuccess = estimateSuccess(performer, receiver);
+        Debug.Log("Receiver = "+receiver.ToString());
+        actSuccess = computeSuccess(performer, inputReceiver);
+        estSuccess = estimateSuccess(performer, inputReceiver);
+        actUtility = computeUtility(performer, inputReceiver);
+        estUtility = estimateUtility(performer, inputReceiver);
 
-        return new ActionInfoWrapper(performer.id, this.receiver, timeToComplete, energyToComplete, known, estUtility, actUtility, estSuccess, actSuccess, this);
+        return new ActionInfoWrapper(performer.id, receiver, timeToComplete, energyToComplete, known, estUtility, actUtility, estSuccess, actSuccess, this);
     }
 
     //reload the action object with the information from a previously computed info wrapper

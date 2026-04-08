@@ -492,7 +492,7 @@ public class NPCMenu : MonoBehaviour
         }
         if(receiver is NPC thisNPC) {
             actions = possibleActions.npcActions[thisNPC.id];
-            Sprite theSprite = thisNPC.gameObject.GetComponent<SpriteRenderer>().sprite;
+            Sprite theSprite = thisNPC.gameObject.GetComponent<AgentSpriteHandler>().getBaseSprite();
             ReceiverInfo objScript = recGameObj.GetComponent<ReceiverInfo>();
             objScript.spriteImageLoc.sprite = theSprite;
             objScript.spriteImageLoc.preserveAspect = true;

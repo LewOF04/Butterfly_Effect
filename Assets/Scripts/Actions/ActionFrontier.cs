@@ -66,6 +66,7 @@ public class ActionFrontier
 
                 ActionInfoWrapper info = agentAction.computeAction(performer, agent);
 
+                if(info.known == false) continue;
                 //check if this is the new best action
                 if(topActionSet == false || info.estUtility > topAction.estUtility) 
                 {
@@ -85,6 +86,7 @@ public class ActionFrontier
                 
                 ActionInfoWrapper info = buildAct.computeAction(performer, building);
 
+                if(info.known == false) continue;
                 if(topActionSet == false || info.estUtility > topAction.estUtility) 
                 {
                     topAction = info;
@@ -97,6 +99,7 @@ public class ActionFrontier
         {
             ActionInfoWrapper info = selfAct.computeAction(performer, default);
 
+            if(info.known == false) continue;
             if(topActionSet == false || info.estUtility > topAction.estUtility) 
             {
                 topAction = info;
@@ -108,6 +111,7 @@ public class ActionFrontier
         {
             ActionInfoWrapper info = envAct.computeAction(performer, default);
 
+            if(info.known == false) continue;
             if(topActionSet == false || info.estUtility > topAction.estUtility) 
             {
                 topAction = info;
@@ -135,6 +139,7 @@ public class ActionFrontier
                 ActionInfoWrapper info = agentAction.computeAction(performer, agent);
                 npcActions[agent.id].Add(info);
 
+                if(info.known == false) continue;
                 //check if this is the new best action
                 if(bestActionSet == false || info.estUtility > bestAction.estUtility)
                 {
@@ -155,6 +160,7 @@ public class ActionFrontier
                 ActionInfoWrapper info = buildAct.computeAction(performer, building);
                 buildingActions[building.id].Add(info);
 
+                if(info.known == false) continue;
                 if(bestActionSet == false || info.estUtility > bestAction.estUtility)
                 {
                     bestActionSet = true;
@@ -168,6 +174,7 @@ public class ActionFrontier
             ActionInfoWrapper info = selfAct.computeAction(performer, default);
             selfActions.Add(info);
 
+            if(info.known == false) continue;
             if(bestActionSet == false || info.estUtility > bestAction.estUtility)
             {
                 bestActionSet = true;
@@ -180,6 +187,7 @@ public class ActionFrontier
             ActionInfoWrapper info = envAct.computeAction(performer, default);
             environmentActions.Add(info);
 
+            if(info.known == false) continue;
             if(bestActionSet == false || info.estUtility > bestAction.estUtility)
             {
                 bestActionSet = true;

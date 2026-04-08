@@ -14,9 +14,9 @@ public class BuyFood : EnvironmentAction
     public override string baseDescription => "Buy food in order to consume it at a later date or give to others.";
 
     protected override float baseTime => 1f;
-    protected override float baseEnergy => 8f;
+    protected override float baseEnergy => 6f;
     protected override float complexity => 5f;
-    protected override float baseUtility => 50f;
+    protected override float baseUtility => 45f;
 
     protected override List<int> utilityPosTraits => new List<int>{0}; 
     protected override List<int> utilityNegTraits => new List<int>{};
@@ -37,7 +37,7 @@ public class BuyFood : EnvironmentAction
 
         //==================Performer Stats==================
         effectors.Add(ActionMaths.calcExpMultiplier(performer.stats.nutrition, 100f, 0f, 0.25f, 2f, 4f)); weights.Add(Mathf.InverseLerp(0f, 100f, performer.attributes.constitution));
-        effectors.Add(ActionMaths.calcExpMultiplier(performer.stats.food, 100f, 0f, 0.25f, 4f, 3f)); weights.Add(0.8f);
+        effectors.Add(ActionMaths.calcExpMultiplier(performer.stats.food, 100f, 0f, 0.25f, 4f, 3f)); weights.Add(1.3f);
         effectors.Add(ActionMaths.calcMultiplier(performer.stats.wealth, 0f, 100f, 0.25f, 2f)); weights.Add(0.5f);
 
         //==================Energy, Time and Success Effectors==================
@@ -90,7 +90,7 @@ public class BuyFood : EnvironmentAction
         }
         else {
             description += "They weren't able to buy food.";
-            volumeMultiplier = -1f;
+            volumeMultiplier = 0f;
             costMultiplier = 0f;
         }
 
@@ -118,7 +118,7 @@ public class BuyFood : EnvironmentAction
         //happiness changes
         if(performer.traits.Contains(0)) 
         {
-            float happinessGain = Mathf.Max(100f, performer.stats.happiness + performer.stats.happiness * 0.1f);
+            float happinessGain = Mathf.Min(100f, performer.stats.happiness + performer.stats.happiness * 0.1f);
             description += " They gained "+happinessGain.ToString("0.00")+" since they're a shopaholic.";
         }
 

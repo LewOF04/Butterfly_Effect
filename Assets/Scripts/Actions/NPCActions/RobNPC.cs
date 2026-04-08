@@ -6,14 +6,14 @@ using NoTarget = System.ValueTuple;
 [Preserve]
 public class RobNPC : NPCAction
 {
-    private float baseTakePerc = 40f;
+    private float baseTakePerc = 55f;
     public RobNPC() : base('N'){}
 
     public override char actionType => 'N';
     public override string name => "Rob Person";
     public override string baseDescription => "It is sometimes easier and quicker to rob someone for their wealth rather than earn it yourself.";
 
-    protected override float baseTime => 10f;
+    protected override float baseTime => 6f;
     protected override float baseEnergy => 60f;
     protected override float complexity => 15f;
     protected override float baseUtility => 50f;
@@ -37,7 +37,7 @@ public class RobNPC : NPCAction
         List<float> weights = new List<float>();
 
         //IAgent stat/attribute effectors
-        effectors.Add(ActionMaths.calcMultiplier(target.stats.wealth, 0f, 100f, 0.25f, 2f)); weights.Add(0.8f);
+        effectors.Add(ActionMaths.calcMultiplier(target.stats.wealth, 0f, 100f, 0.25f, 2f)); weights.Add(1.2f);
         effectors.Add(ActionMaths.calcMultiplier(target.attributes.strength, 0f, 100f, 2f, 0.25f)); weights.Add(0.8f);
 
         effectors.Add(ActionMaths.calcMultiplier(performer.attributes.strength, 0f, 100f, 0.25f, 2f)); weights.Add(0.8f);

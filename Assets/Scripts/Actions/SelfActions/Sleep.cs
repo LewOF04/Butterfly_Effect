@@ -18,7 +18,7 @@ public class Sleep : SelfAction
     protected override float baseTime => 10f;
     protected override float baseEnergy => 0f;
     protected override float complexity => 0f;
-    protected override float baseUtility => 20f;
+    protected override float baseUtility => 55f;
 
     protected override List<int> utilityPosTraits => new List<int>{4}; 
     protected override List<int> utilityNegTraits => new List<int>{3};

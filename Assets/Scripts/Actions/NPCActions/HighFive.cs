@@ -13,10 +13,10 @@ public class HighFive : NPCAction
     public override string name => "High Five";
     public override string baseDescription => "Sometimes it's just nice to be happy, give them a high-five.";
 
-    protected override float baseTime => 0.001f;
+    protected override float baseTime => 0.2f;
     protected override float baseEnergy => 1f;
     protected override float complexity => 0.5f;
-    protected override float baseUtility => 50f;
+    protected override float baseUtility => 25f;
 
     protected override List<int> utilityPosTraits => new List<int>{1, 5}; 
     protected override List<int> utilityNegTraits => new List<int>{2};

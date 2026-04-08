@@ -6,7 +6,7 @@ using NoTarget = System.ValueTuple;
 [Preserve]
 public class RepairBuilding: BuildingAction
 {
-    private const float baseCost = 5f;
+    private const float baseCost = 12.5f;
     private const float baseConditionGain = 15f;
     public RepairBuilding() : base('B'){}
 
@@ -17,7 +17,7 @@ public class RepairBuilding: BuildingAction
     protected override float baseTime => 10f;
     protected override float baseEnergy => 50f;
     protected override float complexity => 40f;
-    protected override float baseUtility => 50f;
+    protected override float baseUtility => 40f;
 
     protected override List<int> utilityPosTraits => new List<int>{7, 8}; 
     protected override List<int> utilityNegTraits => new List<int>{4};
@@ -46,8 +46,6 @@ public class RepairBuilding: BuildingAction
         effectors.Add(ActionMaths.calcMultiplier(timeToComplete, 0f, 24f, 2f, 0.25f)); weights.Add(0.5f);
         effectors.Add(ActionMaths.calcMultiplier(actSuccess, 0f, 100f, 0.25f, 2f)); weights.Add(Mathf.InverseLerp(0f, 100f, performer.attributes.wisdom));
         effectors.Add(ActionMaths.scarcityMultiplier(performer.stats.wealth - baseCost, 0f, 100f, 0.1f, 2f)); weights.Add(0.8f);
-
-        effectors.Add(ActionMaths.calcExpMultiplier(target.condition, 100f, 0f, 0.25f, 5f, 5f)); weights.Add(0.9f);
 
         actUtility = ActionMaths.ApplyWeightedMultipliers(baseUtility, effectors, weights);
         return actUtility;

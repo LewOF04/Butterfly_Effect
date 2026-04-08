@@ -14,9 +14,9 @@ public class GiveFood : NPCAction
     public override string baseDescription => "The npc would like to help another by giving them food.";
 
     protected override float baseTime => 0.5f;
-    protected override float baseEnergy => 2;
+    protected override float baseEnergy => 4;
     protected override float complexity => 5f;
-    protected override float baseUtility => 50f;
+    protected override float baseUtility => 37.5f;
 
     protected override List<int> utilityPosTraits => new List<int>{1}; 
     protected override List<int> utilityNegTraits => new List<int>{9, 0};
@@ -28,9 +28,9 @@ public class GiveFood : NPCAction
     {
         if(actUtility != -1) return actUtility;
 
-        if(timeToComplete == -1) getTimeToComplete(performer, default);
-        if(energyToComplete == -1) getEnergyToComplete(performer, default);
-        if(actSuccess == -1) computeSuccess(performer, default);
+        if(timeToComplete == -1) getTimeToComplete(performer, target);
+        if(energyToComplete == -1) getEnergyToComplete(performer, target);
+        if(actSuccess == -1) computeSuccess(performer, target);
 
         List<float> effectors = new List<float>();
         List<float> weights = new List<float>();

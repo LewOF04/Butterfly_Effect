@@ -5,7 +5,7 @@ public interface IAgent
     int id { get; set; }    //unique ID identifier for the agent
     string firstName { get; set; }    //first name of the agent
     string surname { get; set; }    //last name of the agent
-    string fullName { get; set; }
+    string fullName { get; }
     Attributes attributes { get; set; } //the attributes of the character
     Stats stats { get; set; } //the stats of the character
     List<int> traits { get; set; }  //list of ids of the traits that this agent has

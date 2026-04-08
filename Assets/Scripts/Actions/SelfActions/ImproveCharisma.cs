@@ -13,10 +13,10 @@ public class ImproveCharisma : SelfAction
     public override string name => "Improve Charisma";
     public override string baseDescription => "You can always work on yourself, this IAgent would like to improve their charisma.";
 
-    protected override float baseTime => 4f;
-    protected override float baseEnergy => 20f;
+    protected override float baseTime => 3.25f;
+    protected override float baseEnergy => 13.5f;
     protected override float complexity => 10f;
-    protected override float baseUtility => 50f;
+    protected override float baseUtility => 32f;
 
     protected override List<int> utilityPosTraits => new List<int>{6}; 
     protected override List<int> utilityNegTraits => new List<int>{};

@@ -6,17 +6,17 @@ using NoTarget = System.ValueTuple;
 [Preserve]
 public class WorkJob : SelfAction
 {
-    private const float baseEarning = 5f;
+    private const float baseEarning = 12.5f;
     public WorkJob() : base('S'){}
 
     public override char actionType => 'S';
     public override string name => "Work Job";
     public override string baseDescription => "The IAgent if they have a job, can go to work to earn some money at the cost of energy and time.";
 
-    protected override float baseTime => 8f;
-    protected override float baseEnergy => 50f;
+    protected override float baseTime => 6f;
+    protected override float baseEnergy => 35f;
     protected override float complexity => 5f;
-    protected override float baseUtility => 50f;
+    protected override float baseUtility => 45f;
 
     protected override List<int> utilityPosTraits => new List<int>{3}; 
     protected override List<int> utilityNegTraits => new List<int>{4};
