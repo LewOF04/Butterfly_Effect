@@ -116,32 +116,21 @@ public class NPCManager : MonoBehaviour
         return npc;
     }
 
-    public void generateSingleNPC()
+    public void generateSingleNPC(IAgent parent)
     {
-        System.Random rng = new System.Random();
+        System.Random rng = new System.Random(parent.id);
 
-        //gets the lowest missing key
-        int id = -1;
-        int lastKey = -1;
-        foreach (int key in dataController.NPCStorage.Keys)
+        int id = DomainContext.DataController.AgentCount; //the new id is the next key     
+        NPC agent = generateNPC(id, dataController.TraitStorage.Count, rng);
+        generateAgentName(agent);
+        agent.surname = parent.surname;
+        agent.parentBuilding = parent.parentBuilding;
+        
+        if(DomainContext.DataController is DataControllerSnapshot _)
         {
-            //checks if there are any gaps in the key id list
-            if (key - 1 != lastKey)
-            {
-                id = key - 1;
-                break;
-            }
-            lastKey = key;
+            DomainContext.DataController.TryAddAgent(new NPCData(agent));
         }
-
-        //if no id has been set
-        if (id == -1)
-        {
-            id = dataController.NPCStorage.Count; //the new id is the next key     
-        }
-
-        var npc = generateNPC(id, dataController.TraitStorage.Count, rng);
-        dataController.NPCStorage.Add(npc.id, npc);
+        else DomainContext.DataController.TryAddAgent(agent);
     }
 
     public Dictionary<int, NPCData> DeepClone()
