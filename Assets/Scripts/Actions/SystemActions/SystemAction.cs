@@ -3,6 +3,10 @@ using System.Collections.Generic;
 
 public static class SystemAction
 {
+    private static float InverseLerpMin(float min, float max, float value)
+    {
+        return Mathf.Max(0.05f, Mathf.InverseLerp(min, max, value));
+    }
     public static AgentUpdateInfo calcAgentUpdate(int receiver, float time)
     {
         IDataContainer dataController = DomainContext.DataController;
@@ -15,34 +19,34 @@ public static class SystemAction
         float conditionChange = 0f;
         //Nutrition
         const float condNutriThreshold = 20f;
-        const float condNutriSwing = 1f; 
+        const float condNutriSwing = 0.35f; 
         float condNutriChange;
         if(agent.stats.nutrition < condNutriThreshold)
         {
-            float multi = 2f * Mathf.InverseLerp(condNutriThreshold, 0f, agent.stats.nutrition) * Mathf.InverseLerp(100f, 0f, agent.attributes.constitution);
+            float multi = 2f * InverseLerpMin(condNutriThreshold, 0f, agent.stats.nutrition) * InverseLerpMin(100f, 0f, agent.attributes.constitution);
             condNutriChange = -condNutriSwing * multi;
             description += "<u>Condition</u> negatively effected by low nutrition levels by <b>"+condNutriChange.ToString("0.00")+"</b>, and ";
         }
         else
         {
-            float multi = 2f * Mathf.InverseLerp(condNutriThreshold, 100f, agent.stats.nutrition) * Mathf.InverseLerp(100f, 0f, agent.attributes.constitution);
+            float multi = 2f * InverseLerpMin(condNutriThreshold, 100f, agent.stats.nutrition) * InverseLerpMin(100f, 0f, agent.attributes.constitution);
             condNutriChange = condNutriSwing * multi;
             description += "<u>Condition</u> positively effected by nutrition levels by <b>"+condNutriChange.ToString("0.00")+"</b>, and ";
         }
         conditionChange += condNutriChange;
         //condition
         const float condCondThreshold = 30f;
-        const float condCondSwing = 0.5f;
+        const float condCondSwing = 0.2f;
         float condCondChange;
         if(agent.stats.condition < condCondThreshold)
         {
-            float multi = 2f * Mathf.InverseLerp(condCondThreshold, 0f, agent.stats.condition) * Mathf.InverseLerp(100f, 0f, agent.attributes.constitution);
+            float multi = 2f * InverseLerpMin(condCondThreshold, 0f, agent.stats.condition) * InverseLerpMin(100f, 0f, agent.attributes.constitution);
             condCondChange = -condCondSwing * multi;
             description += "negatively effected by current condition level by <b>"+condCondChange.ToString("0.00")+"</b>. ";
         }
         else
         {
-            float multi = 2f * Mathf.InverseLerp(condCondThreshold, 100f, agent.stats.condition) * Mathf.InverseLerp(0f, 100f, agent.attributes.constitution);
+            float multi = 2f * InverseLerpMin(condCondThreshold, 100f, agent.stats.condition) * InverseLerpMin(0f, 100f, agent.attributes.constitution);
             condCondChange = condCondSwing * multi;
             description += "positively effected by current condition level by <b>"+condCondChange.ToString("0.00")+"</b>.\n";
         }
@@ -50,10 +54,10 @@ public static class SystemAction
 
         /*==================Nutrition change==================*/
         /*Effected by Condition, constitution*/
-        const float nutritionConsumption = 2.5f;
+        const float nutritionConsumption = 1.15f;
         float nutriMulti;
-        if(agent.stats.condition < condCondThreshold) nutriMulti = Mathf.Pow(Mathf.InverseLerp(condCondThreshold, 0f, agent.stats.condition) * Mathf.InverseLerp(100f, 0f, agent.attributes.constitution), 0.5f);
-        else nutriMulti = 2f * Mathf.InverseLerp(100f, condCondThreshold, agent.stats.condition) * Mathf.InverseLerp(100f, 0f, agent.attributes.constitution);
+        if(agent.stats.condition < condCondThreshold) nutriMulti = Mathf.Pow(InverseLerpMin(condCondThreshold, 0f, agent.stats.condition) * InverseLerpMin(100f, 0f, agent.attributes.constitution), 0.5f);
+        else nutriMulti = 2f * InverseLerpMin(100f, condCondThreshold, agent.stats.condition) * InverseLerpMin(100f, 0f, agent.attributes.constitution);
         float nutritionChange = nutriMulti * nutritionConsumption;
         description += "<u>Nutrition</u> decreased by <b>"+nutritionChange.ToString("0.00")+"</b> as a function of condition and constitution.\n";
 
@@ -63,22 +67,22 @@ public static class SystemAction
         //happiness
         const float happHappLowThresh = 40f;
         const float happHappHighThresh = 60f;
-        const float happHappSwing = 1.5f;
+        const float happHappSwing = 0.35f;
         float happHappChange = 0f;
         if(agent.stats.happiness < happHappLowThresh)
         {
-            float multi = 2f * Mathf.InverseLerp(happHappLowThresh, 0f, agent.stats.happiness) * Mathf.InverseLerp(100f, 0f, agent.attributes.fortitude);
+            float multi = 2f * InverseLerpMin(happHappLowThresh, 0f, agent.stats.happiness) * InverseLerpMin(100f, 0f, agent.attributes.fortitude);
             happHappChange = -multi * happHappSwing;
             description += "<u>Happiness</u> negatively effected by current happiness by <b>"+happHappChange.ToString("0.00")+"</b>, ";
         } else if(agent.stats.happiness > happHappHighThresh)
         {
-            float multi = 2f * Mathf.InverseLerp(happHappHighThresh, 100f, agent.stats.happiness) * Mathf.InverseLerp(0f, 100f, agent.attributes.fortitude);
+            float multi = 2f * InverseLerpMin(happHappHighThresh, 100f, agent.stats.happiness) * InverseLerpMin(0f, 100f, agent.attributes.fortitude);
             happHappChange = multi * happHappSwing;
             description += "<u>Happiness</u> positively effected by current happiness by <b>"+happHappChange.ToString("0.00")+"</b>, ";
         }
         happinessChange += happHappChange;
         //traits/relationships
-        const float happRelSwing = 0.5f;
+        const float happRelSwing = 0.2f;
         const float happAvgRelThreshold = 50f;
         if (agent.traits.Contains(1)) //if they are a people pleaser
         {
@@ -95,13 +99,13 @@ public static class SystemAction
                 float happRelChange;
                 if(avgRel < happAvgRelThreshold)
                 {
-                    float multi = Mathf.InverseLerp(happAvgRelThreshold, 0f, agent.stats.happiness);
+                    float multi = InverseLerpMin(happAvgRelThreshold, 0f, agent.stats.happiness);
                     happRelChange = -multi * happRelSwing;
                     description += "negatively effected by being unliked whilst a people pleaser by <b>"+happRelChange.ToString("0.00")+"</b>, ";
                 }
                 else
                 {
-                    float multi = Mathf.InverseLerp(happAvgRelThreshold, 100f, agent.stats.happiness);
+                    float multi = InverseLerpMin(happAvgRelThreshold, 100f, agent.stats.happiness);
                     happRelChange = multi * happRelSwing;
                     description += "positively effected by being liked whilst a people pleaser by <b>"+happRelChange.ToString("0.00")+"</b>, ";
                 }
@@ -109,20 +113,20 @@ public static class SystemAction
             } 
         } 
         //world surroundings
-        float happSurrThresh = 50f * (Mathf.InverseLerp(0f, 100f, agent.attributes.aesthetic_sensitivity) + 0.5f); //alter threshold based on the agents aesthetic sensitivty;
-        const float happSurrSwing = 0.5f;
+        float happSurrThresh = 50f * (InverseLerpMin(0f, 100f, agent.attributes.aesthetic_sensitivity) + 0.5f); //alter threshold based on the agents aesthetic sensitivty;
+        const float happSurrSwing = 0.2f;
         float happSurrChange;
         if(dataController.TryGetBuilding(agent.parentBuilding, out IBuilding building)) //if they live in a house
         {   
             if(building.condition < happSurrThresh)
             {
-                float multi = 2f * Mathf.InverseLerp(0f, happSurrThresh, building.condition) * Mathf.InverseLerp(100f, 0f, agent.attributes.fortitude);
+                float multi = 2f * InverseLerpMin(0f, happSurrThresh, building.condition) * InverseLerpMin(100f, 0f, agent.attributes.fortitude);
                 happSurrChange = -multi * happSurrSwing;
                 description += "and negatively effected by their surroundings by "+happSurrChange.ToString("0.00")+".\n";
             }
             else
             {
-                float multi = 2f * Mathf.InverseLerp(happSurrThresh, 100f, building.condition) * Mathf.InverseLerp(0f, 100f, agent.attributes.fortitude);
+                float multi = 2f * InverseLerpMin(happSurrThresh, 100f, building.condition) * InverseLerpMin(0f, 100f, agent.attributes.fortitude);
                 happSurrChange = multi * happSurrSwing;
                 description += "and positively effected by their surroundings by "+happSurrChange.ToString("0.00")+".\n";
             }
@@ -130,7 +134,7 @@ public static class SystemAction
         else //if they don't live in a house
         {
             float newHappSurrSwing = happSurrSwing * 2f;
-            float multi = 2f * Mathf.InverseLerp(0f, 100f, agent.attributes.aesthetic_sensitivity) * Mathf.InverseLerp(100f, 0f, agent.attributes.fortitude);
+            float multi = 2f * InverseLerpMin(0f, 100f, agent.attributes.aesthetic_sensitivity) * InverseLerpMin(100f, 0f, agent.attributes.fortitude);
             happSurrChange = -multi * newHappSurrSwing;
             description += "and negatively effected by their surroundings by "+happSurrChange.ToString("0.00")+".\n";
         }
@@ -138,8 +142,8 @@ public static class SystemAction
 
         /*==================Energy change==================*/
         /*Effected by constitution and condition*/
-        const float energyConsumption = 1f;
-        float energyMulti = 2f * Mathf.InverseLerp(100f, 0f, agent.attributes.constitution) * Mathf.InverseLerp(100f, 0f, agent.stats.condition);
+        const float energyConsumption = 0.75f;
+        float energyMulti = 2f * InverseLerpMin(100f, 0f, agent.attributes.constitution) * InverseLerpMin(100f, 0f, agent.stats.condition);
         float energyChange = -energyConsumption * energyMulti;
         description += "<u>Energy</u> decreased by <b>"+energyChange.ToString("0.00")+"</b> as a function of constitution and condition.\n";
 
@@ -148,16 +152,16 @@ public static class SystemAction
         /*Effected by Wisdom, fortitude*/
         const float intelWisHighThresh = 70f;
         const float intelWisLowThresh = 30f;
-        const float intelWisSwing = 0.5f;
+        const float intelWisSwing = 0.03f;
         float intelWisChange = 0f;
         if(agent.attributes.intelligence > intelWisHighThresh)
         {
-            float multi = 2f * Mathf.InverseLerp(intelWisHighThresh, 100f, agent.attributes.intelligence) * Mathf.InverseLerp(0f, 100f, agent.attributes.fortitude);
+            float multi = 2f * InverseLerpMin(intelWisHighThresh, 100f, agent.attributes.intelligence) * InverseLerpMin(0f, 100f, agent.attributes.fortitude);
             intelWisChange = multi * intelWisSwing;
             description += "<u>Intelligence</u> increased by <b>"+intelWisChange.ToString("0.00")+"</b> as a function of wisdom and fortitude.\n";
         } else if(agent.attributes.intelligence < intelWisLowThresh)
         {
-            float multi = 2f * Mathf.InverseLerp(intelWisLowThresh, 0f, agent.attributes.intelligence) * Mathf.InverseLerp(100f, 0f, agent.attributes.fortitude);
+            float multi = 2f * InverseLerpMin(intelWisLowThresh, 0f, agent.attributes.intelligence) * InverseLerpMin(100f, 0f, agent.attributes.fortitude);
             intelWisChange = -multi * intelWisSwing;
             description += "<u>Intelligence</u> decreased by <b>"+intelWisChange.ToString("0.00")+"</b> as a function of wisdom and fortitude.\n";
         }
@@ -169,16 +173,16 @@ public static class SystemAction
         //nutrition
         const float ratNutriLowThresh = 30f;
         const float ratNutriHighThresh = 70f;
-        const float ratNutriSwing = 0.5f;
+        const float ratNutriSwing = 0.08f;
         float ratNutriChange = 0f;
         if(agent.stats.nutrition < ratNutriLowThresh)
         {
-            float multi = 2f * Mathf.InverseLerp(ratNutriLowThresh, 0f, agent.stats.nutrition) * Mathf.InverseLerp(100f, 0f, agent.attributes.fortitude);
+            float multi = 2f * InverseLerpMin(ratNutriLowThresh, 0f, agent.stats.nutrition) * InverseLerpMin(100f, 0f, agent.attributes.fortitude);
             ratNutriChange = -multi * ratNutriSwing;
             description += "<u>Rationality</u> decreased by <b>"+ratNutriChange.ToString("0.00")+"</b> as a function of nutrition, and ";
         }else if(agent.stats.nutrition > ratNutriHighThresh)
         {
-            float multi = 2f * Mathf.InverseLerp(ratNutriHighThresh, 100f, agent.stats.nutrition) * Mathf.InverseLerp(0f, 100f, agent.attributes.fortitude);
+            float multi = 2f * InverseLerpMin(ratNutriHighThresh, 100f, agent.stats.nutrition) * InverseLerpMin(0f, 100f, agent.attributes.fortitude);
             ratNutriChange = multi * ratNutriSwing;
             description += "<u>Rationality</u> increased by <b>"+ratNutriChange.ToString("0.00")+"</b> as a function of nutrition, and ";
         }
@@ -186,17 +190,17 @@ public static class SystemAction
         //condition
         const float ratCondLowThresh = 30f;
         const float ratCondHighThresh = 70f;
-        const float ratCondSwing = 0.5f;
+        const float ratCondSwing = 0.08f;
         float ratCondChange = 0f;
         if(agent.stats.condition < ratCondLowThresh)
         {
-            float multi = 2f * Mathf.InverseLerp(ratCondLowThresh, 0f, agent.stats.condition) * Mathf.InverseLerp(100f, 0f, agent.attributes.fortitude);
+            float multi = 2f * InverseLerpMin(ratCondLowThresh, 0f, agent.stats.condition) * InverseLerpMin(100f, 0f, agent.attributes.fortitude);
             ratCondChange = -multi * ratCondSwing;
             description += "decreased by <b>"+ratCondChange.ToString("0.00")+"</b> as a function of condition.\n";
         } else if(agent.stats.condition > ratCondHighThresh)
         {
-            float multi = 2f * Mathf.InverseLerp(ratCondHighThresh, 100f, agent.stats.condition) * Mathf.InverseLerp(0f, 100f, agent.attributes.fortitude);
-            ratCondChange = multi * ratCondChange;
+            float multi = 2f * InverseLerpMin(ratCondHighThresh, 100f, agent.stats.condition) * InverseLerpMin(0f, 100f, agent.attributes.fortitude);
+            ratCondChange = multi * ratCondSwing;
             description += "increased by <b>"+ratCondChange.ToString("0.00")+"</b> as a function of condition.\n";
         }
         rationalityChange += ratCondChange;
@@ -206,16 +210,16 @@ public static class SystemAction
         /*Effected by Happiness*/
         const float fortHappLowThresh = 20f;
         const float fortHappHighThresh = 80f;
-        const float fortHappSwing = 1f;
+        const float fortHappSwing = 0.06f;
         float fortHappChange = 0f;
         if(agent.stats.happiness < fortHappLowThresh)
         {
-            float multi = Mathf.InverseLerp(fortHappLowThresh, 0f, agent.stats.happiness);
+            float multi = InverseLerpMin(fortHappLowThresh, 0f, agent.stats.happiness);
             fortHappChange = -multi * fortHappSwing;
             description += "<u>Fortitude</u> decreased by <b>"+fortHappChange.ToString("0.00")+"</b> as a function of happiness.\n";
         }else if (agent.stats.happiness > fortHappHighThresh)
         {
-            float multi = Mathf.InverseLerp(fortHappHighThresh, 100f, agent.stats.happiness);
+            float multi = InverseLerpMin(fortHappHighThresh, 100f, agent.stats.happiness);
             fortHappChange = multi * fortHappSwing;
             description += "<u>Fortitude</u> increased by <b>"+fortHappChange.ToString("0.00")+"</b> as a function of happiness.\n";
         }
@@ -226,16 +230,16 @@ public static class SystemAction
         /*Effected by Condition*/
         const float charCondLowThresh = 10f;
         const float charCondHighThresh = 90f;
-        const float charCondSwing = 0.5f;
+        const float charCondSwing = 0.03f;
         float charCondChange = 0f;
         if(agent.stats.condition < charCondLowThresh)
         {
-            float multi = Mathf.InverseLerp(charCondLowThresh, 0f, agent.stats.condition);
+            float multi = InverseLerpMin(charCondLowThresh, 0f, agent.stats.condition);
             charCondChange = -multi * charCondSwing;
             description += "<u>Charsima</u> decreased by <b>"+charCondChange.ToString("0.00")+"</b> as a function of condition.\n";
         }else if(agent.stats.condition > charCondHighThresh)
         {
-            float multi = Mathf.InverseLerp(charCondHighThresh, 100f, agent.stats.condition);
+            float multi = InverseLerpMin(charCondHighThresh, 100f, agent.stats.condition);
             charCondChange = multi * charCondSwing;
             description += "<u>Charisma</u> increased by <b>"+charCondChange.ToString("0.00")+"</b> as a function of condition.\n";
         }
@@ -246,16 +250,16 @@ public static class SystemAction
         /*Effected by Fortitude*/
         const float percFortLowThresh = 10f;
         const float percFortHighThresh = 90f;
-        const float percFortSwing = 0.5f;
+        const float percFortSwing = 0.03f;
         float percFortChange = 0f;
         if(agent.attributes.fortitude < percFortLowThresh)
         {
-            float multi = Mathf.InverseLerp(percFortLowThresh, 0f, agent.attributes.fortitude);
+            float multi = InverseLerpMin(percFortLowThresh, 0f, agent.attributes.fortitude);
             percFortChange = -multi * percFortSwing;
             description += "<u>Perception</u> decreased by <b>"+percFortChange.ToString("0.00")+"</b> as a function of fortitude.\n";
         }else if(agent.attributes.fortitude > percFortHighThresh)
         {
-            float multi = Mathf.InverseLerp(percFortHighThresh, 100f, agent.attributes.fortitude);
+            float multi = InverseLerpMin(percFortHighThresh, 100f, agent.attributes.fortitude);
             percFortChange = multi * percFortSwing;
             description += "<u>Perception</u> increased by <b>"+percFortChange.ToString("0.00")+"</b> as a function of fortitude.\n";
         }
@@ -266,16 +270,16 @@ public static class SystemAction
         /*Effected by Condition*/
         const float dexCondLowThresh = 10f;
         const float dexCondHighThresh = 90f;
-        const float dexCondSwing = 0.5f;
+        const float dexCondSwing = 0.03f;
         float dexCondChange = 0f;
         if(agent.stats.condition < dexCondLowThresh)
         {
-            float multi = Mathf.InverseLerp(dexCondLowThresh, 0f, agent.stats.condition);
+            float multi = InverseLerpMin(dexCondLowThresh, 0f, agent.stats.condition);
             dexCondChange = -multi * dexCondSwing;
             description += "<u>Dexterity</u> decreased by <b>"+dexCondChange.ToString("0.00")+"</b> as a function of condition.\n";
         }else if(agent.stats.condition > dexCondHighThresh)
         {
-            float multi = Mathf.InverseLerp(dexCondHighThresh, 100f, agent.stats.condition);
+            float multi = InverseLerpMin(dexCondHighThresh, 100f, agent.stats.condition);
             dexCondChange = multi * dexCondSwing;
             description += "<u>Dexterity</u> increased by <b>"+dexCondChange.ToString("0.00")+"</b> as a function of condition.\n";
         }
@@ -286,16 +290,16 @@ public static class SystemAction
         /*Effected by Condition*/
         const float constCondLowThresh = 10f;
         const float constCondHighThresh = 90f;
-        const float constCondSwing = 0.5f;
+        const float constCondSwing = 0.04f;
         float constCondChange = 0f;
         if(agent.stats.condition < constCondLowThresh)
         {
-            float multi = Mathf.InverseLerp(constCondLowThresh, 0f, agent.stats.condition);
+            float multi = InverseLerpMin(constCondLowThresh, 0f, agent.stats.condition);
             constCondChange = -multi * constCondSwing;
             description += "<u>Constitution</u> decreased by <b>"+constCondChange.ToString("0.00")+"</b> as a function of condition.\n";
         }else if(agent.stats.condition > constCondHighThresh)
         {
-            float multi = Mathf.InverseLerp(constCondHighThresh, 100f, agent.stats.condition);
+            float multi = InverseLerpMin(constCondHighThresh, 100f, agent.stats.condition);
             constCondChange = multi * constCondSwing;
             description += "<u>Constitution</u> increased by <b>"+constCondChange.ToString("0.00")+"</b> as a function of condition.\n";
         }
@@ -307,16 +311,16 @@ public static class SystemAction
         /*Effected by Fortitude*/
         const float wisFortLowThresh = 20f;
         const float wisFortHighThresh = 80f;
-        const float wisFortSwing = 0.5f;
+        const float wisFortSwing = 0.04f;
         float wisFortChange = 0f;
         if(agent.attributes.fortitude < wisFortLowThresh)
         {
-            float multi = Mathf.InverseLerp(wisFortLowThresh, 0f, agent.attributes.fortitude);
+            float multi = InverseLerpMin(wisFortLowThresh, 0f, agent.attributes.fortitude);
             wisFortChange = -multi * wisFortSwing;
             description += "<u>Wisdom</u> decreased by <b>"+wisFortChange.ToString("0.00")+"</b> as a function of fortitude.\n";
         }else if(agent.attributes.fortitude > wisFortHighThresh)
         {
-            float multi = Mathf.InverseLerp(wisFortHighThresh, 100f, agent.attributes.fortitude);
+            float multi = InverseLerpMin(wisFortHighThresh, 100f, agent.attributes.fortitude);
             wisFortChange = multi * wisFortSwing;
             description += "<u>Wisdom</u> increased by <b>"+wisFortChange.ToString("0.00")+"</b> as a function of fortitude.\n";
         }
@@ -328,16 +332,16 @@ public static class SystemAction
         //condition
         const float strCondLowThresh = 10f;
         const float strCondHighThresh = 90f;
-        const float strCondSwing = 0.5f;
+        const float strCondSwing = 0.05f;
         float strCondChange = 0f;
         if(agent.stats.condition < strCondLowThresh)
         {
-            float multi = 2f * Mathf.InverseLerp(strCondLowThresh, 0f, agent.stats.condition) * Mathf.InverseLerp(100f, 0f, agent.attributes.constitution);
+            float multi = 2f * InverseLerpMin(strCondLowThresh, 0f, agent.stats.condition) * InverseLerpMin(100f, 0f, agent.attributes.constitution);
             strCondChange = -multi * strCondSwing;
             description += "<u>Strength</u> decreased by <b>"+strCondChange.ToString("0.00")+"</b> as a function of condition, and ";
         }else if(agent.stats.condition > strCondHighThresh)
         {
-            float multi = 2f * Mathf.InverseLerp(strCondHighThresh, 100f, agent.stats.condition) * Mathf.InverseLerp(0f, 100f, agent.attributes.constitution);
+            float multi = 2f * InverseLerpMin(strCondHighThresh, 100f, agent.stats.condition) * InverseLerpMin(0f, 100f, agent.attributes.constitution);
             strCondChange = multi * strCondSwing;
             description += "<u>Strength</u> increased by <b>"+strCondChange.ToString("0.00")+"</b> as a function of condition, and ";
         }
@@ -345,16 +349,16 @@ public static class SystemAction
         //nutrition
         const float strNutriLowThresh = 10f;
         const float strNutriHighThresh = 90f;
-        const float strNutriSwing = 0.5f;
+        const float strNutriSwing = 0.05f;
         float strNutriChange = 0f;
         if(agent.stats.nutrition < strNutriLowThresh)
         {
-            float multi = 2f * Mathf.InverseLerp(strNutriLowThresh, 0f, agent.stats.nutrition) * Mathf.InverseLerp(100f, 0f, agent.attributes.constitution);
+            float multi = 2f * InverseLerpMin(strNutriLowThresh, 0f, agent.stats.nutrition) * InverseLerpMin(100f, 0f, agent.attributes.constitution);
             strNutriChange = -multi * strNutriSwing;
             description += "decreased by <b>"+strNutriChange.ToString("0.00")+"</b> as a function of nutrition.\n";
         }else if(agent.stats.nutrition > strNutriHighThresh)
         {
-            float multi = 2f * Mathf.InverseLerp(strNutriHighThresh, 100f, agent.stats.nutrition) * Mathf.InverseLerp(0f, 100f, agent.attributes.constitution);
+            float multi = 2f * InverseLerpMin(strNutriHighThresh, 100f, agent.stats.nutrition) * InverseLerpMin(0f, 100f, agent.attributes.constitution);
             strNutriChange = multi * strNutriSwing;
             description += "increased by <b>"+strNutriChange.ToString("0.00")+"</b> as a function of nutrition.\n";
         }
@@ -386,10 +390,10 @@ public static class SystemAction
         if(!DomainContext.DataController.TryGetBuilding(receiver, out var building)) return null;
         float conditionChange = 0f;
         const float condThresh = 50f;
-        const float condSwing = 0.5f;
+        const float condSwing = 0.2f;
         float multi;
-        if(building.condition < condThresh) multi = -Mathf.InverseLerp(0f, condThresh, building.condition);
-        else multi = -Mathf.InverseLerp(condThresh, 100f, building.condition) * 0.2f;
+        if(building.condition < condThresh) multi = -InverseLerpMin(0f, condThresh, building.condition);
+        else multi = -InverseLerpMin(condThresh, 100f, building.condition) * 0.2f;
         
         conditionChange += multi * condSwing;
         return new BuildingUpdateInfo(conditionChange, receiver, time);
@@ -418,9 +422,9 @@ public static class SystemAction
             else otherAgent = rel.key.npcA;
 
             float change;
-            if(rel.value < 60f && rel.value > 40f) change = Mathf.Lerp(-5f, 5f, Mathf.InverseLerp(60f, 40f, rel.value));
-            if(rel.value < 40f) change = Mathf.Lerp(5f, 20f, Mathf.InverseLerp(40f, 0f, rel.value));
-            else change = Mathf.Lerp(-20f, -5f, Mathf.InverseLerp(100f, 60f, rel.value));
+            if(rel.value < 60f && rel.value > 40f) change = Mathf.Lerp(-5f, 5f, InverseLerpMin(60f, 40f, rel.value));
+            if(rel.value < 40f) change = Mathf.Lerp(5f, 20f, InverseLerpMin(40f, 0f, rel.value));
+            else change = Mathf.Lerp(-20f, -5f, InverseLerpMin(100f, 60f, rel.value));
 
             happinessChanges[otherAgent] = change;
         }

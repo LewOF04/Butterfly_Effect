@@ -85,7 +85,6 @@ public abstract class Actions<T> : IAction
         energyToComplete = getEnergyToComplete(performer, inputReceiver);
         timeToComplete = getTimeToComplete(performer, inputReceiver);
         known = isKnown(performer);
-        Debug.Log("Receiver = "+receiver.ToString());
         actSuccess = computeSuccess(performer, inputReceiver);
         estSuccess = estimateSuccess(performer, inputReceiver);
         actUtility = computeUtility(performer, inputReceiver);

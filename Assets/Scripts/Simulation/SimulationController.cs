@@ -345,7 +345,6 @@ public static class SimulationController
             currentTime += 0.1f;
             currentTime = Mathf.Round(currentTime * 10f) / 10f; //round to 1dp
             Debug.Log("Current time: "+currentTime.ToString());
-            yield return new WaitForSeconds(0.0000000001f);
         }
 
         //update world and current time for end of simulation
