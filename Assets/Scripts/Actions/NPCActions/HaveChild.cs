@@ -174,7 +174,7 @@ public class HaveChild : NPCAction
         DataController.Instance.npcManager.generateSingleNPC(performer);
         
         float severity = 30f * Mathf.Abs(multiplier); //determine severity
-        HistoryManager.Instance.AddNPCMemory(name, description, severity, actionTime, performer.id, target.id, wasPosPerf, false); //save memory
+        HistoryManager.Instance.AddNPCMemory(name, description, severity, actionTime, performer.id, target.id, wasPosPerf, wasPosRec); //save memory
     }
 
     //computer the likelihood this action will be a success

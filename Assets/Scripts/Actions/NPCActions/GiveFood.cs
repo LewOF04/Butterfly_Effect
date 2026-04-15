@@ -165,7 +165,7 @@ public class GiveFood : NPCAction
         else {wasPosPerf = false; wasPosRec = false;}
 
         float severity = 20 * Mathf.Abs(multiplier); //determine severity
-        HistoryManager.Instance.AddNPCMemory(name, description, severity, actionTime, performer.id, target.id, wasPosPerf, false); //save memory
+        HistoryManager.Instance.AddNPCMemory(name, description, severity, actionTime, performer.id, target.id, wasPosPerf, wasPosRec); //save memory
     }
 
     //computer the likelihood this action will be a success
